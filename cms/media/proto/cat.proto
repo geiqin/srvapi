@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "proto/common.proto";
+package geiqin.srv.cms.media;
+
+service CatService {
+    rpc Create (Cat) returns (CatResponse) {}
+    rpc Update (Cat) returns (CatResponse) {}
+    rpc Delete (IdInt) returns (CatResponse) {}
+    rpc Get (IdInt) returns (CatResponse) {}
+    rpc Search (Cat) returns (CatResponse) {}
+    rpc List (Cat) returns (CatResponse) {}
+    rpc Tree (Cat) returns (CatResponse) {}
+}
+
+// 字典信息
+message Cat {
+    int32 id =1;
+    string name	 =2;
+    string type	 =3;
+    string taxonomy	 =4;
+    int32 total_num	=5;
+    float total_size	 =6;
+    int32 cat_id=7; //父亲节点
+    int64 user_id  =8;
+    repeated Cat children =9;
+}
+
+//
+message CatResponse {
+    Cat entity = 1;
+    Pager pager =2;
+    repeated Cat items = 3;
+    Error error = 4;
+}

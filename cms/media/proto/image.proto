@@ -1,0 +1,53 @@
+syntax = "proto3";
+import "proto/common.proto";
+import "proto/cat.proto";
+package geiqin.srv.cms.media;
+
+service ImageService {
+    rpc Update (UpdateImage) returns (ImageResponse) {}
+    rpc Get (Image) returns (ImageResponse) {}
+    rpc Search (Image) returns (ImageResponse) {}
+    rpc Delete (Id) returns (ImageResponse) {}
+    rpc List (Image) returns (ImageResponse) {}
+}
+
+
+// 图片信息
+message Image {
+    int64 id =1;
+    string title =2;
+    string type	 =3;
+    int32 cat_id =4;
+    string file_name =5;
+    string raw_name =6;
+    string hash =7;
+    string path	 =8;
+    string url	 =9;
+    string mime_type =10;
+    float size	 =11;
+    int32 width	 =12;
+    int32 height =13;
+    string memo	 =14;
+    string taxonomy	 =15;
+    string app	 =16;
+    string app_flag	 =17;
+    int64 customer_id	=18;
+    int64 user_id	=19;
+    Cat cat =20;
+}
+
+// 修改图片信息
+message UpdateImage {
+    int64 id =1;
+    string title =2;
+    int32 cat_id =4;
+    string memo	 =14;
+}
+
+//
+message ImageResponse {
+    Image entity = 1;
+    Pager pager =2;
+    repeated Image items = 3;
+    Error error = 4;
+}
