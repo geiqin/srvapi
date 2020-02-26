@@ -1,6 +1,4 @@
 syntax = "proto3";
-import "google/protobuf/any.proto";
-
 package geiqin.srv.cms.media;
 
 message Id {
@@ -33,6 +31,4 @@ message DataPage {
     int32 paged = 1;
     int32 page_size = 2;
     int32 total = 3;
-    google.protobuf.Any list = 4;
-    repeated google.protobuf.Any items = 5;
 }

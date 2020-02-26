@@ -6,7 +6,6 @@ package geiqin_srv_cms_media
 import (
 	fmt "fmt"
 	proto "github.com/golang/protobuf/proto"
-	_ "github.com/golang/protobuf/ptypes/any"
 	math "math"
 )
 
