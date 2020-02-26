@@ -1,0 +1,29 @@
+syntax = "proto3";
+import "common.proto";
+//import "proto/item.proto";
+package geiqin.srv.pdm;
+
+service FavoriteService {
+    rpc Create (Favorite) returns (FavoriteResponse) {}
+    rpc Delete (Id) returns (FavoriteResponse) {}
+    rpc Get (Id) returns (FavoriteResponse) {}
+    rpc Check (Id) returns (FavoriteResponse) {}
+    rpc Search (BaseWhere) returns (FavoriteResponse) {}
+}
+
+message Favorite {
+    int64	id	=1;
+    int64	customer_id	=2;
+    int64	item_id	=3;
+    string	created_at	=4;
+    string	updated_at	=5;
+    //Item item =6;
+}
+
+message FavoriteResponse {
+    Favorite entity = 1;
+    Pager pager =2;
+    repeated Favorite items = 3;
+    Error error = 4;
+    Info info =5;
+}

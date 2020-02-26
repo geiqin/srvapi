@@ -1,0 +1,95 @@
+syntax = "proto3";
+package geiqin.srv.pdm;
+//option go_package = img "github.com/geiqin/srvapi/cms/media/proto/image.proto";
+
+import "common.proto";
+import "itemGallery.proto";
+import "itemPrice.proto";
+import "itemRight.proto";
+import "tag.proto";
+import "brand.proto";
+import "sku.proto";
+import "cat.proto";
+//import img "github.com/geiqin/srvapi/cms/media/proto/image.proto";
+
+
+
+service ItemService {
+    rpc Create (Item) returns (ItemResponse) {}
+    rpc Update (Item) returns (ItemResponse) {}
+    rpc Delete (Id) returns (ItemResponse) {}
+    rpc Lock (Ids) returns (ItemResponse) {}
+    rpc Unlock (Ids) returns (ItemResponse) {}
+    rpc Listing (Ids) returns (ItemResponse) {}
+    rpc Delisting (Ids) returns (ItemResponse) {}
+    rpc Recovery (Ids) returns (ItemResponse) {}
+    rpc Destroy (Ids) returns (ItemResponse) {}
+    rpc Get (Id) returns (ItemResponse) {}
+    rpc Search (BaseWhere) returns (ItemResponse) {}
+    rpc SearchDeleted (BaseWhere) returns (ItemResponse) {}
+}
+
+message Item {
+    int64	id	=1;
+    string	name	=2;
+    string	unit	=3;
+    string	item_sn	=4;
+    int64	brand_id	=5;
+    int64	taxonomy_id	=6;
+    int32	buy_quota	=7;
+    int32	quantity	=8  ;
+    int32	sold_num	=9;
+    int32	init_sold_num	=10;
+    int32	frozen_num	=11;
+    string	model_type	=12;
+    bool	listed	=13;
+    bool	locked	=14;
+    bool	hide_stock	=15;
+    bool	join_level_discount	=16;
+    bool	purchase_right	=17;
+    string	auto_listing_time	=18;
+    string	post_type	=19;
+    float	post_fee	=20;
+    string	out_item_no	=21;
+    string	content	=22;
+    string	summary	=23;
+    string	selling_point32	=24;
+    int32	min_buy	=25;
+    bool	nostore_sell	=26;
+    int64	thumb_id	=27;
+    string	thumb_url	=28;
+    int32	template_id	=29;
+    string	barcode	=30;
+    float	price	=31;
+    float	origin_price	=32;
+    float	cost_price	=33;
+    float	min_price	=34;
+    float	max_price	=35;
+    float	weight	=36;
+    string	spec_data	=37;
+    int32	review_num	=38;
+    int32	view_count	=39;
+    int32	view_w_count	=40;
+    int32	buy_count	=41;
+    int32	buy_w_count	=42;
+    int32	sorting	=43;
+    string	created_at	=44;
+    string	updated_at	=45;
+    Brand brand =46;
+    repeated Cat cats =47;
+    repeated Tag tags =48;
+    repeated  Sku skus  =49;
+    repeated  ItemGallery galleries  =50;
+    repeated  ItemPrice prices  =51;
+    repeated  ItemRight rights  =52;
+    //img.Image image =54;
+}
+
+
+message ItemResponse {
+    Item entity = 1;
+    Pager pager =2;
+    repeated Item items = 3;
+    Error error = 4;
+    Info info =5;
+}

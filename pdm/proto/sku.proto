@@ -1,0 +1,39 @@
+syntax = "proto3";
+import "common.proto";
+//import "proto/spec.proto";
+import "specValue.proto";
+package geiqin.srv.pdm;
+service SkuService {
+    rpc List (Id) returns (SkuResponse) {}
+}
+
+message Sku {
+    int64	id	=1;
+    int64	item_id	=2;
+    string	sku_sn	=3;
+    string	name	=4;
+    string	barcode	=5;
+    float	price	=6;
+    float	origin_price	=7;
+    float	cost_price	=8;
+    float	weight	=9;
+    int32	quantity	=10;
+    int32	sold_num	=11;
+    int32	init_sold_num	=12;
+    int32	frozen_num	=13;
+    bool	listed	=14;
+    string	out_sku_no	=15;
+    bool	defaulted	=16;
+    int32	buy_quota	=17;
+    string	created_at	=18;
+    string	updated_at	=19;
+    repeated SpecValue SpecValues =21;
+}
+
+message SkuResponse {
+    Sku entity = 1;
+    Pager pager =2;
+    repeated Sku items = 3;
+    Error error = 4;
+    Info info =5;
+}

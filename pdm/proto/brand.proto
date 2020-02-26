@@ -1,0 +1,35 @@
+syntax = "proto3";
+import "common.proto";
+
+package geiqin.srv.pdm;
+
+service BrandService {
+    rpc Create (Brand) returns (BrandResponse) {}
+    rpc Update (Brand) returns (BrandResponse) {}
+    rpc Delete (IdInt) returns (BrandResponse) {}
+    rpc Get (IdInt) returns (BrandResponse) {}
+    rpc Search (BaseWhere) returns (BrandResponse) {}
+}
+
+
+message Brand {
+    int32	id	=1;
+    string	name	=2;
+    string	website	=3;
+    int64	logo_id	=4;
+    string	logo_url	=5;
+    string	brand_type	=6;
+    int32	item_num	=7;
+    string	description	=8;
+    string	created_at	=9;
+    string	updated_at	=10;
+}
+
+
+message BrandResponse {
+    Brand entity = 1;
+    Pager pager =2;
+    repeated Brand items = 3;
+    Error error = 4;
+    Info info =5;
+}

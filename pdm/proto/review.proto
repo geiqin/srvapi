@@ -1,0 +1,23 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.pdm;
+service ReviewService {
+    rpc Create (Review) returns (ReviewResponse) {}
+    rpc Delete (Id) returns (ReviewResponse) {}
+    rpc Get (Id) returns (ReviewResponse) {}
+    rpc Search (BaseWhere) returns (ReviewResponse) {}
+}
+
+
+message Review {
+    int64	id	=1;
+}
+
+
+message ReviewResponse {
+    Review entity = 1;
+    Pager pager =2;
+    repeated Review items = 3;
+    Error error = 4;
+    Info info =5;
+}

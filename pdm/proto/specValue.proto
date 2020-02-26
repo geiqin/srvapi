@@ -1,0 +1,30 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.pdm;
+
+service SpecValueService {
+    rpc Create (SpecValue) returns (SpecValueResponse) {}
+    rpc Delete (IdInt) returns (SpecValueResponse) {}
+    rpc Get (IdInt) returns (SpecValueResponse) {}
+    rpc List (IdInt) returns (SpecValueResponse) {}
+}
+
+message SpecValue {
+    int32	id	=1;
+    int32	spec_id	=2;
+    string	alias	=3;
+    string	spec_value	=4;
+    int64	spec_img_id	=5;
+    string	spec_img_url =6;
+    int32	sorting	=7;
+    string	created_at	=8;
+    string	updated_at	=9;
+}
+
+message SpecValueResponse {
+    SpecValue entity = 1;
+    Pager pager =2;
+    repeated SpecValue items = 3;
+    Error error = 4;
+    Info info =5;
+}

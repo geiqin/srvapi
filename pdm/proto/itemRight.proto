@@ -1,0 +1,17 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.pdm;
+message ItemRight {
+    int64	id =1;
+    string	type =2;
+    int64	type_value_id =3;
+    int64	item_id =4;
+}
+
+message ItemRightResponse {
+    ItemRight entity = 1;
+    Pager pager =2;
+    repeated ItemRight items = 3;
+    Error error = 4;
+    Info info =5;
+}
