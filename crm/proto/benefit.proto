@@ -1,0 +1,37 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm;
+
+service BenefitService {
+    rpc Create (Benefit) returns (BenefitResponse) {}
+    rpc Update (Benefit) returns (BenefitResponse) {}
+    rpc Delete (IdInt) returns (BenefitResponse) {}
+    rpc Get (IdInt) returns (BenefitResponse) {}
+    rpc Search (BaseWhere) returns (BenefitResponse) {}
+}
+
+message Benefit {
+    int32 id =1;
+    string slug =2;
+    string name =3;
+    int64 icon_id =4;
+    string icon_url =5;
+    string type =6;
+    bool selected =7;
+    bool package =8;
+    string params =9;
+    string memo =10;
+    string created_at =11;
+    string updated_at =12;
+}
+
+
+
+//
+message BenefitResponse {
+    Benefit entity = 1;
+    Pager pager =2;
+    repeated Benefit items = 3;
+    Error error = 4;
+    Info info =5;
+}

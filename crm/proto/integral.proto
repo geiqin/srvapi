@@ -1,0 +1,25 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm;
+
+service IntegralService {
+    rpc Create (IntegralResponse) returns (IntegralResponse) {}
+    rpc Delete (Id) returns (IntegralResponse) {}
+    rpc Get (IntegralResponse) returns (IntegralResponse) {}
+    rpc Search (BaseWhere) returns (IntegralResponse) {}
+}
+
+message Integral {
+    int32 id =1;
+}
+
+
+
+//
+message IntegralResponse {
+    Integral entity = 1;
+    Pager pager =2;
+    repeated Integral items = 3;
+    Error error = 4;
+    Info info =5;
+}

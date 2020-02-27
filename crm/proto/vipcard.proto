@@ -1,0 +1,43 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm;
+
+service VipcardService {
+    rpc Apply (Vipcard) returns (VipcardResponse) {}
+    rpc Renew (Vipcard) returns (VipcardResponse) {}
+    rpc Delete (Id) returns (VipcardResponse) {}
+    rpc Get (Vipcard) returns (VipcardResponse) {}
+    rpc List (VipcardWhere) returns (VipcardResponse) {}
+    rpc Search (BaseWhere) returns (VipcardResponse) {}
+}
+
+message VipcardWhere {
+    bool useable =1;
+    int64 customer_id =2;
+    string number =3;
+    int32 card_method =4;
+}
+
+
+message Vipcard {
+    int64 id =1;
+    int32 card_id =2;
+    int64 customer_id =3;
+    string number =4;
+    string issuer =5;
+    string open_date =6;
+    string validate_date =7;
+    string created_at =8;
+    string updated_at =9;
+}
+
+
+
+//
+message VipcardResponse {
+    Vipcard entity = 1;
+    Pager pager =2;
+    repeated Vipcard items = 3;
+    Error error = 4;
+    Info info =5;
+}

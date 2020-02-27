@@ -1,0 +1,30 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm;
+
+service TagService {
+    rpc Create (Tag) returns (TagResponse) {}
+    rpc Update (Tag) returns (TagResponse) {}
+    rpc Delete (IdInt) returns (TagResponse) {}
+    rpc Get (IdInt) returns (TagResponse) {}
+    rpc Search (BaseWhere) returns (TagResponse) {}
+}
+
+message Tag {
+    int32 id =1;
+    string name =2;
+    int32 type =3;
+    int32 condition_type =4;
+    string created_at =5;
+    string updated_at =6;
+}
+
+
+//
+message TagResponse {
+    Tag entity = 1;
+    Pager pager =2;
+    repeated Tag items = 3;
+    Error error = 4;
+    Info info =5;
+}

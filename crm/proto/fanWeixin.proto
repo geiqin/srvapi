@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm;
+
+service FanWeixinService {
+    rpc Create (FanWeixin) returns (FanWeixinResponse) {}
+    rpc Update (FanWeixin) returns (FanWeixinResponse) {}
+    rpc Delete (Id) returns (FanWeixinResponse) {}
+    rpc Get (FanWeixin) returns (FanWeixinResponse) {}
+    rpc Search (BaseWhere) returns (FanWeixinResponse) {}
+}
+
+message FanWeixin {
+    int32 id =1;
+}
+
+
+
+//
+message FanWeixinResponse {
+    FanWeixin entity = 1;
+    Pager pager =2;
+    repeated FanWeixin items = 3;
+    Error error = 4;
+    Info info =5;
+}

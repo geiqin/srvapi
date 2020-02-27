@@ -1,0 +1,45 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm;
+
+service CardService {
+    rpc Create (Card) returns (CardResponse) {}
+    rpc Update (Card) returns (CardResponse) {}
+    rpc Delete (IdInt) returns (CardResponse) {}
+    rpc Disabled (IdInt) returns (CardResponse) {}
+    rpc Enabled (IdInt) returns (CardResponse) {}
+    rpc Get (IdInt) returns (CardResponse) {}
+    rpc List (Card) returns (CardResponse) {}
+    rpc Search (BaseWhere) returns (CardResponse) {}
+}
+
+message Card {
+    int32 id =1;
+    string name =2;
+    string card_bg =3;
+    string term =4;
+    int32 term_days =5;
+    string term_start_date =6;
+    string term_end_date =7;
+    string method =8;
+    float fee =9;
+    int32 stock =10;
+    string code =11;
+    int32 total_payment =12;
+    float total_consume =13;
+    int32 total_integral =14;
+    string description =15;
+    string phone =16;
+    bool disabled =17;
+    string created_at =19;
+    string updated_at =20;
+}
+
+//
+message CardResponse {
+    Card entity = 1;
+    Pager pager =2;
+    repeated Card items = 3;
+    Error error = 4;
+    Info info =5;
+}

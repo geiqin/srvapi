@@ -1,0 +1,57 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm;
+
+service CustomerService {
+    rpc Create (Customer) returns (CustomerResponse) {}
+    rpc Update (Customer) returns (CustomerResponse) {}
+    rpc Delete (Id) returns (CustomerResponse) {}
+    rpc Get (Customer) returns (CustomerResponse) {}
+    rpc Search (BaseWhere) returns (CustomerResponse) {}
+}
+
+message Customer {
+    int64 id =1;
+    string customer_sn =2;
+    string name =3;
+    string display_name =4;
+    string realname =5;
+    string password =6;
+    string gender =7;
+    string mobile =8;
+    string email =9;
+    int64 avatar_id =10;
+    string avatar_url =11;
+    int32 level_id =12;
+    float advance =13;
+    int32 growth_value =14;
+    int32 integral =15;
+    int32 traded_num =16;
+    float traded_money =17;
+    int32 review_num =18;
+    int32 favorite_num =19;
+    int64 refer_customer_id =20;
+    string refer_url =21;
+    bool locked =22;
+    bool trusted =23;
+    bool binded_mobile =24;
+    bool binded_email =25;
+    int64 area_id =26;
+    string source_type =27;
+    string birthday =28;
+    string memo =29;
+    string created_at =30;
+    string updated_at =31;
+    string deleted_at =32;
+}
+
+
+
+//
+message CustomerResponse {
+    Customer entity = 1;
+    Pager pager =2;
+    repeated Customer items = 3;
+    Error error = 4;
+    Info info =5;
+}
