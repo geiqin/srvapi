@@ -15,6 +15,7 @@ message ItemGallery {
     bool	defaulted	=7;
     string	created_at	=8;
     string	updated_at	=9;
+    repeated  int64 ids  =10;
 }
 
 message ItemGalleryResponse {

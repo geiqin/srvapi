@@ -1,14 +1,15 @@
 syntax = "proto3";
 import "common.proto";
+import "cardBenefit.proto";
 package geiqin.srv.crm;
 
 service CardService {
     rpc Create (Card) returns (CardResponse) {}
     rpc Update (Card) returns (CardResponse) {}
-    rpc Delete (IdInt) returns (CardResponse) {}
-    rpc Disabled (IdInt) returns (CardResponse) {}
-    rpc Enabled (IdInt) returns (CardResponse) {}
-    rpc Get (IdInt) returns (CardResponse) {}
+    rpc Delete (Card) returns (CardResponse) {}
+    rpc Disabled (Card) returns (CardResponse) {}
+    rpc Enabled (Card) returns (CardResponse) {}
+    rpc Get (Card) returns (CardResponse) {}
     rpc List (Card) returns (CardResponse) {}
     rpc Search (BaseWhere) returns (CardResponse) {}
 }
@@ -33,6 +34,8 @@ message Card {
     bool disabled =17;
     string created_at =19;
     string updated_at =20;
+    repeated CardBenefit card_benefits   =21;
+    repeated int32 ids = 22;
 }
 
 //

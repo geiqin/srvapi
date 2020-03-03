@@ -5,8 +5,8 @@ package geiqin.srv.pdm;
 service TagService {
     rpc Create (Tag) returns (TagResponse) {}
     rpc Update (Tag) returns (TagResponse) {}
-    rpc Delete (IdInt) returns (TagResponse) {}
-    rpc Get (IdInt) returns (TagResponse) {}
+    rpc Delete (Tag) returns (TagResponse) {}
+    rpc Get (Tag) returns (TagResponse) {}
     rpc List (BaseWhere) returns (TagResponse) {}
     rpc Search (BaseWhere) returns (TagResponse) {}
 }

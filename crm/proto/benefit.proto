@@ -5,8 +5,8 @@ package geiqin.srv.crm;
 service BenefitService {
     rpc Create (Benefit) returns (BenefitResponse) {}
     rpc Update (Benefit) returns (BenefitResponse) {}
-    rpc Delete (IdInt) returns (BenefitResponse) {}
-    rpc Get (IdInt) returns (BenefitResponse) {}
+    rpc Delete (Benefit) returns (BenefitResponse) {}
+    rpc Get (Benefit) returns (BenefitResponse) {}
     rpc Search (BaseWhere) returns (BenefitResponse) {}
 }
 
@@ -23,6 +23,7 @@ message Benefit {
     string memo =10;
     string created_at =11;
     string updated_at =12;
+    repeated int32 ids = 13;
 }
 
 

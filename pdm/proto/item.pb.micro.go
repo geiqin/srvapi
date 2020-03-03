@@ -36,14 +36,14 @@ var _ server.Option
 type ItemService interface {
 	Create(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Update(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
-	Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*ItemResponse, error)
-	Lock(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error)
-	Unlock(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error)
-	Listing(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error)
-	Delisting(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error)
-	Recovery(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error)
-	Destroy(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error)
-	Get(ctx context.Context, in *Id, opts ...client.CallOption) (*ItemResponse, error)
+	Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Lock(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Unlock(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Listing(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Delisting(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Recovery(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Destroy(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ItemResponse, error)
 	SearchDeleted(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ItemResponse, error)
 }
@@ -86,7 +86,7 @@ func (c *itemService) Update(ctx context.Context, in *Item, opts ...client.CallO
 	return out, nil
 }
 
-func (c *itemService) Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*ItemResponse, error) {
+func (c *itemService) Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Delete", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -96,7 +96,7 @@ func (c *itemService) Delete(ctx context.Context, in *Id, opts ...client.CallOpt
 	return out, nil
 }
 
-func (c *itemService) Lock(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error) {
+func (c *itemService) Lock(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Lock", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -106,7 +106,7 @@ func (c *itemService) Lock(ctx context.Context, in *Ids, opts ...client.CallOpti
 	return out, nil
 }
 
-func (c *itemService) Unlock(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error) {
+func (c *itemService) Unlock(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Unlock", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -116,7 +116,7 @@ func (c *itemService) Unlock(ctx context.Context, in *Ids, opts ...client.CallOp
 	return out, nil
 }
 
-func (c *itemService) Listing(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error) {
+func (c *itemService) Listing(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Listing", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -126,7 +126,7 @@ func (c *itemService) Listing(ctx context.Context, in *Ids, opts ...client.CallO
 	return out, nil
 }
 
-func (c *itemService) Delisting(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error) {
+func (c *itemService) Delisting(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Delisting", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -136,7 +136,7 @@ func (c *itemService) Delisting(ctx context.Context, in *Ids, opts ...client.Cal
 	return out, nil
 }
 
-func (c *itemService) Recovery(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error) {
+func (c *itemService) Recovery(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Recovery", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -146,7 +146,7 @@ func (c *itemService) Recovery(ctx context.Context, in *Ids, opts ...client.Call
 	return out, nil
 }
 
-func (c *itemService) Destroy(ctx context.Context, in *Ids, opts ...client.CallOption) (*ItemResponse, error) {
+func (c *itemService) Destroy(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Destroy", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -156,7 +156,7 @@ func (c *itemService) Destroy(ctx context.Context, in *Ids, opts ...client.CallO
 	return out, nil
 }
 
-func (c *itemService) Get(ctx context.Context, in *Id, opts ...client.CallOption) (*ItemResponse, error) {
+func (c *itemService) Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Get", in)
 	out := new(ItemResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -191,14 +191,14 @@ func (c *itemService) SearchDeleted(ctx context.Context, in *BaseWhere, opts ...
 type ItemServiceHandler interface {
 	Create(context.Context, *Item, *ItemResponse) error
 	Update(context.Context, *Item, *ItemResponse) error
-	Delete(context.Context, *Id, *ItemResponse) error
-	Lock(context.Context, *Ids, *ItemResponse) error
-	Unlock(context.Context, *Ids, *ItemResponse) error
-	Listing(context.Context, *Ids, *ItemResponse) error
-	Delisting(context.Context, *Ids, *ItemResponse) error
-	Recovery(context.Context, *Ids, *ItemResponse) error
-	Destroy(context.Context, *Ids, *ItemResponse) error
-	Get(context.Context, *Id, *ItemResponse) error
+	Delete(context.Context, *Item, *ItemResponse) error
+	Lock(context.Context, *Item, *ItemResponse) error
+	Unlock(context.Context, *Item, *ItemResponse) error
+	Listing(context.Context, *Item, *ItemResponse) error
+	Delisting(context.Context, *Item, *ItemResponse) error
+	Recovery(context.Context, *Item, *ItemResponse) error
+	Destroy(context.Context, *Item, *ItemResponse) error
+	Get(context.Context, *Item, *ItemResponse) error
 	Search(context.Context, *BaseWhere, *ItemResponse) error
 	SearchDeleted(context.Context, *BaseWhere, *ItemResponse) error
 }
@@ -207,14 +207,14 @@ func RegisterItemServiceHandler(s server.Server, hdlr ItemServiceHandler, opts .
 	type itemService interface {
 		Create(ctx context.Context, in *Item, out *ItemResponse) error
 		Update(ctx context.Context, in *Item, out *ItemResponse) error
-		Delete(ctx context.Context, in *Id, out *ItemResponse) error
-		Lock(ctx context.Context, in *Ids, out *ItemResponse) error
-		Unlock(ctx context.Context, in *Ids, out *ItemResponse) error
-		Listing(ctx context.Context, in *Ids, out *ItemResponse) error
-		Delisting(ctx context.Context, in *Ids, out *ItemResponse) error
-		Recovery(ctx context.Context, in *Ids, out *ItemResponse) error
-		Destroy(ctx context.Context, in *Ids, out *ItemResponse) error
-		Get(ctx context.Context, in *Id, out *ItemResponse) error
+		Delete(ctx context.Context, in *Item, out *ItemResponse) error
+		Lock(ctx context.Context, in *Item, out *ItemResponse) error
+		Unlock(ctx context.Context, in *Item, out *ItemResponse) error
+		Listing(ctx context.Context, in *Item, out *ItemResponse) error
+		Delisting(ctx context.Context, in *Item, out *ItemResponse) error
+		Recovery(ctx context.Context, in *Item, out *ItemResponse) error
+		Destroy(ctx context.Context, in *Item, out *ItemResponse) error
+		Get(ctx context.Context, in *Item, out *ItemResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *ItemResponse) error
 		SearchDeleted(ctx context.Context, in *BaseWhere, out *ItemResponse) error
 	}
@@ -237,35 +237,35 @@ func (h *itemServiceHandler) Update(ctx context.Context, in *Item, out *ItemResp
 	return h.ItemServiceHandler.Update(ctx, in, out)
 }
 
-func (h *itemServiceHandler) Delete(ctx context.Context, in *Id, out *ItemResponse) error {
+func (h *itemServiceHandler) Delete(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *itemServiceHandler) Lock(ctx context.Context, in *Ids, out *ItemResponse) error {
+func (h *itemServiceHandler) Lock(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Lock(ctx, in, out)
 }
 
-func (h *itemServiceHandler) Unlock(ctx context.Context, in *Ids, out *ItemResponse) error {
+func (h *itemServiceHandler) Unlock(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Unlock(ctx, in, out)
 }
 
-func (h *itemServiceHandler) Listing(ctx context.Context, in *Ids, out *ItemResponse) error {
+func (h *itemServiceHandler) Listing(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Listing(ctx, in, out)
 }
 
-func (h *itemServiceHandler) Delisting(ctx context.Context, in *Ids, out *ItemResponse) error {
+func (h *itemServiceHandler) Delisting(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Delisting(ctx, in, out)
 }
 
-func (h *itemServiceHandler) Recovery(ctx context.Context, in *Ids, out *ItemResponse) error {
+func (h *itemServiceHandler) Recovery(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Recovery(ctx, in, out)
 }
 
-func (h *itemServiceHandler) Destroy(ctx context.Context, in *Ids, out *ItemResponse) error {
+func (h *itemServiceHandler) Destroy(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Destroy(ctx, in, out)
 }
 
-func (h *itemServiceHandler) Get(ctx context.Context, in *Id, out *ItemResponse) error {
+func (h *itemServiceHandler) Get(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Get(ctx, in, out)
 }
 

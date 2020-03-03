@@ -3,8 +3,8 @@ import "common.proto";
 package geiqin.srv.pdm;
 service ReviewService {
     rpc Create (Review) returns (ReviewResponse) {}
-    rpc Delete (Id) returns (ReviewResponse) {}
-    rpc Get (Id) returns (ReviewResponse) {}
+    rpc Delete (Review) returns (ReviewResponse) {}
+    rpc Get (Review) returns (ReviewResponse) {}
     rpc Search (BaseWhere) returns (ReviewResponse) {}
 }
 

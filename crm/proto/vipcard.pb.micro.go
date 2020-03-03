@@ -36,7 +36,7 @@ var _ server.Option
 type VipcardService interface {
 	Apply(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
 	Renew(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
-	Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*VipcardResponse, error)
+	Delete(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
 	Get(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
 	List(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*VipcardResponse, error)
@@ -80,7 +80,7 @@ func (c *vipcardService) Renew(ctx context.Context, in *Vipcard, opts ...client.
 	return out, nil
 }
 
-func (c *vipcardService) Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*VipcardResponse, error) {
+func (c *vipcardService) Delete(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error) {
 	req := c.c.NewRequest(c.name, "VipcardService.Delete", in)
 	out := new(VipcardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -125,7 +125,7 @@ func (c *vipcardService) Search(ctx context.Context, in *BaseWhere, opts ...clie
 type VipcardServiceHandler interface {
 	Apply(context.Context, *Vipcard, *VipcardResponse) error
 	Renew(context.Context, *Vipcard, *VipcardResponse) error
-	Delete(context.Context, *Id, *VipcardResponse) error
+	Delete(context.Context, *Vipcard, *VipcardResponse) error
 	Get(context.Context, *Vipcard, *VipcardResponse) error
 	List(context.Context, *VipcardWhere, *VipcardResponse) error
 	Search(context.Context, *BaseWhere, *VipcardResponse) error
@@ -135,7 +135,7 @@ func RegisterVipcardServiceHandler(s server.Server, hdlr VipcardServiceHandler, 
 	type vipcardService interface {
 		Apply(ctx context.Context, in *Vipcard, out *VipcardResponse) error
 		Renew(ctx context.Context, in *Vipcard, out *VipcardResponse) error
-		Delete(ctx context.Context, in *Id, out *VipcardResponse) error
+		Delete(ctx context.Context, in *Vipcard, out *VipcardResponse) error
 		Get(ctx context.Context, in *Vipcard, out *VipcardResponse) error
 		List(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *VipcardResponse) error
@@ -159,7 +159,7 @@ func (h *vipcardServiceHandler) Renew(ctx context.Context, in *Vipcard, out *Vip
 	return h.VipcardServiceHandler.Renew(ctx, in, out)
 }
 
-func (h *vipcardServiceHandler) Delete(ctx context.Context, in *Id, out *VipcardResponse) error {
+func (h *vipcardServiceHandler) Delete(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
 	return h.VipcardServiceHandler.Delete(ctx, in, out)
 }
 

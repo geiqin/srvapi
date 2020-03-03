@@ -5,9 +5,9 @@ package geiqin.srv.pdm;
 
 service FavoriteService {
     rpc Create (Favorite) returns (FavoriteResponse) {}
-    rpc Delete (Id) returns (FavoriteResponse) {}
-    rpc Get (Id) returns (FavoriteResponse) {}
-    rpc Check (Id) returns (FavoriteResponse) {}
+    rpc Delete (Favorite) returns (FavoriteResponse) {}
+    rpc Get (Favorite) returns (FavoriteResponse) {}
+    rpc Check (Favorite) returns (FavoriteResponse) {}
     rpc Search (BaseWhere) returns (FavoriteResponse) {}
 }
 

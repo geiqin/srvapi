@@ -4,7 +4,7 @@ package geiqin.srv.crm;
 
 service IntegralService {
     rpc Create (IntegralResponse) returns (IntegralResponse) {}
-    rpc Delete (Id) returns (IntegralResponse) {}
+    rpc Delete (IntegralResponse) returns (IntegralResponse) {}
     rpc Get (IntegralResponse) returns (IntegralResponse) {}
     rpc Search (BaseWhere) returns (IntegralResponse) {}
 }

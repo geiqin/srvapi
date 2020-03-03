@@ -1,0 +1,13 @@
+syntax = "proto3";
+import "itemSaleStats.proto";
+
+package geiqin.srv.pdm;
+
+service Statistics {
+    rpc ItemSale (StatsRequest) returns (ItemSaleStatsResponse) {}
+}
+
+message StatsRequest {
+    string type=1;
+    int32 day=2;
+}

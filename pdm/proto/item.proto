@@ -17,14 +17,14 @@ import "cat.proto";
 service ItemService {
     rpc Create (Item) returns (ItemResponse) {}
     rpc Update (Item) returns (ItemResponse) {}
-    rpc Delete (Id) returns (ItemResponse) {}
-    rpc Lock (Ids) returns (ItemResponse) {}
-    rpc Unlock (Ids) returns (ItemResponse) {}
-    rpc Listing (Ids) returns (ItemResponse) {}
-    rpc Delisting (Ids) returns (ItemResponse) {}
-    rpc Recovery (Ids) returns (ItemResponse) {}
-    rpc Destroy (Ids) returns (ItemResponse) {}
-    rpc Get (Id) returns (ItemResponse) {}
+    rpc Delete (Item) returns (ItemResponse) {}
+    rpc Lock (Item) returns (ItemResponse) {}
+    rpc Unlock (Item) returns (ItemResponse) {}
+    rpc Listing (Item) returns (ItemResponse) {}
+    rpc Delisting (Item) returns (ItemResponse) {}
+    rpc Recovery (Item) returns (ItemResponse) {}
+    rpc Destroy (Item) returns (ItemResponse) {}
+    rpc Get (Item) returns (ItemResponse) {}
     rpc Search (BaseWhere) returns (ItemResponse) {}
     rpc SearchDeleted (BaseWhere) returns (ItemResponse) {}
 }
@@ -82,7 +82,7 @@ message Item {
     repeated  ItemGallery galleries  =50;
     repeated  ItemPrice prices  =51;
     repeated  ItemRight rights  =52;
-    //img.Image image =54;
+    repeated  int64 ids  =53;
 }
 
 

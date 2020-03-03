@@ -1,18 +1,5 @@
 syntax = "proto3";
-
 package geiqin.srv.pdm;
-
-message Id {
-    int64 id = 1;
-}
-
-message IdInt {
-    int32 id = 1;
-}
-
-message Ids {
-    repeated int64 ids = 1;
-}
 
 message Empty {
 }
@@ -31,10 +18,12 @@ message Error {
 
 message Pager {
     int32 paged = 1;
-    int32 page_size = 2;
-    int32 total = 3;
+    int32 total = 2;
+    int32 page_count = 3;
+    int32 page_size = 4;
+    int32 prev_page =5;
+    int32 last_page =6;
 }
-
 
 message BaseWhere {
     int32 paged = 1;
@@ -42,61 +31,15 @@ message BaseWhere {
     int32 top = 3;
     //base params
     int64 id = 4;
-    int64 ids = 5;
-    string keywords = 6;
-    string status =7;
-    int64 area_id=8;
-    int32 type_id=9;
-    int32 cat_id=10;
-    string start_date =11;
-    string end_date =12;
-}
-
-//令牌
-message Token {
-    string access_token = 1;
-    bool valid = 2;
-    Error error = 3;
-    Info info =5;
-}
-
-message Struct {
-    // Unordered map of dynamically typed values.
-    map<string, string> fields = 1;
-}
-
-message Value {
-    // The kind of value.
-    oneof kind {
-        // Represents a null value.
-        NullValue null_value = 1;
-        // Represents a double value.
-        //double number_value = 2;
-
-        int32 int_value = 3;
-
-        float float_value = 4;
-
-        // Represents a string value.
-        string string_value = 5;
-        // Represents a boolean value.
-        bool bool_value = 6;
-        // Represents a structured value.
-        Struct struct_value = 7;
-        // Represents a repeated `Value`.
-        ListValue list_value = 8;
-    }
-}
-
-enum NullValue {
-    // Null value.
-    NULL_VALUE = 0;
-}
-
-// `ListValue` is a wrapper around a repeated field of values.
-//
-// The JSON representation for `ListValue` is JSON array.
-message ListValue {
-    // Repeated field of dynamically typed values.
-    repeated Value values = 1;
+    string mobile = 5;
+    string name = 6;
+    string title = 7;
+    string keywords = 8;
+    string status =9;
+    int64 area_id=10;
+    int32 type_id=11;
+    int32 cat_id=12;
+    string start_date =13;
+    string end_date =14;
+    repeated int64 ids = 15;
 }

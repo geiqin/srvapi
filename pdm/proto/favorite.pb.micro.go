@@ -37,9 +37,9 @@ var _ server.Option
 
 type FavoriteService interface {
 	Create(ctx context.Context, in *Favorite, opts ...client.CallOption) (*FavoriteResponse, error)
-	Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*FavoriteResponse, error)
-	Get(ctx context.Context, in *Id, opts ...client.CallOption) (*FavoriteResponse, error)
-	Check(ctx context.Context, in *Id, opts ...client.CallOption) (*FavoriteResponse, error)
+	Delete(ctx context.Context, in *Favorite, opts ...client.CallOption) (*FavoriteResponse, error)
+	Get(ctx context.Context, in *Favorite, opts ...client.CallOption) (*FavoriteResponse, error)
+	Check(ctx context.Context, in *Favorite, opts ...client.CallOption) (*FavoriteResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*FavoriteResponse, error)
 }
 
@@ -71,7 +71,7 @@ func (c *favoriteService) Create(ctx context.Context, in *Favorite, opts ...clie
 	return out, nil
 }
 
-func (c *favoriteService) Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*FavoriteResponse, error) {
+func (c *favoriteService) Delete(ctx context.Context, in *Favorite, opts ...client.CallOption) (*FavoriteResponse, error) {
 	req := c.c.NewRequest(c.name, "FavoriteService.Delete", in)
 	out := new(FavoriteResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -81,7 +81,7 @@ func (c *favoriteService) Delete(ctx context.Context, in *Id, opts ...client.Cal
 	return out, nil
 }
 
-func (c *favoriteService) Get(ctx context.Context, in *Id, opts ...client.CallOption) (*FavoriteResponse, error) {
+func (c *favoriteService) Get(ctx context.Context, in *Favorite, opts ...client.CallOption) (*FavoriteResponse, error) {
 	req := c.c.NewRequest(c.name, "FavoriteService.Get", in)
 	out := new(FavoriteResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -91,7 +91,7 @@ func (c *favoriteService) Get(ctx context.Context, in *Id, opts ...client.CallOp
 	return out, nil
 }
 
-func (c *favoriteService) Check(ctx context.Context, in *Id, opts ...client.CallOption) (*FavoriteResponse, error) {
+func (c *favoriteService) Check(ctx context.Context, in *Favorite, opts ...client.CallOption) (*FavoriteResponse, error) {
 	req := c.c.NewRequest(c.name, "FavoriteService.Check", in)
 	out := new(FavoriteResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -115,18 +115,18 @@ func (c *favoriteService) Search(ctx context.Context, in *BaseWhere, opts ...cli
 
 type FavoriteServiceHandler interface {
 	Create(context.Context, *Favorite, *FavoriteResponse) error
-	Delete(context.Context, *Id, *FavoriteResponse) error
-	Get(context.Context, *Id, *FavoriteResponse) error
-	Check(context.Context, *Id, *FavoriteResponse) error
+	Delete(context.Context, *Favorite, *FavoriteResponse) error
+	Get(context.Context, *Favorite, *FavoriteResponse) error
+	Check(context.Context, *Favorite, *FavoriteResponse) error
 	Search(context.Context, *BaseWhere, *FavoriteResponse) error
 }
 
 func RegisterFavoriteServiceHandler(s server.Server, hdlr FavoriteServiceHandler, opts ...server.HandlerOption) error {
 	type favoriteService interface {
 		Create(ctx context.Context, in *Favorite, out *FavoriteResponse) error
-		Delete(ctx context.Context, in *Id, out *FavoriteResponse) error
-		Get(ctx context.Context, in *Id, out *FavoriteResponse) error
-		Check(ctx context.Context, in *Id, out *FavoriteResponse) error
+		Delete(ctx context.Context, in *Favorite, out *FavoriteResponse) error
+		Get(ctx context.Context, in *Favorite, out *FavoriteResponse) error
+		Check(ctx context.Context, in *Favorite, out *FavoriteResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *FavoriteResponse) error
 	}
 	type FavoriteService struct {
@@ -144,15 +144,15 @@ func (h *favoriteServiceHandler) Create(ctx context.Context, in *Favorite, out *
 	return h.FavoriteServiceHandler.Create(ctx, in, out)
 }
 
-func (h *favoriteServiceHandler) Delete(ctx context.Context, in *Id, out *FavoriteResponse) error {
+func (h *favoriteServiceHandler) Delete(ctx context.Context, in *Favorite, out *FavoriteResponse) error {
 	return h.FavoriteServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *favoriteServiceHandler) Get(ctx context.Context, in *Id, out *FavoriteResponse) error {
+func (h *favoriteServiceHandler) Get(ctx context.Context, in *Favorite, out *FavoriteResponse) error {
 	return h.FavoriteServiceHandler.Get(ctx, in, out)
 }
 
-func (h *favoriteServiceHandler) Check(ctx context.Context, in *Id, out *FavoriteResponse) error {
+func (h *favoriteServiceHandler) Check(ctx context.Context, in *Favorite, out *FavoriteResponse) error {
 	return h.FavoriteServiceHandler.Check(ctx, in, out)
 }
 

@@ -35,9 +35,9 @@ var _ server.Option
 
 type SpecValueService interface {
 	Create(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error)
-	Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecValueResponse, error)
-	Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecValueResponse, error)
-	List(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecValueResponse, error)
+	Delete(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error)
+	Get(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error)
+	List(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error)
 }
 
 type specValueService struct {
@@ -68,7 +68,7 @@ func (c *specValueService) Create(ctx context.Context, in *SpecValue, opts ...cl
 	return out, nil
 }
 
-func (c *specValueService) Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecValueResponse, error) {
+func (c *specValueService) Delete(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error) {
 	req := c.c.NewRequest(c.name, "SpecValueService.Delete", in)
 	out := new(SpecValueResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -78,7 +78,7 @@ func (c *specValueService) Delete(ctx context.Context, in *IdInt, opts ...client
 	return out, nil
 }
 
-func (c *specValueService) Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecValueResponse, error) {
+func (c *specValueService) Get(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error) {
 	req := c.c.NewRequest(c.name, "SpecValueService.Get", in)
 	out := new(SpecValueResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -88,7 +88,7 @@ func (c *specValueService) Get(ctx context.Context, in *IdInt, opts ...client.Ca
 	return out, nil
 }
 
-func (c *specValueService) List(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecValueResponse, error) {
+func (c *specValueService) List(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error) {
 	req := c.c.NewRequest(c.name, "SpecValueService.List", in)
 	out := new(SpecValueResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -102,17 +102,17 @@ func (c *specValueService) List(ctx context.Context, in *IdInt, opts ...client.C
 
 type SpecValueServiceHandler interface {
 	Create(context.Context, *SpecValue, *SpecValueResponse) error
-	Delete(context.Context, *IdInt, *SpecValueResponse) error
-	Get(context.Context, *IdInt, *SpecValueResponse) error
-	List(context.Context, *IdInt, *SpecValueResponse) error
+	Delete(context.Context, *SpecValue, *SpecValueResponse) error
+	Get(context.Context, *SpecValue, *SpecValueResponse) error
+	List(context.Context, *SpecValue, *SpecValueResponse) error
 }
 
 func RegisterSpecValueServiceHandler(s server.Server, hdlr SpecValueServiceHandler, opts ...server.HandlerOption) error {
 	type specValueService interface {
 		Create(ctx context.Context, in *SpecValue, out *SpecValueResponse) error
-		Delete(ctx context.Context, in *IdInt, out *SpecValueResponse) error
-		Get(ctx context.Context, in *IdInt, out *SpecValueResponse) error
-		List(ctx context.Context, in *IdInt, out *SpecValueResponse) error
+		Delete(ctx context.Context, in *SpecValue, out *SpecValueResponse) error
+		Get(ctx context.Context, in *SpecValue, out *SpecValueResponse) error
+		List(ctx context.Context, in *SpecValue, out *SpecValueResponse) error
 	}
 	type SpecValueService struct {
 		specValueService
@@ -129,14 +129,14 @@ func (h *specValueServiceHandler) Create(ctx context.Context, in *SpecValue, out
 	return h.SpecValueServiceHandler.Create(ctx, in, out)
 }
 
-func (h *specValueServiceHandler) Delete(ctx context.Context, in *IdInt, out *SpecValueResponse) error {
+func (h *specValueServiceHandler) Delete(ctx context.Context, in *SpecValue, out *SpecValueResponse) error {
 	return h.SpecValueServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *specValueServiceHandler) Get(ctx context.Context, in *IdInt, out *SpecValueResponse) error {
+func (h *specValueServiceHandler) Get(ctx context.Context, in *SpecValue, out *SpecValueResponse) error {
 	return h.SpecValueServiceHandler.Get(ctx, in, out)
 }
 
-func (h *specValueServiceHandler) List(ctx context.Context, in *IdInt, out *SpecValueResponse) error {
+func (h *specValueServiceHandler) List(ctx context.Context, in *SpecValue, out *SpecValueResponse) error {
 	return h.SpecValueServiceHandler.List(ctx, in, out)
 }

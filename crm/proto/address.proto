@@ -5,7 +5,7 @@ package geiqin.srv.crm;
 service AddressService {
     rpc Create (Address) returns (AddressResponse) {}
     rpc Update (Address) returns (AddressResponse) {}
-    rpc Delete (Id) returns (AddressResponse) {}
+    rpc Delete (Address) returns (AddressResponse) {}
     rpc Get (Address) returns (AddressResponse) {}
     rpc Search (BaseWhere) returns (AddressResponse) {}
 }

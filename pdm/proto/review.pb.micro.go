@@ -35,8 +35,8 @@ var _ server.Option
 
 type ReviewService interface {
 	Create(ctx context.Context, in *Review, opts ...client.CallOption) (*ReviewResponse, error)
-	Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*ReviewResponse, error)
-	Get(ctx context.Context, in *Id, opts ...client.CallOption) (*ReviewResponse, error)
+	Delete(ctx context.Context, in *Review, opts ...client.CallOption) (*ReviewResponse, error)
+	Get(ctx context.Context, in *Review, opts ...client.CallOption) (*ReviewResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ReviewResponse, error)
 }
 
@@ -68,7 +68,7 @@ func (c *reviewService) Create(ctx context.Context, in *Review, opts ...client.C
 	return out, nil
 }
 
-func (c *reviewService) Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*ReviewResponse, error) {
+func (c *reviewService) Delete(ctx context.Context, in *Review, opts ...client.CallOption) (*ReviewResponse, error) {
 	req := c.c.NewRequest(c.name, "ReviewService.Delete", in)
 	out := new(ReviewResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -78,7 +78,7 @@ func (c *reviewService) Delete(ctx context.Context, in *Id, opts ...client.CallO
 	return out, nil
 }
 
-func (c *reviewService) Get(ctx context.Context, in *Id, opts ...client.CallOption) (*ReviewResponse, error) {
+func (c *reviewService) Get(ctx context.Context, in *Review, opts ...client.CallOption) (*ReviewResponse, error) {
 	req := c.c.NewRequest(c.name, "ReviewService.Get", in)
 	out := new(ReviewResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -102,16 +102,16 @@ func (c *reviewService) Search(ctx context.Context, in *BaseWhere, opts ...clien
 
 type ReviewServiceHandler interface {
 	Create(context.Context, *Review, *ReviewResponse) error
-	Delete(context.Context, *Id, *ReviewResponse) error
-	Get(context.Context, *Id, *ReviewResponse) error
+	Delete(context.Context, *Review, *ReviewResponse) error
+	Get(context.Context, *Review, *ReviewResponse) error
 	Search(context.Context, *BaseWhere, *ReviewResponse) error
 }
 
 func RegisterReviewServiceHandler(s server.Server, hdlr ReviewServiceHandler, opts ...server.HandlerOption) error {
 	type reviewService interface {
 		Create(ctx context.Context, in *Review, out *ReviewResponse) error
-		Delete(ctx context.Context, in *Id, out *ReviewResponse) error
-		Get(ctx context.Context, in *Id, out *ReviewResponse) error
+		Delete(ctx context.Context, in *Review, out *ReviewResponse) error
+		Get(ctx context.Context, in *Review, out *ReviewResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *ReviewResponse) error
 	}
 	type ReviewService struct {
@@ -129,11 +129,11 @@ func (h *reviewServiceHandler) Create(ctx context.Context, in *Review, out *Revi
 	return h.ReviewServiceHandler.Create(ctx, in, out)
 }
 
-func (h *reviewServiceHandler) Delete(ctx context.Context, in *Id, out *ReviewResponse) error {
+func (h *reviewServiceHandler) Delete(ctx context.Context, in *Review, out *ReviewResponse) error {
 	return h.ReviewServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *reviewServiceHandler) Get(ctx context.Context, in *Id, out *ReviewResponse) error {
+func (h *reviewServiceHandler) Get(ctx context.Context, in *Review, out *ReviewResponse) error {
 	return h.ReviewServiceHandler.Get(ctx, in, out)
 }
 

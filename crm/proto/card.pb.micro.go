@@ -36,10 +36,10 @@ var _ server.Option
 type CardService interface {
 	Create(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
 	Update(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
-	Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*CardResponse, error)
-	Disabled(ctx context.Context, in *IdInt, opts ...client.CallOption) (*CardResponse, error)
-	Enabled(ctx context.Context, in *IdInt, opts ...client.CallOption) (*CardResponse, error)
-	Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*CardResponse, error)
+	Delete(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	Disabled(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	Enabled(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	Get(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
 	List(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CardResponse, error)
 }
@@ -82,7 +82,7 @@ func (c *cardService) Update(ctx context.Context, in *Card, opts ...client.CallO
 	return out, nil
 }
 
-func (c *cardService) Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*CardResponse, error) {
+func (c *cardService) Delete(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error) {
 	req := c.c.NewRequest(c.name, "CardService.Delete", in)
 	out := new(CardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -92,7 +92,7 @@ func (c *cardService) Delete(ctx context.Context, in *IdInt, opts ...client.Call
 	return out, nil
 }
 
-func (c *cardService) Disabled(ctx context.Context, in *IdInt, opts ...client.CallOption) (*CardResponse, error) {
+func (c *cardService) Disabled(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error) {
 	req := c.c.NewRequest(c.name, "CardService.Disabled", in)
 	out := new(CardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -102,7 +102,7 @@ func (c *cardService) Disabled(ctx context.Context, in *IdInt, opts ...client.Ca
 	return out, nil
 }
 
-func (c *cardService) Enabled(ctx context.Context, in *IdInt, opts ...client.CallOption) (*CardResponse, error) {
+func (c *cardService) Enabled(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error) {
 	req := c.c.NewRequest(c.name, "CardService.Enabled", in)
 	out := new(CardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -112,7 +112,7 @@ func (c *cardService) Enabled(ctx context.Context, in *IdInt, opts ...client.Cal
 	return out, nil
 }
 
-func (c *cardService) Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*CardResponse, error) {
+func (c *cardService) Get(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error) {
 	req := c.c.NewRequest(c.name, "CardService.Get", in)
 	out := new(CardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -147,10 +147,10 @@ func (c *cardService) Search(ctx context.Context, in *BaseWhere, opts ...client.
 type CardServiceHandler interface {
 	Create(context.Context, *Card, *CardResponse) error
 	Update(context.Context, *Card, *CardResponse) error
-	Delete(context.Context, *IdInt, *CardResponse) error
-	Disabled(context.Context, *IdInt, *CardResponse) error
-	Enabled(context.Context, *IdInt, *CardResponse) error
-	Get(context.Context, *IdInt, *CardResponse) error
+	Delete(context.Context, *Card, *CardResponse) error
+	Disabled(context.Context, *Card, *CardResponse) error
+	Enabled(context.Context, *Card, *CardResponse) error
+	Get(context.Context, *Card, *CardResponse) error
 	List(context.Context, *Card, *CardResponse) error
 	Search(context.Context, *BaseWhere, *CardResponse) error
 }
@@ -159,10 +159,10 @@ func RegisterCardServiceHandler(s server.Server, hdlr CardServiceHandler, opts .
 	type cardService interface {
 		Create(ctx context.Context, in *Card, out *CardResponse) error
 		Update(ctx context.Context, in *Card, out *CardResponse) error
-		Delete(ctx context.Context, in *IdInt, out *CardResponse) error
-		Disabled(ctx context.Context, in *IdInt, out *CardResponse) error
-		Enabled(ctx context.Context, in *IdInt, out *CardResponse) error
-		Get(ctx context.Context, in *IdInt, out *CardResponse) error
+		Delete(ctx context.Context, in *Card, out *CardResponse) error
+		Disabled(ctx context.Context, in *Card, out *CardResponse) error
+		Enabled(ctx context.Context, in *Card, out *CardResponse) error
+		Get(ctx context.Context, in *Card, out *CardResponse) error
 		List(ctx context.Context, in *Card, out *CardResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *CardResponse) error
 	}
@@ -185,19 +185,19 @@ func (h *cardServiceHandler) Update(ctx context.Context, in *Card, out *CardResp
 	return h.CardServiceHandler.Update(ctx, in, out)
 }
 
-func (h *cardServiceHandler) Delete(ctx context.Context, in *IdInt, out *CardResponse) error {
+func (h *cardServiceHandler) Delete(ctx context.Context, in *Card, out *CardResponse) error {
 	return h.CardServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *cardServiceHandler) Disabled(ctx context.Context, in *IdInt, out *CardResponse) error {
+func (h *cardServiceHandler) Disabled(ctx context.Context, in *Card, out *CardResponse) error {
 	return h.CardServiceHandler.Disabled(ctx, in, out)
 }
 
-func (h *cardServiceHandler) Enabled(ctx context.Context, in *IdInt, out *CardResponse) error {
+func (h *cardServiceHandler) Enabled(ctx context.Context, in *Card, out *CardResponse) error {
 	return h.CardServiceHandler.Enabled(ctx, in, out)
 }
 
-func (h *cardServiceHandler) Get(ctx context.Context, in *IdInt, out *CardResponse) error {
+func (h *cardServiceHandler) Get(ctx context.Context, in *Card, out *CardResponse) error {
 	return h.CardServiceHandler.Get(ctx, in, out)
 }
 

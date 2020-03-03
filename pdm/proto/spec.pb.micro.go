@@ -36,8 +36,9 @@ var _ server.Option
 type SpecService interface {
 	Create(ctx context.Context, in *Spec, opts ...client.CallOption) (*SpecResponse, error)
 	Update(ctx context.Context, in *Spec, opts ...client.CallOption) (*SpecResponse, error)
-	Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecResponse, error)
-	Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecResponse, error)
+	Delete(ctx context.Context, in *Spec, opts ...client.CallOption) (*SpecResponse, error)
+	Get(ctx context.Context, in *Spec, opts ...client.CallOption) (*SpecResponse, error)
+	List(ctx context.Context, in *Empty, opts ...client.CallOption) (*SpecResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*SpecResponse, error)
 }
 
@@ -79,7 +80,7 @@ func (c *specService) Update(ctx context.Context, in *Spec, opts ...client.CallO
 	return out, nil
 }
 
-func (c *specService) Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecResponse, error) {
+func (c *specService) Delete(ctx context.Context, in *Spec, opts ...client.CallOption) (*SpecResponse, error) {
 	req := c.c.NewRequest(c.name, "SpecService.Delete", in)
 	out := new(SpecResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -89,8 +90,18 @@ func (c *specService) Delete(ctx context.Context, in *IdInt, opts ...client.Call
 	return out, nil
 }
 
-func (c *specService) Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*SpecResponse, error) {
+func (c *specService) Get(ctx context.Context, in *Spec, opts ...client.CallOption) (*SpecResponse, error) {
 	req := c.c.NewRequest(c.name, "SpecService.Get", in)
+	out := new(SpecResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *specService) List(ctx context.Context, in *Empty, opts ...client.CallOption) (*SpecResponse, error) {
+	req := c.c.NewRequest(c.name, "SpecService.List", in)
 	out := new(SpecResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -114,8 +125,9 @@ func (c *specService) Search(ctx context.Context, in *BaseWhere, opts ...client.
 type SpecServiceHandler interface {
 	Create(context.Context, *Spec, *SpecResponse) error
 	Update(context.Context, *Spec, *SpecResponse) error
-	Delete(context.Context, *IdInt, *SpecResponse) error
-	Get(context.Context, *IdInt, *SpecResponse) error
+	Delete(context.Context, *Spec, *SpecResponse) error
+	Get(context.Context, *Spec, *SpecResponse) error
+	List(context.Context, *Empty, *SpecResponse) error
 	Search(context.Context, *BaseWhere, *SpecResponse) error
 }
 
@@ -123,8 +135,9 @@ func RegisterSpecServiceHandler(s server.Server, hdlr SpecServiceHandler, opts .
 	type specService interface {
 		Create(ctx context.Context, in *Spec, out *SpecResponse) error
 		Update(ctx context.Context, in *Spec, out *SpecResponse) error
-		Delete(ctx context.Context, in *IdInt, out *SpecResponse) error
-		Get(ctx context.Context, in *IdInt, out *SpecResponse) error
+		Delete(ctx context.Context, in *Spec, out *SpecResponse) error
+		Get(ctx context.Context, in *Spec, out *SpecResponse) error
+		List(ctx context.Context, in *Empty, out *SpecResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *SpecResponse) error
 	}
 	type SpecService struct {
@@ -146,12 +159,16 @@ func (h *specServiceHandler) Update(ctx context.Context, in *Spec, out *SpecResp
 	return h.SpecServiceHandler.Update(ctx, in, out)
 }
 
-func (h *specServiceHandler) Delete(ctx context.Context, in *IdInt, out *SpecResponse) error {
+func (h *specServiceHandler) Delete(ctx context.Context, in *Spec, out *SpecResponse) error {
 	return h.SpecServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *specServiceHandler) Get(ctx context.Context, in *IdInt, out *SpecResponse) error {
+func (h *specServiceHandler) Get(ctx context.Context, in *Spec, out *SpecResponse) error {
 	return h.SpecServiceHandler.Get(ctx, in, out)
+}
+
+func (h *specServiceHandler) List(ctx context.Context, in *Empty, out *SpecResponse) error {
+	return h.SpecServiceHandler.List(ctx, in, out)
 }
 
 func (h *specServiceHandler) Search(ctx context.Context, in *BaseWhere, out *SpecResponse) error {

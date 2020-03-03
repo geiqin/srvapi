@@ -6,8 +6,8 @@ package geiqin.srv.pdm;
 service BrandService {
     rpc Create (Brand) returns (BrandResponse) {}
     rpc Update (Brand) returns (BrandResponse) {}
-    rpc Delete (IdInt) returns (BrandResponse) {}
-    rpc Get (IdInt) returns (BrandResponse) {}
+    rpc Delete (Brand) returns (BrandResponse) {}
+    rpc Get (Brand) returns (BrandResponse) {}
     rpc Search (BaseWhere) returns (BrandResponse) {}
 }
 

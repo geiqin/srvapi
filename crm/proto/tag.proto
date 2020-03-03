@@ -5,8 +5,8 @@ package geiqin.srv.crm;
 service TagService {
     rpc Create (Tag) returns (TagResponse) {}
     rpc Update (Tag) returns (TagResponse) {}
-    rpc Delete (IdInt) returns (TagResponse) {}
-    rpc Get (IdInt) returns (TagResponse) {}
+    rpc Delete (Tag) returns (TagResponse) {}
+    rpc Get (Tag) returns (TagResponse) {}
     rpc Search (BaseWhere) returns (TagResponse) {}
 }
 
@@ -17,6 +17,7 @@ message Tag {
     int32 condition_type =4;
     string created_at =5;
     string updated_at =6;
+    repeated int32 ids = 22;
 }
 
 

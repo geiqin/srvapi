@@ -4,9 +4,9 @@ package geiqin.srv.pdm;
 
 service SpecValueService {
     rpc Create (SpecValue) returns (SpecValueResponse) {}
-    rpc Delete (IdInt) returns (SpecValueResponse) {}
-    rpc Get (IdInt) returns (SpecValueResponse) {}
-    rpc List (IdInt) returns (SpecValueResponse) {}
+    rpc Delete (SpecValue) returns (SpecValueResponse) {}
+    rpc Get (SpecValue) returns (SpecValueResponse) {}
+    rpc List (SpecValue) returns (SpecValueResponse) {}
 }
 
 message SpecValue {
@@ -17,8 +17,6 @@ message SpecValue {
     int64	spec_img_id	=5;
     string	spec_img_url =6;
     int32	sorting	=7;
-    string	created_at	=8;
-    string	updated_at	=9;
 }
 
 message SpecValueResponse {

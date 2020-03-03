@@ -35,7 +35,7 @@ var _ server.Option
 
 type ItemPriceService interface {
 	Set(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*ItemPriceResponse, error)
-	Get(ctx context.Context, in *Id, opts ...client.CallOption) (*ItemPriceResponse, error)
+	Get(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*ItemPriceResponse, error)
 }
 
 type itemPriceService struct {
@@ -66,7 +66,7 @@ func (c *itemPriceService) Set(ctx context.Context, in *ItemPrice, opts ...clien
 	return out, nil
 }
 
-func (c *itemPriceService) Get(ctx context.Context, in *Id, opts ...client.CallOption) (*ItemPriceResponse, error) {
+func (c *itemPriceService) Get(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*ItemPriceResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemPriceService.Get", in)
 	out := new(ItemPriceResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -80,13 +80,13 @@ func (c *itemPriceService) Get(ctx context.Context, in *Id, opts ...client.CallO
 
 type ItemPriceServiceHandler interface {
 	Set(context.Context, *ItemPrice, *ItemPriceResponse) error
-	Get(context.Context, *Id, *ItemPriceResponse) error
+	Get(context.Context, *ItemPrice, *ItemPriceResponse) error
 }
 
 func RegisterItemPriceServiceHandler(s server.Server, hdlr ItemPriceServiceHandler, opts ...server.HandlerOption) error {
 	type itemPriceService interface {
 		Set(ctx context.Context, in *ItemPrice, out *ItemPriceResponse) error
-		Get(ctx context.Context, in *Id, out *ItemPriceResponse) error
+		Get(ctx context.Context, in *ItemPrice, out *ItemPriceResponse) error
 	}
 	type ItemPriceService struct {
 		itemPriceService
@@ -103,6 +103,6 @@ func (h *itemPriceServiceHandler) Set(ctx context.Context, in *ItemPrice, out *I
 	return h.ItemPriceServiceHandler.Set(ctx, in, out)
 }
 
-func (h *itemPriceServiceHandler) Get(ctx context.Context, in *Id, out *ItemPriceResponse) error {
+func (h *itemPriceServiceHandler) Get(ctx context.Context, in *ItemPrice, out *ItemPriceResponse) error {
 	return h.ItemPriceServiceHandler.Get(ctx, in, out)
 }

@@ -36,7 +36,7 @@ var _ server.Option
 type CustomerService interface {
 	Create(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	Update(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
-	Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*CustomerResponse, error)
+	Delete(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	Get(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CustomerResponse, error)
 }
@@ -79,7 +79,7 @@ func (c *customerService) Update(ctx context.Context, in *Customer, opts ...clie
 	return out, nil
 }
 
-func (c *customerService) Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) Delete(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Delete", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -114,7 +114,7 @@ func (c *customerService) Search(ctx context.Context, in *BaseWhere, opts ...cli
 type CustomerServiceHandler interface {
 	Create(context.Context, *Customer, *CustomerResponse) error
 	Update(context.Context, *Customer, *CustomerResponse) error
-	Delete(context.Context, *Id, *CustomerResponse) error
+	Delete(context.Context, *Customer, *CustomerResponse) error
 	Get(context.Context, *Customer, *CustomerResponse) error
 	Search(context.Context, *BaseWhere, *CustomerResponse) error
 }
@@ -123,7 +123,7 @@ func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler
 	type customerService interface {
 		Create(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Update(ctx context.Context, in *Customer, out *CustomerResponse) error
-		Delete(ctx context.Context, in *Id, out *CustomerResponse) error
+		Delete(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Get(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *CustomerResponse) error
 	}
@@ -146,7 +146,7 @@ func (h *customerServiceHandler) Update(ctx context.Context, in *Customer, out *
 	return h.CustomerServiceHandler.Update(ctx, in, out)
 }
 
-func (h *customerServiceHandler) Delete(ctx context.Context, in *Id, out *CustomerResponse) error {
+func (h *customerServiceHandler) Delete(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Delete(ctx, in, out)
 }
 

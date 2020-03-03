@@ -36,8 +36,8 @@ var _ server.Option
 type TagService interface {
 	Create(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
 	Update(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
-	Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*TagResponse, error)
-	Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*TagResponse, error)
+	Delete(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
+	Get(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error)
 	List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*TagResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*TagResponse, error)
 }
@@ -80,7 +80,7 @@ func (c *tagService) Update(ctx context.Context, in *Tag, opts ...client.CallOpt
 	return out, nil
 }
 
-func (c *tagService) Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*TagResponse, error) {
+func (c *tagService) Delete(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error) {
 	req := c.c.NewRequest(c.name, "TagService.Delete", in)
 	out := new(TagResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -90,7 +90,7 @@ func (c *tagService) Delete(ctx context.Context, in *IdInt, opts ...client.CallO
 	return out, nil
 }
 
-func (c *tagService) Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*TagResponse, error) {
+func (c *tagService) Get(ctx context.Context, in *Tag, opts ...client.CallOption) (*TagResponse, error) {
 	req := c.c.NewRequest(c.name, "TagService.Get", in)
 	out := new(TagResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -125,8 +125,8 @@ func (c *tagService) Search(ctx context.Context, in *BaseWhere, opts ...client.C
 type TagServiceHandler interface {
 	Create(context.Context, *Tag, *TagResponse) error
 	Update(context.Context, *Tag, *TagResponse) error
-	Delete(context.Context, *IdInt, *TagResponse) error
-	Get(context.Context, *IdInt, *TagResponse) error
+	Delete(context.Context, *Tag, *TagResponse) error
+	Get(context.Context, *Tag, *TagResponse) error
 	List(context.Context, *BaseWhere, *TagResponse) error
 	Search(context.Context, *BaseWhere, *TagResponse) error
 }
@@ -135,8 +135,8 @@ func RegisterTagServiceHandler(s server.Server, hdlr TagServiceHandler, opts ...
 	type tagService interface {
 		Create(ctx context.Context, in *Tag, out *TagResponse) error
 		Update(ctx context.Context, in *Tag, out *TagResponse) error
-		Delete(ctx context.Context, in *IdInt, out *TagResponse) error
-		Get(ctx context.Context, in *IdInt, out *TagResponse) error
+		Delete(ctx context.Context, in *Tag, out *TagResponse) error
+		Get(ctx context.Context, in *Tag, out *TagResponse) error
 		List(ctx context.Context, in *BaseWhere, out *TagResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *TagResponse) error
 	}
@@ -159,11 +159,11 @@ func (h *tagServiceHandler) Update(ctx context.Context, in *Tag, out *TagRespons
 	return h.TagServiceHandler.Update(ctx, in, out)
 }
 
-func (h *tagServiceHandler) Delete(ctx context.Context, in *IdInt, out *TagResponse) error {
+func (h *tagServiceHandler) Delete(ctx context.Context, in *Tag, out *TagResponse) error {
 	return h.TagServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *tagServiceHandler) Get(ctx context.Context, in *IdInt, out *TagResponse) error {
+func (h *tagServiceHandler) Get(ctx context.Context, in *Tag, out *TagResponse) error {
 	return h.TagServiceHandler.Get(ctx, in, out)
 }
 

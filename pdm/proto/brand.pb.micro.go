@@ -36,8 +36,8 @@ var _ server.Option
 type BrandService interface {
 	Create(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
 	Update(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
-	Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*BrandResponse, error)
-	Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*BrandResponse, error)
+	Delete(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
+	Get(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*BrandResponse, error)
 }
 
@@ -79,7 +79,7 @@ func (c *brandService) Update(ctx context.Context, in *Brand, opts ...client.Cal
 	return out, nil
 }
 
-func (c *brandService) Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*BrandResponse, error) {
+func (c *brandService) Delete(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error) {
 	req := c.c.NewRequest(c.name, "BrandService.Delete", in)
 	out := new(BrandResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -89,7 +89,7 @@ func (c *brandService) Delete(ctx context.Context, in *IdInt, opts ...client.Cal
 	return out, nil
 }
 
-func (c *brandService) Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*BrandResponse, error) {
+func (c *brandService) Get(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error) {
 	req := c.c.NewRequest(c.name, "BrandService.Get", in)
 	out := new(BrandResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -114,8 +114,8 @@ func (c *brandService) Search(ctx context.Context, in *BaseWhere, opts ...client
 type BrandServiceHandler interface {
 	Create(context.Context, *Brand, *BrandResponse) error
 	Update(context.Context, *Brand, *BrandResponse) error
-	Delete(context.Context, *IdInt, *BrandResponse) error
-	Get(context.Context, *IdInt, *BrandResponse) error
+	Delete(context.Context, *Brand, *BrandResponse) error
+	Get(context.Context, *Brand, *BrandResponse) error
 	Search(context.Context, *BaseWhere, *BrandResponse) error
 }
 
@@ -123,8 +123,8 @@ func RegisterBrandServiceHandler(s server.Server, hdlr BrandServiceHandler, opts
 	type brandService interface {
 		Create(ctx context.Context, in *Brand, out *BrandResponse) error
 		Update(ctx context.Context, in *Brand, out *BrandResponse) error
-		Delete(ctx context.Context, in *IdInt, out *BrandResponse) error
-		Get(ctx context.Context, in *IdInt, out *BrandResponse) error
+		Delete(ctx context.Context, in *Brand, out *BrandResponse) error
+		Get(ctx context.Context, in *Brand, out *BrandResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *BrandResponse) error
 	}
 	type BrandService struct {
@@ -146,11 +146,11 @@ func (h *brandServiceHandler) Update(ctx context.Context, in *Brand, out *BrandR
 	return h.BrandServiceHandler.Update(ctx, in, out)
 }
 
-func (h *brandServiceHandler) Delete(ctx context.Context, in *IdInt, out *BrandResponse) error {
+func (h *brandServiceHandler) Delete(ctx context.Context, in *Brand, out *BrandResponse) error {
 	return h.BrandServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *brandServiceHandler) Get(ctx context.Context, in *IdInt, out *BrandResponse) error {
+func (h *brandServiceHandler) Get(ctx context.Context, in *Brand, out *BrandResponse) error {
 	return h.BrandServiceHandler.Get(ctx, in, out)
 }
 

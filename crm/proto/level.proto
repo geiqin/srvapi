@@ -5,8 +5,8 @@ package geiqin.srv.crm;
 service LevelService {
     rpc Create (Level) returns (LevelResponse) {}
     rpc Update (Level) returns (LevelResponse) {}
-    rpc Delete (IdInt) returns (LevelResponse) {}
-    rpc Get (IdInt) returns (LevelResponse) {}
+    rpc Delete (Level) returns (LevelResponse) {}
+    rpc Get (Level) returns (LevelResponse) {}
     rpc Search (BaseWhere) returns (LevelResponse) {}
 }
 
@@ -28,10 +28,11 @@ message Level {
     string card_bg =15;
     bool defaulted =16;
     bool disabled =17;
-    bool locked =21;
-    string description =18;
-    string created_at =19;
-    string updated_at =20;
+    bool locked =18;
+    string description =19;
+    string created_at =20;
+    string updated_at =21;
+    repeated int32 ids = 22;
 }
 
 

@@ -36,7 +36,7 @@ var _ server.Option
 type AddressService interface {
 	Create(ctx context.Context, in *Address, opts ...client.CallOption) (*AddressResponse, error)
 	Update(ctx context.Context, in *Address, opts ...client.CallOption) (*AddressResponse, error)
-	Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*AddressResponse, error)
+	Delete(ctx context.Context, in *Address, opts ...client.CallOption) (*AddressResponse, error)
 	Get(ctx context.Context, in *Address, opts ...client.CallOption) (*AddressResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*AddressResponse, error)
 }
@@ -79,7 +79,7 @@ func (c *addressService) Update(ctx context.Context, in *Address, opts ...client
 	return out, nil
 }
 
-func (c *addressService) Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*AddressResponse, error) {
+func (c *addressService) Delete(ctx context.Context, in *Address, opts ...client.CallOption) (*AddressResponse, error) {
 	req := c.c.NewRequest(c.name, "AddressService.Delete", in)
 	out := new(AddressResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -114,7 +114,7 @@ func (c *addressService) Search(ctx context.Context, in *BaseWhere, opts ...clie
 type AddressServiceHandler interface {
 	Create(context.Context, *Address, *AddressResponse) error
 	Update(context.Context, *Address, *AddressResponse) error
-	Delete(context.Context, *Id, *AddressResponse) error
+	Delete(context.Context, *Address, *AddressResponse) error
 	Get(context.Context, *Address, *AddressResponse) error
 	Search(context.Context, *BaseWhere, *AddressResponse) error
 }
@@ -123,7 +123,7 @@ func RegisterAddressServiceHandler(s server.Server, hdlr AddressServiceHandler, 
 	type addressService interface {
 		Create(ctx context.Context, in *Address, out *AddressResponse) error
 		Update(ctx context.Context, in *Address, out *AddressResponse) error
-		Delete(ctx context.Context, in *Id, out *AddressResponse) error
+		Delete(ctx context.Context, in *Address, out *AddressResponse) error
 		Get(ctx context.Context, in *Address, out *AddressResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *AddressResponse) error
 	}
@@ -146,7 +146,7 @@ func (h *addressServiceHandler) Update(ctx context.Context, in *Address, out *Ad
 	return h.AddressServiceHandler.Update(ctx, in, out)
 }
 
-func (h *addressServiceHandler) Delete(ctx context.Context, in *Id, out *AddressResponse) error {
+func (h *addressServiceHandler) Delete(ctx context.Context, in *Address, out *AddressResponse) error {
 	return h.AddressServiceHandler.Delete(ctx, in, out)
 }
 

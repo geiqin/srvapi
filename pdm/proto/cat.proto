@@ -6,9 +6,9 @@ package geiqin.srv.pdm;
 service CatService {
     rpc Create (Cat) returns (CatResponse) {}
     rpc Update (Cat) returns (CatResponse) {}
-    rpc Delete (IdInt) returns (CatResponse) {}
-    rpc Get (IdInt) returns (CatResponse) {}
-    rpc Tree (IdInt) returns (CatResponse) {}
+    rpc Delete (Cat) returns (CatResponse) {}
+    rpc Get (Cat) returns (CatResponse) {}
+    rpc Tree (Cat) returns (CatResponse) {}
     rpc Search (BaseWhere) returns (CatResponse) {}
 }
 
@@ -23,7 +23,7 @@ message Cat {
     int32	sorting	=8;
     string	created_at	=9;
     string	updated_at	=10;
-    repeated Cat Children =11;
+    repeated Cat children =11;
 }
 
 message CatResponse {

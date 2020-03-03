@@ -36,7 +36,7 @@ var _ server.Option
 type FanWeixinService interface {
 	Create(ctx context.Context, in *FanWeixin, opts ...client.CallOption) (*FanWeixinResponse, error)
 	Update(ctx context.Context, in *FanWeixin, opts ...client.CallOption) (*FanWeixinResponse, error)
-	Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*FanWeixinResponse, error)
+	Delete(ctx context.Context, in *FanWeixin, opts ...client.CallOption) (*FanWeixinResponse, error)
 	Get(ctx context.Context, in *FanWeixin, opts ...client.CallOption) (*FanWeixinResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*FanWeixinResponse, error)
 }
@@ -79,7 +79,7 @@ func (c *fanWeixinService) Update(ctx context.Context, in *FanWeixin, opts ...cl
 	return out, nil
 }
 
-func (c *fanWeixinService) Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*FanWeixinResponse, error) {
+func (c *fanWeixinService) Delete(ctx context.Context, in *FanWeixin, opts ...client.CallOption) (*FanWeixinResponse, error) {
 	req := c.c.NewRequest(c.name, "FanWeixinService.Delete", in)
 	out := new(FanWeixinResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -114,7 +114,7 @@ func (c *fanWeixinService) Search(ctx context.Context, in *BaseWhere, opts ...cl
 type FanWeixinServiceHandler interface {
 	Create(context.Context, *FanWeixin, *FanWeixinResponse) error
 	Update(context.Context, *FanWeixin, *FanWeixinResponse) error
-	Delete(context.Context, *Id, *FanWeixinResponse) error
+	Delete(context.Context, *FanWeixin, *FanWeixinResponse) error
 	Get(context.Context, *FanWeixin, *FanWeixinResponse) error
 	Search(context.Context, *BaseWhere, *FanWeixinResponse) error
 }
@@ -123,7 +123,7 @@ func RegisterFanWeixinServiceHandler(s server.Server, hdlr FanWeixinServiceHandl
 	type fanWeixinService interface {
 		Create(ctx context.Context, in *FanWeixin, out *FanWeixinResponse) error
 		Update(ctx context.Context, in *FanWeixin, out *FanWeixinResponse) error
-		Delete(ctx context.Context, in *Id, out *FanWeixinResponse) error
+		Delete(ctx context.Context, in *FanWeixin, out *FanWeixinResponse) error
 		Get(ctx context.Context, in *FanWeixin, out *FanWeixinResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *FanWeixinResponse) error
 	}
@@ -146,7 +146,7 @@ func (h *fanWeixinServiceHandler) Update(ctx context.Context, in *FanWeixin, out
 	return h.FanWeixinServiceHandler.Update(ctx, in, out)
 }
 
-func (h *fanWeixinServiceHandler) Delete(ctx context.Context, in *Id, out *FanWeixinResponse) error {
+func (h *fanWeixinServiceHandler) Delete(ctx context.Context, in *FanWeixin, out *FanWeixinResponse) error {
 	return h.FanWeixinServiceHandler.Delete(ctx, in, out)
 }
 

@@ -5,8 +5,9 @@ package geiqin.srv.pdm;
 service SpecService {
     rpc Create (Spec) returns (SpecResponse) {}
     rpc Update (Spec) returns (SpecResponse) {}
-    rpc Delete (IdInt) returns (SpecResponse) {}
-    rpc Get (IdInt) returns (SpecResponse) {}
+    rpc Delete (Spec) returns (SpecResponse) {}
+    rpc Get (Spec) returns (SpecResponse) {}
+    rpc List (Empty) returns (SpecResponse) {}
     rpc Search (BaseWhere) returns (SpecResponse) {}
 }
 

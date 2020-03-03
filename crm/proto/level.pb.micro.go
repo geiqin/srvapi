@@ -36,8 +36,8 @@ var _ server.Option
 type LevelService interface {
 	Create(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	Update(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
-	Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*LevelResponse, error)
-	Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*LevelResponse, error)
+	Delete(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
+	Get(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*LevelResponse, error)
 }
 
@@ -79,7 +79,7 @@ func (c *levelService) Update(ctx context.Context, in *Level, opts ...client.Cal
 	return out, nil
 }
 
-func (c *levelService) Delete(ctx context.Context, in *IdInt, opts ...client.CallOption) (*LevelResponse, error) {
+func (c *levelService) Delete(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error) {
 	req := c.c.NewRequest(c.name, "LevelService.Delete", in)
 	out := new(LevelResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -89,7 +89,7 @@ func (c *levelService) Delete(ctx context.Context, in *IdInt, opts ...client.Cal
 	return out, nil
 }
 
-func (c *levelService) Get(ctx context.Context, in *IdInt, opts ...client.CallOption) (*LevelResponse, error) {
+func (c *levelService) Get(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error) {
 	req := c.c.NewRequest(c.name, "LevelService.Get", in)
 	out := new(LevelResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -114,8 +114,8 @@ func (c *levelService) Search(ctx context.Context, in *BaseWhere, opts ...client
 type LevelServiceHandler interface {
 	Create(context.Context, *Level, *LevelResponse) error
 	Update(context.Context, *Level, *LevelResponse) error
-	Delete(context.Context, *IdInt, *LevelResponse) error
-	Get(context.Context, *IdInt, *LevelResponse) error
+	Delete(context.Context, *Level, *LevelResponse) error
+	Get(context.Context, *Level, *LevelResponse) error
 	Search(context.Context, *BaseWhere, *LevelResponse) error
 }
 
@@ -123,8 +123,8 @@ func RegisterLevelServiceHandler(s server.Server, hdlr LevelServiceHandler, opts
 	type levelService interface {
 		Create(ctx context.Context, in *Level, out *LevelResponse) error
 		Update(ctx context.Context, in *Level, out *LevelResponse) error
-		Delete(ctx context.Context, in *IdInt, out *LevelResponse) error
-		Get(ctx context.Context, in *IdInt, out *LevelResponse) error
+		Delete(ctx context.Context, in *Level, out *LevelResponse) error
+		Get(ctx context.Context, in *Level, out *LevelResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *LevelResponse) error
 	}
 	type LevelService struct {
@@ -146,11 +146,11 @@ func (h *levelServiceHandler) Update(ctx context.Context, in *Level, out *LevelR
 	return h.LevelServiceHandler.Update(ctx, in, out)
 }
 
-func (h *levelServiceHandler) Delete(ctx context.Context, in *IdInt, out *LevelResponse) error {
+func (h *levelServiceHandler) Delete(ctx context.Context, in *Level, out *LevelResponse) error {
 	return h.LevelServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *levelServiceHandler) Get(ctx context.Context, in *IdInt, out *LevelResponse) error {
+func (h *levelServiceHandler) Get(ctx context.Context, in *Level, out *LevelResponse) error {
 	return h.LevelServiceHandler.Get(ctx, in, out)
 }
 

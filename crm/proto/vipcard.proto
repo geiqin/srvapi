@@ -1,11 +1,13 @@
 syntax = "proto3";
 import "common.proto";
+import "card.proto";
+
 package geiqin.srv.crm;
 
 service VipcardService {
     rpc Apply (Vipcard) returns (VipcardResponse) {}
     rpc Renew (Vipcard) returns (VipcardResponse) {}
-    rpc Delete (Id) returns (VipcardResponse) {}
+    rpc Delete (Vipcard) returns (VipcardResponse) {}
     rpc Get (Vipcard) returns (VipcardResponse) {}
     rpc List (VipcardWhere) returns (VipcardResponse) {}
     rpc Search (BaseWhere) returns (VipcardResponse) {}
@@ -29,6 +31,7 @@ message Vipcard {
     string validate_date =7;
     string created_at =8;
     string updated_at =9;
+    Card card =10;
 }
 
 

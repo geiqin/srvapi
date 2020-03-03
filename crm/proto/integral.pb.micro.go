@@ -35,7 +35,7 @@ var _ server.Option
 
 type IntegralService interface {
 	Create(ctx context.Context, in *IntegralResponse, opts ...client.CallOption) (*IntegralResponse, error)
-	Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*IntegralResponse, error)
+	Delete(ctx context.Context, in *IntegralResponse, opts ...client.CallOption) (*IntegralResponse, error)
 	Get(ctx context.Context, in *IntegralResponse, opts ...client.CallOption) (*IntegralResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*IntegralResponse, error)
 }
@@ -68,7 +68,7 @@ func (c *integralService) Create(ctx context.Context, in *IntegralResponse, opts
 	return out, nil
 }
 
-func (c *integralService) Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*IntegralResponse, error) {
+func (c *integralService) Delete(ctx context.Context, in *IntegralResponse, opts ...client.CallOption) (*IntegralResponse, error) {
 	req := c.c.NewRequest(c.name, "IntegralService.Delete", in)
 	out := new(IntegralResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -102,7 +102,7 @@ func (c *integralService) Search(ctx context.Context, in *BaseWhere, opts ...cli
 
 type IntegralServiceHandler interface {
 	Create(context.Context, *IntegralResponse, *IntegralResponse) error
-	Delete(context.Context, *Id, *IntegralResponse) error
+	Delete(context.Context, *IntegralResponse, *IntegralResponse) error
 	Get(context.Context, *IntegralResponse, *IntegralResponse) error
 	Search(context.Context, *BaseWhere, *IntegralResponse) error
 }
@@ -110,7 +110,7 @@ type IntegralServiceHandler interface {
 func RegisterIntegralServiceHandler(s server.Server, hdlr IntegralServiceHandler, opts ...server.HandlerOption) error {
 	type integralService interface {
 		Create(ctx context.Context, in *IntegralResponse, out *IntegralResponse) error
-		Delete(ctx context.Context, in *Id, out *IntegralResponse) error
+		Delete(ctx context.Context, in *IntegralResponse, out *IntegralResponse) error
 		Get(ctx context.Context, in *IntegralResponse, out *IntegralResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *IntegralResponse) error
 	}
@@ -129,7 +129,7 @@ func (h *integralServiceHandler) Create(ctx context.Context, in *IntegralRespons
 	return h.IntegralServiceHandler.Create(ctx, in, out)
 }
 
-func (h *integralServiceHandler) Delete(ctx context.Context, in *Id, out *IntegralResponse) error {
+func (h *integralServiceHandler) Delete(ctx context.Context, in *IntegralResponse, out *IntegralResponse) error {
 	return h.IntegralServiceHandler.Delete(ctx, in, out)
 }
 

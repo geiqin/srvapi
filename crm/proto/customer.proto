@@ -1,11 +1,15 @@
 syntax = "proto3";
 import "common.proto";
+import "vipcard.proto";
+import "tag.proto";
+import "level.proto";
+import "address.proto";
 package geiqin.srv.crm;
 
 service CustomerService {
     rpc Create (Customer) returns (CustomerResponse) {}
     rpc Update (Customer) returns (CustomerResponse) {}
-    rpc Delete (Id) returns (CustomerResponse) {}
+    rpc Delete (Customer) returns (CustomerResponse) {}
     rpc Get (Customer) returns (CustomerResponse) {}
     rpc Search (BaseWhere) returns (CustomerResponse) {}
 }
@@ -43,6 +47,11 @@ message Customer {
     string created_at =30;
     string updated_at =31;
     string deleted_at =32;
+    Level level =33;
+    repeated Tag tags = 34;
+    repeated Vipcard vipcards =35;
+    repeated Address addrs = 36;
+    repeated int64 ids = 37;
 }
 
 

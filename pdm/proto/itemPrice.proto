@@ -4,7 +4,7 @@ package geiqin.srv.pdm;
 
 service ItemPriceService {
     rpc Set (ItemPrice) returns (ItemPriceResponse) {}
-    rpc Get (Id) returns (ItemPriceResponse) {}
+    rpc Get (ItemPrice) returns (ItemPriceResponse) {}
 }
 
 message ItemPrice {
