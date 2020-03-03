@@ -1,0 +1,40 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.ims.coupon;
+
+service CouponTicketService {
+    //发放优惠劵凭证
+    rpc Give (CouponTicket) returns (CouponTicketResponse) {}
+    //核销优惠劵凭证
+    rpc Use (CouponTicket) returns (CouponTicketResponse) {}
+    //获取优惠劵凭证信息
+    rpc Get (CouponTicket) returns (CouponTicketResponse) {}
+    //查询优惠劵凭证
+    rpc Search (BaseWhere) returns (CouponTicketResponse) {}
+}
+
+//优惠劵凭证
+message CouponTicket{
+    int64 id = 1;
+    string ticket_sn = 2;
+    string start_at = 3;
+    string end_at = 4;
+    int64 coupon_id = 5;
+    int64 customer_id = 6;
+    int64 order_id = 7;
+    bool is_used = 8;
+    string use_at = 9;
+    string status = 10;
+    string created_at = 11;
+    string updated_at = 12;
+}
+
+
+//
+message CouponTicketResponse {
+    CouponTicket entity = 1;
+    Pager pager =2;
+    repeated CouponTicket items = 3;
+    Error error = 4;
+    Info info =5;
+}
