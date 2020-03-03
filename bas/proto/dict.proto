@@ -1,0 +1,32 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.bas;
+
+service DictService {
+    rpc Get (Dict) returns (DictResponse) {}
+    rpc Search (BaseWhere) returns (DictResponse) {}
+    rpc Tree (Dict) returns (DictResponse) {}
+    rpc List (Dict) returns (DictResponse) {}
+}
+
+// 字典信息
+message Dict {
+    int32 id =1;
+    int32 dict_type_id =2;
+    string value =3;
+    string text	=4; //键名
+    string term	=5; //分组
+    string memo	=6; //备注
+    int32 sorting	=7; //排序
+}
+
+
+//
+message DictResponse {
+    Dict entity = 1;
+    Pager pager =2;
+    repeated Dict items = 3;
+    Error error = 4;
+    Info info =5;
+    map<string,Dict> maps =6;
+}

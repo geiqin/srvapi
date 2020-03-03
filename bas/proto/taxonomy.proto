@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.bas;
+
+service TaxonomyService {
+    rpc Get (Taxonomy) returns (TaxonomyResponse) {}
+    rpc Search (BaseWhere) returns (TaxonomyResponse) {}
+    rpc Tree (Taxonomy) returns (TaxonomyResponse) {}
+    rpc List (Taxonomy) returns (TaxonomyResponse) {}
+}
+
+//标准分类信息
+message Taxonomy {
+    int64 id =1;
+    string name	 =2;
+    string type =3;
+    int64 taxonomy_id	 =4;
+    int32 depth	 =5;
+    string path	 =6;
+    string memo	 =7;
+    int32 sorting =8;
+    repeated Taxonomy children=9;
+}
+
+message TaxonomyResponse {
+    Taxonomy entity = 1;
+    Pager pager =2;
+    repeated Taxonomy items = 3;
+    Error error = 4;
+    Info info =5;
+}
