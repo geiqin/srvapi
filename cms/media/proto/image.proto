@@ -5,12 +5,11 @@ package geiqin.srv.cms.media;
 
 service ImageService {
     rpc Update (UpdateImage) returns (ImageResponse) {}
+    rpc Delete (Image) returns (ImageResponse) {}
     rpc Get (Image) returns (ImageResponse) {}
-    rpc Search (Image) returns (ImageResponse) {}
-    rpc Delete (Id) returns (ImageResponse) {}
     rpc List (Image) returns (ImageResponse) {}
+    rpc Search (BaseWhere) returns (ImageResponse) {}
 }
-
 
 // 图片信息
 message Image {
@@ -34,6 +33,7 @@ message Image {
     int64 customer_id	=18;
     int64 user_id	=19;
     Cat cat =20;
+    repeated int64 ids =21;
 }
 
 // 修改图片信息
@@ -50,4 +50,5 @@ message ImageResponse {
     Pager pager =2;
     repeated Image items = 3;
     Error error = 4;
+    Info info =5;
 }

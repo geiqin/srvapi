@@ -35,10 +35,10 @@ var _ server.Option
 
 type ImageService interface {
 	Update(ctx context.Context, in *UpdateImage, opts ...client.CallOption) (*ImageResponse, error)
+	Delete(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error)
 	Get(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error)
-	Search(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error)
-	Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*ImageResponse, error)
 	List(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error)
+	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ImageResponse, error)
 }
 
 type imageService struct {
@@ -69,28 +69,18 @@ func (c *imageService) Update(ctx context.Context, in *UpdateImage, opts ...clie
 	return out, nil
 }
 
+func (c *imageService) Delete(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error) {
+	req := c.c.NewRequest(c.name, "ImageService.Delete", in)
+	out := new(ImageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *imageService) Get(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error) {
 	req := c.c.NewRequest(c.name, "ImageService.Get", in)
-	out := new(ImageResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *imageService) Search(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error) {
-	req := c.c.NewRequest(c.name, "ImageService.Search", in)
-	out := new(ImageResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *imageService) Delete(ctx context.Context, in *Id, opts ...client.CallOption) (*ImageResponse, error) {
-	req := c.c.NewRequest(c.name, "ImageService.Delete", in)
 	out := new(ImageResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -109,23 +99,33 @@ func (c *imageService) List(ctx context.Context, in *Image, opts ...client.CallO
 	return out, nil
 }
 
+func (c *imageService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ImageResponse, error) {
+	req := c.c.NewRequest(c.name, "ImageService.Search", in)
+	out := new(ImageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ImageService service
 
 type ImageServiceHandler interface {
 	Update(context.Context, *UpdateImage, *ImageResponse) error
+	Delete(context.Context, *Image, *ImageResponse) error
 	Get(context.Context, *Image, *ImageResponse) error
-	Search(context.Context, *Image, *ImageResponse) error
-	Delete(context.Context, *Id, *ImageResponse) error
 	List(context.Context, *Image, *ImageResponse) error
+	Search(context.Context, *BaseWhere, *ImageResponse) error
 }
 
 func RegisterImageServiceHandler(s server.Server, hdlr ImageServiceHandler, opts ...server.HandlerOption) error {
 	type imageService interface {
 		Update(ctx context.Context, in *UpdateImage, out *ImageResponse) error
+		Delete(ctx context.Context, in *Image, out *ImageResponse) error
 		Get(ctx context.Context, in *Image, out *ImageResponse) error
-		Search(ctx context.Context, in *Image, out *ImageResponse) error
-		Delete(ctx context.Context, in *Id, out *ImageResponse) error
 		List(ctx context.Context, in *Image, out *ImageResponse) error
+		Search(ctx context.Context, in *BaseWhere, out *ImageResponse) error
 	}
 	type ImageService struct {
 		imageService
@@ -142,18 +142,18 @@ func (h *imageServiceHandler) Update(ctx context.Context, in *UpdateImage, out *
 	return h.ImageServiceHandler.Update(ctx, in, out)
 }
 
+func (h *imageServiceHandler) Delete(ctx context.Context, in *Image, out *ImageResponse) error {
+	return h.ImageServiceHandler.Delete(ctx, in, out)
+}
+
 func (h *imageServiceHandler) Get(ctx context.Context, in *Image, out *ImageResponse) error {
 	return h.ImageServiceHandler.Get(ctx, in, out)
 }
 
-func (h *imageServiceHandler) Search(ctx context.Context, in *Image, out *ImageResponse) error {
-	return h.ImageServiceHandler.Search(ctx, in, out)
-}
-
-func (h *imageServiceHandler) Delete(ctx context.Context, in *Id, out *ImageResponse) error {
-	return h.ImageServiceHandler.Delete(ctx, in, out)
-}
-
 func (h *imageServiceHandler) List(ctx context.Context, in *Image, out *ImageResponse) error {
 	return h.ImageServiceHandler.List(ctx, in, out)
+}
+
+func (h *imageServiceHandler) Search(ctx context.Context, in *BaseWhere, out *ImageResponse) error {
+	return h.ImageServiceHandler.Search(ctx, in, out)
 }

@@ -5,24 +5,25 @@ package geiqin.srv.cms.media;
 service CatService {
     rpc Create (Cat) returns (CatResponse) {}
     rpc Update (Cat) returns (CatResponse) {}
-    rpc Delete (IdInt) returns (CatResponse) {}
-    rpc Get (IdInt) returns (CatResponse) {}
-    rpc Search (Cat) returns (CatResponse) {}
+    rpc Delete (Cat) returns (CatResponse) {}
+    rpc Get (Cat) returns (CatResponse) {}
     rpc List (Cat) returns (CatResponse) {}
     rpc Tree (Cat) returns (CatResponse) {}
+    rpc Search (BaseWhere) returns (CatResponse) {}
 }
 
 // 字典信息
 message Cat {
     int32 id =1;
-    string name	 =2;
-    string type	 =3;
-    string taxonomy	 =4;
+    string name =2;
+    string type =3;
+    string taxonomy =4;
     int32 total_num	=5;
-    float total_size	 =6;
+    float total_size =6;
     int32 cat_id=7; //父亲节点
-    int64 user_id  =8;
+    int64 user_id =8;
     repeated Cat children =9;
+    repeated int32 ids =10;
 }
 
 //
@@ -31,4 +32,5 @@ message CatResponse {
     Pager pager =2;
     repeated Cat items = 3;
     Error error = 4;
+    Info info =5;
 }
