@@ -5,13 +5,13 @@ import "couponTicket.proto";
 
 package geiqin.srv.ims.coupon;
 
-//客户优惠劵服务
+//客户优惠劵服务（客户专用）
 service MyCouponService {
     //获得优惠劵信息
     rpc Get (Coupon) returns (CouponResponse) {}
     //获得优惠劵详情
     rpc Detail (Coupon) returns (CouponResponse) {}
-    //查询优惠券列表（客户专用）
+    //查询优惠券列表
     rpc List (Coupon) returns (CouponResponse) {}
     //未领取的优惠券列表
     rpc UncollectedList (Coupon) returns (CouponResponse) {}
@@ -31,8 +31,8 @@ service CouponService {
     rpc Cancel (Coupon) returns (CouponResponse) {}
     //获得优惠劵信息
     rpc Get (Coupon) returns (CouponResponse) {}
-    //查询优惠券列表（供下拉框选择用）
-    rpc List (BaseWhere) returns (CouponResponse) {}
+    //查询优惠券列表
+    rpc List (Coupon) returns (CouponResponse) {}
     //查询优惠劵
     rpc Search (BaseWhere) returns (CouponResponse) {}
 }

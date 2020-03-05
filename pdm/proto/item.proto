@@ -25,6 +25,7 @@ service ItemService {
     rpc Recovery (Item) returns (ItemResponse) {}
     rpc Destroy (Item) returns (ItemResponse) {}
     rpc Get (Item) returns (ItemResponse) {}
+    rpc List (Item) returns (ItemResponse) {}
     rpc Search (BaseWhere) returns (ItemResponse) {}
     rpc SearchDeleted (BaseWhere) returns (ItemResponse) {}
 }

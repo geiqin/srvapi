@@ -38,7 +38,7 @@ type MyCouponService interface {
 	Get(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
 	//获得优惠劵详情
 	Detail(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
-	//查询优惠券列表（客户专用）
+	//查询优惠券列表
 	List(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
 	//未领取的优惠券列表
 	UncollectedList(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
@@ -121,7 +121,7 @@ type MyCouponServiceHandler interface {
 	Get(context.Context, *Coupon, *CouponResponse) error
 	//获得优惠劵详情
 	Detail(context.Context, *Coupon, *CouponResponse) error
-	//查询优惠券列表（客户专用）
+	//查询优惠券列表
 	List(context.Context, *Coupon, *CouponResponse) error
 	//未领取的优惠券列表
 	UncollectedList(context.Context, *Coupon, *CouponResponse) error
@@ -181,8 +181,8 @@ type CouponService interface {
 	Cancel(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
 	//获得优惠劵信息
 	Get(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
-	//查询优惠券列表（供下拉框选择用）
-	List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CouponResponse, error)
+	//查询优惠券列表
+	List(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
 	//查询优惠劵
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CouponResponse, error)
 }
@@ -255,7 +255,7 @@ func (c *couponService) Get(ctx context.Context, in *Coupon, opts ...client.Call
 	return out, nil
 }
 
-func (c *couponService) List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CouponResponse, error) {
+func (c *couponService) List(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error) {
 	req := c.c.NewRequest(c.name, "CouponService.List", in)
 	out := new(CouponResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -288,8 +288,8 @@ type CouponServiceHandler interface {
 	Cancel(context.Context, *Coupon, *CouponResponse) error
 	//获得优惠劵信息
 	Get(context.Context, *Coupon, *CouponResponse) error
-	//查询优惠券列表（供下拉框选择用）
-	List(context.Context, *BaseWhere, *CouponResponse) error
+	//查询优惠券列表
+	List(context.Context, *Coupon, *CouponResponse) error
 	//查询优惠劵
 	Search(context.Context, *BaseWhere, *CouponResponse) error
 }
@@ -301,7 +301,7 @@ func RegisterCouponServiceHandler(s server.Server, hdlr CouponServiceHandler, op
 		Delete(ctx context.Context, in *Coupon, out *CouponResponse) error
 		Cancel(ctx context.Context, in *Coupon, out *CouponResponse) error
 		Get(ctx context.Context, in *Coupon, out *CouponResponse) error
-		List(ctx context.Context, in *BaseWhere, out *CouponResponse) error
+		List(ctx context.Context, in *Coupon, out *CouponResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *CouponResponse) error
 	}
 	type CouponService struct {
@@ -335,7 +335,7 @@ func (h *couponServiceHandler) Get(ctx context.Context, in *Coupon, out *CouponR
 	return h.CouponServiceHandler.Get(ctx, in, out)
 }
 
-func (h *couponServiceHandler) List(ctx context.Context, in *BaseWhere, out *CouponResponse) error {
+func (h *couponServiceHandler) List(ctx context.Context, in *Coupon, out *CouponResponse) error {
 	return h.CouponServiceHandler.List(ctx, in, out)
 }
 

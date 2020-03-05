@@ -44,6 +44,7 @@ type ItemService interface {
 	Recovery(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Destroy(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	List(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ItemResponse, error)
 	SearchDeleted(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ItemResponse, error)
 }
@@ -166,6 +167,16 @@ func (c *itemService) Get(ctx context.Context, in *Item, opts ...client.CallOpti
 	return out, nil
 }
 
+func (c *itemService) List(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ItemService.List", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *itemService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Search", in)
 	out := new(ItemResponse)
@@ -199,6 +210,7 @@ type ItemServiceHandler interface {
 	Recovery(context.Context, *Item, *ItemResponse) error
 	Destroy(context.Context, *Item, *ItemResponse) error
 	Get(context.Context, *Item, *ItemResponse) error
+	List(context.Context, *Item, *ItemResponse) error
 	Search(context.Context, *BaseWhere, *ItemResponse) error
 	SearchDeleted(context.Context, *BaseWhere, *ItemResponse) error
 }
@@ -215,6 +227,7 @@ func RegisterItemServiceHandler(s server.Server, hdlr ItemServiceHandler, opts .
 		Recovery(ctx context.Context, in *Item, out *ItemResponse) error
 		Destroy(ctx context.Context, in *Item, out *ItemResponse) error
 		Get(ctx context.Context, in *Item, out *ItemResponse) error
+		List(ctx context.Context, in *Item, out *ItemResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *ItemResponse) error
 		SearchDeleted(ctx context.Context, in *BaseWhere, out *ItemResponse) error
 	}
@@ -267,6 +280,10 @@ func (h *itemServiceHandler) Destroy(ctx context.Context, in *Item, out *ItemRes
 
 func (h *itemServiceHandler) Get(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Get(ctx, in, out)
+}
+
+func (h *itemServiceHandler) List(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.ItemServiceHandler.List(ctx, in, out)
 }
 
 func (h *itemServiceHandler) Search(ctx context.Context, in *BaseWhere, out *ItemResponse) error {
