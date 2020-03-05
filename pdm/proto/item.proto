@@ -84,6 +84,8 @@ message Item {
     repeated  ItemPrice prices  =51;
     repeated  ItemRight rights  =52;
     repeated  int64 ids  =53;
+    Sku skuitem =54; //单一规格商品（在购物车，营销活动等场景用到）
+    int64 sku_id =55; //单一规格商品输入参数（在获取规格商品时使用）
 }
 
 
