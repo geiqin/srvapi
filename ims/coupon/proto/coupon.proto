@@ -40,7 +40,6 @@ service CouponService {
 //优惠劵
 message Coupon{
     int64 id = 1;
-    int64 promotion_id = 2;
     string coupon_sn = 3;
     string title = 4;
     int32 total = 5;

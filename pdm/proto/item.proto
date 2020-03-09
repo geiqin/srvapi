@@ -1,6 +1,5 @@
 syntax = "proto3";
 package geiqin.srv.pdm;
-//option go_package = img "github.com/geiqin/srvapi/cms/media/proto/image.proto";
 
 import "common.proto";
 import "itemGallery.proto";
@@ -10,23 +9,36 @@ import "tag.proto";
 import "brand.proto";
 import "sku.proto";
 import "cat.proto";
-//import img "github.com/geiqin/srvapi/cms/media/proto/image.proto";
-
-
+import "spec.proto";
 
 service ItemService {
+    //创建商品
     rpc Create (Item) returns (ItemResponse) {}
+    //修改商品
     rpc Update (Item) returns (ItemResponse) {}
+    //删除商品
     rpc Delete (Item) returns (ItemResponse) {}
+    //商品加锁
     rpc Lock (Item) returns (ItemResponse) {}
+    //商品解锁
     rpc Unlock (Item) returns (ItemResponse) {}
+    //商品上架
     rpc Listing (Item) returns (ItemResponse) {}
+    //商品下架
     rpc Delisting (Item) returns (ItemResponse) {}
+    //恢复商品
     rpc Recovery (Item) returns (ItemResponse) {}
+    //永久删除商品
     rpc Destroy (Item) returns (ItemResponse) {}
+    //商品基本信息
     rpc Get (Item) returns (ItemResponse) {}
+    //商品详细信息（显示专用）
+    rpc Detail (Item) returns (ItemResponse) {}
+    //商品列表（来源基本信息）
     rpc List (Item) returns (ItemResponse) {}
+    //查询商品
     rpc Search (BaseWhere) returns (ItemResponse) {}
+    //查询已删除商品
     rpc SearchDeleted (BaseWhere) returns (ItemResponse) {}
 }
 
@@ -83,9 +95,11 @@ message Item {
     repeated  ItemGallery galleries  =50;
     repeated  ItemPrice prices  =51;
     repeated  ItemRight rights  =52;
-    repeated  int64 ids  =53;
-    Sku skuitem =54; //单一规格商品（在购物车，营销活动等场景用到）
-    int64 sku_id =55; //单一规格商品输入参数（在获取规格商品时使用）
+    repeated  SpecItemIndex spec_indexes  =53; //规格更新专用
+    repeated  int64 ids  =54;
+    repeated  Spec specs  =55; //(详情显示专用)
+    Sku skuitem =56; //单一规格商品（在购物车，营销活动等场景用到）
+    int64 sku_id =57; //单一规格商品输入参数（在获取规格商品时使用）
 }
 
 

@@ -1,0 +1,49 @@
+syntax = "proto3";
+import "common.proto";
+import "limitDiscountGoods.proto";
+package geiqin.srv.ims.discount;
+
+service LimitDiscountService {
+    //创建限时折扣活动
+    rpc Create (LimitDiscount) returns (LimitDiscountResponse) {}
+    //编辑限时折扣活动
+    rpc Update (LimitDiscount) returns (LimitDiscountResponse) {}
+    //删除活动
+    rpc Delete (LimitDiscount) returns (LimitDiscountResponse) {}
+    //设置限时折扣活动失效
+    rpc Cancel (LimitDiscount) returns (LimitDiscountResponse) {}
+    //获取活动详情
+    rpc Get (LimitDiscount) returns (LimitDiscountResponse) {}
+    //查询活动列表
+    rpc Search (BaseWhere) returns (LimitDiscountResponse) {}
+}
+
+
+message LimitDiscount {
+    int64 id = 1;
+    string name =2;
+    string start_at =3;
+    string end_at =4;
+    int32 period_type = 5;
+    string period_start_time = 6;
+    string period_end_time = 7;
+    string period_days = 8;
+    int32 limit_type = 9;
+    int32 limit_num = 10;
+    string lable = 11;
+    string erased = 12;
+    int32 Status =13;
+    string created_at = 14;
+    string updated_at = 15;
+    LimitDiscountGoods goodses = 16;
+}
+
+
+//
+message LimitDiscountResponse {
+    LimitDiscount entity = 1;
+    Pager pager =2;
+    repeated LimitDiscount items = 3;
+    Error error = 4;
+    Info info =5;
+}

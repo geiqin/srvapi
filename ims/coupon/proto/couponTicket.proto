@@ -24,7 +24,7 @@ message CouponTicket{
     int64 order_id = 7;
     bool is_used = 8;
     string use_at = 9;
-    string status = 10;
+    int32 status = 10;
     string created_at = 11;
     string updated_at = 12;
 }

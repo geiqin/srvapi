@@ -1,0 +1,46 @@
+syntax = "proto3";
+import "common.proto";
+import "rewardStep.proto";
+
+package geiqin.srv.ims.reward;
+
+service RewardService {
+    //创建满减送活动
+    rpc Create (Reward) returns (RewardResponse) {}
+    // 编辑满减送活动
+    rpc Update (Reward) returns (RewardResponse) {}
+    // 删除满减活动
+    rpc Delete (Reward) returns (RewardResponse) {}
+    //终止满减送活动
+    rpc Cancel (Reward) returns (RewardResponse) {}
+    // 获取活动详情
+    rpc Get (Reward) returns (RewardResponse) {}
+    //分页查询活动列表
+    rpc Search (BaseWhere) returns (RewardResponse) {}
+}
+
+
+message Reward {
+    int64 id = 1;
+    string name = 2;
+    string start_at = 3;
+    string end_at = 4;
+    int32 range_type = 5;
+    int32 condition_type = 6;
+    int32 step_num = 7;
+    string description = 8;
+    string created_at = 9;
+    string updated_at = 10;
+    RewardGoods goodses = 11;
+    repeated RewardStep steps =12;
+}
+
+
+//
+message RewardResponse {
+    Reward entity = 1;
+    Pager pager =2;
+    repeated Reward items = 3;
+    Error error = 4;
+    Info info =5;
+}

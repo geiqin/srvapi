@@ -30,6 +30,14 @@ message Sku {
     repeated SpecValue SpecValues =21;
 }
 
+message SpecItemIndex{
+    int64	id	=1;
+    int64	item_id	=2;
+    int64	sku_id	=3;
+    int32	spec_id	=4;
+    int32	spec_value_id	=5;
+}
+
 message SkuResponse {
     Sku entity = 1;
     Pager pager =2;

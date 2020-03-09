@@ -34,18 +34,33 @@ var _ server.Option
 // Client API for ItemService service
 
 type ItemService interface {
+	//创建商品
 	Create(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//修改商品
 	Update(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//删除商品
 	Delete(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//商品加锁
 	Lock(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//商品解锁
 	Unlock(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//商品上架
 	Listing(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//商品下架
 	Delisting(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//恢复商品
 	Recovery(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//永久删除商品
 	Destroy(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//商品基本信息
 	Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//商品详细信息（显示专用）
+	Detail(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//商品列表（来源基本信息）
 	List(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//查询商品
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ItemResponse, error)
+	//查询已删除商品
 	SearchDeleted(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ItemResponse, error)
 }
 
@@ -167,6 +182,16 @@ func (c *itemService) Get(ctx context.Context, in *Item, opts ...client.CallOpti
 	return out, nil
 }
 
+func (c *itemService) Detail(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ItemService.Detail", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *itemService) List(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.List", in)
 	out := new(ItemResponse)
@@ -200,18 +225,33 @@ func (c *itemService) SearchDeleted(ctx context.Context, in *BaseWhere, opts ...
 // Server API for ItemService service
 
 type ItemServiceHandler interface {
+	//创建商品
 	Create(context.Context, *Item, *ItemResponse) error
+	//修改商品
 	Update(context.Context, *Item, *ItemResponse) error
+	//删除商品
 	Delete(context.Context, *Item, *ItemResponse) error
+	//商品加锁
 	Lock(context.Context, *Item, *ItemResponse) error
+	//商品解锁
 	Unlock(context.Context, *Item, *ItemResponse) error
+	//商品上架
 	Listing(context.Context, *Item, *ItemResponse) error
+	//商品下架
 	Delisting(context.Context, *Item, *ItemResponse) error
+	//恢复商品
 	Recovery(context.Context, *Item, *ItemResponse) error
+	//永久删除商品
 	Destroy(context.Context, *Item, *ItemResponse) error
+	//商品基本信息
 	Get(context.Context, *Item, *ItemResponse) error
+	//商品详细信息（显示专用）
+	Detail(context.Context, *Item, *ItemResponse) error
+	//商品列表（来源基本信息）
 	List(context.Context, *Item, *ItemResponse) error
+	//查询商品
 	Search(context.Context, *BaseWhere, *ItemResponse) error
+	//查询已删除商品
 	SearchDeleted(context.Context, *BaseWhere, *ItemResponse) error
 }
 
@@ -227,6 +267,7 @@ func RegisterItemServiceHandler(s server.Server, hdlr ItemServiceHandler, opts .
 		Recovery(ctx context.Context, in *Item, out *ItemResponse) error
 		Destroy(ctx context.Context, in *Item, out *ItemResponse) error
 		Get(ctx context.Context, in *Item, out *ItemResponse) error
+		Detail(ctx context.Context, in *Item, out *ItemResponse) error
 		List(ctx context.Context, in *Item, out *ItemResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *ItemResponse) error
 		SearchDeleted(ctx context.Context, in *BaseWhere, out *ItemResponse) error
@@ -280,6 +321,10 @@ func (h *itemServiceHandler) Destroy(ctx context.Context, in *Item, out *ItemRes
 
 func (h *itemServiceHandler) Get(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Get(ctx, in, out)
+}
+
+func (h *itemServiceHandler) Detail(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.ItemServiceHandler.Detail(ctx, in, out)
 }
 
 func (h *itemServiceHandler) List(ctx context.Context, in *Item, out *ItemResponse) error {
