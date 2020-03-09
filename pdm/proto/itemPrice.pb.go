@@ -21,14 +21,14 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type ItemPrice struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type                 string   `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	TypeValueId          int64    `protobuf:"varint,3,opt,name=type_value_id,json=typeValueId,proto3" json:"type_value_id,omitempty"`
-	ItemId               int64    `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	SkuId                int64    `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	Method               string   `protobuf:"bytes,6,opt,name=method,proto3" json:"method,omitempty"`
-	Price                float32  `protobuf:"fixed32,7,opt,name=price,proto3" json:"price,omitempty"`
-	Discount             float32  `protobuf:"fixed32,8,opt,name=discount,proto3" json:"discount,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Type                 string   `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`
+	TypeValueId          int64    `protobuf:"varint,3,opt,name=type_value_id,json=typeValueId,proto3" json:"type_value_id"`
+	ItemId               int64    `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id"`
+	SkuId                int64    `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	Method               string   `protobuf:"bytes,6,opt,name=method,proto3" json:"method"`
+	Price                float32  `protobuf:"fixed32,7,opt,name=price,proto3" json:"price"`
+	Discount             float32  `protobuf:"fixed32,8,opt,name=discount,proto3" json:"discount"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
