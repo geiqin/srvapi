@@ -1,0 +1,58 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.ord.private;
+
+service DeliveryService {
+    rpc Create (Delivery) returns (DeliveryResponse) {}
+    rpc Update (Delivery) returns (DeliveryResponse) {}
+    rpc Delete (Delivery) returns (DeliveryResponse) {}
+    rpc Get (Delivery) returns (DeliveryResponse) {}
+    rpc Search (BaseWhere) returns (DeliveryResponse) {}
+}
+
+message Delivery {
+    int64 id = 1;
+    string type = 2;
+    int64 order_id = 3;
+    string delivery_type = 4;
+    string delivery_sn = 5;
+    float freight = 6;
+    bool protected = 7;
+    int32 express_id = 8;
+    string express_name = 9;
+    string express_code = 10;
+    string express_no = 11;
+    int64 customer_id = 12;
+    string receiver_name = 13;
+    int64 receiver_area_id = 14;
+    string receiver_addr = 15;
+    string receiver_zip = 16;
+    string receiver_tel = 17;
+    string receiver_mobile = 18;
+    string receiver_email = 19;
+    int64 op_id = 20;
+    string status = 21;
+    string memo = 22;
+    string arrived_at = 23;
+    string created_at = 24;
+    string updated_at = 25;
+    repeated DeliveryDetail details = 26;
+}
+
+message DeliveryDetail {
+    int64 id = 1;
+    int64 delivery_id = 2;
+    int64 order_detail_id = 3;
+    int64 item_id = 4;
+    int64 sku_id = 5;
+    int32 num = 6;
+}
+
+
+message DeliveryResponse {
+    Delivery entity = 1;
+    Pager pager =2;
+    repeated Delivery items = 3;
+    Error error = 4;
+    Info info =5;
+}

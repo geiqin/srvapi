@@ -1,0 +1,54 @@
+syntax = "proto3";
+import "common.proto";
+
+package geiqin.srv.ord.private;
+
+message OrderStats {
+    int32 id  = 1;
+    float pay_amount  = 2;
+    float coupon_amount  = 3;
+    float express_amount  = 4;
+    float refund_amount  = 5;
+    int32 pay_num  = 6;
+    int32 buyer_num  = 7;
+    int32 goods_num  = 8;
+    int32 refund_num  = 9;
+    int32 new_customer_num  = 10;
+    int32 old_customer_num  = 11;
+    string statistic_date  = 12;
+    string created_at  = 13;
+    string updated_at  = 14;
+}
+
+message OrderDayStats {
+    int32 id  = 1;
+    float pay_amount  = 2;
+    float coupon_amount  = 3;
+    float express_amount  = 4;
+    float refund_amount  = 5;
+    int32 pay_num  = 6;
+    int32 buyer_num  = 7;
+    int32 goods_num  = 8;
+    int32 refund_num  = 9;
+    int32 new_customer_num  = 10;
+    int32 old_customer_num  = 11;
+    string created_at  = 12;
+    string updated_at  = 13;
+}
+
+
+message OrderStatsResponse {
+    OrderStats entity = 1;
+    Pager pager =2;
+    repeated OrderStats items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message OrderDayStatsResponse {
+    OrderDayStats entity = 1;
+    Pager pager =2;
+    repeated OrderDayStats items = 3;
+    Error error = 4;
+    Info info =5;
+}

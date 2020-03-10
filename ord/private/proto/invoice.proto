@@ -1,0 +1,23 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.ord.private;
+
+service InvoiceService {
+    rpc Create (Invoice) returns (InvoiceResponse) {}
+    rpc Update (Invoice) returns (InvoiceResponse) {}
+    rpc Delete (Invoice) returns (InvoiceResponse) {}
+    rpc Get (Invoice) returns (InvoiceResponse) {}
+    rpc Search (BaseWhere) returns (InvoiceResponse) {}
+}
+
+message Invoice {
+    int64 id = 1;
+}
+
+message InvoiceResponse {
+    Invoice entity = 1;
+    Pager pager =2;
+    repeated Invoice items = 3;
+    Error error = 4;
+    Info info =5;
+}

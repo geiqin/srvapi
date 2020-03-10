@@ -1,0 +1,135 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.ord.private;
+
+service MyOrderService {
+    //确认订单
+    rpc Confirm (OrderRequest) returns (OrderResponse) {}
+    //提交订单
+    rpc Submit (Order) returns (OrderResponse) {}
+    //删除订单
+    rpc Delete (Order) returns (OrderResponse) {}
+    //撤销订单
+    rpc Cancel (Order) returns (OrderResponse) {}
+    //确认收货
+    rpc Receipt (Order) returns (OrderResponse) {}
+    //获取订单信息
+    rpc Get (Order) returns (OrderResponse) {}
+    //查询订单
+    rpc Search (BaseWhere) returns (OrderResponse) {}
+
+    //Route::post('qin.ord.my.order.choose.coupon', 'MyOrderController@chooseCoupon');// 下单选择优惠券
+}
+
+service OrderService {
+    //创建订单（管理员后台下单）
+    rpc Create (OrderRequest) returns (OrderResponse) {}
+    //审核订单
+    rpc Check (Order) returns (OrderResponse) {}
+    //修改价格
+    rpc ModifyPrice (Order) returns (OrderResponse) {}
+    //修改地址
+    rpc ModifyAddr (Order) returns (OrderResponse) {}
+    //删除订单
+    rpc Delete (Order) returns (OrderResponse) {}
+    //获取订单信息
+    rpc Get (Order) returns (OrderResponse) {}
+    //查询订单
+    rpc Search (BaseWhere) returns (OrderResponse) {}
+}
+
+message Order {
+    int64 id = 1;
+    string order_sn = 2;
+    float total_fee = 3;
+    int32 total_num = 4;
+    float total_weight = 5;
+    string order_type = 6;
+    string pay_type = 7;
+    bool can_delivery = 8;
+    bool can_cod = 9;
+    int64 customer_id = 10;
+    float payment = 11;
+    float modify_price = 12;
+    bool is_free = 13;
+    float paid_fee = 14;
+    float express_fee = 15;
+    float refunded_fee = 16;
+    float discount_fee = 17;
+    string currency = 23;
+    int32 points_fee = 24;
+    int32 reward_points = 25;
+    string status = 26;
+    string pay_status = 27;
+    string refund_status = 28;
+    string deliver_status = 29;
+    string trade_memo = 30;
+    string buyer_message = 31;
+    int32 branch_id = 32;
+    string seller_flag = 33;
+    string out_user_id = 38;
+    string out_order_no = 39;
+    string platform_source = 40;
+    int32 flag = 41;
+    string memo = 42;
+    bool safeguarded = 43;
+    string ref_type = 44;
+    int64 ref_order_id = 45;
+    string paid_at = 46;
+    string shipped_at = 47;
+    string signed_at = 48;
+    string refunded_at = 49;
+    string finished_at = 50;
+    string created_at = 51;
+    string updated_at = 52;
+    repeated OrderDetail details = 53;
+}
+
+message OrderDetail {
+    int64 id = 1;
+    int64 order_id = 2;
+    int64 item_id = 3;
+    int64 sku_id = 4;
+    string item_sn = 5;
+    string sku_sn = 6;
+    string name = 7;
+    float weight = 8;
+    float price = 9;
+    float cost = 10;
+    int32 num = 11;
+    int32 send_num = 12;
+    float amount = 13;
+    int32 points = 14;
+    string item_type = 15;
+    string additional = 16;
+    int64 present_id = 19;
+    float origin_price = 20;
+    float modify_price = 21;
+    bool is_vip_bought = 22;
+    float distribution_profit = 23;
+    string created_at = 17;
+    string updated_at = 18;
+}
+
+//订单数据请求
+message OrderRequest{
+    int64 customer_id =1; //后台下单专用
+    string cart_id =2; //购物车下单
+    int64 item_id =3; //商品ID（直接购买专用）
+    int64 sku_id =4; ////规格货品ID（直接购买专用）
+    int32 num =5; //购买数量（直接购买专用）
+    bool directed =6; //是否为直接购买
+    int64 address_id =7; //收货地址
+    string message =8; //买家留言(50字以内)
+    int64 vipcard_id =9; //选中的会员卡
+    int32 pay_method =10; //选中的支付方式
+    repeated int64 coupon_ids =11; //选中的优惠劵
+}
+
+message OrderResponse {
+    Order entity = 1;
+    Pager pager =2;
+    repeated Order items = 3;
+    Error error = 4;
+    Info info =5;
+}
