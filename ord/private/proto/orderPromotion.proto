@@ -18,6 +18,8 @@ message OrderPromotionParams {
     int64 order_id = 4;
     string promotion_type = 5;
     repeated int64 ids = 6;
+    string start_date = 7;
+    string end_date = 8;
 
 }
 
