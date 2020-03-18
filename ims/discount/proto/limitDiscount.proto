@@ -16,6 +16,8 @@ service LimitDiscountService {
     rpc Get (LimitDiscount) returns (LimitDiscountResponse) {}
     //查询活动列表
     rpc Search (BaseWhere) returns (LimitDiscountResponse) {}
+    //获取活动列表
+    rpc List (BaseWhere) returns (LimitDiscountResponse) {}
 }
 
 
@@ -31,13 +33,13 @@ message LimitDiscount {
     int32 limit_type = 9;
     int32 limit_num = 10;
     string lable = 11;
-    string erased = 12;
+    int32 erased = 12;
     int32 Status =13;
     string created_at = 14;
     string updated_at = 15;
-    LimitDiscountGoods goodses = 16;
+    repeated LimitDiscountGoods goodses = 16;
+    repeated int64 ids = 17;
 }
-
 
 //
 message LimitDiscountResponse {

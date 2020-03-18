@@ -1,0 +1,33 @@
+syntax = "proto3";
+import "common.proto";
+import "customer.proto";
+package geiqin.srv.crm;
+
+service AuthService {
+    //客户登录
+    rpc Login (AuthRequest) returns (TokenResponse) {}
+    //修改密码
+    rpc UpdatePwd (AuthRequest) returns (TokenResponse) {}
+    //获得当前客户
+    rpc Info (Empty) returns (CustomerResponse) {}
+    //安全退出
+    rpc Logout (Empty) returns (AuthResponse) {}
+}
+
+
+message AuthRequest{
+    int64 customer_id =2;
+    string name = 4;
+    string mobile =6;
+    string email =7;
+    string password =3;
+}
+
+
+//
+message AuthResponse {
+    Token entity = 1;
+    Pager pager =2;
+    Error error = 4;
+    Info info =5;
+}

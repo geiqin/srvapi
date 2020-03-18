@@ -1,0 +1,64 @@
+syntax = "proto3";
+package geiqin.srv.pdm;
+import "common.proto";
+import "item.proto";
+import "itemGallery.proto";
+import "tag.proto";
+import "brand.proto";
+import "sku.proto";
+import "cat.proto";
+import "spec.proto";
+
+service MyItemService {
+    // 查询商品
+    rpc Search (ItemWhere) returns (ItemDisplayResponse) {}
+    // 获取商品信息
+    rpc Get (ItemWhere) returns (ItemDisplayResponse) {}
+}
+
+message ItemDisplay {
+    int64	id	=1;
+    string	name	=2;
+    string	unit	=3;
+    string	item_sn	=4;
+    int64	taxonomy_id	=5;
+    int32	quantity	=6  ;
+    int32	sold_num	=7;
+    string	model_type	=8;
+    bool	hide_stock	=9;
+    string	content	=10;
+    string	summary	=11;
+    string	selling_point	=12;
+    int32	min_buy	=13;
+    bool	nostore_sell	=14;
+    string	thumb_url	=15;
+    int32	template_id	=16;
+    string	barcode	=17;
+    float	price	=18;
+    float	origin_price	=19;
+    float	min_price	=20;
+    float	max_price	=21;
+    float	weight	=22;
+    int32	review_num	=23;
+    int32	view_count	=24;
+    Brand brand =25;
+    repeated Cat cats =26;
+    repeated Tag tags =27;
+    repeated  Sku skus  =28;
+    repeated  ItemGallery galleries  =29;
+    repeated  Spec specs  =30; //(详情显示专用)
+    bool is_member_goods = 31; // 是否会员专享
+    bool is_buy = 32; // 商品是否可购买
+    bool is_member = 33; // 登录用户是否会员
+    float member_price = 34; // 会员价
+    bool is_distribution = 35; // 是否参与分销
+    string distribution_share_icon = 36; // 分销图标
+}
+
+message ItemDisplayResponse {
+    ItemDisplay entity = 1;
+    Pager pager =2;
+    repeated ItemDisplay items = 3;
+    Error error = 4;
+    Info info =5;
+}

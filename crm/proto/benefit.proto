@@ -7,7 +7,9 @@ service BenefitService {
     rpc Update (Benefit) returns (BenefitResponse) {}
     rpc Delete (Benefit) returns (BenefitResponse) {}
     rpc Get (Benefit) returns (BenefitResponse) {}
-    rpc Search (BaseWhere) returns (BenefitResponse) {}
+    rpc Search (BenefitWhere) returns (BenefitResponse) {}
+    rpc List (BenefitWhere) returns (BenefitResponse) {}
+    rpc Selected (Benefit) returns (BenefitResponse) {}
 }
 
 message Benefit {
@@ -26,7 +28,15 @@ message Benefit {
     repeated int32 ids = 13;
 }
 
-
+//查询参数
+message BenefitWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    //以下为自定义参数
+    string name = 3;
+    string type = 4;
+    bool selected = 5;
+}
 
 //
 message BenefitResponse {

@@ -4,25 +4,35 @@ import "cardBenefit.proto";
 package geiqin.srv.crm;
 
 service CardService {
+    //创建卡
     rpc Create (Card) returns (CardResponse) {}
+    //修改卡
     rpc Update (Card) returns (CardResponse) {}
+    //删除卡
     rpc Delete (Card) returns (CardResponse) {}
+    //禁用卡
     rpc Disabled (Card) returns (CardResponse) {}
+    //启用卡
     rpc Enabled (Card) returns (CardResponse) {}
+    //获得卡
     rpc Get (Card) returns (CardResponse) {}
+    //查询卡列表
     rpc List (Card) returns (CardResponse) {}
-    rpc Search (BaseWhere) returns (CardResponse) {}
+    //有效卡列表
+    rpc ValidList (Card) returns (CardResponse) {}
+    //查询卡列表
+    rpc Search (CardWhere) returns (CardResponse) {}
 }
 
 message Card {
     int32 id =1;
     string name =2;
     string card_bg =3;
-    string term =4;
+    int32 term =4;
     int32 term_days =5;
     string term_start_date =6;
     string term_end_date =7;
-    string method =8;
+    int32 method =8;
     float fee =9;
     int32 stock =10;
     string code =11;
@@ -36,7 +46,19 @@ message Card {
     string updated_at =20;
     repeated CardBenefit card_benefits   =21;
     repeated int32 ids = 22;
+    int32 status = 23;
 }
+
+
+//查询参数
+message CardWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    //以下为自定义参数
+    string name = 3;
+    int32 status = 4; //状态 1使用中   2 已禁用  3已过期
+}
+
 
 //
 message CardResponse {

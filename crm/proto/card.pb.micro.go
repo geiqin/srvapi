@@ -34,14 +34,24 @@ var _ server.Option
 // Client API for CardService service
 
 type CardService interface {
+	//创建卡
 	Create(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	//修改卡
 	Update(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	//删除卡
 	Delete(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	//禁用卡
 	Disabled(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	//启用卡
 	Enabled(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	//获得卡
 	Get(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	//查询卡列表
 	List(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CardResponse, error)
+	//有效卡列表
+	ValidList(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	//查询卡列表
+	Search(ctx context.Context, in *CardWhere, opts ...client.CallOption) (*CardResponse, error)
 }
 
 type cardService struct {
@@ -132,7 +142,17 @@ func (c *cardService) List(ctx context.Context, in *Card, opts ...client.CallOpt
 	return out, nil
 }
 
-func (c *cardService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CardResponse, error) {
+func (c *cardService) ValidList(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error) {
+	req := c.c.NewRequest(c.name, "CardService.ValidList", in)
+	out := new(CardResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cardService) Search(ctx context.Context, in *CardWhere, opts ...client.CallOption) (*CardResponse, error) {
 	req := c.c.NewRequest(c.name, "CardService.Search", in)
 	out := new(CardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -145,14 +165,24 @@ func (c *cardService) Search(ctx context.Context, in *BaseWhere, opts ...client.
 // Server API for CardService service
 
 type CardServiceHandler interface {
+	//创建卡
 	Create(context.Context, *Card, *CardResponse) error
+	//修改卡
 	Update(context.Context, *Card, *CardResponse) error
+	//删除卡
 	Delete(context.Context, *Card, *CardResponse) error
+	//禁用卡
 	Disabled(context.Context, *Card, *CardResponse) error
+	//启用卡
 	Enabled(context.Context, *Card, *CardResponse) error
+	//获得卡
 	Get(context.Context, *Card, *CardResponse) error
+	//查询卡列表
 	List(context.Context, *Card, *CardResponse) error
-	Search(context.Context, *BaseWhere, *CardResponse) error
+	//有效卡列表
+	ValidList(context.Context, *Card, *CardResponse) error
+	//查询卡列表
+	Search(context.Context, *CardWhere, *CardResponse) error
 }
 
 func RegisterCardServiceHandler(s server.Server, hdlr CardServiceHandler, opts ...server.HandlerOption) error {
@@ -164,7 +194,8 @@ func RegisterCardServiceHandler(s server.Server, hdlr CardServiceHandler, opts .
 		Enabled(ctx context.Context, in *Card, out *CardResponse) error
 		Get(ctx context.Context, in *Card, out *CardResponse) error
 		List(ctx context.Context, in *Card, out *CardResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *CardResponse) error
+		ValidList(ctx context.Context, in *Card, out *CardResponse) error
+		Search(ctx context.Context, in *CardWhere, out *CardResponse) error
 	}
 	type CardService struct {
 		cardService
@@ -205,6 +236,10 @@ func (h *cardServiceHandler) List(ctx context.Context, in *Card, out *CardRespon
 	return h.CardServiceHandler.List(ctx, in, out)
 }
 
-func (h *cardServiceHandler) Search(ctx context.Context, in *BaseWhere, out *CardResponse) error {
+func (h *cardServiceHandler) ValidList(ctx context.Context, in *Card, out *CardResponse) error {
+	return h.CardServiceHandler.ValidList(ctx, in, out)
+}
+
+func (h *cardServiceHandler) Search(ctx context.Context, in *CardWhere, out *CardResponse) error {
 	return h.CardServiceHandler.Search(ctx, in, out)
 }

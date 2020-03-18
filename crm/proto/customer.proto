@@ -7,11 +7,30 @@ import "address.proto";
 package geiqin.srv.crm;
 
 service CustomerService {
+    //手动添加用户
     rpc Create (Customer) returns (CustomerResponse) {}
+    //客户注册
+    rpc Register (Customer) returns (CustomerResponse) {}
+    //修改客户
     rpc Update (Customer) returns (CustomerResponse) {}
+    //删除客户
     rpc Delete (Customer) returns (CustomerResponse) {}
+    //锁定客户
+    rpc Lock (Customer) returns (CustomerResponse) {}
+    //解锁客户
+    rpc Unlock (Customer) returns (CustomerResponse) {}
+    //获得客户
     rpc Get (Customer) returns (CustomerResponse) {}
-    rpc Search (BaseWhere) returns (CustomerResponse) {}
+    //获得客户详情
+    rpc Detail (Customer) returns (CustomerResponse) {}
+    //根据ids获得客户
+    rpc List (Customer) returns (CustomerResponse) {}
+    //查询客户
+    rpc Search (CustomerWhere) returns (CustomerResponse) {}
+    //设置会员标签
+    rpc SetTags (Customer) returns (CustomerResponse) {}
+    //设置会员卡
+    rpc SetCards (Customer) returns (CustomerResponse) {}
 }
 
 message Customer {
@@ -20,8 +39,8 @@ message Customer {
     string name =3;
     string display_name =4;
     string realname =5;
-    string password =6;
-    string gender =7;
+    string idcard =6;
+    int32 gender =7;
     string mobile =8;
     string email =9;
     int64 avatar_id =10;
@@ -41,20 +60,37 @@ message Customer {
     bool binded_mobile =24;
     bool binded_email =25;
     int64 area_id =26;
-    string source_type =27;
+    int32 source_type =27;
     string birthday =28;
     string memo =29;
     string created_at =30;
     string updated_at =31;
     string deleted_at =32;
     Level level =33;
-    repeated Tag tags = 34;
-    repeated Vipcard vipcards =35;
-    repeated Address addrs = 36;
-    repeated int64 ids = 37;
+    repeated Tag tags = 35;
+    repeated Vipcard vipcards =36;
+    repeated Address addrs = 37;
+    repeated int64 ids = 38;
 }
 
-
+//客户查询参数
+message CustomerWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    //以下为自定义参数
+    string name = 4;
+    int32 gender =5;
+    string mobile =6;
+    string email =7;
+    int32 level_id =8;
+    int32 card_id =9;
+    int32 tag_id =10;
+    int32 source_type =11;
+    int64 area_id =12;
+    string status =13;
+    string keywords =14;
+}
 
 //
 message CustomerResponse {

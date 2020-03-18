@@ -34,8 +34,8 @@ var _ server.Option
 // Client API for ItemPriceService service
 
 type ItemPriceService interface {
-	Set(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*ItemPriceResponse, error)
-	Get(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*ItemPriceResponse, error)
+	Set(ctx context.Context, in *ItemCustomPrice, opts ...client.CallOption) (*ItemCustomPriceResponse, error)
+	Get(ctx context.Context, in *ItemCustomPrice, opts ...client.CallOption) (*ItemCustomPriceResponse, error)
 }
 
 type itemPriceService struct {
@@ -56,9 +56,9 @@ func NewItemPriceService(name string, c client.Client) ItemPriceService {
 	}
 }
 
-func (c *itemPriceService) Set(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*ItemPriceResponse, error) {
+func (c *itemPriceService) Set(ctx context.Context, in *ItemCustomPrice, opts ...client.CallOption) (*ItemCustomPriceResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemPriceService.Set", in)
-	out := new(ItemPriceResponse)
+	out := new(ItemCustomPriceResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,9 +66,9 @@ func (c *itemPriceService) Set(ctx context.Context, in *ItemPrice, opts ...clien
 	return out, nil
 }
 
-func (c *itemPriceService) Get(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*ItemPriceResponse, error) {
+func (c *itemPriceService) Get(ctx context.Context, in *ItemCustomPrice, opts ...client.CallOption) (*ItemCustomPriceResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemPriceService.Get", in)
-	out := new(ItemPriceResponse)
+	out := new(ItemCustomPriceResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -79,14 +79,14 @@ func (c *itemPriceService) Get(ctx context.Context, in *ItemPrice, opts ...clien
 // Server API for ItemPriceService service
 
 type ItemPriceServiceHandler interface {
-	Set(context.Context, *ItemPrice, *ItemPriceResponse) error
-	Get(context.Context, *ItemPrice, *ItemPriceResponse) error
+	Set(context.Context, *ItemCustomPrice, *ItemCustomPriceResponse) error
+	Get(context.Context, *ItemCustomPrice, *ItemCustomPriceResponse) error
 }
 
 func RegisterItemPriceServiceHandler(s server.Server, hdlr ItemPriceServiceHandler, opts ...server.HandlerOption) error {
 	type itemPriceService interface {
-		Set(ctx context.Context, in *ItemPrice, out *ItemPriceResponse) error
-		Get(ctx context.Context, in *ItemPrice, out *ItemPriceResponse) error
+		Set(ctx context.Context, in *ItemCustomPrice, out *ItemCustomPriceResponse) error
+		Get(ctx context.Context, in *ItemCustomPrice, out *ItemCustomPriceResponse) error
 	}
 	type ItemPriceService struct {
 		itemPriceService
@@ -99,10 +99,10 @@ type itemPriceServiceHandler struct {
 	ItemPriceServiceHandler
 }
 
-func (h *itemPriceServiceHandler) Set(ctx context.Context, in *ItemPrice, out *ItemPriceResponse) error {
+func (h *itemPriceServiceHandler) Set(ctx context.Context, in *ItemCustomPrice, out *ItemCustomPriceResponse) error {
 	return h.ItemPriceServiceHandler.Set(ctx, in, out)
 }
 
-func (h *itemPriceServiceHandler) Get(ctx context.Context, in *ItemPrice, out *ItemPriceResponse) error {
+func (h *itemPriceServiceHandler) Get(ctx context.Context, in *ItemCustomPrice, out *ItemCustomPriceResponse) error {
 	return h.ItemPriceServiceHandler.Get(ctx, in, out)
 }

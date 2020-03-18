@@ -41,9 +41,11 @@ type MyCouponService interface {
 	//查询优惠券列表
 	List(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
 	//未领取的优惠券列表
-	UncollectedList(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
+	UncollectedList(ctx context.Context, in *Empty, opts ...client.CallOption) (*CouponResponse, error)
 	//可使用的优惠券列表
 	ValidList(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
+	//领取优惠劵
+	Receive(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error)
 }
 
 type myCouponService struct {
@@ -94,7 +96,7 @@ func (c *myCouponService) List(ctx context.Context, in *Coupon, opts ...client.C
 	return out, nil
 }
 
-func (c *myCouponService) UncollectedList(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error) {
+func (c *myCouponService) UncollectedList(ctx context.Context, in *Empty, opts ...client.CallOption) (*CouponResponse, error) {
 	req := c.c.NewRequest(c.name, "MyCouponService.UncollectedList", in)
 	out := new(CouponResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -114,6 +116,16 @@ func (c *myCouponService) ValidList(ctx context.Context, in *Coupon, opts ...cli
 	return out, nil
 }
 
+func (c *myCouponService) Receive(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error) {
+	req := c.c.NewRequest(c.name, "MyCouponService.Receive", in)
+	out := new(CouponResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for MyCouponService service
 
 type MyCouponServiceHandler interface {
@@ -124,9 +136,11 @@ type MyCouponServiceHandler interface {
 	//查询优惠券列表
 	List(context.Context, *Coupon, *CouponResponse) error
 	//未领取的优惠券列表
-	UncollectedList(context.Context, *Coupon, *CouponResponse) error
+	UncollectedList(context.Context, *Empty, *CouponResponse) error
 	//可使用的优惠券列表
 	ValidList(context.Context, *Coupon, *CouponResponse) error
+	//领取优惠劵
+	Receive(context.Context, *CouponWhere, *CouponResponse) error
 }
 
 func RegisterMyCouponServiceHandler(s server.Server, hdlr MyCouponServiceHandler, opts ...server.HandlerOption) error {
@@ -134,8 +148,9 @@ func RegisterMyCouponServiceHandler(s server.Server, hdlr MyCouponServiceHandler
 		Get(ctx context.Context, in *Coupon, out *CouponResponse) error
 		Detail(ctx context.Context, in *Coupon, out *CouponResponse) error
 		List(ctx context.Context, in *Coupon, out *CouponResponse) error
-		UncollectedList(ctx context.Context, in *Coupon, out *CouponResponse) error
+		UncollectedList(ctx context.Context, in *Empty, out *CouponResponse) error
 		ValidList(ctx context.Context, in *Coupon, out *CouponResponse) error
+		Receive(ctx context.Context, in *CouponWhere, out *CouponResponse) error
 	}
 	type MyCouponService struct {
 		myCouponService
@@ -160,12 +175,16 @@ func (h *myCouponServiceHandler) List(ctx context.Context, in *Coupon, out *Coup
 	return h.MyCouponServiceHandler.List(ctx, in, out)
 }
 
-func (h *myCouponServiceHandler) UncollectedList(ctx context.Context, in *Coupon, out *CouponResponse) error {
+func (h *myCouponServiceHandler) UncollectedList(ctx context.Context, in *Empty, out *CouponResponse) error {
 	return h.MyCouponServiceHandler.UncollectedList(ctx, in, out)
 }
 
 func (h *myCouponServiceHandler) ValidList(ctx context.Context, in *Coupon, out *CouponResponse) error {
 	return h.MyCouponServiceHandler.ValidList(ctx, in, out)
+}
+
+func (h *myCouponServiceHandler) Receive(ctx context.Context, in *CouponWhere, out *CouponResponse) error {
+	return h.MyCouponServiceHandler.Receive(ctx, in, out)
 }
 
 // Client API for CouponService service
@@ -176,15 +195,17 @@ type CouponService interface {
 	//修改优惠劵
 	Update(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
 	//删除优惠券
-	Delete(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
+	Delete(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error)
 	//撤销优惠券
-	Cancel(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
+	Cancel(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error)
 	//获得优惠劵信息
 	Get(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
-	//查询优惠券列表
-	List(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error)
+	//获取优惠券列表（下拉框选择专用）
+	ValidList(ctx context.Context, in *Empty, opts ...client.CallOption) (*CouponResponse, error)
 	//查询优惠劵
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CouponResponse, error)
+	Search(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error)
+	//赠送优惠劵
+	Give(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error)
 }
 
 type couponService struct {
@@ -225,7 +246,7 @@ func (c *couponService) Update(ctx context.Context, in *Coupon, opts ...client.C
 	return out, nil
 }
 
-func (c *couponService) Delete(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error) {
+func (c *couponService) Delete(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error) {
 	req := c.c.NewRequest(c.name, "CouponService.Delete", in)
 	out := new(CouponResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -235,7 +256,7 @@ func (c *couponService) Delete(ctx context.Context, in *Coupon, opts ...client.C
 	return out, nil
 }
 
-func (c *couponService) Cancel(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error) {
+func (c *couponService) Cancel(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error) {
 	req := c.c.NewRequest(c.name, "CouponService.Cancel", in)
 	out := new(CouponResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -255,8 +276,8 @@ func (c *couponService) Get(ctx context.Context, in *Coupon, opts ...client.Call
 	return out, nil
 }
 
-func (c *couponService) List(ctx context.Context, in *Coupon, opts ...client.CallOption) (*CouponResponse, error) {
-	req := c.c.NewRequest(c.name, "CouponService.List", in)
+func (c *couponService) ValidList(ctx context.Context, in *Empty, opts ...client.CallOption) (*CouponResponse, error) {
+	req := c.c.NewRequest(c.name, "CouponService.ValidList", in)
 	out := new(CouponResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -265,8 +286,18 @@ func (c *couponService) List(ctx context.Context, in *Coupon, opts ...client.Cal
 	return out, nil
 }
 
-func (c *couponService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CouponResponse, error) {
+func (c *couponService) Search(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error) {
 	req := c.c.NewRequest(c.name, "CouponService.Search", in)
+	out := new(CouponResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponService) Give(ctx context.Context, in *CouponWhere, opts ...client.CallOption) (*CouponResponse, error) {
+	req := c.c.NewRequest(c.name, "CouponService.Give", in)
 	out := new(CouponResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -283,26 +314,29 @@ type CouponServiceHandler interface {
 	//修改优惠劵
 	Update(context.Context, *Coupon, *CouponResponse) error
 	//删除优惠券
-	Delete(context.Context, *Coupon, *CouponResponse) error
+	Delete(context.Context, *CouponWhere, *CouponResponse) error
 	//撤销优惠券
-	Cancel(context.Context, *Coupon, *CouponResponse) error
+	Cancel(context.Context, *CouponWhere, *CouponResponse) error
 	//获得优惠劵信息
 	Get(context.Context, *Coupon, *CouponResponse) error
-	//查询优惠券列表
-	List(context.Context, *Coupon, *CouponResponse) error
+	//获取优惠券列表（下拉框选择专用）
+	ValidList(context.Context, *Empty, *CouponResponse) error
 	//查询优惠劵
-	Search(context.Context, *BaseWhere, *CouponResponse) error
+	Search(context.Context, *CouponWhere, *CouponResponse) error
+	//赠送优惠劵
+	Give(context.Context, *CouponWhere, *CouponResponse) error
 }
 
 func RegisterCouponServiceHandler(s server.Server, hdlr CouponServiceHandler, opts ...server.HandlerOption) error {
 	type couponService interface {
 		Create(ctx context.Context, in *Coupon, out *CouponResponse) error
 		Update(ctx context.Context, in *Coupon, out *CouponResponse) error
-		Delete(ctx context.Context, in *Coupon, out *CouponResponse) error
-		Cancel(ctx context.Context, in *Coupon, out *CouponResponse) error
+		Delete(ctx context.Context, in *CouponWhere, out *CouponResponse) error
+		Cancel(ctx context.Context, in *CouponWhere, out *CouponResponse) error
 		Get(ctx context.Context, in *Coupon, out *CouponResponse) error
-		List(ctx context.Context, in *Coupon, out *CouponResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *CouponResponse) error
+		ValidList(ctx context.Context, in *Empty, out *CouponResponse) error
+		Search(ctx context.Context, in *CouponWhere, out *CouponResponse) error
+		Give(ctx context.Context, in *CouponWhere, out *CouponResponse) error
 	}
 	type CouponService struct {
 		couponService
@@ -323,11 +357,11 @@ func (h *couponServiceHandler) Update(ctx context.Context, in *Coupon, out *Coup
 	return h.CouponServiceHandler.Update(ctx, in, out)
 }
 
-func (h *couponServiceHandler) Delete(ctx context.Context, in *Coupon, out *CouponResponse) error {
+func (h *couponServiceHandler) Delete(ctx context.Context, in *CouponWhere, out *CouponResponse) error {
 	return h.CouponServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *couponServiceHandler) Cancel(ctx context.Context, in *Coupon, out *CouponResponse) error {
+func (h *couponServiceHandler) Cancel(ctx context.Context, in *CouponWhere, out *CouponResponse) error {
 	return h.CouponServiceHandler.Cancel(ctx, in, out)
 }
 
@@ -335,10 +369,14 @@ func (h *couponServiceHandler) Get(ctx context.Context, in *Coupon, out *CouponR
 	return h.CouponServiceHandler.Get(ctx, in, out)
 }
 
-func (h *couponServiceHandler) List(ctx context.Context, in *Coupon, out *CouponResponse) error {
-	return h.CouponServiceHandler.List(ctx, in, out)
+func (h *couponServiceHandler) ValidList(ctx context.Context, in *Empty, out *CouponResponse) error {
+	return h.CouponServiceHandler.ValidList(ctx, in, out)
 }
 
-func (h *couponServiceHandler) Search(ctx context.Context, in *BaseWhere, out *CouponResponse) error {
+func (h *couponServiceHandler) Search(ctx context.Context, in *CouponWhere, out *CouponResponse) error {
 	return h.CouponServiceHandler.Search(ctx, in, out)
+}
+
+func (h *couponServiceHandler) Give(ctx context.Context, in *CouponWhere, out *CouponResponse) error {
+	return h.CouponServiceHandler.Give(ctx, in, out)
 }

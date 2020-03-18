@@ -7,7 +7,7 @@ service AddressService {
     rpc Update (Address) returns (AddressResponse) {}
     rpc Delete (Address) returns (AddressResponse) {}
     rpc Get (Address) returns (AddressResponse) {}
-    rpc Search (BaseWhere) returns (AddressResponse) {}
+    rpc Search (AddressWhere) returns (AddressResponse) {}
 }
 
 message Address {
@@ -27,6 +27,15 @@ message Address {
     bool defaulted =14;
     string created_at =15;
     string updated_at =16;
+}
+
+
+//地址查询参数
+message AddressWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    //以下为自定义参数
+    string customer_id = 4;
 }
 
 

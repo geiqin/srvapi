@@ -38,7 +38,7 @@ type AddressService interface {
 	Update(ctx context.Context, in *Address, opts ...client.CallOption) (*AddressResponse, error)
 	Delete(ctx context.Context, in *Address, opts ...client.CallOption) (*AddressResponse, error)
 	Get(ctx context.Context, in *Address, opts ...client.CallOption) (*AddressResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*AddressResponse, error)
+	Search(ctx context.Context, in *AddressWhere, opts ...client.CallOption) (*AddressResponse, error)
 }
 
 type addressService struct {
@@ -99,7 +99,7 @@ func (c *addressService) Get(ctx context.Context, in *Address, opts ...client.Ca
 	return out, nil
 }
 
-func (c *addressService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*AddressResponse, error) {
+func (c *addressService) Search(ctx context.Context, in *AddressWhere, opts ...client.CallOption) (*AddressResponse, error) {
 	req := c.c.NewRequest(c.name, "AddressService.Search", in)
 	out := new(AddressResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -116,7 +116,7 @@ type AddressServiceHandler interface {
 	Update(context.Context, *Address, *AddressResponse) error
 	Delete(context.Context, *Address, *AddressResponse) error
 	Get(context.Context, *Address, *AddressResponse) error
-	Search(context.Context, *BaseWhere, *AddressResponse) error
+	Search(context.Context, *AddressWhere, *AddressResponse) error
 }
 
 func RegisterAddressServiceHandler(s server.Server, hdlr AddressServiceHandler, opts ...server.HandlerOption) error {
@@ -125,7 +125,7 @@ func RegisterAddressServiceHandler(s server.Server, hdlr AddressServiceHandler, 
 		Update(ctx context.Context, in *Address, out *AddressResponse) error
 		Delete(ctx context.Context, in *Address, out *AddressResponse) error
 		Get(ctx context.Context, in *Address, out *AddressResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *AddressResponse) error
+		Search(ctx context.Context, in *AddressWhere, out *AddressResponse) error
 	}
 	type AddressService struct {
 		addressService
@@ -154,6 +154,6 @@ func (h *addressServiceHandler) Get(ctx context.Context, in *Address, out *Addre
 	return h.AddressServiceHandler.Get(ctx, in, out)
 }
 
-func (h *addressServiceHandler) Search(ctx context.Context, in *BaseWhere, out *AddressResponse) error {
+func (h *addressServiceHandler) Search(ctx context.Context, in *AddressWhere, out *AddressResponse) error {
 	return h.AddressServiceHandler.Search(ctx, in, out)
 }

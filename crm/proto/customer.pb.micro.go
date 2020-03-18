@@ -34,11 +34,30 @@ var _ server.Option
 // Client API for CustomerService service
 
 type CustomerService interface {
+	//手动添加用户
 	Create(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//客户注册
+	Register(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//修改客户
 	Update(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//删除客户
 	Delete(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//锁定客户
+	Lock(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//解锁客户
+	Unlock(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//获得客户
 	Get(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CustomerResponse, error)
+	//获得客户详情
+	Detail(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//根据ids获得客户
+	List(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//查询客户
+	Search(ctx context.Context, in *CustomerWhere, opts ...client.CallOption) (*CustomerResponse, error)
+	//设置会员标签
+	SetTags(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//设置会员卡
+	SetCards(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 }
 
 type customerService struct {
@@ -69,6 +88,16 @@ func (c *customerService) Create(ctx context.Context, in *Customer, opts ...clie
 	return out, nil
 }
 
+func (c *customerService) Register(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.Register", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *customerService) Update(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Update", in)
 	out := new(CustomerResponse)
@@ -89,6 +118,26 @@ func (c *customerService) Delete(ctx context.Context, in *Customer, opts ...clie
 	return out, nil
 }
 
+func (c *customerService) Lock(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.Lock", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) Unlock(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.Unlock", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *customerService) Get(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Get", in)
 	out := new(CustomerResponse)
@@ -99,8 +148,48 @@ func (c *customerService) Get(ctx context.Context, in *Customer, opts ...client.
 	return out, nil
 }
 
-func (c *customerService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CustomerResponse, error) {
+func (c *customerService) Detail(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.Detail", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) List(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.List", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) Search(ctx context.Context, in *CustomerWhere, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Search", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) SetTags(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.SetTags", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) SetCards(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.SetCards", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -112,20 +201,46 @@ func (c *customerService) Search(ctx context.Context, in *BaseWhere, opts ...cli
 // Server API for CustomerService service
 
 type CustomerServiceHandler interface {
+	//手动添加用户
 	Create(context.Context, *Customer, *CustomerResponse) error
+	//客户注册
+	Register(context.Context, *Customer, *CustomerResponse) error
+	//修改客户
 	Update(context.Context, *Customer, *CustomerResponse) error
+	//删除客户
 	Delete(context.Context, *Customer, *CustomerResponse) error
+	//锁定客户
+	Lock(context.Context, *Customer, *CustomerResponse) error
+	//解锁客户
+	Unlock(context.Context, *Customer, *CustomerResponse) error
+	//获得客户
 	Get(context.Context, *Customer, *CustomerResponse) error
-	Search(context.Context, *BaseWhere, *CustomerResponse) error
+	//获得客户详情
+	Detail(context.Context, *Customer, *CustomerResponse) error
+	//根据ids获得客户
+	List(context.Context, *Customer, *CustomerResponse) error
+	//查询客户
+	Search(context.Context, *CustomerWhere, *CustomerResponse) error
+	//设置会员标签
+	SetTags(context.Context, *Customer, *CustomerResponse) error
+	//设置会员卡
+	SetCards(context.Context, *Customer, *CustomerResponse) error
 }
 
 func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler, opts ...server.HandlerOption) error {
 	type customerService interface {
 		Create(ctx context.Context, in *Customer, out *CustomerResponse) error
+		Register(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Update(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Delete(ctx context.Context, in *Customer, out *CustomerResponse) error
+		Lock(ctx context.Context, in *Customer, out *CustomerResponse) error
+		Unlock(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Get(ctx context.Context, in *Customer, out *CustomerResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *CustomerResponse) error
+		Detail(ctx context.Context, in *Customer, out *CustomerResponse) error
+		List(ctx context.Context, in *Customer, out *CustomerResponse) error
+		Search(ctx context.Context, in *CustomerWhere, out *CustomerResponse) error
+		SetTags(ctx context.Context, in *Customer, out *CustomerResponse) error
+		SetCards(ctx context.Context, in *Customer, out *CustomerResponse) error
 	}
 	type CustomerService struct {
 		customerService
@@ -142,6 +257,10 @@ func (h *customerServiceHandler) Create(ctx context.Context, in *Customer, out *
 	return h.CustomerServiceHandler.Create(ctx, in, out)
 }
 
+func (h *customerServiceHandler) Register(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.Register(ctx, in, out)
+}
+
 func (h *customerServiceHandler) Update(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Update(ctx, in, out)
 }
@@ -150,10 +269,34 @@ func (h *customerServiceHandler) Delete(ctx context.Context, in *Customer, out *
 	return h.CustomerServiceHandler.Delete(ctx, in, out)
 }
 
+func (h *customerServiceHandler) Lock(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.Lock(ctx, in, out)
+}
+
+func (h *customerServiceHandler) Unlock(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.Unlock(ctx, in, out)
+}
+
 func (h *customerServiceHandler) Get(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Get(ctx, in, out)
 }
 
-func (h *customerServiceHandler) Search(ctx context.Context, in *BaseWhere, out *CustomerResponse) error {
+func (h *customerServiceHandler) Detail(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.Detail(ctx, in, out)
+}
+
+func (h *customerServiceHandler) List(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.List(ctx, in, out)
+}
+
+func (h *customerServiceHandler) Search(ctx context.Context, in *CustomerWhere, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Search(ctx, in, out)
+}
+
+func (h *customerServiceHandler) SetTags(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.SetTags(ctx, in, out)
+}
+
+func (h *customerServiceHandler) SetCards(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.SetCards(ctx, in, out)
 }

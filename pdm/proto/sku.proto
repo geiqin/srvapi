@@ -27,7 +27,7 @@ message Sku {
     int32	buy_quota	=17;
     string	created_at	=18;
     string	updated_at	=19;
-    repeated SpecValue SpecValues =21;
+    repeated SpecValue spec_values =21;
 }
 
 message SpecItemIndex{

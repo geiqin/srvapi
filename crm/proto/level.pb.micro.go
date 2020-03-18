@@ -39,6 +39,7 @@ type LevelService interface {
 	Delete(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	Get(ctx context.Context, in *Level, opts ...client.CallOption) (*LevelResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*LevelResponse, error)
+	List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*LevelResponse, error)
 }
 
 type levelService struct {
@@ -109,6 +110,16 @@ func (c *levelService) Search(ctx context.Context, in *BaseWhere, opts ...client
 	return out, nil
 }
 
+func (c *levelService) List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*LevelResponse, error) {
+	req := c.c.NewRequest(c.name, "LevelService.List", in)
+	out := new(LevelResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for LevelService service
 
 type LevelServiceHandler interface {
@@ -117,6 +128,7 @@ type LevelServiceHandler interface {
 	Delete(context.Context, *Level, *LevelResponse) error
 	Get(context.Context, *Level, *LevelResponse) error
 	Search(context.Context, *BaseWhere, *LevelResponse) error
+	List(context.Context, *BaseWhere, *LevelResponse) error
 }
 
 func RegisterLevelServiceHandler(s server.Server, hdlr LevelServiceHandler, opts ...server.HandlerOption) error {
@@ -126,6 +138,7 @@ func RegisterLevelServiceHandler(s server.Server, hdlr LevelServiceHandler, opts
 		Delete(ctx context.Context, in *Level, out *LevelResponse) error
 		Get(ctx context.Context, in *Level, out *LevelResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *LevelResponse) error
+		List(ctx context.Context, in *BaseWhere, out *LevelResponse) error
 	}
 	type LevelService struct {
 		levelService
@@ -156,4 +169,8 @@ func (h *levelServiceHandler) Get(ctx context.Context, in *Level, out *LevelResp
 
 func (h *levelServiceHandler) Search(ctx context.Context, in *BaseWhere, out *LevelResponse) error {
 	return h.LevelServiceHandler.Search(ctx, in, out)
+}
+
+func (h *levelServiceHandler) List(ctx context.Context, in *BaseWhere, out *LevelResponse) error {
+	return h.LevelServiceHandler.List(ctx, in, out)
 }

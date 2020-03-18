@@ -11,7 +11,7 @@ service BuyingService {
 //购买清单
 message Buying {
     string solution =1;
-    int32 count =2;
+    int32 count =2;// 商品总数
     float total =3;
     float discount = 4;
     float freight = 5;
@@ -28,6 +28,7 @@ message BuyingItem {
     float price =4;
     float origin_price =5;
     float sub_total =6;
+    int64 promotion_id =7;
 }
 
 message BuyingResponse {

@@ -34,14 +34,14 @@ var _ server.Option
 // Client API for CouponTicketService service
 
 type CouponTicketService interface {
-	//发放优惠劵凭证
-	Give(ctx context.Context, in *CouponTicket, opts ...client.CallOption) (*CouponTicketResponse, error)
 	//核销优惠劵凭证
 	Use(ctx context.Context, in *CouponTicket, opts ...client.CallOption) (*CouponTicketResponse, error)
 	//获取优惠劵凭证信息
-	Get(ctx context.Context, in *CouponTicket, opts ...client.CallOption) (*CouponTicketResponse, error)
+	Get(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error)
 	//查询优惠劵凭证
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CouponTicketResponse, error)
+	Search(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error)
+	//获取优惠劵凭证列表
+	List(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error)
 }
 
 type couponTicketService struct {
@@ -62,16 +62,6 @@ func NewCouponTicketService(name string, c client.Client) CouponTicketService {
 	}
 }
 
-func (c *couponTicketService) Give(ctx context.Context, in *CouponTicket, opts ...client.CallOption) (*CouponTicketResponse, error) {
-	req := c.c.NewRequest(c.name, "CouponTicketService.Give", in)
-	out := new(CouponTicketResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *couponTicketService) Use(ctx context.Context, in *CouponTicket, opts ...client.CallOption) (*CouponTicketResponse, error) {
 	req := c.c.NewRequest(c.name, "CouponTicketService.Use", in)
 	out := new(CouponTicketResponse)
@@ -82,7 +72,7 @@ func (c *couponTicketService) Use(ctx context.Context, in *CouponTicket, opts ..
 	return out, nil
 }
 
-func (c *couponTicketService) Get(ctx context.Context, in *CouponTicket, opts ...client.CallOption) (*CouponTicketResponse, error) {
+func (c *couponTicketService) Get(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error) {
 	req := c.c.NewRequest(c.name, "CouponTicketService.Get", in)
 	out := new(CouponTicketResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -92,8 +82,18 @@ func (c *couponTicketService) Get(ctx context.Context, in *CouponTicket, opts ..
 	return out, nil
 }
 
-func (c *couponTicketService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CouponTicketResponse, error) {
+func (c *couponTicketService) Search(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error) {
 	req := c.c.NewRequest(c.name, "CouponTicketService.Search", in)
+	out := new(CouponTicketResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *couponTicketService) List(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error) {
+	req := c.c.NewRequest(c.name, "CouponTicketService.List", in)
 	out := new(CouponTicketResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -105,22 +105,22 @@ func (c *couponTicketService) Search(ctx context.Context, in *BaseWhere, opts ..
 // Server API for CouponTicketService service
 
 type CouponTicketServiceHandler interface {
-	//发放优惠劵凭证
-	Give(context.Context, *CouponTicket, *CouponTicketResponse) error
 	//核销优惠劵凭证
 	Use(context.Context, *CouponTicket, *CouponTicketResponse) error
 	//获取优惠劵凭证信息
-	Get(context.Context, *CouponTicket, *CouponTicketResponse) error
+	Get(context.Context, *CouponTicketWhere, *CouponTicketResponse) error
 	//查询优惠劵凭证
-	Search(context.Context, *BaseWhere, *CouponTicketResponse) error
+	Search(context.Context, *CouponTicketWhere, *CouponTicketResponse) error
+	//获取优惠劵凭证列表
+	List(context.Context, *CouponTicketWhere, *CouponTicketResponse) error
 }
 
 func RegisterCouponTicketServiceHandler(s server.Server, hdlr CouponTicketServiceHandler, opts ...server.HandlerOption) error {
 	type couponTicketService interface {
-		Give(ctx context.Context, in *CouponTicket, out *CouponTicketResponse) error
 		Use(ctx context.Context, in *CouponTicket, out *CouponTicketResponse) error
-		Get(ctx context.Context, in *CouponTicket, out *CouponTicketResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *CouponTicketResponse) error
+		Get(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error
+		Search(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error
+		List(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error
 	}
 	type CouponTicketService struct {
 		couponTicketService
@@ -133,18 +133,117 @@ type couponTicketServiceHandler struct {
 	CouponTicketServiceHandler
 }
 
-func (h *couponTicketServiceHandler) Give(ctx context.Context, in *CouponTicket, out *CouponTicketResponse) error {
-	return h.CouponTicketServiceHandler.Give(ctx, in, out)
-}
-
 func (h *couponTicketServiceHandler) Use(ctx context.Context, in *CouponTicket, out *CouponTicketResponse) error {
 	return h.CouponTicketServiceHandler.Use(ctx, in, out)
 }
 
-func (h *couponTicketServiceHandler) Get(ctx context.Context, in *CouponTicket, out *CouponTicketResponse) error {
+func (h *couponTicketServiceHandler) Get(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error {
 	return h.CouponTicketServiceHandler.Get(ctx, in, out)
 }
 
-func (h *couponTicketServiceHandler) Search(ctx context.Context, in *BaseWhere, out *CouponTicketResponse) error {
+func (h *couponTicketServiceHandler) Search(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error {
 	return h.CouponTicketServiceHandler.Search(ctx, in, out)
+}
+
+func (h *couponTicketServiceHandler) List(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error {
+	return h.CouponTicketServiceHandler.List(ctx, in, out)
+}
+
+// Client API for MyCouponTicketService service
+
+type MyCouponTicketService interface {
+	//查询优惠劵凭证
+	Search(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error)
+	//获取可使用的优惠劵凭证凭ID集合（如：下单选择优惠券）
+	UsableTicketIds(ctx context.Context, in *Buying, opts ...client.CallOption) (*CouponTicketResponse, error)
+	//获取可使用的优惠劵凭证列表（如：下单选择优惠券）
+	UsableList(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error)
+}
+
+type myCouponTicketService struct {
+	c    client.Client
+	name string
+}
+
+func NewMyCouponTicketService(name string, c client.Client) MyCouponTicketService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.ims.coupon"
+	}
+	return &myCouponTicketService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *myCouponTicketService) Search(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error) {
+	req := c.c.NewRequest(c.name, "MyCouponTicketService.Search", in)
+	out := new(CouponTicketResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myCouponTicketService) UsableTicketIds(ctx context.Context, in *Buying, opts ...client.CallOption) (*CouponTicketResponse, error) {
+	req := c.c.NewRequest(c.name, "MyCouponTicketService.UsableTicketIds", in)
+	out := new(CouponTicketResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myCouponTicketService) UsableList(ctx context.Context, in *CouponTicketWhere, opts ...client.CallOption) (*CouponTicketResponse, error) {
+	req := c.c.NewRequest(c.name, "MyCouponTicketService.UsableList", in)
+	out := new(CouponTicketResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for MyCouponTicketService service
+
+type MyCouponTicketServiceHandler interface {
+	//查询优惠劵凭证
+	Search(context.Context, *CouponTicketWhere, *CouponTicketResponse) error
+	//获取可使用的优惠劵凭证凭ID集合（如：下单选择优惠券）
+	UsableTicketIds(context.Context, *Buying, *CouponTicketResponse) error
+	//获取可使用的优惠劵凭证列表（如：下单选择优惠券）
+	UsableList(context.Context, *CouponTicketWhere, *CouponTicketResponse) error
+}
+
+func RegisterMyCouponTicketServiceHandler(s server.Server, hdlr MyCouponTicketServiceHandler, opts ...server.HandlerOption) error {
+	type myCouponTicketService interface {
+		Search(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error
+		UsableTicketIds(ctx context.Context, in *Buying, out *CouponTicketResponse) error
+		UsableList(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error
+	}
+	type MyCouponTicketService struct {
+		myCouponTicketService
+	}
+	h := &myCouponTicketServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&MyCouponTicketService{h}, opts...))
+}
+
+type myCouponTicketServiceHandler struct {
+	MyCouponTicketServiceHandler
+}
+
+func (h *myCouponTicketServiceHandler) Search(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error {
+	return h.MyCouponTicketServiceHandler.Search(ctx, in, out)
+}
+
+func (h *myCouponTicketServiceHandler) UsableTicketIds(ctx context.Context, in *Buying, out *CouponTicketResponse) error {
+	return h.MyCouponTicketServiceHandler.UsableTicketIds(ctx, in, out)
+}
+
+func (h *myCouponTicketServiceHandler) UsableList(ctx context.Context, in *CouponTicketWhere, out *CouponTicketResponse) error {
+	return h.MyCouponTicketServiceHandler.UsableList(ctx, in, out)
 }

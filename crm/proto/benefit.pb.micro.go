@@ -38,7 +38,9 @@ type BenefitService interface {
 	Update(ctx context.Context, in *Benefit, opts ...client.CallOption) (*BenefitResponse, error)
 	Delete(ctx context.Context, in *Benefit, opts ...client.CallOption) (*BenefitResponse, error)
 	Get(ctx context.Context, in *Benefit, opts ...client.CallOption) (*BenefitResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*BenefitResponse, error)
+	Search(ctx context.Context, in *BenefitWhere, opts ...client.CallOption) (*BenefitResponse, error)
+	List(ctx context.Context, in *BenefitWhere, opts ...client.CallOption) (*BenefitResponse, error)
+	Selected(ctx context.Context, in *Benefit, opts ...client.CallOption) (*BenefitResponse, error)
 }
 
 type benefitService struct {
@@ -99,8 +101,28 @@ func (c *benefitService) Get(ctx context.Context, in *Benefit, opts ...client.Ca
 	return out, nil
 }
 
-func (c *benefitService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*BenefitResponse, error) {
+func (c *benefitService) Search(ctx context.Context, in *BenefitWhere, opts ...client.CallOption) (*BenefitResponse, error) {
 	req := c.c.NewRequest(c.name, "BenefitService.Search", in)
+	out := new(BenefitResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *benefitService) List(ctx context.Context, in *BenefitWhere, opts ...client.CallOption) (*BenefitResponse, error) {
+	req := c.c.NewRequest(c.name, "BenefitService.List", in)
+	out := new(BenefitResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *benefitService) Selected(ctx context.Context, in *Benefit, opts ...client.CallOption) (*BenefitResponse, error) {
+	req := c.c.NewRequest(c.name, "BenefitService.Selected", in)
 	out := new(BenefitResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -116,7 +138,9 @@ type BenefitServiceHandler interface {
 	Update(context.Context, *Benefit, *BenefitResponse) error
 	Delete(context.Context, *Benefit, *BenefitResponse) error
 	Get(context.Context, *Benefit, *BenefitResponse) error
-	Search(context.Context, *BaseWhere, *BenefitResponse) error
+	Search(context.Context, *BenefitWhere, *BenefitResponse) error
+	List(context.Context, *BenefitWhere, *BenefitResponse) error
+	Selected(context.Context, *Benefit, *BenefitResponse) error
 }
 
 func RegisterBenefitServiceHandler(s server.Server, hdlr BenefitServiceHandler, opts ...server.HandlerOption) error {
@@ -125,7 +149,9 @@ func RegisterBenefitServiceHandler(s server.Server, hdlr BenefitServiceHandler, 
 		Update(ctx context.Context, in *Benefit, out *BenefitResponse) error
 		Delete(ctx context.Context, in *Benefit, out *BenefitResponse) error
 		Get(ctx context.Context, in *Benefit, out *BenefitResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *BenefitResponse) error
+		Search(ctx context.Context, in *BenefitWhere, out *BenefitResponse) error
+		List(ctx context.Context, in *BenefitWhere, out *BenefitResponse) error
+		Selected(ctx context.Context, in *Benefit, out *BenefitResponse) error
 	}
 	type BenefitService struct {
 		benefitService
@@ -154,6 +180,14 @@ func (h *benefitServiceHandler) Get(ctx context.Context, in *Benefit, out *Benef
 	return h.BenefitServiceHandler.Get(ctx, in, out)
 }
 
-func (h *benefitServiceHandler) Search(ctx context.Context, in *BaseWhere, out *BenefitResponse) error {
+func (h *benefitServiceHandler) Search(ctx context.Context, in *BenefitWhere, out *BenefitResponse) error {
 	return h.BenefitServiceHandler.Search(ctx, in, out)
+}
+
+func (h *benefitServiceHandler) List(ctx context.Context, in *BenefitWhere, out *BenefitResponse) error {
+	return h.BenefitServiceHandler.List(ctx, in, out)
+}
+
+func (h *benefitServiceHandler) Selected(ctx context.Context, in *Benefit, out *BenefitResponse) error {
+	return h.BenefitServiceHandler.Selected(ctx, in, out)
 }

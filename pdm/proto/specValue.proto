@@ -7,6 +7,7 @@ service SpecValueService {
     rpc Delete (SpecValue) returns (SpecValueResponse) {}
     rpc Get (SpecValue) returns (SpecValueResponse) {}
     rpc List (SpecValue) returns (SpecValueResponse) {}
+    rpc IsUsed (SpecValue) returns (SpecValueResponse) {}
 }
 
 message SpecValue {

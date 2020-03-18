@@ -31,15 +31,177 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
+// Client API for MyVipcardService service
+
+type MyVipcardService interface {
+	//会员卡申请
+	Apply(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
+	//会员卡续展
+	Renew(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
+	//获取会员卡
+	Get(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
+	//查询会员卡
+	Search(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error)
+	//会员是否有会员卡
+	HasCard(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error)
+	//获取有效的会员卡列表
+	ValidList(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error)
+}
+
+type myVipcardService struct {
+	c    client.Client
+	name string
+}
+
+func NewMyVipcardService(name string, c client.Client) MyVipcardService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.crm"
+	}
+	return &myVipcardService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *myVipcardService) Apply(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error) {
+	req := c.c.NewRequest(c.name, "MyVipcardService.Apply", in)
+	out := new(VipcardResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myVipcardService) Renew(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error) {
+	req := c.c.NewRequest(c.name, "MyVipcardService.Renew", in)
+	out := new(VipcardResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myVipcardService) Get(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error) {
+	req := c.c.NewRequest(c.name, "MyVipcardService.Get", in)
+	out := new(VipcardResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myVipcardService) Search(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error) {
+	req := c.c.NewRequest(c.name, "MyVipcardService.Search", in)
+	out := new(VipcardResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myVipcardService) HasCard(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error) {
+	req := c.c.NewRequest(c.name, "MyVipcardService.HasCard", in)
+	out := new(VipcardResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myVipcardService) ValidList(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error) {
+	req := c.c.NewRequest(c.name, "MyVipcardService.ValidList", in)
+	out := new(VipcardResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for MyVipcardService service
+
+type MyVipcardServiceHandler interface {
+	//会员卡申请
+	Apply(context.Context, *Vipcard, *VipcardResponse) error
+	//会员卡续展
+	Renew(context.Context, *Vipcard, *VipcardResponse) error
+	//获取会员卡
+	Get(context.Context, *Vipcard, *VipcardResponse) error
+	//查询会员卡
+	Search(context.Context, *VipcardWhere, *VipcardResponse) error
+	//会员是否有会员卡
+	HasCard(context.Context, *VipcardWhere, *VipcardResponse) error
+	//获取有效的会员卡列表
+	ValidList(context.Context, *VipcardWhere, *VipcardResponse) error
+}
+
+func RegisterMyVipcardServiceHandler(s server.Server, hdlr MyVipcardServiceHandler, opts ...server.HandlerOption) error {
+	type myVipcardService interface {
+		Apply(ctx context.Context, in *Vipcard, out *VipcardResponse) error
+		Renew(ctx context.Context, in *Vipcard, out *VipcardResponse) error
+		Get(ctx context.Context, in *Vipcard, out *VipcardResponse) error
+		Search(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error
+		HasCard(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error
+		ValidList(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error
+	}
+	type MyVipcardService struct {
+		myVipcardService
+	}
+	h := &myVipcardServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&MyVipcardService{h}, opts...))
+}
+
+type myVipcardServiceHandler struct {
+	MyVipcardServiceHandler
+}
+
+func (h *myVipcardServiceHandler) Apply(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
+	return h.MyVipcardServiceHandler.Apply(ctx, in, out)
+}
+
+func (h *myVipcardServiceHandler) Renew(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
+	return h.MyVipcardServiceHandler.Renew(ctx, in, out)
+}
+
+func (h *myVipcardServiceHandler) Get(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
+	return h.MyVipcardServiceHandler.Get(ctx, in, out)
+}
+
+func (h *myVipcardServiceHandler) Search(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error {
+	return h.MyVipcardServiceHandler.Search(ctx, in, out)
+}
+
+func (h *myVipcardServiceHandler) HasCard(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error {
+	return h.MyVipcardServiceHandler.HasCard(ctx, in, out)
+}
+
+func (h *myVipcardServiceHandler) ValidList(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error {
+	return h.MyVipcardServiceHandler.ValidList(ctx, in, out)
+}
+
 // Client API for VipcardService service
 
 type VipcardService interface {
-	Apply(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
+	//后台颁发会员卡
+	Create(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
+	//后台会员卡续展
 	Renew(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
+	//删除会员卡
 	Delete(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
+	//获取会员卡
 	Get(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
-	List(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*VipcardResponse, error)
+	//会员卡列表
+	List(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
+	//查询会员卡
+	Search(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error)
 }
 
 type vipcardService struct {
@@ -60,8 +222,8 @@ func NewVipcardService(name string, c client.Client) VipcardService {
 	}
 }
 
-func (c *vipcardService) Apply(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error) {
-	req := c.c.NewRequest(c.name, "VipcardService.Apply", in)
+func (c *vipcardService) Create(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error) {
+	req := c.c.NewRequest(c.name, "VipcardService.Create", in)
 	out := new(VipcardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -100,7 +262,7 @@ func (c *vipcardService) Get(ctx context.Context, in *Vipcard, opts ...client.Ca
 	return out, nil
 }
 
-func (c *vipcardService) List(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error) {
+func (c *vipcardService) List(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error) {
 	req := c.c.NewRequest(c.name, "VipcardService.List", in)
 	out := new(VipcardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -110,7 +272,7 @@ func (c *vipcardService) List(ctx context.Context, in *VipcardWhere, opts ...cli
 	return out, nil
 }
 
-func (c *vipcardService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*VipcardResponse, error) {
+func (c *vipcardService) Search(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error) {
 	req := c.c.NewRequest(c.name, "VipcardService.Search", in)
 	out := new(VipcardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -123,22 +285,28 @@ func (c *vipcardService) Search(ctx context.Context, in *BaseWhere, opts ...clie
 // Server API for VipcardService service
 
 type VipcardServiceHandler interface {
-	Apply(context.Context, *Vipcard, *VipcardResponse) error
+	//后台颁发会员卡
+	Create(context.Context, *Vipcard, *VipcardResponse) error
+	//后台会员卡续展
 	Renew(context.Context, *Vipcard, *VipcardResponse) error
+	//删除会员卡
 	Delete(context.Context, *Vipcard, *VipcardResponse) error
+	//获取会员卡
 	Get(context.Context, *Vipcard, *VipcardResponse) error
-	List(context.Context, *VipcardWhere, *VipcardResponse) error
-	Search(context.Context, *BaseWhere, *VipcardResponse) error
+	//会员卡列表
+	List(context.Context, *Vipcard, *VipcardResponse) error
+	//查询会员卡
+	Search(context.Context, *VipcardWhere, *VipcardResponse) error
 }
 
 func RegisterVipcardServiceHandler(s server.Server, hdlr VipcardServiceHandler, opts ...server.HandlerOption) error {
 	type vipcardService interface {
-		Apply(ctx context.Context, in *Vipcard, out *VipcardResponse) error
+		Create(ctx context.Context, in *Vipcard, out *VipcardResponse) error
 		Renew(ctx context.Context, in *Vipcard, out *VipcardResponse) error
 		Delete(ctx context.Context, in *Vipcard, out *VipcardResponse) error
 		Get(ctx context.Context, in *Vipcard, out *VipcardResponse) error
-		List(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *VipcardResponse) error
+		List(ctx context.Context, in *Vipcard, out *VipcardResponse) error
+		Search(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error
 	}
 	type VipcardService struct {
 		vipcardService
@@ -151,8 +319,8 @@ type vipcardServiceHandler struct {
 	VipcardServiceHandler
 }
 
-func (h *vipcardServiceHandler) Apply(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
-	return h.VipcardServiceHandler.Apply(ctx, in, out)
+func (h *vipcardServiceHandler) Create(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
+	return h.VipcardServiceHandler.Create(ctx, in, out)
 }
 
 func (h *vipcardServiceHandler) Renew(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
@@ -167,10 +335,10 @@ func (h *vipcardServiceHandler) Get(ctx context.Context, in *Vipcard, out *Vipca
 	return h.VipcardServiceHandler.Get(ctx, in, out)
 }
 
-func (h *vipcardServiceHandler) List(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error {
+func (h *vipcardServiceHandler) List(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
 	return h.VipcardServiceHandler.List(ctx, in, out)
 }
 
-func (h *vipcardServiceHandler) Search(ctx context.Context, in *BaseWhere, out *VipcardResponse) error {
+func (h *vipcardServiceHandler) Search(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error {
 	return h.VipcardServiceHandler.Search(ctx, in, out)
 }

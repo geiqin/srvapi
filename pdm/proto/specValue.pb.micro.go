@@ -38,6 +38,7 @@ type SpecValueService interface {
 	Delete(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error)
 	Get(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error)
 	List(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error)
+	IsUsed(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error)
 }
 
 type specValueService struct {
@@ -98,6 +99,16 @@ func (c *specValueService) List(ctx context.Context, in *SpecValue, opts ...clie
 	return out, nil
 }
 
+func (c *specValueService) IsUsed(ctx context.Context, in *SpecValue, opts ...client.CallOption) (*SpecValueResponse, error) {
+	req := c.c.NewRequest(c.name, "SpecValueService.IsUsed", in)
+	out := new(SpecValueResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for SpecValueService service
 
 type SpecValueServiceHandler interface {
@@ -105,6 +116,7 @@ type SpecValueServiceHandler interface {
 	Delete(context.Context, *SpecValue, *SpecValueResponse) error
 	Get(context.Context, *SpecValue, *SpecValueResponse) error
 	List(context.Context, *SpecValue, *SpecValueResponse) error
+	IsUsed(context.Context, *SpecValue, *SpecValueResponse) error
 }
 
 func RegisterSpecValueServiceHandler(s server.Server, hdlr SpecValueServiceHandler, opts ...server.HandlerOption) error {
@@ -113,6 +125,7 @@ func RegisterSpecValueServiceHandler(s server.Server, hdlr SpecValueServiceHandl
 		Delete(ctx context.Context, in *SpecValue, out *SpecValueResponse) error
 		Get(ctx context.Context, in *SpecValue, out *SpecValueResponse) error
 		List(ctx context.Context, in *SpecValue, out *SpecValueResponse) error
+		IsUsed(ctx context.Context, in *SpecValue, out *SpecValueResponse) error
 	}
 	type SpecValueService struct {
 		specValueService
@@ -139,4 +152,8 @@ func (h *specValueServiceHandler) Get(ctx context.Context, in *SpecValue, out *S
 
 func (h *specValueServiceHandler) List(ctx context.Context, in *SpecValue, out *SpecValueResponse) error {
 	return h.SpecValueServiceHandler.List(ctx, in, out)
+}
+
+func (h *specValueServiceHandler) IsUsed(ctx context.Context, in *SpecValue, out *SpecValueResponse) error {
+	return h.SpecValueServiceHandler.IsUsed(ctx, in, out)
 }

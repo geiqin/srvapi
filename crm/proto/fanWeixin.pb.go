@@ -21,20 +21,20 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type FanWeixin struct {
-	Id                   int64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	AppId                string    `protobuf:"bytes,2,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
-	OpenId               string    `protobuf:"bytes,3,opt,name=open_id,json=openId,proto3" json:"open_id,omitempty"`
-	UnionId              string    `protobuf:"bytes,4,opt,name=union_id,json=unionId,proto3" json:"union_id,omitempty"`
-	Nick                 string    `protobuf:"bytes,5,opt,name=nick,proto3" json:"nick,omitempty"`
-	Avatar               string    `protobuf:"bytes,6,opt,name=avatar,proto3" json:"avatar,omitempty"`
-	Sex                  string    `protobuf:"bytes,7,opt,name=sex,proto3" json:"sex,omitempty"`
-	Province             string    `protobuf:"bytes,8,opt,name=province,proto3" json:"province,omitempty"`
-	City                 string    `protobuf:"bytes,9,opt,name=city,proto3" json:"city,omitempty"`
-	Country              string    `protobuf:"bytes,10,opt,name=country,proto3" json:"country,omitempty"`
-	Followed             bool      `protobuf:"varint,11,opt,name=followed,proto3" json:"followed,omitempty"`
-	FollowedAt           string    `protobuf:"bytes,12,opt,name=followed_at,json=followedAt,proto3" json:"followed_at,omitempty"`
-	CustomerId           int64     `protobuf:"varint,13,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	RelatedAt            string    `protobuf:"bytes,14,opt,name=related_at,json=relatedAt,proto3" json:"related_at,omitempty"`
+	Id                   int64     `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	AppId                string    `protobuf:"bytes,2,opt,name=app_id,json=appId,proto3" json:"app_id"`
+	OpenId               string    `protobuf:"bytes,3,opt,name=open_id,json=openId,proto3" json:"open_id"`
+	UnionId              string    `protobuf:"bytes,4,opt,name=union_id,json=unionId,proto3" json:"union_id"`
+	Nick                 string    `protobuf:"bytes,5,opt,name=nick,proto3" json:"nick"`
+	Avatar               string    `protobuf:"bytes,6,opt,name=avatar,proto3" json:"avatar"`
+	Sex                  string    `protobuf:"bytes,7,opt,name=sex,proto3" json:"sex"`
+	Province             string    `protobuf:"bytes,8,opt,name=province,proto3" json:"province"`
+	City                 string    `protobuf:"bytes,9,opt,name=city,proto3" json:"city"`
+	Country              string    `protobuf:"bytes,10,opt,name=country,proto3" json:"country"`
+	Followed             bool      `protobuf:"varint,11,opt,name=followed,proto3" json:"followed"`
+	FollowedAt           string    `protobuf:"bytes,12,opt,name=followed_at,json=followedAt,proto3" json:"followed_at"`
+	CustomerId           int64     `protobuf:"varint,13,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	RelatedAt            string    `protobuf:"bytes,14,opt,name=related_at,json=relatedAt,proto3" json:"related_at"`
 	CreatedAt            string    `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string    `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Customer             *Customer `protobuf:"bytes,17,opt,name=customer,proto3" json:"customer,omitempty"`
