@@ -38,6 +38,8 @@ type MyItemService interface {
 	Search(ctx context.Context, in *ItemWhere, opts ...client.CallOption) (*ItemDisplayResponse, error)
 	// 获取商品信息
 	Get(ctx context.Context, in *ItemWhere, opts ...client.CallOption) (*ItemDisplayResponse, error)
+	// 增加商品销量
+	AddSoldNum(ctx context.Context, in *ItemDisplayWhere, opts ...client.CallOption) (*ItemDisplayResponse, error)
 }
 
 type myItemService struct {
@@ -78,6 +80,16 @@ func (c *myItemService) Get(ctx context.Context, in *ItemWhere, opts ...client.C
 	return out, nil
 }
 
+func (c *myItemService) AddSoldNum(ctx context.Context, in *ItemDisplayWhere, opts ...client.CallOption) (*ItemDisplayResponse, error) {
+	req := c.c.NewRequest(c.name, "MyItemService.AddSoldNum", in)
+	out := new(ItemDisplayResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for MyItemService service
 
 type MyItemServiceHandler interface {
@@ -85,12 +97,15 @@ type MyItemServiceHandler interface {
 	Search(context.Context, *ItemWhere, *ItemDisplayResponse) error
 	// 获取商品信息
 	Get(context.Context, *ItemWhere, *ItemDisplayResponse) error
+	// 增加商品销量
+	AddSoldNum(context.Context, *ItemDisplayWhere, *ItemDisplayResponse) error
 }
 
 func RegisterMyItemServiceHandler(s server.Server, hdlr MyItemServiceHandler, opts ...server.HandlerOption) error {
 	type myItemService interface {
 		Search(ctx context.Context, in *ItemWhere, out *ItemDisplayResponse) error
 		Get(ctx context.Context, in *ItemWhere, out *ItemDisplayResponse) error
+		AddSoldNum(ctx context.Context, in *ItemDisplayWhere, out *ItemDisplayResponse) error
 	}
 	type MyItemService struct {
 		myItemService
@@ -109,4 +124,8 @@ func (h *myItemServiceHandler) Search(ctx context.Context, in *ItemWhere, out *I
 
 func (h *myItemServiceHandler) Get(ctx context.Context, in *ItemWhere, out *ItemDisplayResponse) error {
 	return h.MyItemServiceHandler.Get(ctx, in, out)
+}
+
+func (h *myItemServiceHandler) AddSoldNum(ctx context.Context, in *ItemDisplayWhere, out *ItemDisplayResponse) error {
+	return h.MyItemServiceHandler.AddSoldNum(ctx, in, out)
 }

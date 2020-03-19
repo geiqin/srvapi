@@ -14,6 +14,8 @@ service MyItemService {
     rpc Search (ItemWhere) returns (ItemDisplayResponse) {}
     // 获取商品信息
     rpc Get (ItemWhere) returns (ItemDisplayResponse) {}
+    // 增加商品销量
+    rpc AddSoldNum (ItemDisplayWhere) returns (ItemDisplayResponse) {}
 }
 
 message ItemDisplay {
@@ -53,6 +55,13 @@ message ItemDisplay {
     float member_price = 34; // 会员价
     bool is_distribution = 35; // 是否参与分销
     string distribution_share_icon = 36; // 分销图标
+}
+
+message ItemDisplayWhere {
+    int64 id = 1;
+    repeated int64 ids = 2;
+    int32 sold_num = 3;
+    int64 sku_id = 4;
 }
 
 message ItemDisplayResponse {

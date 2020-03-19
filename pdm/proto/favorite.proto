@@ -1,14 +1,17 @@
 syntax = "proto3";
 import "common.proto";
-//import "proto/item.proto";
+import "itemDisplay.proto";
 package geiqin.srv.pdm;
 
 service FavoriteService {
+    rpc Search (FavoriteWhere) returns (FavoriteResponse) {}
+}
+
+service MyFavoriteService {
     rpc Create (Favorite) returns (FavoriteResponse) {}
-    rpc Delete (Favorite) returns (FavoriteResponse) {}
-    rpc Get (Favorite) returns (FavoriteResponse) {}
+    rpc Delete (FavoriteWhere) returns (FavoriteResponse) {}
     rpc Check (Favorite) returns (FavoriteResponse) {}
-    rpc Search (BaseWhere) returns (FavoriteResponse) {}
+    rpc Search (FavoriteWhere) returns (FavoriteResponse) {}
 }
 
 message Favorite {
@@ -17,7 +20,17 @@ message Favorite {
     int64	item_id	=3;
     string	created_at	=4;
     string	updated_at	=5;
-    //Item item =6;
+    ItemDisplay item =6;
+}
+
+message FavoriteWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    int64 id = 4;
+    repeated int64 ids = 5;
+    int64 customer_id = 6;
+    int64 item_id	= 7;
 }
 
 message FavoriteResponse {
