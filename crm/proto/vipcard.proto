@@ -41,7 +41,7 @@ message Vipcard {
     int32 card_id =2;
     int64 customer_id =3;
     string number =4;
-    string issuer =5;
+    int64 user_id =5;
     string open_date =6;
     string validate_date =7;
     string created_at =8;

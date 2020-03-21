@@ -46,8 +46,8 @@ type CardService interface {
 	Enabled(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
 	//获得卡
 	Get(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
-	//查询卡列表
-	List(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
+	//查询卡列表(未删除的权益卡列表)
+	List(ctx context.Context, in *CardWhere, opts ...client.CallOption) (*CardResponse, error)
 	//有效卡列表
 	ValidList(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error)
 	//查询卡列表
@@ -132,7 +132,7 @@ func (c *cardService) Get(ctx context.Context, in *Card, opts ...client.CallOpti
 	return out, nil
 }
 
-func (c *cardService) List(ctx context.Context, in *Card, opts ...client.CallOption) (*CardResponse, error) {
+func (c *cardService) List(ctx context.Context, in *CardWhere, opts ...client.CallOption) (*CardResponse, error) {
 	req := c.c.NewRequest(c.name, "CardService.List", in)
 	out := new(CardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -177,8 +177,8 @@ type CardServiceHandler interface {
 	Enabled(context.Context, *Card, *CardResponse) error
 	//获得卡
 	Get(context.Context, *Card, *CardResponse) error
-	//查询卡列表
-	List(context.Context, *Card, *CardResponse) error
+	//查询卡列表(未删除的权益卡列表)
+	List(context.Context, *CardWhere, *CardResponse) error
 	//有效卡列表
 	ValidList(context.Context, *Card, *CardResponse) error
 	//查询卡列表
@@ -193,7 +193,7 @@ func RegisterCardServiceHandler(s server.Server, hdlr CardServiceHandler, opts .
 		Disabled(ctx context.Context, in *Card, out *CardResponse) error
 		Enabled(ctx context.Context, in *Card, out *CardResponse) error
 		Get(ctx context.Context, in *Card, out *CardResponse) error
-		List(ctx context.Context, in *Card, out *CardResponse) error
+		List(ctx context.Context, in *CardWhere, out *CardResponse) error
 		ValidList(ctx context.Context, in *Card, out *CardResponse) error
 		Search(ctx context.Context, in *CardWhere, out *CardResponse) error
 	}
@@ -232,7 +232,7 @@ func (h *cardServiceHandler) Get(ctx context.Context, in *Card, out *CardRespons
 	return h.CardServiceHandler.Get(ctx, in, out)
 }
 
-func (h *cardServiceHandler) List(ctx context.Context, in *Card, out *CardResponse) error {
+func (h *cardServiceHandler) List(ctx context.Context, in *CardWhere, out *CardResponse) error {
 	return h.CardServiceHandler.List(ctx, in, out)
 }
 

@@ -6,6 +6,7 @@ package geiqin.srv.crm;
 service AuthService {
     //客户登录
     rpc Login (AuthRequest) returns (TokenResponse) {}
+
     //修改密码
     rpc UpdatePwd (AuthRequest) returns (TokenResponse) {}
     //获得当前客户

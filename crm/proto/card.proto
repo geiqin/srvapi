@@ -16,8 +16,8 @@ service CardService {
     rpc Enabled (Card) returns (CardResponse) {}
     //获得卡
     rpc Get (Card) returns (CardResponse) {}
-    //查询卡列表
-    rpc List (Card) returns (CardResponse) {}
+    //查询卡列表(未删除的权益卡列表)
+    rpc List (CardWhere) returns (CardResponse) {}
     //有效卡列表
     rpc ValidList (Card) returns (CardResponse) {}
     //查询卡列表
@@ -57,6 +57,7 @@ message CardWhere {
     //以下为自定义参数
     string name = 3;
     int32 status = 4; //状态 1使用中   2 已禁用  3已过期
+    int32 method =5;  //领取方式：1 直接领取   2 付费购买
 }
 
 

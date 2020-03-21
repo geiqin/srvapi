@@ -1,0 +1,63 @@
+syntax = "proto3";
+import "common.proto";
+import "customer.proto";
+
+package geiqin.srv.crm;
+
+service FanService {
+    //粉丝登录
+    rpc Login (Fan) returns (TokenResponse) {}
+    rpc Create (Fan) returns (FanResponse) {}
+    rpc Update (Fan) returns (FanResponse) {}
+    rpc Delete (Fan) returns (FanResponse) {}
+    rpc Get (Fan) returns (FanResponse) {}
+    rpc Search (FanWhere) returns (FanResponse) {}
+}
+
+message Fan {
+    int64 id = 1;
+    string source = 2;
+    string open_id = 3;
+    string union_id = 4;
+    string nick_name = 5;
+    string avatar_url = 6;
+    int32 gender = 7;
+    string province = 8;
+    string city = 9;
+    string country = 10;
+    bool followed = 11;
+    string followed_at = 12;
+    int64 customer_id = 13;
+    string remark = 14;
+    string mobile = 15;
+    string email = 16;
+    string created_at = 17;
+    string updated_at = 18;
+    Customer customer = 19;
+    repeated int64 ids = 20;
+}
+
+
+//粉丝查询参数
+message FanWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    //以下为自定义参数
+    string name = 4;
+    int32 gender =5;
+    string mobile =6;
+    string source =7;
+    string status =13;
+    string keywords =14;
+}
+
+
+//
+message FanResponse {
+    Fan entity = 1;
+    Pager pager =2;
+    repeated Fan items = 3;
+    Error error = 4;
+    Info info =5;
+}

@@ -90,6 +90,7 @@ message CustomerWhere {
     int64 area_id =12;
     string status =13;
     string keywords =14;
+
 }
 
 //
