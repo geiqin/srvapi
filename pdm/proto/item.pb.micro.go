@@ -54,6 +54,8 @@ type ItemService interface {
 	Destroy(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	//商品基本信息
 	Get(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
+	//商品基本信息列表(SRV专用)
+	GoodsList(ctx context.Context, in *GoodsWhere, opts ...client.CallOption) (*ItemResponse, error)
 	//商品详细信息（后台专用）
 	Detail(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 	//商品显示详情（前端专用）
@@ -186,6 +188,16 @@ func (c *itemService) Get(ctx context.Context, in *Item, opts ...client.CallOpti
 	return out, nil
 }
 
+func (c *itemService) GoodsList(ctx context.Context, in *GoodsWhere, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ItemService.GoodsList", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *itemService) Detail(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemService.Detail", in)
 	out := new(ItemResponse)
@@ -269,6 +281,8 @@ type ItemServiceHandler interface {
 	Destroy(context.Context, *Item, *ItemResponse) error
 	//商品基本信息
 	Get(context.Context, *Item, *ItemResponse) error
+	//商品基本信息列表(SRV专用)
+	GoodsList(context.Context, *GoodsWhere, *ItemResponse) error
 	//商品详细信息（后台专用）
 	Detail(context.Context, *Item, *ItemResponse) error
 	//商品显示详情（前端专用）
@@ -295,6 +309,7 @@ func RegisterItemServiceHandler(s server.Server, hdlr ItemServiceHandler, opts .
 		Recovery(ctx context.Context, in *Item, out *ItemResponse) error
 		Destroy(ctx context.Context, in *Item, out *ItemResponse) error
 		Get(ctx context.Context, in *Item, out *ItemResponse) error
+		GoodsList(ctx context.Context, in *GoodsWhere, out *ItemResponse) error
 		Detail(ctx context.Context, in *Item, out *ItemResponse) error
 		Display(ctx context.Context, in *Item, out *ItemResponse) error
 		SkuDetail(ctx context.Context, in *Item, out *ItemResponse) error
@@ -351,6 +366,10 @@ func (h *itemServiceHandler) Destroy(ctx context.Context, in *Item, out *ItemRes
 
 func (h *itemServiceHandler) Get(ctx context.Context, in *Item, out *ItemResponse) error {
 	return h.ItemServiceHandler.Get(ctx, in, out)
+}
+
+func (h *itemServiceHandler) GoodsList(ctx context.Context, in *GoodsWhere, out *ItemResponse) error {
+	return h.ItemServiceHandler.GoodsList(ctx, in, out)
 }
 
 func (h *itemServiceHandler) Detail(ctx context.Context, in *Item, out *ItemResponse) error {

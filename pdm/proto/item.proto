@@ -32,6 +32,8 @@ service ItemService {
     rpc Destroy (Item) returns (ItemResponse) {}
     //商品基本信息
     rpc Get (Item) returns (ItemResponse) {}
+    //商品基本信息列表(SRV专用)
+    rpc GoodsList (GoodsWhere) returns (ItemResponse) {}
     //商品详细信息（后台专用）
     rpc Detail (Item) returns (ItemResponse) {}
     //商品显示详情（前端专用）
@@ -105,6 +107,11 @@ message Item {
     repeated  Spec specs  =55; //(详情显示专用)
     Sku skuitem =56; //单一规格商品（在购物车，营销活动等场景用到）
     int64 sku_id =57; //单一规格商品输入参数（在获取规格商品时使用）
+}
+
+message GoodsWhere {
+    repeated int64 item_ids = 1;
+    repeated int64 sku_ids = 2;
 }
 
 message ItemWhere {

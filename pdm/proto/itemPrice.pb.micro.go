@@ -34,8 +34,9 @@ var _ server.Option
 // Client API for ItemPriceService service
 
 type ItemPriceService interface {
-	Set(ctx context.Context, in *ItemCustomPrice, opts ...client.CallOption) (*ItemCustomPriceResponse, error)
-	Get(ctx context.Context, in *ItemCustomPrice, opts ...client.CallOption) (*ItemCustomPriceResponse, error)
+	Set(ctx context.Context, in *PriceScheme, opts ...client.CallOption) (*PriceSchemeResponse, error)
+	Get(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*ItemPriceResponse, error)
+	Scheme(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*PriceSchemeResponse, error)
 }
 
 type itemPriceService struct {
@@ -56,9 +57,9 @@ func NewItemPriceService(name string, c client.Client) ItemPriceService {
 	}
 }
 
-func (c *itemPriceService) Set(ctx context.Context, in *ItemCustomPrice, opts ...client.CallOption) (*ItemCustomPriceResponse, error) {
+func (c *itemPriceService) Set(ctx context.Context, in *PriceScheme, opts ...client.CallOption) (*PriceSchemeResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemPriceService.Set", in)
-	out := new(ItemCustomPriceResponse)
+	out := new(PriceSchemeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,9 +67,19 @@ func (c *itemPriceService) Set(ctx context.Context, in *ItemCustomPrice, opts ..
 	return out, nil
 }
 
-func (c *itemPriceService) Get(ctx context.Context, in *ItemCustomPrice, opts ...client.CallOption) (*ItemCustomPriceResponse, error) {
+func (c *itemPriceService) Get(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*ItemPriceResponse, error) {
 	req := c.c.NewRequest(c.name, "ItemPriceService.Get", in)
-	out := new(ItemCustomPriceResponse)
+	out := new(ItemPriceResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *itemPriceService) Scheme(ctx context.Context, in *ItemPrice, opts ...client.CallOption) (*PriceSchemeResponse, error) {
+	req := c.c.NewRequest(c.name, "ItemPriceService.Scheme", in)
+	out := new(PriceSchemeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -79,14 +90,16 @@ func (c *itemPriceService) Get(ctx context.Context, in *ItemCustomPrice, opts ..
 // Server API for ItemPriceService service
 
 type ItemPriceServiceHandler interface {
-	Set(context.Context, *ItemCustomPrice, *ItemCustomPriceResponse) error
-	Get(context.Context, *ItemCustomPrice, *ItemCustomPriceResponse) error
+	Set(context.Context, *PriceScheme, *PriceSchemeResponse) error
+	Get(context.Context, *ItemPrice, *ItemPriceResponse) error
+	Scheme(context.Context, *ItemPrice, *PriceSchemeResponse) error
 }
 
 func RegisterItemPriceServiceHandler(s server.Server, hdlr ItemPriceServiceHandler, opts ...server.HandlerOption) error {
 	type itemPriceService interface {
-		Set(ctx context.Context, in *ItemCustomPrice, out *ItemCustomPriceResponse) error
-		Get(ctx context.Context, in *ItemCustomPrice, out *ItemCustomPriceResponse) error
+		Set(ctx context.Context, in *PriceScheme, out *PriceSchemeResponse) error
+		Get(ctx context.Context, in *ItemPrice, out *ItemPriceResponse) error
+		Scheme(ctx context.Context, in *ItemPrice, out *PriceSchemeResponse) error
 	}
 	type ItemPriceService struct {
 		itemPriceService
@@ -99,10 +112,14 @@ type itemPriceServiceHandler struct {
 	ItemPriceServiceHandler
 }
 
-func (h *itemPriceServiceHandler) Set(ctx context.Context, in *ItemCustomPrice, out *ItemCustomPriceResponse) error {
+func (h *itemPriceServiceHandler) Set(ctx context.Context, in *PriceScheme, out *PriceSchemeResponse) error {
 	return h.ItemPriceServiceHandler.Set(ctx, in, out)
 }
 
-func (h *itemPriceServiceHandler) Get(ctx context.Context, in *ItemCustomPrice, out *ItemCustomPriceResponse) error {
+func (h *itemPriceServiceHandler) Get(ctx context.Context, in *ItemPrice, out *ItemPriceResponse) error {
 	return h.ItemPriceServiceHandler.Get(ctx, in, out)
+}
+
+func (h *itemPriceServiceHandler) Scheme(ctx context.Context, in *ItemPrice, out *PriceSchemeResponse) error {
+	return h.ItemPriceServiceHandler.Scheme(ctx, in, out)
 }
