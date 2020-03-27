@@ -35,9 +35,9 @@ var _ server.Option
 
 type MyOrderService interface {
 	//确认订单
-	Confirm(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	Confirm(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*BuyingResponse, error)
 	//提交订单
-	Submit(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
+	Submit(ctx context.Context, in *Buying, opts ...client.CallOption) (*OrderResponse, error)
 	//删除订单
 	Delete(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//撤销订单
@@ -47,7 +47,7 @@ type MyOrderService interface {
 	//获取订单信息
 	Get(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//查询订单
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*OrderResponse, error)
+	Search(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
 }
 
 type myOrderService struct {
@@ -68,9 +68,9 @@ func NewMyOrderService(name string, c client.Client) MyOrderService {
 	}
 }
 
-func (c *myOrderService) Confirm(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+func (c *myOrderService) Confirm(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*BuyingResponse, error) {
 	req := c.c.NewRequest(c.name, "MyOrderService.Confirm", in)
-	out := new(OrderResponse)
+	out := new(BuyingResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -78,7 +78,7 @@ func (c *myOrderService) Confirm(ctx context.Context, in *OrderRequest, opts ...
 	return out, nil
 }
 
-func (c *myOrderService) Submit(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
+func (c *myOrderService) Submit(ctx context.Context, in *Buying, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "MyOrderService.Submit", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -128,7 +128,7 @@ func (c *myOrderService) Get(ctx context.Context, in *Order, opts ...client.Call
 	return out, nil
 }
 
-func (c *myOrderService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*OrderResponse, error) {
+func (c *myOrderService) Search(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "MyOrderService.Search", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -142,9 +142,9 @@ func (c *myOrderService) Search(ctx context.Context, in *BaseWhere, opts ...clie
 
 type MyOrderServiceHandler interface {
 	//确认订单
-	Confirm(context.Context, *OrderRequest, *OrderResponse) error
+	Confirm(context.Context, *BuyingRequest, *BuyingResponse) error
 	//提交订单
-	Submit(context.Context, *Order, *OrderResponse) error
+	Submit(context.Context, *Buying, *OrderResponse) error
 	//删除订单
 	Delete(context.Context, *Order, *OrderResponse) error
 	//撤销订单
@@ -154,18 +154,18 @@ type MyOrderServiceHandler interface {
 	//获取订单信息
 	Get(context.Context, *Order, *OrderResponse) error
 	//查询订单
-	Search(context.Context, *BaseWhere, *OrderResponse) error
+	Search(context.Context, *OrderWhere, *OrderResponse) error
 }
 
 func RegisterMyOrderServiceHandler(s server.Server, hdlr MyOrderServiceHandler, opts ...server.HandlerOption) error {
 	type myOrderService interface {
-		Confirm(ctx context.Context, in *OrderRequest, out *OrderResponse) error
-		Submit(ctx context.Context, in *Order, out *OrderResponse) error
+		Confirm(ctx context.Context, in *BuyingRequest, out *BuyingResponse) error
+		Submit(ctx context.Context, in *Buying, out *OrderResponse) error
 		Delete(ctx context.Context, in *Order, out *OrderResponse) error
 		Cancel(ctx context.Context, in *Order, out *OrderResponse) error
 		Receipt(ctx context.Context, in *Order, out *OrderResponse) error
 		Get(ctx context.Context, in *Order, out *OrderResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *OrderResponse) error
+		Search(ctx context.Context, in *OrderWhere, out *OrderResponse) error
 	}
 	type MyOrderService struct {
 		myOrderService
@@ -178,11 +178,11 @@ type myOrderServiceHandler struct {
 	MyOrderServiceHandler
 }
 
-func (h *myOrderServiceHandler) Confirm(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+func (h *myOrderServiceHandler) Confirm(ctx context.Context, in *BuyingRequest, out *BuyingResponse) error {
 	return h.MyOrderServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *myOrderServiceHandler) Submit(ctx context.Context, in *Order, out *OrderResponse) error {
+func (h *myOrderServiceHandler) Submit(ctx context.Context, in *Buying, out *OrderResponse) error {
 	return h.MyOrderServiceHandler.Submit(ctx, in, out)
 }
 
@@ -202,7 +202,7 @@ func (h *myOrderServiceHandler) Get(ctx context.Context, in *Order, out *OrderRe
 	return h.MyOrderServiceHandler.Get(ctx, in, out)
 }
 
-func (h *myOrderServiceHandler) Search(ctx context.Context, in *BaseWhere, out *OrderResponse) error {
+func (h *myOrderServiceHandler) Search(ctx context.Context, in *OrderWhere, out *OrderResponse) error {
 	return h.MyOrderServiceHandler.Search(ctx, in, out)
 }
 
@@ -210,19 +210,19 @@ func (h *myOrderServiceHandler) Search(ctx context.Context, in *BaseWhere, out *
 
 type OrderService interface {
 	//创建订单（管理员后台下单）
-	Create(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error)
+	Create(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*BuyingResponse, error)
 	//审核订单
 	Check(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//修改价格
 	ModifyPrice(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//修改地址
-	ModifyAddr(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
+	ModifyAddress(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//删除订单
 	Delete(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//获取订单信息
 	Get(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//查询订单
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*OrderResponse, error)
+	Search(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
 }
 
 type orderService struct {
@@ -243,9 +243,9 @@ func NewOrderService(name string, c client.Client) OrderService {
 	}
 }
 
-func (c *orderService) Create(ctx context.Context, in *OrderRequest, opts ...client.CallOption) (*OrderResponse, error) {
+func (c *orderService) Create(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*BuyingResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.Create", in)
-	out := new(OrderResponse)
+	out := new(BuyingResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -273,8 +273,8 @@ func (c *orderService) ModifyPrice(ctx context.Context, in *Order, opts ...clien
 	return out, nil
 }
 
-func (c *orderService) ModifyAddr(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
-	req := c.c.NewRequest(c.name, "OrderService.ModifyAddr", in)
+func (c *orderService) ModifyAddress(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.ModifyAddress", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -303,7 +303,7 @@ func (c *orderService) Get(ctx context.Context, in *Order, opts ...client.CallOp
 	return out, nil
 }
 
-func (c *orderService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*OrderResponse, error) {
+func (c *orderService) Search(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.Search", in)
 	out := new(OrderResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -317,30 +317,30 @@ func (c *orderService) Search(ctx context.Context, in *BaseWhere, opts ...client
 
 type OrderServiceHandler interface {
 	//创建订单（管理员后台下单）
-	Create(context.Context, *OrderRequest, *OrderResponse) error
+	Create(context.Context, *BuyingRequest, *BuyingResponse) error
 	//审核订单
 	Check(context.Context, *Order, *OrderResponse) error
 	//修改价格
 	ModifyPrice(context.Context, *Order, *OrderResponse) error
 	//修改地址
-	ModifyAddr(context.Context, *Order, *OrderResponse) error
+	ModifyAddress(context.Context, *Order, *OrderResponse) error
 	//删除订单
 	Delete(context.Context, *Order, *OrderResponse) error
 	//获取订单信息
 	Get(context.Context, *Order, *OrderResponse) error
 	//查询订单
-	Search(context.Context, *BaseWhere, *OrderResponse) error
+	Search(context.Context, *OrderWhere, *OrderResponse) error
 }
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
 	type orderService interface {
-		Create(ctx context.Context, in *OrderRequest, out *OrderResponse) error
+		Create(ctx context.Context, in *BuyingRequest, out *BuyingResponse) error
 		Check(ctx context.Context, in *Order, out *OrderResponse) error
 		ModifyPrice(ctx context.Context, in *Order, out *OrderResponse) error
-		ModifyAddr(ctx context.Context, in *Order, out *OrderResponse) error
+		ModifyAddress(ctx context.Context, in *Order, out *OrderResponse) error
 		Delete(ctx context.Context, in *Order, out *OrderResponse) error
 		Get(ctx context.Context, in *Order, out *OrderResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *OrderResponse) error
+		Search(ctx context.Context, in *OrderWhere, out *OrderResponse) error
 	}
 	type OrderService struct {
 		orderService
@@ -353,7 +353,7 @@ type orderServiceHandler struct {
 	OrderServiceHandler
 }
 
-func (h *orderServiceHandler) Create(ctx context.Context, in *OrderRequest, out *OrderResponse) error {
+func (h *orderServiceHandler) Create(ctx context.Context, in *BuyingRequest, out *BuyingResponse) error {
 	return h.OrderServiceHandler.Create(ctx, in, out)
 }
 
@@ -365,8 +365,8 @@ func (h *orderServiceHandler) ModifyPrice(ctx context.Context, in *Order, out *O
 	return h.OrderServiceHandler.ModifyPrice(ctx, in, out)
 }
 
-func (h *orderServiceHandler) ModifyAddr(ctx context.Context, in *Order, out *OrderResponse) error {
-	return h.OrderServiceHandler.ModifyAddr(ctx, in, out)
+func (h *orderServiceHandler) ModifyAddress(ctx context.Context, in *Order, out *OrderResponse) error {
+	return h.OrderServiceHandler.ModifyAddress(ctx, in, out)
 }
 
 func (h *orderServiceHandler) Delete(ctx context.Context, in *Order, out *OrderResponse) error {
@@ -377,6 +377,6 @@ func (h *orderServiceHandler) Get(ctx context.Context, in *Order, out *OrderResp
 	return h.OrderServiceHandler.Get(ctx, in, out)
 }
 
-func (h *orderServiceHandler) Search(ctx context.Context, in *BaseWhere, out *OrderResponse) error {
+func (h *orderServiceHandler) Search(ctx context.Context, in *OrderWhere, out *OrderResponse) error {
 	return h.OrderServiceHandler.Search(ctx, in, out)
 }
