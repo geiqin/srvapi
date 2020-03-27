@@ -1,0 +1,69 @@
+syntax = "proto3";
+import "common.proto";
+import "goodsInfo.proto";
+import "orderAddress.proto";
+import "orderCoupon.proto";
+
+package geiqin.srv.ord.private;
+
+service BuyingService {
+    //计算优惠
+    rpc Calculate (Buying) returns (BuyingResponse) {}
+}
+
+//购买清单
+message Buying {
+    string solution =1;
+    bool changed =2;
+    int32 count =3;
+    float total =4;
+    float discount = 5;
+    float freight = 6;
+    float amount = 7;
+    int64 address_id =8;
+    int64 customer_id =9;
+    int64 use_ticket_id =10; //正在使用的优惠劵ID
+    string message =11; //买家留言(50字以内)
+    repeated int64 available_ticket_ids =12; //可以使用的优惠劵
+    repeated BuyingItem items = 13;
+    repeated string cart_row_ids =14;
+    repeated OrderCoupon coupons =15;
+    OrderAddress address =16;
+}
+
+//购买清单明细
+message BuyingItem {
+    int64 item_id =1;
+    int64 sku_id =2;
+    int32 num =3;
+    float price =4;
+    float origin_price =5;
+    float sub_total =6;
+    bool is_gift =7;
+    int64 promotion_id =8;
+    GoodsInfo goods =9;
+}
+
+
+//购买清单请求(订单下单使用)
+message BuyingRequest{
+    int64 customer_id =1; //后台下单专用
+    int64 item_id =3; //商品ID（直接购买专用）
+    int64 sku_id =4; ////规格货品ID（直接购买专用）
+    int32 num =5; //购买数量（直接购买专用）
+    int32 source =6; //请求来源 1是直接购买，2是 购物车下单，3，确认订单重复计算
+    int64 address_id =7; //收货地址
+    string message =8; //买家留言(50字以内)
+    int64 vipcard_id =9; //选中的会员卡
+    int32 pay_method =10; //选中的支付方式
+    int64 use_ticket_id =11; //选中的优惠劵凭证ID
+    repeated string cart_row_ids =12; //购物车行id集合
+}
+
+message BuyingResponse {
+    Buying entity = 1;
+    Pager pager =2;
+    repeated Buying items = 3;
+    Error error = 4;
+    Info info =5;
+}

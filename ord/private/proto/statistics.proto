@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "orderStats.proto";
+
+package geiqin.srv.ord.private;
+
+service Statistics {
+    //获取订单统计数据
+    rpc OrderTotal (StatsRequest) returns (OrderStatsResponse) {}
+    //今日实时统计
+    rpc TodayTotal (StatsRequest) returns (OrderDayStatsResponse) {}
+    //获取订单近30日客单统计明细数据
+    rpc OrderDays (StatsRequest) returns (OrderDayStatsResponse) {}
+    //获取店铺未处理订单数量
+    rpc Unhandled (StatsRequest) returns (OrderStatsResponse) {}
+    //查询用户购买的商品
+    rpc CustomerGoods (StatsRequest) returns (OrderStatsResponse) {}
+    //获取用户订单统计数据
+    rpc CustomerOrder (StatsRequest) returns (OrderStatsResponse) {}
+}
+
+message StatsRequest {
+    string type=1;
+    int32 days=2;
+    int32 paged = 3;
+    int32 page_size = 4;
+}
