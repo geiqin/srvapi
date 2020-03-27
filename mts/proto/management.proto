@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "common.proto";
+import "store.proto";
+package geiqin.srv.mts;
+
+service ManagementService {
+    rpc Add (Management) returns (ManagementResponse) {}
+    rpc Update (Management) returns (ManagementResponse) {}
+    rpc Remove (Management) returns (ManagementResponse) {}
+    rpc Get (Management) returns (ManagementResponse) {}
+    rpc Search (BaseWhere) returns (ManagementResponse) {}
+}
+
+message Management {
+    int64 id =1;
+    int64 user_id =2;
+    int64 store_id =3;
+    int64 role_id =4;
+    Store store =5;
+}
+
+
+
+//
+message ManagementResponse {
+    Management entity = 1;
+    Pager pager =2;
+    repeated Management items = 3;
+    Error error = 4;
+    Info info =5;
+}
