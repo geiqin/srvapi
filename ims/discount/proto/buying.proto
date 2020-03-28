@@ -11,13 +11,17 @@ service BuyingService {
 //购买清单
 message Buying {
     string solution =1;
-    int32 count =2;// 商品总数
+    int32 count =2;
     float total =3;
     float discount = 4;
     float freight = 5;
     float amount = 6;
-    repeated BuyingItem items = 7;
-    repeated BuyingItem gifts = 9; //赠送的礼物
+    int64 address_id =7;
+    int64 customer_id =8;
+    int64 use_ticket_id =9; //正在使用的优惠劵ID
+    repeated int64 available_ticket_ids =10; //可以使用的优惠劵
+    repeated BuyingItem items = 11;
+    bool changed = 12;
 }
 
 //购买清单明细

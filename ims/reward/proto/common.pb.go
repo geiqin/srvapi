@@ -241,9 +241,9 @@ func (m *Pager) GetLastPage() int32 {
 }
 
 type BaseWhere struct {
-	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Top      int32 `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
+	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Top      int32 `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
 	//base params
 	Id                   int64    `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
 	Mobile               string   `protobuf:"bytes,5,opt,name=mobile,proto3" json:"mobile,omitempty"`

@@ -46,6 +46,8 @@ type RewardService interface {
 	Get(ctx context.Context, in *Reward, opts ...client.CallOption) (*RewardResponse, error)
 	//分页查询活动列表
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*RewardResponse, error)
+	//获取活动列表
+	List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*RewardResponse, error)
 }
 
 type rewardService struct {
@@ -126,6 +128,16 @@ func (c *rewardService) Search(ctx context.Context, in *BaseWhere, opts ...clien
 	return out, nil
 }
 
+func (c *rewardService) List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*RewardResponse, error) {
+	req := c.c.NewRequest(c.name, "RewardService.List", in)
+	out := new(RewardResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for RewardService service
 
 type RewardServiceHandler interface {
@@ -141,6 +153,8 @@ type RewardServiceHandler interface {
 	Get(context.Context, *Reward, *RewardResponse) error
 	//分页查询活动列表
 	Search(context.Context, *BaseWhere, *RewardResponse) error
+	//获取活动列表
+	List(context.Context, *BaseWhere, *RewardResponse) error
 }
 
 func RegisterRewardServiceHandler(s server.Server, hdlr RewardServiceHandler, opts ...server.HandlerOption) error {
@@ -151,6 +165,7 @@ func RegisterRewardServiceHandler(s server.Server, hdlr RewardServiceHandler, op
 		Cancel(ctx context.Context, in *Reward, out *RewardResponse) error
 		Get(ctx context.Context, in *Reward, out *RewardResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *RewardResponse) error
+		List(ctx context.Context, in *BaseWhere, out *RewardResponse) error
 	}
 	type RewardService struct {
 		rewardService
@@ -185,4 +200,8 @@ func (h *rewardServiceHandler) Get(ctx context.Context, in *Reward, out *RewardR
 
 func (h *rewardServiceHandler) Search(ctx context.Context, in *BaseWhere, out *RewardResponse) error {
 	return h.RewardServiceHandler.Search(ctx, in, out)
+}
+
+func (h *rewardServiceHandler) List(ctx context.Context, in *BaseWhere, out *RewardResponse) error {
+	return h.RewardServiceHandler.List(ctx, in, out)
 }

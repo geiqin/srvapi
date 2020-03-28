@@ -12,7 +12,7 @@ service RewardGoodsService {
 
 message RewardGoods{
     int64 id = 1;
-    int64 promotion_id = 2;
+    int64 reward_id = 2;
     int64 item_id = 3;
     int64 sku_id = 4;
     string created_at = 8;

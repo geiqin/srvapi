@@ -1,5 +1,6 @@
 syntax = "proto3";
 import "common.proto";
+import "rewardGoods.proto";
 import "rewardStep.proto";
 
 package geiqin.srv.ims.reward;
@@ -17,6 +18,8 @@ service RewardService {
     rpc Get (Reward) returns (RewardResponse) {}
     //分页查询活动列表
     rpc Search (BaseWhere) returns (RewardResponse) {}
+    //获取活动列表
+    rpc List (BaseWhere) returns (RewardResponse) {}
 }
 
 
@@ -31,8 +34,11 @@ message Reward {
     string description = 8;
     string created_at = 9;
     string updated_at = 10;
-    RewardGoods goodses = 11;
-    repeated RewardStep steps =12;
+    repeated RewardGoods goodses = 11;
+    repeated RewardStep steps = 12;
+    bool looped = 13; // 是否循环满减
+    int32 status = 14;
+    string status_name = 15;
 }
 
 

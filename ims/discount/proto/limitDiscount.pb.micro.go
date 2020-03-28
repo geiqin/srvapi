@@ -48,6 +48,8 @@ type LimitDiscountService interface {
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*LimitDiscountResponse, error)
 	//获取活动列表
 	List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*LimitDiscountResponse, error)
+	// 分页查询可参与活动的商品列表
+	SearchGoods(ctx context.Context, in *GoodsInfoWhere, opts ...client.CallOption) (*GoodsInfoResponse, error)
 }
 
 type limitDiscountService struct {
@@ -138,6 +140,16 @@ func (c *limitDiscountService) List(ctx context.Context, in *BaseWhere, opts ...
 	return out, nil
 }
 
+func (c *limitDiscountService) SearchGoods(ctx context.Context, in *GoodsInfoWhere, opts ...client.CallOption) (*GoodsInfoResponse, error) {
+	req := c.c.NewRequest(c.name, "LimitDiscountService.SearchGoods", in)
+	out := new(GoodsInfoResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for LimitDiscountService service
 
 type LimitDiscountServiceHandler interface {
@@ -155,6 +167,8 @@ type LimitDiscountServiceHandler interface {
 	Search(context.Context, *BaseWhere, *LimitDiscountResponse) error
 	//获取活动列表
 	List(context.Context, *BaseWhere, *LimitDiscountResponse) error
+	// 分页查询可参与活动的商品列表
+	SearchGoods(context.Context, *GoodsInfoWhere, *GoodsInfoResponse) error
 }
 
 func RegisterLimitDiscountServiceHandler(s server.Server, hdlr LimitDiscountServiceHandler, opts ...server.HandlerOption) error {
@@ -166,6 +180,7 @@ func RegisterLimitDiscountServiceHandler(s server.Server, hdlr LimitDiscountServ
 		Get(ctx context.Context, in *LimitDiscount, out *LimitDiscountResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *LimitDiscountResponse) error
 		List(ctx context.Context, in *BaseWhere, out *LimitDiscountResponse) error
+		SearchGoods(ctx context.Context, in *GoodsInfoWhere, out *GoodsInfoResponse) error
 	}
 	type LimitDiscountService struct {
 		limitDiscountService
@@ -204,4 +219,8 @@ func (h *limitDiscountServiceHandler) Search(ctx context.Context, in *BaseWhere,
 
 func (h *limitDiscountServiceHandler) List(ctx context.Context, in *BaseWhere, out *LimitDiscountResponse) error {
 	return h.LimitDiscountServiceHandler.List(ctx, in, out)
+}
+
+func (h *limitDiscountServiceHandler) SearchGoods(ctx context.Context, in *GoodsInfoWhere, out *GoodsInfoResponse) error {
+	return h.LimitDiscountServiceHandler.SearchGoods(ctx, in, out)
 }
