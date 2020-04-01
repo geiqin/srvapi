@@ -36,6 +36,8 @@ var _ server.Option
 type CustomerService interface {
 	//手动添加用户
 	Create(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//从粉丝添加用户
+	CreateByFan(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//客户注册
 	Register(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//修改客户
@@ -80,6 +82,16 @@ func NewCustomerService(name string, c client.Client) CustomerService {
 
 func (c *customerService) Create(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Create", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) CreateByFan(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.CreateByFan", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -203,6 +215,8 @@ func (c *customerService) SetCards(ctx context.Context, in *Customer, opts ...cl
 type CustomerServiceHandler interface {
 	//手动添加用户
 	Create(context.Context, *Customer, *CustomerResponse) error
+	//从粉丝添加用户
+	CreateByFan(context.Context, *Customer, *CustomerResponse) error
 	//客户注册
 	Register(context.Context, *Customer, *CustomerResponse) error
 	//修改客户
@@ -230,6 +244,7 @@ type CustomerServiceHandler interface {
 func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler, opts ...server.HandlerOption) error {
 	type customerService interface {
 		Create(ctx context.Context, in *Customer, out *CustomerResponse) error
+		CreateByFan(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Register(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Update(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Delete(ctx context.Context, in *Customer, out *CustomerResponse) error
@@ -255,6 +270,10 @@ type customerServiceHandler struct {
 
 func (h *customerServiceHandler) Create(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Create(ctx, in, out)
+}
+
+func (h *customerServiceHandler) CreateByFan(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.CreateByFan(ctx, in, out)
 }
 
 func (h *customerServiceHandler) Register(ctx context.Context, in *Customer, out *CustomerResponse) error {

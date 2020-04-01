@@ -9,6 +9,8 @@ package geiqin.srv.crm;
 service CustomerService {
     //手动添加用户
     rpc Create (Customer) returns (CustomerResponse) {}
+    //从粉丝添加用户
+    rpc CreateByFan (Customer) returns (CustomerResponse) {}
     //客户注册
     rpc Register (Customer) returns (CustomerResponse) {}
     //修改客户
