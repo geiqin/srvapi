@@ -1,0 +1,37 @@
+syntax = "proto3";
+import "common.proto";
+import "checkDetail.proto";
+package geiqin.srv.wms;
+
+service CheckService {
+    rpc Create (Check) returns (CheckResponse) {}
+    rpc Update (Check) returns (CheckResponse) {}
+    rpc Delete (Check) returns (CheckResponse) {}
+    rpc Confirm (Check) returns (CheckResponse) {}
+    rpc Approve (Check) returns (CheckResponse) {}
+    rpc Get (Check) returns (CheckResponse) {}
+    rpc Search (BaseWhere) returns (CheckResponse) {}
+    rpc Details (BaseWhere) returns (CheckDetailResponse) {}
+}
+
+message Check {
+    int64 id = 1;
+    string check_sn = 2;
+    int32 user_id = 3;
+    string memo = 4;
+    int32 row_total = 5;
+    int32 quantity_total = 6;
+    int32 status = 7;
+    string failure = 8;
+    string created_at = 9;
+    string updated_at = 10;
+    repeated CheckDetail details =11;
+}
+
+message CheckResponse {
+    Check entity = 1;
+    Pager pager =2;
+    repeated Check items = 3;
+    Error error = 4;
+    Info info =5;
+}

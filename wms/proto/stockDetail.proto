@@ -1,0 +1,34 @@
+syntax = "proto3";
+import "common.proto";
+import "goodsInfo.proto";
+package geiqin.srv.wms;
+
+service StockDetailService {
+    rpc Create (StockDetail) returns (StockDetailResponse) {}
+    rpc Update (StockDetail) returns (StockDetailResponse) {}
+    rpc Delete (StockDetail) returns (StockDetailResponse) {}
+    rpc Get (StockDetail) returns (StockDetailResponse) {}
+    rpc Search (BaseWhere) returns (StockDetailResponse) {}
+}
+
+message StockDetail {
+    int64 id = 1;
+    int64 stock_id = 2;
+    int64 item_id = 3;
+    int64 sku_id = 4;
+    int32 quantity = 5;
+    float cost_price = 6;
+    float cost_total = 7;
+    string memo = 8;
+    string created_at = 9;
+    string updated_at = 10;
+    GoodsInfo goods =11;
+}
+
+message StockDetailResponse {
+    StockDetail entity = 1;
+    Pager pager =2;
+    repeated StockDetail items = 3;
+    Error error = 4;
+    Info info =5;
+}
