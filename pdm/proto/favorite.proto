@@ -20,7 +20,7 @@ message Favorite {
     int64	item_id	=3;
     string	created_at	=4;
     string	updated_at	=5;
-    ItemDisplay item =6;
+    Item item =6;
 }
 
 message FavoriteWhere {

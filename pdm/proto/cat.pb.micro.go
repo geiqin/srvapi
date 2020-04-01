@@ -40,6 +40,7 @@ type CatService interface {
 	Get(ctx context.Context, in *Cat, opts ...client.CallOption) (*CatResponse, error)
 	Tree(ctx context.Context, in *Cat, opts ...client.CallOption) (*CatResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CatResponse, error)
+	List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CatResponse, error)
 }
 
 type catService struct {
@@ -120,6 +121,16 @@ func (c *catService) Search(ctx context.Context, in *BaseWhere, opts ...client.C
 	return out, nil
 }
 
+func (c *catService) List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CatResponse, error) {
+	req := c.c.NewRequest(c.name, "CatService.List", in)
+	out := new(CatResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for CatService service
 
 type CatServiceHandler interface {
@@ -129,6 +140,7 @@ type CatServiceHandler interface {
 	Get(context.Context, *Cat, *CatResponse) error
 	Tree(context.Context, *Cat, *CatResponse) error
 	Search(context.Context, *BaseWhere, *CatResponse) error
+	List(context.Context, *BaseWhere, *CatResponse) error
 }
 
 func RegisterCatServiceHandler(s server.Server, hdlr CatServiceHandler, opts ...server.HandlerOption) error {
@@ -139,6 +151,7 @@ func RegisterCatServiceHandler(s server.Server, hdlr CatServiceHandler, opts ...
 		Get(ctx context.Context, in *Cat, out *CatResponse) error
 		Tree(ctx context.Context, in *Cat, out *CatResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *CatResponse) error
+		List(ctx context.Context, in *BaseWhere, out *CatResponse) error
 	}
 	type CatService struct {
 		catService
@@ -173,4 +186,67 @@ func (h *catServiceHandler) Tree(ctx context.Context, in *Cat, out *CatResponse)
 
 func (h *catServiceHandler) Search(ctx context.Context, in *BaseWhere, out *CatResponse) error {
 	return h.CatServiceHandler.Search(ctx, in, out)
+}
+
+func (h *catServiceHandler) List(ctx context.Context, in *BaseWhere, out *CatResponse) error {
+	return h.CatServiceHandler.List(ctx, in, out)
+}
+
+// Client API for MyCatService service
+
+type MyCatService interface {
+	List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CatResponse, error)
+}
+
+type myCatService struct {
+	c    client.Client
+	name string
+}
+
+func NewMyCatService(name string, c client.Client) MyCatService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.pdm"
+	}
+	return &myCatService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *myCatService) List(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CatResponse, error) {
+	req := c.c.NewRequest(c.name, "MyCatService.List", in)
+	out := new(CatResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for MyCatService service
+
+type MyCatServiceHandler interface {
+	List(context.Context, *BaseWhere, *CatResponse) error
+}
+
+func RegisterMyCatServiceHandler(s server.Server, hdlr MyCatServiceHandler, opts ...server.HandlerOption) error {
+	type myCatService interface {
+		List(ctx context.Context, in *BaseWhere, out *CatResponse) error
+	}
+	type MyCatService struct {
+		myCatService
+	}
+	h := &myCatServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&MyCatService{h}, opts...))
+}
+
+type myCatServiceHandler struct {
+	MyCatServiceHandler
+}
+
+func (h *myCatServiceHandler) List(ctx context.Context, in *BaseWhere, out *CatResponse) error {
+	return h.MyCatServiceHandler.List(ctx, in, out)
 }

@@ -10,6 +10,11 @@ service CatService {
     rpc Get (Cat) returns (CatResponse) {}
     rpc Tree (Cat) returns (CatResponse) {}
     rpc Search (BaseWhere) returns (CatResponse) {}
+    rpc List (BaseWhere) returns (CatResponse) {}
+}
+
+service MyCatService{
+    rpc List (BaseWhere) returns (CatResponse) {}
 }
 
 message Cat {

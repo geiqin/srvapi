@@ -9,14 +9,15 @@ service BuyingService {
 
 //购买清单
 message Buying {
-    string solution =1;
-    int32 count =2;
-    float total =3;
+    string solution = 1;
+    int32 count = 2;
+    float total = 3;
     float discount = 4;
     float freight = 5;
     float amount = 6;
-    repeated BuyingItem items = 7;
-    repeated BuyingItem gifts = 9; //赠送的礼物
+    int32 point = 7;
+    repeated BuyingItem items = 8;
+    bool changed = 9;
 }
 
 //购买清单明细

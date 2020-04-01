@@ -9,6 +9,7 @@ service ImageService {
     rpc Get (Image) returns (ImageResponse) {}
     rpc List (Image) returns (ImageResponse) {}
     rpc Search (BaseWhere) returns (ImageResponse) {}
+    rpc SetCat (Image) returns (ImageResponse) {}
 }
 
 // 图片信息
@@ -28,12 +29,11 @@ message Image {
     int32 height =13;
     string memo	 =14;
     string taxonomy	 =15;
-    string app	 =16;
-    string app_flag	 =17;
-    int64 customer_id	=18;
     int64 user_id	=19;
-    Cat cat =20;
-    repeated int64 ids =21;
+    string created_at =20;
+    string updated_at =21;
+    Cat cat =22;
+    repeated int64 ids =23;
 }
 
 // 修改图片信息

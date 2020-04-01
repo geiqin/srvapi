@@ -62,6 +62,8 @@ type ItemDisplay struct {
 	XXX_sizecache         int32          `json:"-"`
 }
 
+func (*ItemDisplay) TableName() string { return "items" }
+
 func (m *ItemDisplay) Reset()         { *m = ItemDisplay{} }
 func (m *ItemDisplay) String() string { return proto.CompactTextString(m) }
 func (*ItemDisplay) ProtoMessage()    {}

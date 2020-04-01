@@ -39,6 +39,7 @@ type ImageService interface {
 	Get(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error)
 	List(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ImageResponse, error)
+	SetCat(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error)
 }
 
 type imageService struct {
@@ -109,6 +110,16 @@ func (c *imageService) Search(ctx context.Context, in *BaseWhere, opts ...client
 	return out, nil
 }
 
+func (c *imageService) SetCat(ctx context.Context, in *Image, opts ...client.CallOption) (*ImageResponse, error) {
+	req := c.c.NewRequest(c.name, "ImageService.SetCat", in)
+	out := new(ImageResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ImageService service
 
 type ImageServiceHandler interface {
@@ -117,6 +128,7 @@ type ImageServiceHandler interface {
 	Get(context.Context, *Image, *ImageResponse) error
 	List(context.Context, *Image, *ImageResponse) error
 	Search(context.Context, *BaseWhere, *ImageResponse) error
+	SetCat(context.Context, *Image, *ImageResponse) error
 }
 
 func RegisterImageServiceHandler(s server.Server, hdlr ImageServiceHandler, opts ...server.HandlerOption) error {
@@ -126,6 +138,7 @@ func RegisterImageServiceHandler(s server.Server, hdlr ImageServiceHandler, opts
 		Get(ctx context.Context, in *Image, out *ImageResponse) error
 		List(ctx context.Context, in *Image, out *ImageResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *ImageResponse) error
+		SetCat(ctx context.Context, in *Image, out *ImageResponse) error
 	}
 	type ImageService struct {
 		imageService
@@ -156,4 +169,8 @@ func (h *imageServiceHandler) List(ctx context.Context, in *Image, out *ImageRes
 
 func (h *imageServiceHandler) Search(ctx context.Context, in *BaseWhere, out *ImageResponse) error {
 	return h.ImageServiceHandler.Search(ctx, in, out)
+}
+
+func (h *imageServiceHandler) SetCat(ctx context.Context, in *Image, out *ImageResponse) error {
+	return h.ImageServiceHandler.SetCat(ctx, in, out)
 }

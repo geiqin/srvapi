@@ -10,6 +10,7 @@ service CatService {
     rpc List (Cat) returns (CatResponse) {}
     rpc Tree (Cat) returns (CatResponse) {}
     rpc Search (BaseWhere) returns (CatResponse) {}
+
 }
 
 // 字典信息
