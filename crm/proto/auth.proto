@@ -13,6 +13,7 @@ service AuthService {
     rpc Info (Empty) returns (CustomerResponse) {}
     //安全退出
     rpc Logout (Empty) returns (AuthResponse) {}
+
 }
 
 

@@ -33,6 +33,8 @@ service CustomerService {
     rpc SetTags (Customer) returns (CustomerResponse) {}
     //设置会员卡
     rpc SetCards (Customer) returns (CustomerResponse) {}
+    //修改客户手机号
+    rpc UpdateMobile (Customer) returns (CustomerResponse) {}
 }
 
 message Customer {

@@ -60,6 +60,8 @@ type CustomerService interface {
 	SetTags(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//设置会员卡
 	SetCards(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//修改客户手机号
+	UpdateMobile(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 }
 
 type customerService struct {
@@ -210,6 +212,16 @@ func (c *customerService) SetCards(ctx context.Context, in *Customer, opts ...cl
 	return out, nil
 }
 
+func (c *customerService) UpdateMobile(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.UpdateMobile", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for CustomerService service
 
 type CustomerServiceHandler interface {
@@ -239,6 +251,8 @@ type CustomerServiceHandler interface {
 	SetTags(context.Context, *Customer, *CustomerResponse) error
 	//设置会员卡
 	SetCards(context.Context, *Customer, *CustomerResponse) error
+	//修改客户手机号
+	UpdateMobile(context.Context, *Customer, *CustomerResponse) error
 }
 
 func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler, opts ...server.HandlerOption) error {
@@ -256,6 +270,7 @@ func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler
 		Search(ctx context.Context, in *CustomerWhere, out *CustomerResponse) error
 		SetTags(ctx context.Context, in *Customer, out *CustomerResponse) error
 		SetCards(ctx context.Context, in *Customer, out *CustomerResponse) error
+		UpdateMobile(ctx context.Context, in *Customer, out *CustomerResponse) error
 	}
 	type CustomerService struct {
 		customerService
@@ -318,4 +333,8 @@ func (h *customerServiceHandler) SetTags(ctx context.Context, in *Customer, out 
 
 func (h *customerServiceHandler) SetCards(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.SetCards(ctx, in, out)
+}
+
+func (h *customerServiceHandler) UpdateMobile(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.UpdateMobile(ctx, in, out)
 }

@@ -21,11 +21,11 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type AuthRequest struct {
-	CustomerId           int64    `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
-	Mobile               string   `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile"`
-	Email                string   `protobuf:"bytes,7,opt,name=email,proto3" json:"email"`
-	Password             string   `protobuf:"bytes,3,opt,name=password,proto3" json:"password"`
+	CustomerId           int64    `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Mobile               string   `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Email                string   `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
+	Password             string   `protobuf:"bytes,3,opt,name=password,proto3" json:"password,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
