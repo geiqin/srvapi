@@ -23,7 +23,7 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 type Snsapp struct {
 	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Type                 string   `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	Channel              string   `protobuf:"bytes,3,opt,name=channel,proto3" json:"channel,omitempty"`
 	StoreId              int64    `protobuf:"varint,4,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
 	AppId                string   `protobuf:"bytes,5,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
 	AppSecret            string   `protobuf:"bytes,6,opt,name=app_secret,json=appSecret,proto3" json:"app_secret,omitempty"`
@@ -78,9 +78,9 @@ func (m *Snsapp) GetName() string {
 	return ""
 }
 
-func (m *Snsapp) GetType() string {
+func (m *Snsapp) GetChannel() string {
 	if m != nil {
-		return m.Type
+		return m.Channel
 	}
 	return ""
 }

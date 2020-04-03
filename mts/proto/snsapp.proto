@@ -15,7 +15,7 @@ service SnsappService {
 message Snsapp {
     int64	id	=1;
     string	name	=2;
-    string	type	=3;
+    string	channel	=3;
     int64	store_id	=4;
     string	app_id	=5;
     string	app_secret	=6;
