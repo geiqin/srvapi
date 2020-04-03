@@ -1,5 +1,7 @@
 syntax = "proto3";
 import "common.proto";
+import "orderDetail.proto";
+import "areaInfo.proto";
 package geiqin.srv.ord.private;
 
 service MySafeguardService {
@@ -12,17 +14,19 @@ service MySafeguardService {
     // 申请补发商品
     rpc ApplyRepair (Safeguard) returns (SafeguardResponse) {}
     // 取消维权
-    rpc ApplyCancel (Safeguard) returns (SafeguardResponse) {}
-    //选择售后类型
-    rpc TypeChoose (Safeguard) returns (SafeguardResponse) {}
-    //确认售后类型
-    rpc TypeConfirm (Safeguard) returns (SafeguardResponse) {}
-    //提交退货物流信息
+    rpc ApplyCancel (SafeguardWhere) returns (SafeguardResponse) {}
+    // 获取维权类型
+    rpc GetType (SafeguardWhere) returns (SafeguardTypeResponse) {}
+    // 确认维权类型
+    rpc ConfirmType (SafeguardWhere) returns (SafeguardTypeResponse) {}
+    // 提交退货物流信息
     rpc ExpressConfirm (Safeguard) returns (SafeguardResponse) {}
-    //获取维权信息
-    rpc Get (Safeguard) returns (SafeguardResponse) {}
-    //退换/售后查询
-    rpc Search (BaseWhere) returns (SafeguardResponse) {}
+    // 获取维权信息（基本信息）
+    rpc Get (SafeguardWhere) returns (SafeguardResponse) {}
+    // 获取维权信息
+    rpc Display (SafeguardWhere) returns (SafeguardResponse) {}
+    // 退换/售后查询
+    rpc Search (SafeguardWhere) returns (SafeguardResponse) {}
 
 }
 
@@ -32,11 +36,13 @@ service SafeguardService {
     //拒绝维权申请
     rpc Refused (Safeguard) returns (SafeguardResponse) {}
     //维权订单退款
-    rpc refund (Safeguard) returns (SafeguardResponse) {}
-    //获取维权信息
-    rpc Get (Safeguard) returns (SafeguardResponse) {}
+    rpc Refund (Safeguard) returns (SafeguardResponse) {}
+    // 获取维权信息（基本信息）
+    rpc Get (SafeguardWhere) returns (SafeguardResponse) {}
+    // 获取维权信息
+    rpc Display (SafeguardWhere) returns (SafeguardResponse) {}
     //查询维权信息
-    rpc Search (BaseWhere) returns (SafeguardResponse) {}
+    rpc Search (SafeguardWhere) returns (SafeguardResponse) {}
 }
 
 message Safeguard {
@@ -48,22 +54,29 @@ message Safeguard {
     int64 exchange_delivery_id = 6;
     string express_name = 7;
     string express_no = 8;
-    bool refunded = 9;
-    float refund_fee = 10;
-    string refund_method = 11;
-    string check_status = 12;
-    string status = 13;
-    string reason = 14;
-    string description = 15;
-    int64 op_id = 16;
-    string op_name = 17;
-    string memo = 18;
-    string goods_status = 19;
-    string refunded_at = 20;
-    string checked_at = 21;
-    string created_at = 22;
-    string updated_at = 23;
-    repeated SafeguardDetail details = 24;
+    string express_code = 9;
+    string mobile = 10;
+    bool refunded = 11;
+    float refund_fee = 12;
+    string refund_method = 13;
+    string check_status = 142;
+    string status = 15;
+    string reason = 16;
+    string description = 17;
+    int64 op_id = 18;
+    string op_name = 19;
+    string memo = 20;
+    string goods_status = 21;
+    string refunded_at = 22;
+    string metadata = 23;
+    string checked_at = 24;
+    string created_at = 25;
+    string updated_at = 26;
+    repeated SafeguardDetail details = 27;
+    repeated SafeguardImage images = 28;
+    SafeguardAddress address = 29;// 维权收货人地址
+    SafeguardReturnExpress return_express = 30;// 买家退货填写的退货物流信息
+
 }
 
 message SafeguardDetail {
@@ -75,10 +88,71 @@ message SafeguardDetail {
     int32 num = 6;
 }
 
+message SafeguardImage {
+    int64 id = 1;
+    int64 safeguard_id = 2;
+    int64 image_id = 3;
+    string image_url = 4;
+}
+
+// 维权收货人地址
+message SafeguardAddress {
+    string name = 1;
+    int64 area_id = 2;
+    string addr = 3;
+    string mobile = 4;
+    AreaInfo area = 5;
+}
+
+// 买家退货填写的退货物流信息
+message SafeguardReturnExpress {
+    string express_name = 1;
+    string express_no = 2;
+    string express_code = 3;
+    string mobile = 4;
+    repeated SafeguardImage images = 5;
+}
+
+message SafeguardWhere {
+    int32 paged =1;
+    int32 page_size =2;
+    string	sorting	=3;
+    int64 id = 4;
+    repeated int64 ids = 5;
+    int64 order_id = 6;
+    int64 customer_id = 7;
+    string type = 8;
+    string keywords_type = 9;
+    string keywords = 10;
+    repeated int64 order_detail_ids = 11;
+    string status = 12;
+    string safeguard_sn = 13;
+}
+
+message SafeguardType {
+    int64 order_id = 1;
+    bool is_refund = 2;// 是否可退款（仅退款）
+    bool is_return = 3;// 是否可退货（退货退款）
+    bool is_exchange = 4;// 是否可换货
+    bool is_repair = 5;// 是否可补发货
+    float max_refund_price = 6;// 最大退款金额
+    float express_fee = 7;// 运费
+    SafeguardAddress address = 8;// 维权收货人地址
+    repeated OrderDetail details = 9;
+}
+
 message SafeguardResponse {
     Safeguard entity = 1;
-    Pager pager =2;
+    Pager pager = 2;
     repeated Safeguard items = 3;
     Error error = 4;
-    Info info =5;
+    Info info = 5;
+}
+
+message SafeguardTypeResponse {
+    SafeguardType entity = 1;
+    Pager pager = 2;
+    repeated SafeguardType items = 3;
+    Error error = 4;
+    Info info = 5;
 }

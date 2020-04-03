@@ -1,0 +1,37 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.dms;
+
+service GlobalCfgService {
+    //设置销分销配置信息
+    rpc Set (GlobalCfg) returns (GlobalCfgResponse) {}
+    //获取分销配置信息
+    rpc Get (Empty) returns (GlobalCfgResponse) {}
+}
+
+message GlobalCfg {
+    int64 id = 1;
+    string	name  =2;
+    int64 	share_id  =3;
+    string	share_url =4;
+    int32 	mode =5;
+    int32 	settle_method =6;
+    bool  	is_recruit =7;
+    bool  	is_checked =8;
+    bool  	is_inner_buy  =9;
+    bool  	is_commission_display =10;
+    bool  	is_commission_rate_display =11;
+    bool  	auto_upgrade =12;
+    int32 	relate_expire =13;
+    int32 	relate_rob =14;
+    int32 	relate_protect_days =15;
+}
+
+
+message GlobalCfgResponse {
+    GlobalCfg entity = 1;
+    Pager pager =2;
+    repeated GlobalCfg items = 3;
+    Error error = 4;
+    Info info =5;
+}

@@ -3,6 +3,7 @@ import "common.proto";
 import "goodsInfo.proto";
 import "orderAddress.proto";
 import "orderCoupon.proto";
+import "couponTicketInfo.proto";
 
 package geiqin.srv.ord.private;
 
@@ -29,6 +30,8 @@ message Buying {
     repeated string cart_row_ids =14;
     repeated OrderCoupon coupons =15;
     OrderAddress address =16;
+    CouponTicket use_ticket = 17;
+    string platform_source =18; //下单来源
 }
 
 //购买清单明细
@@ -48,16 +51,14 @@ message BuyingItem {
 //购买清单请求(订单下单使用)
 message BuyingRequest{
     int64 customer_id =1; //后台下单专用
-    int64 item_id =3; //商品ID（直接购买专用）
-    int64 sku_id =4; ////规格货品ID（直接购买专用）
-    int32 num =5; //购买数量（直接购买专用）
-    int32 source =6; //请求来源 1是直接购买，2是 购物车下单，3，确认订单重复计算
-    int64 address_id =7; //收货地址
-    string message =8; //买家留言(50字以内)
-    int64 vipcard_id =9; //选中的会员卡
-    int32 pay_method =10; //选中的支付方式
-    int64 use_ticket_id =11; //选中的优惠劵凭证ID
-    repeated string cart_row_ids =12; //购物车行id集合
+    int32 source =2; //请求来源 1是直接购买，2是 购物车下单，3，确认订单重复计算
+    int64 address_id =3; //收货地址
+    string message =4; //买家留言(50字以内)
+    int64 vipcard_id =5; //选中的会员卡
+    int32 pay_method =6; //选中的支付方式
+    int64 use_ticket_id =7; //选中的优惠劵凭证ID
+    string platform_source =8; //下单来源
+    repeated BuyingItem items =9;
 }
 
 message BuyingResponse {

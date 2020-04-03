@@ -34,11 +34,8 @@ var _ server.Option
 // Client API for DeliveryService service
 
 type DeliveryService interface {
-	Create(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error)
-	Update(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error)
-	Delete(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error)
-	Get(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*DeliveryResponse, error)
+	// 获取订单发货列表
+	List(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error)
 }
 
 type deliveryService struct {
@@ -59,48 +56,8 @@ func NewDeliveryService(name string, c client.Client) DeliveryService {
 	}
 }
 
-func (c *deliveryService) Create(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error) {
-	req := c.c.NewRequest(c.name, "DeliveryService.Create", in)
-	out := new(DeliveryResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *deliveryService) Update(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error) {
-	req := c.c.NewRequest(c.name, "DeliveryService.Update", in)
-	out := new(DeliveryResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *deliveryService) Delete(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error) {
-	req := c.c.NewRequest(c.name, "DeliveryService.Delete", in)
-	out := new(DeliveryResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *deliveryService) Get(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error) {
-	req := c.c.NewRequest(c.name, "DeliveryService.Get", in)
-	out := new(DeliveryResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *deliveryService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*DeliveryResponse, error) {
-	req := c.c.NewRequest(c.name, "DeliveryService.Search", in)
+func (c *deliveryService) List(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error) {
+	req := c.c.NewRequest(c.name, "DeliveryService.List", in)
 	out := new(DeliveryResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -112,20 +69,13 @@ func (c *deliveryService) Search(ctx context.Context, in *BaseWhere, opts ...cli
 // Server API for DeliveryService service
 
 type DeliveryServiceHandler interface {
-	Create(context.Context, *Delivery, *DeliveryResponse) error
-	Update(context.Context, *Delivery, *DeliveryResponse) error
-	Delete(context.Context, *Delivery, *DeliveryResponse) error
-	Get(context.Context, *Delivery, *DeliveryResponse) error
-	Search(context.Context, *BaseWhere, *DeliveryResponse) error
+	// 获取订单发货列表
+	List(context.Context, *Delivery, *DeliveryResponse) error
 }
 
 func RegisterDeliveryServiceHandler(s server.Server, hdlr DeliveryServiceHandler, opts ...server.HandlerOption) error {
 	type deliveryService interface {
-		Create(ctx context.Context, in *Delivery, out *DeliveryResponse) error
-		Update(ctx context.Context, in *Delivery, out *DeliveryResponse) error
-		Delete(ctx context.Context, in *Delivery, out *DeliveryResponse) error
-		Get(ctx context.Context, in *Delivery, out *DeliveryResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *DeliveryResponse) error
+		List(ctx context.Context, in *Delivery, out *DeliveryResponse) error
 	}
 	type DeliveryService struct {
 		deliveryService
@@ -138,22 +88,6 @@ type deliveryServiceHandler struct {
 	DeliveryServiceHandler
 }
 
-func (h *deliveryServiceHandler) Create(ctx context.Context, in *Delivery, out *DeliveryResponse) error {
-	return h.DeliveryServiceHandler.Create(ctx, in, out)
-}
-
-func (h *deliveryServiceHandler) Update(ctx context.Context, in *Delivery, out *DeliveryResponse) error {
-	return h.DeliveryServiceHandler.Update(ctx, in, out)
-}
-
-func (h *deliveryServiceHandler) Delete(ctx context.Context, in *Delivery, out *DeliveryResponse) error {
-	return h.DeliveryServiceHandler.Delete(ctx, in, out)
-}
-
-func (h *deliveryServiceHandler) Get(ctx context.Context, in *Delivery, out *DeliveryResponse) error {
-	return h.DeliveryServiceHandler.Get(ctx, in, out)
-}
-
-func (h *deliveryServiceHandler) Search(ctx context.Context, in *BaseWhere, out *DeliveryResponse) error {
-	return h.DeliveryServiceHandler.Search(ctx, in, out)
+func (h *deliveryServiceHandler) List(ctx context.Context, in *Delivery, out *DeliveryResponse) error {
+	return h.DeliveryServiceHandler.List(ctx, in, out)
 }

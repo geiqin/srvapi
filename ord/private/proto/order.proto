@@ -1,14 +1,16 @@
 syntax = "proto3";
 import "common.proto";
 import "buying.proto";
+import "orderDetail.proto";
 import "orderAddress.proto";
+import "delivery.proto";
 package geiqin.srv.ord.private;
 
 service MyOrderService {
     //确认订单
     rpc Confirm (BuyingRequest) returns (BuyingResponse) {}
     //提交订单
-    rpc Submit (Buying) returns (OrderResponse) {}
+    rpc Submit (BuyingRequest) returns (OrderResponse) {}
     //删除订单
     rpc Delete (Order) returns (OrderResponse) {}
     //撤销订单
@@ -17,6 +19,8 @@ service MyOrderService {
     rpc Receipt (Order) returns (OrderResponse) {}
     //获取订单信息
     rpc Get (Order) returns (OrderResponse) {}
+    //获取订单信息(详细信息)
+    rpc Display (Order) returns (OrderResponse) {}
     //查询订单
     rpc Search (OrderWhere) returns (OrderResponse) {}
 
@@ -36,8 +40,18 @@ service OrderService {
     rpc Delete (Order) returns (OrderResponse) {}
     //获取订单信息
     rpc Get (Order) returns (OrderResponse) {}
+    //获取订单信息(详细信息)
+    rpc Display (Order) returns (OrderResponse) {}
     //查询订单
     rpc Search (OrderWhere) returns (OrderResponse) {}
+    //订单备注
+    rpc Remarks (Order) returns (OrderResponse) {}
+    //订单发货
+    rpc Ship (Delivery) returns (DeliveryResponse) {}
+    //订单补发货
+    rpc RepairShip (Delivery) returns (DeliveryResponse) {}
+    //订单换货发货
+    rpc ExchangeShip (Delivery) returns (DeliveryResponse) {}
 }
 
 message Order {
@@ -76,41 +90,34 @@ message Order {
     string status =34;
     string pay_status =35;
     string refund_status =36;
-    string ship_status =37;
     string expire_at =38;
     string paid_at =39;
     string shipped_at =40;
     string signed_at =41;
     string refunded_at =42;
     string finished_at =43;
+    string created_at =44;
+    string updated_at =45;
+    string platform_source =46;
     OrderAddress address =54;
     repeated OrderDetail details = 55;
+    Customer customer = 56;
+    repeated Delivery delivery = 57;
+
 }
 
-message OrderDetail {
-    int64 id = 1;
-    int64 order_id = 2;
-    int64 item_id = 3;
-    int64 sku_id = 4;
-    string item_sn = 5;
-    string sku_sn = 6;
-    string name = 7;
-    float weight = 8;
-    float price = 9;
-    float cost = 10;
-    int32 num = 11;
-    int32 send_num = 12;
-    float amount = 13;
-    int32 points = 14;
-    string item_type = 15;
-    string additional = 16;
-    int64 present_id = 19;
-    float origin_price = 20;
-    float modify_price = 21;
-    bool is_vip_bought = 22;
-    float distribution_profit = 23;
-    string created_at = 17;
-    string updated_at = 18;
+message Customer {
+    int64 id =1;
+    string customer_sn =2;
+    string name =3;
+    string display_name =4;
+    string realname =5;
+    string idcard =6;
+    int32 gender =7;
+    string mobile =8;
+    string email =9;
+    int64 avatar_id =10;
+    string avatar_url =11;
 }
 
 

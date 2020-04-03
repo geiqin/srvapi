@@ -1,0 +1,32 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.dms;
+
+service StatementService {
+    //处理计算佣金
+    rpc Handle (Statement) returns (StatementResponse) {}
+    //获取结算佣金
+    rpc Get (Statement) returns (StatementResponse) {}
+    //查询结算佣金
+    rpc Search (BaseWhere) returns (StatementResponse) {}
+}
+
+message Statement {
+    int64 id = 1;
+    int64 source_id = 2;
+    int64 distributor_id = 3;
+    float money = 4;
+    string source = 5;
+    string type = 6;
+    string created_at = 7;
+    string updated_at = 8;
+}
+
+
+message StatementResponse {
+    Statement entity = 1;
+    Pager pager =2;
+    repeated Statement items = 3;
+    Error error = 4;
+    Info info =5;
+}

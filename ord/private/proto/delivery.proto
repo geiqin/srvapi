@@ -1,13 +1,11 @@
 syntax = "proto3";
 import "common.proto";
+import "goodsInfo.proto";
 package geiqin.srv.ord.private;
 
 service DeliveryService {
-    rpc Create (Delivery) returns (DeliveryResponse) {}
-    rpc Update (Delivery) returns (DeliveryResponse) {}
-    rpc Delete (Delivery) returns (DeliveryResponse) {}
-    rpc Get (Delivery) returns (DeliveryResponse) {}
-    rpc Search (BaseWhere) returns (DeliveryResponse) {}
+    // 获取订单发货列表
+    rpc List (Delivery) returns (DeliveryResponse) {}
 }
 
 message Delivery {
@@ -37,6 +35,7 @@ message Delivery {
     string created_at = 24;
     string updated_at = 25;
     repeated DeliveryDetail details = 26;
+    int64 safeguard_id = 27;
 }
 
 message DeliveryDetail {
@@ -46,6 +45,7 @@ message DeliveryDetail {
     int64 item_id = 4;
     int64 sku_id = 5;
     int32 num = 6;
+    GoodsInfo goods = 7;
 }
 
 

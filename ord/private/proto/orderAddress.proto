@@ -1,5 +1,6 @@
 syntax = "proto3";
 import "common.proto";
+import "areaInfo.proto";
 package geiqin.srv.ord.private;
 
 service OrderAddressService {
@@ -25,6 +26,7 @@ message OrderAddress {
     int64 address_id = 13;
     string created_at = 14;
     string updated_at = 15;
+    AreaInfo area = 16;
 }
 
 
