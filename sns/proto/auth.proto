@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "common.proto";
+
+package geiqin.srv.sns;
+
+service AuthService {
+    //微信小程序登录
+    rpc WxMini (WxMiniLogin) returns (TokenResponse) {}
+    //支付宝登陆
+    rpc Alipay (AlipayLogin) returns (TokenResponse) {}
+    //需要其他登陆往一下继续实现
+}
+
+message WxMiniLogin {
+    string signature =1;
+    string code =2;
+    string rawData =3;
+    string encryptedData =4;
+    string iv =5;
+    string scene =6;
+}
+
+message AlipayLogin {
+    string signature =1;
+    string code =2;
+}

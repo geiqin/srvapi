@@ -1,0 +1,19 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.sns;
+
+message FanTrack {
+    int64 id = 1;
+    string source = 2;
+    string created_at = 17;
+    string updated_at = 18;
+    repeated int64 ids = 20;
+}
+
+message FanTrackResponse {
+    FanTrack entity = 1;
+    Pager pager =2;
+    repeated FanTrack items = 3;
+    Error error = 4;
+    Info info =5;
+}
