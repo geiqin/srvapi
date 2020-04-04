@@ -1,0 +1,58 @@
+syntax = "proto3";
+import "common.proto";
+
+package geiqin.srv.pay;
+
+
+//提现服务
+service WithdrawalService {
+    //创建提现
+    rpc Create (Withdrawal) returns (WithdrawalResponse) {}
+    //修改提现
+    rpc Update (Withdrawal) returns (WithdrawalResponse) {}
+    //删除提现
+    rpc Delete (Withdrawal) returns (WithdrawalResponse) {}
+    //获得提现信息
+    rpc Get (Withdrawal) returns (WithdrawalResponse) {}
+    //查询提现
+    rpc Search (BaseWhere) returns (WithdrawalResponse) {}
+}
+
+//提现
+message Withdrawal{
+    int64 id = 1;
+    float amount = 2;
+    string asset_transaction = 3;
+    string balance_transaction = 4;
+    string channel = 5;
+    string extra = 6;
+    string failure_msg = 7;
+    float fee = 8;
+    bool livemode = 9;
+    string operation_url = 10;
+    string order_no = 11;
+    string source = 12;
+    string canceled_at = 13;
+    string succeeded_at = 14;
+    string target_user_type = 15;
+    int64 target_user_id = 16;
+    float service_fee = 17;
+    int64 settle_account_id = 18;
+    int64 store_id = 19;
+    string meno = 20;
+    string metadata = 21;
+    string status = 22;
+    string created_at = 23;
+    string updated_at = 24;
+
+}
+
+
+//
+message WithdrawalResponse {
+    Withdrawal entity = 1;
+    Pager pager =2;
+    repeated Withdrawal items = 3;
+    Error error = 4;
+    Info info =5;
+}

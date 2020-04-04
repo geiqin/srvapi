@@ -1,0 +1,65 @@
+syntax = "proto3";
+import "common.proto";
+
+package geiqin.srv.pay;
+ 
+
+//支付凭证
+service ChargeService {
+    //创建支付凭证
+    rpc Create (Charge) returns (ChargeResponse) {}
+    //修改支付凭证
+    rpc Update (Charge) returns (ChargeResponse) {}
+    //删除支付凭证
+    rpc Delete (Charge) returns (ChargeResponse) {}
+    //获得支付凭证
+    rpc Get (Charge) returns (ChargeResponse) {} 
+    //查询支付凭证
+    rpc Search (BaseWhere) returns (ChargeResponse) {}
+}
+
+//支付凭证
+message Charge{
+    int64 id = 1;
+    string charge_sn = 2;
+    bool lived = 3;
+    bool paid = 4;
+    bool refunded = 5;
+    bool reversed = 6;
+    int64 paygate_id = 7;
+    string open_id = 8;
+    string target_user_type = 10;
+    int64 target_user_id = 11;
+    int64 out_trade_id = 13;
+    string out_trade_sn = 14;
+    float amount = 15;
+    string currency = 16;
+    string subject = 17;
+    string body = 18;
+    string extra = 19;
+    string channel = 22;
+    string trade_type = 23;
+    string transaction_no = 24;
+    float refunded_amount = 25;
+    string failure_code = 26;
+    string failure_msg = 27;
+    string credential = 28;
+    string client_ip = 29;
+    string memo = 30;
+    string metadata = 31;
+    string status = 32;
+    string paid_at = 20;
+    string expired_at = 21;
+    string created_at = 33;
+    string updated_at = 34;
+}
+
+
+//
+message ChargeResponse {
+    Charge entity = 1;
+    Pager pager =2;
+    repeated Charge items = 3;
+    Error error = 4;
+    Info info =5;
+}
