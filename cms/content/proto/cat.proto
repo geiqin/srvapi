@@ -1,0 +1,43 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.cms.content;
+
+service CatService {
+    rpc Create (Cat) returns (CatResponse) {}
+    rpc Update (Cat) returns (CatResponse) {}
+    rpc Delete (Cat) returns (CatResponse) {}
+    rpc Get (Cat) returns (CatResponse) {}
+    rpc Search (BaseWhere) returns (CatResponse) {}
+    rpc List (BaseWhere) returns (CatResponse) {}
+    rpc Tree (Cat) returns (CatResponse) {}
+}
+
+// 字典信息
+message Cat {
+    int32 id =1;
+    string name	 =2;
+    string slug	 =3;
+    int32 cat_id =4;
+    int64 thumb_id	 =5;
+    string thumb_url  =6;
+    string depth  =7;
+    string description =8;
+    bool system	 =17;
+    int32 sorting =9;
+    int32 article_count =10;
+    string created_at =11;
+    string updated_at =12;
+    repeated Cat children = 13;
+    repeated int32 ids = 14;
+}
+
+
+
+//
+message CatResponse {
+    Cat entity = 1;
+    Pager pager =2;
+    repeated Cat items = 3;
+    Error error = 4;
+    Info info =5;
+}

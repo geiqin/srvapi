@@ -22,12 +22,12 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // 图片信息
 type Image struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Title                string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
-	Type                 string   `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	CatId                int32    `protobuf:"varint,4,opt,name=cat_id,json=catId,proto3" json:"cat_id,omitempty"`
-	FileName             string   `protobuf:"bytes,5,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
-	RawName              string   `protobuf:"bytes,6,opt,name=raw_name,json=rawName,proto3" json:"raw_name,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Title                string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title"`
+	Type                 string   `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
+	CatId                int32    `protobuf:"varint,4,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
+	FileName             string   `protobuf:"bytes,5,opt,name=file_name,json=fileName,proto3" json:"file_name"`
+	RawName              string   `protobuf:"bytes,6,opt,name=raw_name,json=rawName,proto3" json:"raw_name"`
 	Hash                 string   `protobuf:"bytes,7,opt,name=hash,proto3" json:"hash,omitempty"`
 	Path                 string   `protobuf:"bytes,8,opt,name=path,proto3" json:"path,omitempty"`
 	Url                  string   `protobuf:"bytes,9,opt,name=url,proto3" json:"url,omitempty"`
