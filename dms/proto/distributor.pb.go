@@ -46,7 +46,7 @@ type Distributor struct {
 	CreatedAt            string         `protobuf:"bytes,22,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string         `protobuf:"bytes,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Rank                 *Rank          `protobuf:"bytes,24,opt,name=rank,proto3" json:"rank,omitempty"`
-	Inviter              *Distributor   `protobuf:"bytes,25,opt,name=inviter,proto3" json:"inviter,omitempty"`
+	Inviter              *Distributor   `protobuf:"bytes,25,opt,name=inviter,proto3" json:"inviter,omitempty" gorm:"ForeignKey:inviter_id"`
 	Children             []*Distributor `protobuf:"bytes,26,rep,name=children,proto3" json:"children,omitempty"`
 	Ids                  []int64        `protobuf:"varint,27,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`

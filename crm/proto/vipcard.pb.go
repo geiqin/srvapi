@@ -21,16 +21,16 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Vipcard struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	CardId               int32    `protobuf:"varint,2,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
-	CustomerId           int64    `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	Number               string   `protobuf:"bytes,4,opt,name=number,proto3" json:"number,omitempty"`
-	UserId               int64    `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	OpenDate             string   `protobuf:"bytes,6,opt,name=open_date,json=openDate,proto3" json:"open_date,omitempty"`
-	ValidateDate         string   `protobuf:"bytes,7,opt,name=validate_date,json=validateDate,proto3" json:"validate_date,omitempty"`
-	DisplayName          string   `protobuf:"bytes,8,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Issuer               string   `protobuf:"bytes,9,opt,name=issuer,proto3" json:"issuer,omitempty"`
-	Status               int32    `protobuf:"varint,10,opt,name=status,proto3" json:"status,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	CardId               int32    `protobuf:"varint,2,opt,name=card_id,json=cardId,proto3" json:"card_id"`
+	CustomerId           int64    `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Number               string   `protobuf:"bytes,4,opt,name=number,proto3" json:"number"`
+	UserId               int64    `protobuf:"varint,5,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	OpenDate             string   `protobuf:"bytes,6,opt,name=open_date,json=openDate,proto3" json:"open_date"`
+	ValidateDate         string   `protobuf:"bytes,7,opt,name=validate_date,json=validateDate,proto3" json:"validate_date"`
+	DisplayName          string   `protobuf:"bytes,8,opt,name=display_name,json=displayName,proto3" json:"display_name"`
+	Issuer               string   `protobuf:"bytes,9,opt,name=issuer,proto3" json:"issuer"`
+	Status               int32    `protobuf:"varint,10,opt,name=status,proto3" json:"status"`
 	CreatedAt            string   `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	DeletedAt            string   `protobuf:"bytes,13,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
