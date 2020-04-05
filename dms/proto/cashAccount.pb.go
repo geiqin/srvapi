@@ -223,7 +223,9 @@ func init() {
 	proto.RegisterType((*CashAccountResponse)(nil), "geiqin.srv.dms.CashAccountResponse")
 }
 
-func init() { proto.RegisterFile("cashAccount.proto", fileDescriptor_4b8a2214f459de5b) }
+func init() {
+	proto.RegisterFile("cashAccount.proto", fileDescriptor_4b8a2214f459de5b)
+}
 
 var fileDescriptor_4b8a2214f459de5b = []byte{
 	// 467 bytes of a gzipped FileDescriptorProto

@@ -1,0 +1,59 @@
+syntax = "proto3";
+import "profile.proto";
+import "common.proto";
+import "role.proto";
+
+package geiqin.srv.uim;
+
+service UserService {
+    rpc Create (User) returns (UserResponse) {}
+    rpc Update (User) returns (UserResponse) {}
+    rpc Get (User) returns (UserResponse) {}
+    rpc Delete (User) returns (UserResponse) {}
+    rpc Search (UserWhere) returns (UserResponse) {}
+    rpc Login (UserWhere) returns (TokenResponse) {}
+    rpc Info (Empty) returns (UserResponse) {}
+    rpc ValidateToken (Token) returns (TokenResponse) {}
+}
+
+// 用户信息
+message User {
+    int64  id = 1;
+    string name = 2;
+    string display_name = 3;
+    string avatar_id = 4;
+    string avatar_url = 5;
+    string password = 6;
+    string email = 7;
+    string mobile =8;
+    string gender = 9;
+    string created_at =10;
+    string updated_at = 11;
+    Profile profile = 12;
+    repeated Role roles =13;
+    repeated int64 ids =14;
+}
+
+
+// 用户信息
+message UserWhere {
+    int32 paged =1;
+    int32 page_size=2;
+    string sorting =3;
+    string name = 4;
+    string display_name = 5;
+    string email = 6;
+    string mobile =7;
+    string gender = 8;
+    string password = 9; //此字段是额外字段
+}
+
+
+message UserResponse {
+    User entity = 1;
+    Pager pager =2;
+    repeated User items = 3;
+    Error error = 4;
+    Info info =5;
+}
+

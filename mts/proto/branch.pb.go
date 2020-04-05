@@ -232,7 +232,9 @@ func init() {
 	proto.RegisterType((*BranchResponse)(nil), "geiqin.srv.mts.BranchResponse")
 }
 
-func init() { proto.RegisterFile("branch.proto", fileDescriptor_20ce1f5884b7e047) }
+func init() {
+	proto.RegisterFile("branch.proto", fileDescriptor_20ce1f5884b7e047)
+}
 
 var fileDescriptor_20ce1f5884b7e047 = []byte{
 	// 437 bytes of a gzipped FileDescriptorProto

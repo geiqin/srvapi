@@ -209,7 +209,9 @@ func init() {
 	proto.RegisterType((*CatResponse)(nil), "geiqin.srv.cms.media.CatResponse")
 }
 
-func init() { proto.RegisterFile("cat.proto", fileDescriptor_c0a5ac8640cab35d) }
+func init() {
+	proto.RegisterFile("cat.proto", fileDescriptor_c0a5ac8640cab35d)
+}
 
 var fileDescriptor_c0a5ac8640cab35d = []byte{
 	// 437 bytes of a gzipped FileDescriptorProto

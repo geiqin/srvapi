@@ -21,12 +21,12 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Cart struct {
-	Id                   string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
-	Count                int32       `protobuf:"varint,2,opt,name=count,proto3" json:"count"`
-	Total                float32     `protobuf:"fixed32,3,opt,name=total,proto3" json:"total"`
-	Discount             float32     `protobuf:"fixed32,4,opt,name=discount,proto3" json:"discount"`
-	Freight              float32     `protobuf:"fixed32,5,opt,name=freight,proto3" json:"freight"`
-	Amount               float32     `protobuf:"fixed32,6,opt,name=amount,proto3" json:"amount"`
+	Id                   string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Count                int32       `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Total                float32     `protobuf:"fixed32,3,opt,name=total,proto3" json:"total,omitempty"`
+	Discount             float32     `protobuf:"fixed32,4,opt,name=discount,proto3" json:"discount,omitempty"`
+	Freight              float32     `protobuf:"fixed32,5,opt,name=freight,proto3" json:"freight,omitempty"`
+	Amount               float32     `protobuf:"fixed32,6,opt,name=amount,proto3" json:"amount,omitempty"`
 	Items                []*CartItem `protobuf:"bytes,7,rep,name=items,proto3" json:"items,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
@@ -367,7 +367,9 @@ func init() {
 	proto.RegisterType((*CartResponse)(nil), "geiqin.srv.ord.private.CartResponse")
 }
 
-func init() { proto.RegisterFile("cart.proto", fileDescriptor_bf731a5c8f9a516f) }
+func init() {
+	proto.RegisterFile("cart.proto", fileDescriptor_bf731a5c8f9a516f)
+}
 
 var fileDescriptor_bf731a5c8f9a516f = []byte{
 	// 603 bytes of a gzipped FileDescriptorProto

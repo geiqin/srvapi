@@ -125,16 +125,16 @@ func (m *CouponTicketWhere) GetStatus() string {
 
 // 优惠劵凭证
 type CouponTicket struct {
-	Id                   int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	TicketSn             string      `protobuf:"bytes,2,opt,name=ticket_sn,json=ticketSn,proto3" json:"ticket_sn"`
-	StartAt              string      `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at"`
-	EndAt                string      `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at"`
-	CouponId             int64       `protobuf:"varint,5,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`
-	CustomerId           int64       `protobuf:"varint,6,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	OrderId              int64       `protobuf:"varint,7,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	IsUsed               bool        `protobuf:"varint,8,opt,name=is_used,json=isUsed,proto3" json:"is_used"`
-	UseAt                string      `protobuf:"bytes,9,opt,name=use_at,json=useAt,proto3" json:"use_at"`
-	Status               int32       `protobuf:"varint,10,opt,name=status,proto3" json:"status"`
+	Id                   int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TicketSn             string      `protobuf:"bytes,2,opt,name=ticket_sn,json=ticketSn,proto3" json:"ticket_sn,omitempty"`
+	StartAt              string      `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
+	EndAt                string      `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
+	CouponId             int64       `protobuf:"varint,5,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id,omitempty"`
+	CustomerId           int64       `protobuf:"varint,6,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	OrderId              int64       `protobuf:"varint,7,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	IsUsed               bool        `protobuf:"varint,8,opt,name=is_used,json=isUsed,proto3" json:"is_used,omitempty"`
+	UseAt                string      `protobuf:"bytes,9,opt,name=use_at,json=useAt,proto3" json:"use_at,omitempty"`
+	Status               int32       `protobuf:"varint,10,opt,name=status,proto3" json:"status,omitempty"`
 	CreatedAt            string      `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string      `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Ids                  []int64     `protobuf:"varint,13,rep,packed,name=ids,proto3" json:"ids,omitempty"`
@@ -269,17 +269,17 @@ func (m *CouponTicket) GetCoupon() *CouponInfo {
 
 // 优惠券
 type CouponInfo struct {
-	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CouponSn             string         `protobuf:"bytes,2,opt,name=coupon_sn,json=couponSn,proto3" json:"coupon_sn"`
-	Title                string         `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
-	IsAtLeast            bool           `protobuf:"varint,4,opt,name=is_at_least,json=isAtLeast,proto3" json:"is_at_least"`
-	AtLeast              float32        `protobuf:"fixed32,5,opt,name=at_least,json=atLeast,proto3" json:"at_least"`
-	PreferentialType     int32          `protobuf:"varint,6,opt,name=preferential_type,json=preferentialType,proto3" json:"preferential_type"`
-	PreferentialMoney    float32        `protobuf:"fixed32,7,opt,name=preferential_money,json=preferentialMoney,proto3" json:"preferential_money"`
-	PreferentialDiscount float32        `protobuf:"fixed32,8,opt,name=preferential_discount,json=preferentialDiscount,proto3" json:"preferential_discount"`
-	ExchangeNum          int32          `protobuf:"varint,9,opt,name=exchange_num,json=exchangeNum,proto3" json:"exchange_num"`
-	RangeType            string         `protobuf:"bytes,10,opt,name=range_type,json=rangeType,proto3" json:"range_type"`
-	Description          string         `protobuf:"bytes,11,opt,name=description,proto3" json:"description"`
+	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CouponSn             string         `protobuf:"bytes,2,opt,name=coupon_sn,json=couponSn,proto3" json:"coupon_sn,omitempty"`
+	Title                string         `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	IsAtLeast            bool           `protobuf:"varint,4,opt,name=is_at_least,json=isAtLeast,proto3" json:"is_at_least,omitempty"`
+	AtLeast              float32        `protobuf:"fixed32,5,opt,name=at_least,json=atLeast,proto3" json:"at_least,omitempty"`
+	PreferentialType     int32          `protobuf:"varint,6,opt,name=preferential_type,json=preferentialType,proto3" json:"preferential_type,omitempty"`
+	PreferentialMoney    float32        `protobuf:"fixed32,7,opt,name=preferential_money,json=preferentialMoney,proto3" json:"preferential_money,omitempty"`
+	PreferentialDiscount float32        `protobuf:"fixed32,8,opt,name=preferential_discount,json=preferentialDiscount,proto3" json:"preferential_discount,omitempty"`
+	ExchangeNum          int32          `protobuf:"varint,9,opt,name=exchange_num,json=exchangeNum,proto3" json:"exchange_num,omitempty"`
+	RangeType            string         `protobuf:"bytes,10,opt,name=range_type,json=rangeType,proto3" json:"range_type,omitempty"`
+	Description          string         `protobuf:"bytes,11,opt,name=description,proto3" json:"description,omitempty"`
 	Goodses              []*CouponGoods `protobuf:"bytes,12,rep,name=goodses,proto3" json:"goodses,omitempty"`
 	Ids                  []int64        `protobuf:"varint,13,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
@@ -490,7 +490,9 @@ func init() {
 	proto.RegisterType((*CouponTicketResponse)(nil), "geiqin.srv.ims.coupon.CouponTicketResponse")
 }
 
-func init() { proto.RegisterFile("couponTicket.proto", fileDescriptor_b05ea0f1ee352a83) }
+func init() {
+	proto.RegisterFile("couponTicket.proto", fileDescriptor_b05ea0f1ee352a83)
+}
 
 var fileDescriptor_b05ea0f1ee352a83 = []byte{
 	// 831 bytes of a gzipped FileDescriptorProto

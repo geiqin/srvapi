@@ -21,17 +21,17 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Present struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	ItemId               int64    `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuId                int64    `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	FetchLimit           int32    `protobuf:"varint,5,opt,name=fetch_limit,json=fetchLimit,proto3" json:"fetch_limit"`
-	LongEffective        bool     `protobuf:"varint,6,opt,name=long_effective,json=longEffective,proto3" json:"long_effective"`
-	StartAt              string   `protobuf:"bytes,7,opt,name=start_at,json=startAt,proto3" json:"start_at"`
-	EndAt                string   `protobuf:"bytes,8,opt,name=end_at,json=endAt,proto3" json:"end_at"`
-	IssuedNum            int32    `protobuf:"varint,9,opt,name=issued_num,json=issuedNum,proto3" json:"issued_num"`
-	ExchangedNum         int32    `protobuf:"varint,10,opt,name=exchanged_num,json=exchangedNum,proto3" json:"exchanged_num"`
-	Status               int32    `protobuf:"varint,11,opt,name=status,proto3" json:"status"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ItemId               int64    `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuId                int64    `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	FetchLimit           int32    `protobuf:"varint,5,opt,name=fetch_limit,json=fetchLimit,proto3" json:"fetch_limit,omitempty"`
+	LongEffective        bool     `protobuf:"varint,6,opt,name=long_effective,json=longEffective,proto3" json:"long_effective,omitempty"`
+	StartAt              string   `protobuf:"bytes,7,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
+	EndAt                string   `protobuf:"bytes,8,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
+	IssuedNum            int32    `protobuf:"varint,9,opt,name=issued_num,json=issuedNum,proto3" json:"issued_num,omitempty"`
+	ExchangedNum         int32    `protobuf:"varint,10,opt,name=exchanged_num,json=exchangedNum,proto3" json:"exchanged_num,omitempty"`
+	Status               int32    `protobuf:"varint,11,opt,name=status,proto3" json:"status,omitempty"`
 	CreatedAt            string   `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Ids                  []int64  `protobuf:"varint,14,rep,packed,name=ids,proto3" json:"ids,omitempty"`
@@ -240,7 +240,9 @@ func init() {
 	proto.RegisterType((*PresentResponse)(nil), "geiqin.srv.ims.present.PresentResponse")
 }
 
-func init() { proto.RegisterFile("present.proto", fileDescriptor_7cdd2afe20cfa69b) }
+func init() {
+	proto.RegisterFile("present.proto", fileDescriptor_7cdd2afe20cfa69b)
+}
 
 var fileDescriptor_7cdd2afe20cfa69b = []byte{
 	// 502 bytes of a gzipped FileDescriptorProto

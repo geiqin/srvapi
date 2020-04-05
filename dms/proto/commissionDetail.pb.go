@@ -231,7 +231,9 @@ func init() {
 	proto.RegisterType((*CommissionDetailResponse)(nil), "geiqin.srv.dms.CommissionDetailResponse")
 }
 
-func init() { proto.RegisterFile("commissionDetail.proto", fileDescriptor_d4da00a9d4c67a27) }
+func init() {
+	proto.RegisterFile("commissionDetail.proto", fileDescriptor_d4da00a9d4c67a27)
+}
 
 var fileDescriptor_d4da00a9d4c67a27 = []byte{
 	// 484 bytes of a gzipped FileDescriptorProto

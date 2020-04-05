@@ -21,20 +21,20 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Address struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CustomerId           int64    `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	LastName             string   `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3" json:"last_name"`
-	FirstName            string   `protobuf:"bytes,5,opt,name=first_name,json=firstName,proto3" json:"first_name"`
-	AreaId               int64    `protobuf:"varint,6,opt,name=area_id,json=areaId,proto3" json:"area_id"`
-	StreetId             int64    `protobuf:"varint,7,opt,name=street_id,json=streetId,proto3" json:"street_id"`
-	Addr                 string   `protobuf:"bytes,8,opt,name=addr,proto3" json:"addr"`
-	Postcode             string   `protobuf:"bytes,9,opt,name=postcode,proto3" json:"postcode"`
-	Mobile               string   `protobuf:"bytes,10,opt,name=mobile,proto3" json:"mobile"`
-	Tel                  string   `protobuf:"bytes,11,opt,name=tel,proto3" json:"tel"`
-	DeliveryDay          string   `protobuf:"bytes,12,opt,name=delivery_day,json=deliveryDay,proto3" json:"delivery_day"`
-	DeliveryTime         string   `protobuf:"bytes,13,opt,name=delivery_time,json=deliveryTime,proto3" json:"delivery_time"`
-	Defaulted            bool     `protobuf:"varint,14,opt,name=defaulted,proto3" json:"defaulted"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CustomerId           int64    `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	LastName             string   `protobuf:"bytes,4,opt,name=last_name,json=lastName,proto3" json:"last_name,omitempty"`
+	FirstName            string   `protobuf:"bytes,5,opt,name=first_name,json=firstName,proto3" json:"first_name,omitempty"`
+	AreaId               int64    `protobuf:"varint,6,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
+	StreetId             int64    `protobuf:"varint,7,opt,name=street_id,json=streetId,proto3" json:"street_id,omitempty"`
+	Addr                 string   `protobuf:"bytes,8,opt,name=addr,proto3" json:"addr,omitempty"`
+	Postcode             string   `protobuf:"bytes,9,opt,name=postcode,proto3" json:"postcode,omitempty"`
+	Mobile               string   `protobuf:"bytes,10,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Tel                  string   `protobuf:"bytes,11,opt,name=tel,proto3" json:"tel,omitempty"`
+	DeliveryDay          string   `protobuf:"bytes,12,opt,name=delivery_day,json=deliveryDay,proto3" json:"delivery_day,omitempty"`
+	DeliveryTime         string   `protobuf:"bytes,13,opt,name=delivery_time,json=deliveryTime,proto3" json:"delivery_time,omitempty"`
+	Defaulted            bool     `protobuf:"varint,14,opt,name=defaulted,proto3" json:"defaulted,omitempty"`
 	CreatedAt            string   `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Area                 *Area    `protobuf:"bytes,17,opt,name=area,proto3" json:"area,omitempty"`
@@ -514,7 +514,9 @@ func init() {
 	proto.RegisterType((*AddressResponse)(nil), "geiqin.srv.crm.AddressResponse")
 }
 
-func init() { proto.RegisterFile("address.proto", fileDescriptor_982c640dad8fe78e) }
+func init() {
+	proto.RegisterFile("address.proto", fileDescriptor_982c640dad8fe78e)
+}
 
 var fileDescriptor_982c640dad8fe78e = []byte{
 	// 836 bytes of a gzipped FileDescriptorProto

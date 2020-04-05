@@ -400,7 +400,9 @@ func init() {
 	proto.RegisterType((*BaseWhere)(nil), "geiqin.srv.ims.present.BaseWhere")
 }
 
-func init() { proto.RegisterFile("common.proto", fileDescriptor_555bd8c177793206) }
+func init() {
+	proto.RegisterFile("common.proto", fileDescriptor_555bd8c177793206)
+}
 
 var fileDescriptor_555bd8c177793206 = []byte{
 	// 440 bytes of a gzipped FileDescriptorProto

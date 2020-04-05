@@ -167,7 +167,9 @@ func init() {
 	proto.RegisterType((*FanTrackResponse)(nil), "geiqin.srv.sns.FanTrackResponse")
 }
 
-func init() { proto.RegisterFile("fanTrack.proto", fileDescriptor_2ebdb3459b3bd922) }
+func init() {
+	proto.RegisterFile("fanTrack.proto", fileDescriptor_2ebdb3459b3bd922)
+}
 
 var fileDescriptor_2ebdb3459b3bd922 = []byte{
 	// 269 bytes of a gzipped FileDescriptorProto

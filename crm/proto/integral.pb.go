@@ -136,7 +136,9 @@ func init() {
 	proto.RegisterType((*IntegralResponse)(nil), "geiqin.srv.crm.IntegralResponse")
 }
 
-func init() { proto.RegisterFile("integral.proto", fileDescriptor_d3d836c8d70e1b53) }
+func init() {
+	proto.RegisterFile("integral.proto", fileDescriptor_d3d836c8d70e1b53)
+}
 
 var fileDescriptor_d3d836c8d70e1b53 = []byte{
 	// 276 bytes of a gzipped FileDescriptorProto

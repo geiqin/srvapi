@@ -223,7 +223,9 @@ func init() {
 	proto.RegisterType((*SupplierContactResponse)(nil), "geiqin.srv.wms.SupplierContactResponse")
 }
 
-func init() { proto.RegisterFile("supplierContact.proto", fileDescriptor_dc715dceb827fce9) }
+func init() {
+	proto.RegisterFile("supplierContact.proto", fileDescriptor_dc715dceb827fce9)
+}
 
 var fileDescriptor_dc715dceb827fce9 = []byte{
 	// 439 bytes of a gzipped FileDescriptorProto

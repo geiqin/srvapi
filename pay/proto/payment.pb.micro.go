@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
+	client "github.com/micro/go-micro/v2/client"
+	server "github.com/micro/go-micro/v2/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -50,12 +50,6 @@ type weixinService struct {
 }
 
 func NewWeixinService(name string, c client.Client) WeixinService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.pay"
-	}
 	return &weixinService{
 		c:    c,
 		name: name,
@@ -166,12 +160,6 @@ type alipayService struct {
 }
 
 func NewAlipayService(name string, c client.Client) AlipayService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.pay"
-	}
 	return &alipayService{
 		c:    c,
 		name: name,

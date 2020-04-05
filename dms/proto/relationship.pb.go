@@ -287,7 +287,9 @@ func init() {
 	proto.RegisterType((*RelationshipResponse)(nil), "geiqin.srv.dms.RelationshipResponse")
 }
 
-func init() { proto.RegisterFile("relationship.proto", fileDescriptor_a5623305174737df) }
+func init() {
+	proto.RegisterFile("relationship.proto", fileDescriptor_a5623305174737df)
+}
 
 var fileDescriptor_a5623305174737df = []byte{
 	// 515 bytes of a gzipped FileDescriptorProto

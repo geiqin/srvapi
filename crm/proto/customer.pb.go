@@ -21,40 +21,40 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Customer struct {
-	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CustomerSn           string     `protobuf:"bytes,2,opt,name=customer_sn,json=customerSn,proto3" json:"customer_sn"`
-	Name                 string     `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	DisplayName          string     `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name"`
-	Realname             string     `protobuf:"bytes,5,opt,name=realname,proto3" json:"realname"`
-	Idcard               string     `protobuf:"bytes,6,opt,name=idcard,proto3" json:"idcard"`
-	Gender               int32      `protobuf:"varint,7,opt,name=gender,proto3" json:"gender"`
-	Mobile               string     `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile"`
-	Email                string     `protobuf:"bytes,9,opt,name=email,proto3" json:"email"`
-	AvatarId             int64      `protobuf:"varint,10,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id"`
-	AvatarUrl            string     `protobuf:"bytes,11,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
-	LevelId              int32      `protobuf:"varint,12,opt,name=level_id,json=levelId,proto3" json:"level_id"`
-	Advance              float32    `protobuf:"fixed32,13,opt,name=advance,proto3" json:"advance"`
-	GrowthValue          int32      `protobuf:"varint,14,opt,name=growth_value,json=growthValue,proto3" json:"growth_value"`
-	Integral             int32      `protobuf:"varint,15,opt,name=integral,proto3" json:"integral"`
-	TradedNum            int32      `protobuf:"varint,16,opt,name=traded_num,json=tradedNum,proto3" json:"traded_num"`
-	TradedMoney          float32    `protobuf:"fixed32,17,opt,name=traded_money,json=tradedMoney,proto3" json:"traded_money"`
-	ReviewNum            int32      `protobuf:"varint,18,opt,name=review_num,json=reviewNum,proto3" json:"review_num"`
-	FavoriteNum          int32      `protobuf:"varint,19,opt,name=favorite_num,json=favoriteNum,proto3" json:"favorite_num"`
-	ReferCustomerId      int64      `protobuf:"varint,20,opt,name=refer_customer_id,json=referCustomerId,proto3" json:"refer_customer_id"`
-	ReferUrl             string     `protobuf:"bytes,21,opt,name=refer_url,json=referUrl,proto3" json:"refer_url"`
-	Locked               bool       `protobuf:"varint,22,opt,name=locked,proto3" json:"locked"`
-	Trusted              bool       `protobuf:"varint,23,opt,name=trusted,proto3" json:"trusted"`
-	BindedMobile         bool       `protobuf:"varint,24,opt,name=binded_mobile,json=bindedMobile,proto3" json:"binded_mobile"`
-	BindedEmail          bool       `protobuf:"varint,25,opt,name=binded_email,json=bindedEmail,proto3" json:"binded_email"`
-	AreaId               int64      `protobuf:"varint,26,opt,name=area_id,json=areaId,proto3" json:"area_id"`
-	SourceType           int32      `protobuf:"varint,27,opt,name=source_type,json=sourceType,proto3" json:"source_type"`
-	Birthday             string     `protobuf:"bytes,28,opt,name=birthday,proto3" json:"birthday"`
-	Memo                 string     `protobuf:"bytes,29,opt,name=memo,proto3" json:"memo"`
+	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CustomerSn           string     `protobuf:"bytes,2,opt,name=customer_sn,json=customerSn,proto3" json:"customer_sn,omitempty"`
+	Name                 string     `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName          string     `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Realname             string     `protobuf:"bytes,5,opt,name=realname,proto3" json:"realname,omitempty"`
+	Idcard               string     `protobuf:"bytes,6,opt,name=idcard,proto3" json:"idcard,omitempty"`
+	Gender               int32      `protobuf:"varint,7,opt,name=gender,proto3" json:"gender,omitempty"`
+	Mobile               string     `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Email                string     `protobuf:"bytes,9,opt,name=email,proto3" json:"email,omitempty"`
+	AvatarId             int64      `protobuf:"varint,10,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id,omitempty"`
+	AvatarUrl            string     `protobuf:"bytes,11,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	LevelId              int32      `protobuf:"varint,12,opt,name=level_id,json=levelId,proto3" json:"level_id,omitempty"`
+	Advance              float32    `protobuf:"fixed32,13,opt,name=advance,proto3" json:"advance,omitempty"`
+	GrowthValue          int32      `protobuf:"varint,14,opt,name=growth_value,json=growthValue,proto3" json:"growth_value,omitempty"`
+	Integral             int32      `protobuf:"varint,15,opt,name=integral,proto3" json:"integral,omitempty"`
+	TradedNum            int32      `protobuf:"varint,16,opt,name=traded_num,json=tradedNum,proto3" json:"traded_num,omitempty"`
+	TradedMoney          float32    `protobuf:"fixed32,17,opt,name=traded_money,json=tradedMoney,proto3" json:"traded_money,omitempty"`
+	ReviewNum            int32      `protobuf:"varint,18,opt,name=review_num,json=reviewNum,proto3" json:"review_num,omitempty"`
+	FavoriteNum          int32      `protobuf:"varint,19,opt,name=favorite_num,json=favoriteNum,proto3" json:"favorite_num,omitempty"`
+	ReferCustomerId      int64      `protobuf:"varint,20,opt,name=refer_customer_id,json=referCustomerId,proto3" json:"refer_customer_id,omitempty"`
+	ReferUrl             string     `protobuf:"bytes,21,opt,name=refer_url,json=referUrl,proto3" json:"refer_url,omitempty"`
+	Locked               bool       `protobuf:"varint,22,opt,name=locked,proto3" json:"locked,omitempty"`
+	Trusted              bool       `protobuf:"varint,23,opt,name=trusted,proto3" json:"trusted,omitempty"`
+	BindedMobile         bool       `protobuf:"varint,24,opt,name=binded_mobile,json=bindedMobile,proto3" json:"binded_mobile,omitempty"`
+	BindedEmail          bool       `protobuf:"varint,25,opt,name=binded_email,json=bindedEmail,proto3" json:"binded_email,omitempty"`
+	AreaId               int64      `protobuf:"varint,26,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
+	SourceType           int32      `protobuf:"varint,27,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
+	Birthday             string     `protobuf:"bytes,28,opt,name=birthday,proto3" json:"birthday,omitempty"`
+	Memo                 string     `protobuf:"bytes,29,opt,name=memo,proto3" json:"memo,omitempty"`
 	CreatedAt            string     `protobuf:"bytes,30,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string     `protobuf:"bytes,31,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	DeletedAt            string     `protobuf:"bytes,32,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
 	Level                *Level     `protobuf:"bytes,33,opt,name=level,proto3" json:"level,omitempty"`
-	Tags                 []*Tag     `protobuf:"bytes,35,rep,name=tags,proto3" json:"tags,omitempty" gorm:"many2many:customer_tags;"`
+	Tags                 []*Tag     `protobuf:"bytes,35,rep,name=tags,proto3" json:"tags,omitempty"`
 	Vipcards             []*Vipcard `protobuf:"bytes,36,rep,name=vipcards,proto3" json:"vipcards,omitempty"`
 	Addrs                []*Address `protobuf:"bytes,37,rep,name=addrs,proto3" json:"addrs,omitempty"`
 	Ids                  []int64    `protobuf:"varint,38,rep,packed,name=ids,proto3" json:"ids,omitempty"`
@@ -570,7 +570,9 @@ func init() {
 	proto.RegisterType((*CustomerResponse)(nil), "geiqin.srv.crm.CustomerResponse")
 }
 
-func init() { proto.RegisterFile("customer.proto", fileDescriptor_9efa92dae3d6ec46) }
+func init() {
+	proto.RegisterFile("customer.proto", fileDescriptor_9efa92dae3d6ec46)
+}
 
 var fileDescriptor_9efa92dae3d6ec46 = []byte{
 	// 1043 bytes of a gzipped FileDescriptorProto

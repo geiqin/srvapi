@@ -116,12 +116,12 @@ func (m *OrderPromotionParams) GetEndDate() string {
 }
 
 type OrderPromotion struct {
-	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CustomerId           int64                  `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	OrderId              int64                  `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	PromotionId          int64                  `protobuf:"varint,4,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id"`
-	PromotionType        string                 `protobuf:"bytes,5,opt,name=promotion_type,json=promotionType,proto3" json:"promotion_type"`
-	Price                float32                `protobuf:"fixed32,6,opt,name=price,proto3" json:"price"`
+	Id                   int64                  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CustomerId           int64                  `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	OrderId              int64                  `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	PromotionId          int64                  `protobuf:"varint,4,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id,omitempty"`
+	PromotionType        string                 `protobuf:"bytes,5,opt,name=promotion_type,json=promotionType,proto3" json:"promotion_type,omitempty"`
+	Price                float32                `protobuf:"fixed32,6,opt,name=price,proto3" json:"price,omitempty"`
 	CreatedAt            string                 `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string                 `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Goodses              []*OrderPromotionGoods `protobuf:"bytes,9,rep,name=goodses,proto3" json:"goodses,omitempty"`
@@ -219,12 +219,12 @@ func (m *OrderPromotion) GetGoodses() []*OrderPromotionGoods {
 }
 
 type OrderPromotionGoods struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	OrderPromotionId     int64    `protobuf:"varint,2,opt,name=order_promotion_id,json=orderPromotionId,proto3" json:"order_promotion_id"`
-	ItemId               int64    `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuId                int64    `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	GoodsNum             int32    `protobuf:"varint,5,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num"`
-	Price                float32  `protobuf:"fixed32,6,opt,name=price,proto3" json:"price"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	OrderPromotionId     int64    `protobuf:"varint,2,opt,name=order_promotion_id,json=orderPromotionId,proto3" json:"order_promotion_id,omitempty"`
+	ItemId               int64    `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuId                int64    `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	GoodsNum             int32    `protobuf:"varint,5,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num,omitempty"`
+	Price                float32  `protobuf:"fixed32,6,opt,name=price,proto3" json:"price,omitempty"`
 	CreatedAt            string   `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -391,7 +391,9 @@ func init() {
 	proto.RegisterType((*OrderPromotionResponse)(nil), "geiqin.srv.ord.private.OrderPromotionResponse")
 }
 
-func init() { proto.RegisterFile("orderPromotion.proto", fileDescriptor_9a828aeaf0d55488) }
+func init() {
+	proto.RegisterFile("orderPromotion.proto", fileDescriptor_9a828aeaf0d55488)
+}
 
 var fileDescriptor_9a828aeaf0d55488 = []byte{
 	// 576 bytes of a gzipped FileDescriptorProto

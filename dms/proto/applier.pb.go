@@ -21,16 +21,16 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Applier struct {
-	Id                   int64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	DistributorId        int64                 `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id"`
-	RankId               int32                 `protobuf:"varint,3,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
-	DisplayName          string                `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name"`
-	Autoed               bool                  `protobuf:"varint,5,opt,name=autoed,proto3" json:"autoed"`
-	CustomerId           int64                 `protobuf:"varint,6,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	Status               string                `protobuf:"bytes,7,opt,name=status,proto3" json:"status"`
-	Reason               string                `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason"`
-	Remarks              string                `protobuf:"bytes,9,opt,name=remarks,proto3" json:"remarks"`
-	Addons               string                `protobuf:"bytes,10,opt,name=addons,proto3" json:"addons"`
+	Id                   int64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	DistributorId        int64                 `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id,omitempty"`
+	RankId               int32                 `protobuf:"varint,3,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
+	DisplayName          string                `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Autoed               bool                  `protobuf:"varint,5,opt,name=autoed,proto3" json:"autoed,omitempty"`
+	CustomerId           int64                 `protobuf:"varint,6,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	Status               string                `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
+	Reason               string                `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason,omitempty"`
+	Remarks              string                `protobuf:"bytes,9,opt,name=remarks,proto3" json:"remarks,omitempty"`
+	Addons               string                `protobuf:"bytes,10,opt,name=addons,proto3" json:"addons,omitempty"`
 	CreatedAt            string                `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string                `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Distributor          *Distributor          `protobuf:"bytes,13,opt,name=distributor,proto3" json:"distributor,omitempty"`
@@ -657,7 +657,9 @@ func init() {
 	proto.RegisterType((*ApplierMeetCondition)(nil), "geiqin.srv.dms.ApplierMeetCondition")
 }
 
-func init() { proto.RegisterFile("applier.proto", fileDescriptor_83e53247d573818c) }
+func init() {
+	proto.RegisterFile("applier.proto", fileDescriptor_83e53247d573818c)
+}
 
 var fileDescriptor_83e53247d573818c = []byte{
 	// 1068 bytes of a gzipped FileDescriptorProto

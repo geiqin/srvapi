@@ -21,10 +21,10 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Tag struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	Type                 int32    `protobuf:"varint,3,opt,name=type,proto3" json:"type"`
-	ConditionType        int32    `protobuf:"varint,4,opt,name=condition_type,json=conditionType,proto3" json:"condition_type"`
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Type                 int32    `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`
+	ConditionType        int32    `protobuf:"varint,4,opt,name=condition_type,json=conditionType,proto3" json:"condition_type,omitempty"`
 	CreatedAt            string   `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	IsUse                int32    `protobuf:"varint,7,opt,name=is_use,json=isUse,proto3" json:"is_use,omitempty"`
@@ -258,7 +258,9 @@ func init() {
 	proto.RegisterType((*TagResponse)(nil), "geiqin.srv.crm.TagResponse")
 }
 
-func init() { proto.RegisterFile("tag.proto", fileDescriptor_27f545bcde37ecb5) }
+func init() {
+	proto.RegisterFile("tag.proto", fileDescriptor_27f545bcde37ecb5)
+}
 
 var fileDescriptor_27f545bcde37ecb5 = []byte{
 	// 450 bytes of a gzipped FileDescriptorProto

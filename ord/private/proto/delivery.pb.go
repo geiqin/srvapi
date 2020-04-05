@@ -268,12 +268,12 @@ func (m *Delivery) GetSafeguardId() int64 {
 }
 
 type DeliveryDetail struct {
-	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	DeliveryId           int64      `protobuf:"varint,2,opt,name=delivery_id,json=deliveryId,proto3" json:"delivery_id"`
-	OrderDetailId        int64      `protobuf:"varint,3,opt,name=order_detail_id,json=orderDetailId,proto3" json:"order_detail_id"`
-	ItemId               int64      `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuId                int64      `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	Num                  int32      `protobuf:"varint,6,opt,name=num,proto3" json:"num"`
+	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	DeliveryId           int64      `protobuf:"varint,2,opt,name=delivery_id,json=deliveryId,proto3" json:"delivery_id,omitempty"`
+	OrderDetailId        int64      `protobuf:"varint,3,opt,name=order_detail_id,json=orderDetailId,proto3" json:"order_detail_id,omitempty"`
+	ItemId               int64      `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuId                int64      `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Num                  int32      `protobuf:"varint,6,opt,name=num,proto3" json:"num,omitempty"`
 	Goods                *GoodsInfo `protobuf:"bytes,7,opt,name=goods,proto3" json:"goods,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
@@ -431,7 +431,9 @@ func init() {
 	proto.RegisterType((*DeliveryResponse)(nil), "geiqin.srv.ord.private.DeliveryResponse")
 }
 
-func init() { proto.RegisterFile("delivery.proto", fileDescriptor_bf387bcb4e23d880) }
+func init() {
+	proto.RegisterFile("delivery.proto", fileDescriptor_bf387bcb4e23d880)
+}
 
 var fileDescriptor_bf387bcb4e23d880 = []byte{
 	// 736 bytes of a gzipped FileDescriptorProto

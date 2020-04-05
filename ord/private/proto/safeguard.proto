@@ -113,6 +113,11 @@ message SafeguardReturnExpress {
     repeated SafeguardImage images = 5;
 }
 
+message SafeguardMetadata {
+    SafeguardAddress address = 1;
+    SafeguardReturnExpress return_express = 2;
+}
+
 message SafeguardWhere {
     int32 paged =1;
     int32 page_size =2;

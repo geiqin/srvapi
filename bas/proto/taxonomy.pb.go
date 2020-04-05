@@ -200,7 +200,9 @@ func init() {
 	proto.RegisterType((*TaxonomyResponse)(nil), "geiqin.srv.bas.TaxonomyResponse")
 }
 
-func init() { proto.RegisterFile("taxonomy.proto", fileDescriptor_1b3e90e04276df48) }
+func init() {
+	proto.RegisterFile("taxonomy.proto", fileDescriptor_1b3e90e04276df48)
+}
 
 var fileDescriptor_1b3e90e04276df48 = []byte{
 	// 384 bytes of a gzipped FileDescriptorProto

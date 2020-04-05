@@ -135,7 +135,9 @@ func init() {
 	proto.RegisterType((*InvoiceResponse)(nil), "geiqin.srv.ord.private.InvoiceResponse")
 }
 
-func init() { proto.RegisterFile("invoice.proto", fileDescriptor_3b1832ff34ba7c07) }
+func init() {
+	proto.RegisterFile("invoice.proto", fileDescriptor_3b1832ff34ba7c07)
+}
 
 var fileDescriptor_3b1832ff34ba7c07 = []byte{
 	// 287 bytes of a gzipped FileDescriptorProto

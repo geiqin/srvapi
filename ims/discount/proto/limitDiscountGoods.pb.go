@@ -200,7 +200,9 @@ func init() {
 	proto.RegisterType((*LimitDiscountGoodsResponse)(nil), "geiqin.srv.ims.discount.LimitDiscountGoodsResponse")
 }
 
-func init() { proto.RegisterFile("limitDiscountGoods.proto", fileDescriptor_5aed98e0b2304ae1) }
+func init() {
+	proto.RegisterFile("limitDiscountGoods.proto", fileDescriptor_5aed98e0b2304ae1)
+}
 
 var fileDescriptor_5aed98e0b2304ae1 = []byte{
 	// 415 bytes of a gzipped FileDescriptorProto

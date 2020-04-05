@@ -175,7 +175,9 @@ func init() {
 	proto.RegisterType((*WechatResponse)(nil), "geiqin.srv.sns.WechatResponse")
 }
 
-func init() { proto.RegisterFile("wechat.proto", fileDescriptor_e74b134486e7456c) }
+func init() {
+	proto.RegisterFile("wechat.proto", fileDescriptor_e74b134486e7456c)
+}
 
 var fileDescriptor_e74b134486e7456c = []byte{
 	// 434 bytes of a gzipped FileDescriptorProto

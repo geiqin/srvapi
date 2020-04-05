@@ -22,11 +22,11 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // 优惠劵凭证
 type CouponTicket struct {
-	Id                   int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	TicketSn             string      `protobuf:"bytes,2,opt,name=ticket_sn,json=ticketSn,proto3" json:"ticket_sn"`
-	StartAt              string      `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at"`
-	EndAt                string      `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at"`
-	CouponId             int64       `protobuf:"varint,5,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`
+	Id                   int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	TicketSn             string      `protobuf:"bytes,2,opt,name=ticket_sn,json=ticketSn,proto3" json:"ticket_sn,omitempty"`
+	StartAt              string      `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
+	EndAt                string      `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
+	CouponId             int64       `protobuf:"varint,5,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id,omitempty"`
 	Coupon               *CouponInfo `protobuf:"bytes,6,opt,name=coupon,proto3" json:"coupon,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
@@ -225,7 +225,9 @@ func init() {
 	proto.RegisterType((*CouponInfo)(nil), "geiqin.srv.ord.private.CouponInfo")
 }
 
-func init() { proto.RegisterFile("couponTicketInfo.proto", fileDescriptor_63b07f10809c5618) }
+func init() {
+	proto.RegisterFile("couponTicketInfo.proto", fileDescriptor_63b07f10809c5618)
+}
 
 var fileDescriptor_63b07f10809c5618 = []byte{
 	// 374 bytes of a gzipped FileDescriptorProto

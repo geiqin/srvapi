@@ -263,7 +263,9 @@ func init() {
 	proto.RegisterType((*WithdrawResponse)(nil), "geiqin.srv.dms.WithdrawResponse")
 }
 
-func init() { proto.RegisterFile("withdraw.proto", fileDescriptor_b0dd7acb611886fa) }
+func init() {
+	proto.RegisterFile("withdraw.proto", fileDescriptor_b0dd7acb611886fa)
+}
 
 var fileDescriptor_b0dd7acb611886fa = []byte{
 	// 574 bytes of a gzipped FileDescriptorProto

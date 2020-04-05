@@ -151,7 +151,9 @@ func init() {
 	proto.RegisterType((*AlipayLogin)(nil), "geiqin.srv.sns.AlipayLogin")
 }
 
-func init() { proto.RegisterFile("auth.proto", fileDescriptor_8bbd6f3875b0e874) }
+func init() {
+	proto.RegisterFile("auth.proto", fileDescriptor_8bbd6f3875b0e874)
+}
 
 var fileDescriptor_8bbd6f3875b0e874 = []byte{
 	// 252 bytes of a gzipped FileDescriptorProto

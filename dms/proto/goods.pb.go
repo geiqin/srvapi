@@ -21,11 +21,11 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Goods struct {
-	Id                   int64              `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	ItemId               int64              `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuId                int64              `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	Disabled             bool               `protobuf:"varint,6,opt,name=disabled,proto3" json:"disabled"`
-	Default              bool               `protobuf:"varint,7,opt,name=default,proto3" json:"default"`
+	Id                   int64              `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ItemId               int64              `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuId                int64              `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Disabled             bool               `protobuf:"varint,6,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	Default              bool               `protobuf:"varint,7,opt,name=default,proto3" json:"default,omitempty"`
 	CreatedAt            string             `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string             `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	GoodsCommission      []*GoodsCommission `protobuf:"bytes,10,rep,name=goods_commission,json=goodsCommission,proto3" json:"goods_commission,omitempty"`
@@ -359,7 +359,9 @@ func init() {
 	proto.RegisterType((*GoodsResponse)(nil), "geiqin.srv.dms.GoodsResponse")
 }
 
-func init() { proto.RegisterFile("goods.proto", fileDescriptor_a30593c5487368b0) }
+func init() {
+	proto.RegisterFile("goods.proto", fileDescriptor_a30593c5487368b0)
+}
 
 var fileDescriptor_a30593c5487368b0 = []byte{
 	// 630 bytes of a gzipped FileDescriptorProto

@@ -21,13 +21,13 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type OrderCoupon struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	OrderId              int64    `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	CustomerId           int64    `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	CouponId             int64    `protobuf:"varint,4,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id"`
-	CouponNum            int32    `protobuf:"varint,5,opt,name=coupon_num,json=couponNum,proto3" json:"coupon_num"`
-	CouponType           string   `protobuf:"bytes,6,opt,name=coupon_type,json=couponType,proto3" json:"coupon_type"`
-	CouponPrice          float32  `protobuf:"fixed32,7,opt,name=coupon_price,json=couponPrice,proto3" json:"coupon_price"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	OrderId              int64    `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	CustomerId           int64    `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	CouponId             int64    `protobuf:"varint,4,opt,name=coupon_id,json=couponId,proto3" json:"coupon_id,omitempty"`
+	CouponNum            int32    `protobuf:"varint,5,opt,name=coupon_num,json=couponNum,proto3" json:"coupon_num,omitempty"`
+	CouponType           string   `protobuf:"bytes,6,opt,name=coupon_type,json=couponType,proto3" json:"coupon_type,omitempty"`
+	CouponPrice          float32  `protobuf:"fixed32,7,opt,name=coupon_price,json=couponPrice,proto3" json:"coupon_price,omitempty"`
 	CreatedAt            string   `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -199,7 +199,9 @@ func init() {
 	proto.RegisterType((*OrderCouponResponse)(nil), "geiqin.srv.ord.private.OrderCouponResponse")
 }
 
-func init() { proto.RegisterFile("orderCoupon.proto", fileDescriptor_6f6d0333e07ddebc) }
+func init() {
+	proto.RegisterFile("orderCoupon.proto", fileDescriptor_6f6d0333e07ddebc)
+}
 
 var fileDescriptor_6f6d0333e07ddebc = []byte{
 	// 426 bytes of a gzipped FileDescriptorProto

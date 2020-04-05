@@ -44,10 +44,14 @@ message Vipcard {
     int64 user_id =5;
     string open_date =6;
     string validate_date =7;
-    string created_at =8;
-    string updated_at =9;
-    Card card =10;
-    repeated int64 ids =11;
+    string display_name =8;
+    string issuer = 9;
+    int32 status = 10;
+    string created_at =11;
+    string updated_at =12;
+    string deleted_at =13;
+    Card card =14;
+    repeated int64 ids =15;
 }
 
 //查询参数

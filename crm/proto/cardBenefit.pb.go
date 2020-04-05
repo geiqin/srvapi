@@ -21,10 +21,10 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type CardBenefit struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CardId               int32    `protobuf:"varint,2,opt,name=card_id,json=cardId,proto3" json:"card_id"`
-	BenefitId            int32    `protobuf:"varint,3,opt,name=benefit_id,json=benefitId,proto3" json:"benefit_id"`
-	Params               string   `protobuf:"bytes,4,opt,name=params,proto3" json:"params"`
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CardId               int32    `protobuf:"varint,2,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
+	BenefitId            int32    `protobuf:"varint,3,opt,name=benefit_id,json=benefitId,proto3" json:"benefit_id,omitempty"`
+	Params               string   `protobuf:"bytes,4,opt,name=params,proto3" json:"params,omitempty"`
 	CreatedAt            string   `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Benefit              *Benefit `protobuf:"bytes,7,opt,name=benefit,proto3" json:"benefit,omitempty"`
@@ -192,7 +192,9 @@ func init() {
 	proto.RegisterType((*CardBenefitResponse)(nil), "geiqin.srv.crm.CardBenefitResponse")
 }
 
-func init() { proto.RegisterFile("cardBenefit.proto", fileDescriptor_f69b83a596fd8713) }
+func init() {
+	proto.RegisterFile("cardBenefit.proto", fileDescriptor_f69b83a596fd8713)
+}
 
 var fileDescriptor_f69b83a596fd8713 = []byte{
 	// 403 bytes of a gzipped FileDescriptorProto

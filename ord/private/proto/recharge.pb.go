@@ -263,7 +263,9 @@ func init() {
 	proto.RegisterType((*RechargeResponse)(nil), "geiqin.srv.ord.private.RechargeResponse")
 }
 
-func init() { proto.RegisterFile("recharge.proto", fileDescriptor_97761fa03f464eb0) }
+func init() {
+	proto.RegisterFile("recharge.proto", fileDescriptor_97761fa03f464eb0)
+}
 
 var fileDescriptor_97761fa03f464eb0 = []byte{
 	// 505 bytes of a gzipped FileDescriptorProto

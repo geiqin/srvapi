@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
+	client "github.com/micro/go-micro/v2/client"
+	server "github.com/micro/go-micro/v2/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -64,12 +64,6 @@ type mySafeguardService struct {
 }
 
 func NewMySafeguardService(name string, c client.Client) MySafeguardService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.ord.private"
-	}
 	return &mySafeguardService{
 		c:    c,
 		name: name,
@@ -127,7 +121,7 @@ func (c *mySafeguardService) ApplyCancel(ctx context.Context, in *SafeguardWhere
 }
 
 func (c *mySafeguardService) GetType(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardTypeResponse, error) {
-	req := c.c.NewRequest(c.name, "MySafeguardService.getType", in)
+	req := c.c.NewRequest(c.name, "MySafeguardService.GetType", in)
 	out := new(SafeguardTypeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -137,7 +131,7 @@ func (c *mySafeguardService) GetType(ctx context.Context, in *SafeguardWhere, op
 }
 
 func (c *mySafeguardService) ConfirmType(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardTypeResponse, error) {
-	req := c.c.NewRequest(c.name, "MySafeguardService.confirmType", in)
+	req := c.c.NewRequest(c.name, "MySafeguardService.ConfirmType", in)
 	out := new(SafeguardTypeResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -305,12 +299,6 @@ type safeguardService struct {
 }
 
 func NewSafeguardService(name string, c client.Client) SafeguardService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.ord.private"
-	}
 	return &safeguardService{
 		c:    c,
 		name: name,

@@ -1,0 +1,24 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.uim;
+
+service ProfileService {
+    rpc Get (Profile) returns (ProfileResponse) {}
+    rpc Search (BaseWhere) returns (ProfileResponse) {}
+}
+
+// 用户信息
+message Profile {
+    int64 id = 1;
+    string company_name = 2;
+    string created_at = 3;
+    string updated_at = 4;
+}
+
+message ProfileResponse {
+    Profile entity = 1;
+    Pager pager =2;
+    repeated Profile items = 3;
+    Error error = 4;
+    Info info =5;
+}

@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
+	client "github.com/micro/go-micro/v2/client"
+	server "github.com/micro/go-micro/v2/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -35,7 +35,7 @@ var _ server.Option
 
 type MyConsumerService interface {
 	//邀请新客户
-	//rpc Invite (Consumer) returns (ConsumerResponse) {}
+	Create(ctx context.Context, in *Consumer, opts ...client.CallOption) (*ConsumerResponse, error)
 	//获取我的客户信息
 	//rpc Get (Consumer) returns (ConsumerResponse) {}
 	//查询我的客户
@@ -48,16 +48,20 @@ type myConsumerService struct {
 }
 
 func NewMyConsumerService(name string, c client.Client) MyConsumerService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.dms"
-	}
 	return &myConsumerService{
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *myConsumerService) Create(ctx context.Context, in *Consumer, opts ...client.CallOption) (*ConsumerResponse, error) {
+	req := c.c.NewRequest(c.name, "MyConsumerService.Create", in)
+	out := new(ConsumerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *myConsumerService) Search(ctx context.Context, in *ConsumerWhere, opts ...client.CallOption) (*ConsumerResponse, error) {
@@ -74,7 +78,7 @@ func (c *myConsumerService) Search(ctx context.Context, in *ConsumerWhere, opts 
 
 type MyConsumerServiceHandler interface {
 	//邀请新客户
-	//rpc Invite (Consumer) returns (ConsumerResponse) {}
+	Create(context.Context, *Consumer, *ConsumerResponse) error
 	//获取我的客户信息
 	//rpc Get (Consumer) returns (ConsumerResponse) {}
 	//查询我的客户
@@ -83,6 +87,7 @@ type MyConsumerServiceHandler interface {
 
 func RegisterMyConsumerServiceHandler(s server.Server, hdlr MyConsumerServiceHandler, opts ...server.HandlerOption) error {
 	type myConsumerService interface {
+		Create(ctx context.Context, in *Consumer, out *ConsumerResponse) error
 		Search(ctx context.Context, in *ConsumerWhere, out *ConsumerResponse) error
 	}
 	type MyConsumerService struct {
@@ -94,6 +99,10 @@ func RegisterMyConsumerServiceHandler(s server.Server, hdlr MyConsumerServiceHan
 
 type myConsumerServiceHandler struct {
 	MyConsumerServiceHandler
+}
+
+func (h *myConsumerServiceHandler) Create(ctx context.Context, in *Consumer, out *ConsumerResponse) error {
+	return h.MyConsumerServiceHandler.Create(ctx, in, out)
 }
 
 func (h *myConsumerServiceHandler) Search(ctx context.Context, in *ConsumerWhere, out *ConsumerResponse) error {
@@ -113,12 +122,6 @@ type consumerService struct {
 }
 
 func NewConsumerService(name string, c client.Client) ConsumerService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.dms"
-	}
 	return &consumerService{
 		c:    c,
 		name: name,

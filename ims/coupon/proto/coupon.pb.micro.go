@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
+	client "github.com/micro/go-micro/v2/client"
+	server "github.com/micro/go-micro/v2/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -54,12 +54,6 @@ type myCouponService struct {
 }
 
 func NewMyCouponService(name string, c client.Client) MyCouponService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.ims.coupon"
-	}
 	return &myCouponService{
 		c:    c,
 		name: name,
@@ -214,12 +208,6 @@ type couponService struct {
 }
 
 func NewCouponService(name string, c client.Client) CouponService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.ims.coupon"
-	}
 	return &couponService{
 		c:    c,
 		name: name,

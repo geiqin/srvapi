@@ -1,0 +1,31 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.uim;
+
+service RoleService {
+    rpc Create (Role) returns (RoleResponse) {}
+    rpc Update (Role) returns (RoleResponse) {}
+    rpc Delete (Role) returns (RoleResponse) {}
+    rpc Get (Role) returns (RoleResponse) {}
+    rpc Search (BaseWhere) returns (RoleResponse) {}
+}
+
+// 用户信息
+message Role {
+    int64 id = 1;
+    string name = 2;
+    string display_name = 3;
+    string memo = 4;
+    int32 level =5;
+    int64 store_id =6;
+    string created_at = 7;
+    string updated_at = 8;
+}
+
+message RoleResponse {
+    Role entity = 1;
+    Pager pager =2;
+    repeated Role items = 3;
+    Error error = 4;
+    Info info =5;
+}

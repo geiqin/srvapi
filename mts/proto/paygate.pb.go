@@ -184,7 +184,9 @@ func init() {
 	proto.RegisterType((*PaygateResponse)(nil), "geiqin.srv.mts.PaygateResponse")
 }
 
-func init() { proto.RegisterFile("paygate.proto", fileDescriptor_3cfcd5bde813e8e3) }
+func init() {
+	proto.RegisterFile("paygate.proto", fileDescriptor_3cfcd5bde813e8e3)
+}
 
 var fileDescriptor_3cfcd5bde813e8e3 = []byte{
 	// 386 bytes of a gzipped FileDescriptorProto

@@ -21,21 +21,21 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type GlobalCfg struct {
-	Id                      int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                    string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	ShareId                 int64    `protobuf:"varint,3,opt,name=share_id,json=shareId,proto3" json:"share_id"`
-	ShareUrl                string   `protobuf:"bytes,4,opt,name=share_url,json=shareUrl,proto3" json:"share_url"`
-	Mode                    int32    `protobuf:"varint,5,opt,name=mode,proto3" json:"mode"`
-	SettleMethod            int32    `protobuf:"varint,6,opt,name=settle_method,json=settleMethod,proto3" json:"settle_method"`
-	IsRecruit               bool     `protobuf:"varint,7,opt,name=is_recruit,json=isRecruit,proto3" json:"is_recruit"`
-	IsChecked               bool     `protobuf:"varint,8,opt,name=is_checked,json=isChecked,proto3" json:"is_checked"`
-	IsInnerBuy              bool     `protobuf:"varint,9,opt,name=is_inner_buy,json=isInnerBuy,proto3" json:"is_inner_buy"`
-	IsCommissionDisplay     bool     `protobuf:"varint,10,opt,name=is_commission_display,json=isCommissionDisplay,proto3" json:"is_commission_display"`
-	IsCommissionRateDisplay bool     `protobuf:"varint,11,opt,name=is_commission_rate_display,json=isCommissionRateDisplay,proto3" json:"is_commission_rate_display"`
-	AutoUpgrade             bool     `protobuf:"varint,12,opt,name=auto_upgrade,json=autoUpgrade,proto3" json:"auto_upgrade"`
-	RelateExpire            int32    `protobuf:"varint,13,opt,name=relate_expire,json=relateExpire,proto3" json:"relate_expire"`
-	RelateRob               int32    `protobuf:"varint,14,opt,name=relate_rob,json=relateRob,proto3" json:"relate_rob"`
-	RelateProtectDays       int32    `protobuf:"varint,15,opt,name=relate_protect_days,json=relateProtectDays,proto3" json:"relate_protect_days"`
+	Id                      int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                    string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	ShareId                 int64    `protobuf:"varint,3,opt,name=share_id,json=shareId,proto3" json:"share_id,omitempty"`
+	ShareUrl                string   `protobuf:"bytes,4,opt,name=share_url,json=shareUrl,proto3" json:"share_url,omitempty"`
+	Mode                    int32    `protobuf:"varint,5,opt,name=mode,proto3" json:"mode,omitempty"`
+	SettleMethod            int32    `protobuf:"varint,6,opt,name=settle_method,json=settleMethod,proto3" json:"settle_method,omitempty"`
+	IsRecruit               bool     `protobuf:"varint,7,opt,name=is_recruit,json=isRecruit,proto3" json:"is_recruit,omitempty"`
+	IsChecked               bool     `protobuf:"varint,8,opt,name=is_checked,json=isChecked,proto3" json:"is_checked,omitempty"`
+	IsInnerBuy              bool     `protobuf:"varint,9,opt,name=is_inner_buy,json=isInnerBuy,proto3" json:"is_inner_buy,omitempty"`
+	IsCommissionDisplay     bool     `protobuf:"varint,10,opt,name=is_commission_display,json=isCommissionDisplay,proto3" json:"is_commission_display,omitempty"`
+	IsCommissionRateDisplay bool     `protobuf:"varint,11,opt,name=is_commission_rate_display,json=isCommissionRateDisplay,proto3" json:"is_commission_rate_display,omitempty"`
+	AutoUpgrade             bool     `protobuf:"varint,12,opt,name=auto_upgrade,json=autoUpgrade,proto3" json:"auto_upgrade,omitempty"`
+	RelateExpire            int32    `protobuf:"varint,13,opt,name=relate_expire,json=relateExpire,proto3" json:"relate_expire,omitempty"`
+	RelateRob               int32    `protobuf:"varint,14,opt,name=relate_rob,json=relateRob,proto3" json:"relate_rob,omitempty"`
+	RelateProtectDays       int32    `protobuf:"varint,15,opt,name=relate_protect_days,json=relateProtectDays,proto3" json:"relate_protect_days,omitempty"`
 	XXX_NoUnkeyedLiteral    struct{} `json:"-"`
 	XXX_unrecognized        []byte   `json:"-"`
 	XXX_sizecache           int32    `json:"-"`
@@ -247,7 +247,9 @@ func init() {
 	proto.RegisterType((*GlobalCfgResponse)(nil), "geiqin.srv.dms.GlobalCfgResponse")
 }
 
-func init() { proto.RegisterFile("globalCfg.proto", fileDescriptor_a7f24658b9748355) }
+func init() {
+	proto.RegisterFile("globalCfg.proto", fileDescriptor_a7f24658b9748355)
+}
 
 var fileDescriptor_a7f24658b9748355 = []byte{
 	// 522 bytes of a gzipped FileDescriptorProto

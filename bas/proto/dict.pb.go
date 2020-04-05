@@ -194,7 +194,9 @@ func init() {
 	proto.RegisterMapType((map[string]*Dict)(nil), "geiqin.srv.bas.DictResponse.MapsEntry")
 }
 
-func init() { proto.RegisterFile("dict.proto", fileDescriptor_67812e90854f6714) }
+func init() {
+	proto.RegisterFile("dict.proto", fileDescriptor_67812e90854f6714)
+}
 
 var fileDescriptor_67812e90854f6714 = []byte{
 	// 409 bytes of a gzipped FileDescriptorProto

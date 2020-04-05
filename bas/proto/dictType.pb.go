@@ -208,7 +208,9 @@ func init() {
 	proto.RegisterType((*DictTypeResponse)(nil), "geiqin.srv.bas.DictTypeResponse")
 }
 
-func init() { proto.RegisterFile("dictType.proto", fileDescriptor_25937c3ebe87c716) }
+func init() {
+	proto.RegisterFile("dictType.proto", fileDescriptor_25937c3ebe87c716)
+}
 
 var fileDescriptor_25937c3ebe87c716 = []byte{
 	// 367 bytes of a gzipped FileDescriptorProto

@@ -5,7 +5,7 @@ package geiqin.srv.dms;
 
 service MyConsumerService {
     //邀请新客户
-    //rpc Invite (Consumer) returns (ConsumerResponse) {}
+    rpc Create (Consumer) returns (ConsumerResponse) {}
     //获取我的客户信息
     //rpc Get (Consumer) returns (ConsumerResponse) {}
     //查询我的客户
@@ -25,16 +25,17 @@ message Consumer {
     float order_amount =5;
     int32 total_order_num = 6;
     float total_order_amount =7;
-    string status = 8;
+    int32 status = 8;
     int32 change_num = 9;
     string last_change_at = 10;
     string join_at = 11;
     string mobile = 12;
     string consumer_display_name =13;
     string consumer_avatar_url =14;
-    string created_at = 15;
-    string updated_at = 16;
-    Distributor distributor = 17;
+    string dis_display_name = 15;
+    string created_at = 16;
+    string updated_at = 17;
+    Distributor distributor = 18;
 
 }
 

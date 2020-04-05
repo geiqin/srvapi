@@ -160,7 +160,9 @@ func init() {
 	proto.RegisterType((*AuthResponse)(nil), "geiqin.srv.crm.AuthResponse")
 }
 
-func init() { proto.RegisterFile("auth.proto", fileDescriptor_8bbd6f3875b0e874) }
+func init() {
+	proto.RegisterFile("auth.proto", fileDescriptor_8bbd6f3875b0e874)
+}
 
 var fileDescriptor_8bbd6f3875b0e874 = []byte{
 	// 356 bytes of a gzipped FileDescriptorProto

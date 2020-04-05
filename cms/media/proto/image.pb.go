@@ -354,7 +354,9 @@ func init() {
 	proto.RegisterType((*ImageResponse)(nil), "geiqin.srv.cms.media.ImageResponse")
 }
 
-func init() { proto.RegisterFile("image.proto", fileDescriptor_9624c68e2b547544) }
+func init() {
+	proto.RegisterFile("image.proto", fileDescriptor_9624c68e2b547544)
+}
 
 var fileDescriptor_9624c68e2b547544 = []byte{
 	// 577 bytes of a gzipped FileDescriptorProto
