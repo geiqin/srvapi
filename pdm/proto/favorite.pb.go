@@ -263,7 +263,9 @@ func init() {
 	proto.RegisterType((*FavoriteResponse)(nil), "geiqin.srv.pdm.FavoriteResponse")
 }
 
-func init() { proto.RegisterFile("favorite.proto", fileDescriptor_d331d96d24e0e82b) }
+func init() {
+	proto.RegisterFile("favorite.proto", fileDescriptor_d331d96d24e0e82b)
+}
 
 var fileDescriptor_d331d96d24e0e82b = []byte{
 	// 467 bytes of a gzipped FileDescriptorProto

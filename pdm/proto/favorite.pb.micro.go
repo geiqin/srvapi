@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
+	client "github.com/micro/go-micro/v2/client"
+	server "github.com/micro/go-micro/v2/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -43,12 +43,6 @@ type favoriteService struct {
 }
 
 func NewFavoriteService(name string, c client.Client) FavoriteService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.pdm"
-	}
 	return &favoriteService{
 		c:    c,
 		name: name,
@@ -105,12 +99,6 @@ type myFavoriteService struct {
 }
 
 func NewMyFavoriteService(name string, c client.Client) MyFavoriteService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.pdm"
-	}
 	return &myFavoriteService{
 		c:    c,
 		name: name,

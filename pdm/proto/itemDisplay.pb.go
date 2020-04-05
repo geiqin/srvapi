@@ -21,48 +21,46 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type ItemDisplay struct {
-	Id                    int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                  string         `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	Unit                  string         `protobuf:"bytes,3,opt,name=unit,proto3" json:"unit"`
-	ItemSn                string         `protobuf:"bytes,4,opt,name=item_sn,json=itemSn,proto3" json:"item_sn"`
-	TaxonomyId            int64          `protobuf:"varint,5,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id"`
-	Quantity              int32          `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity"`
-	SoldNum               int32          `protobuf:"varint,7,opt,name=sold_num,json=soldNum,proto3" json:"sold_num"`
-	ModelType             string         `protobuf:"bytes,8,opt,name=model_type,json=modelType,proto3" json:"model_type"`
-	HideStock             bool           `protobuf:"varint,9,opt,name=hide_stock,json=hideStock,proto3" json:"hide_stock"`
-	Content               string         `protobuf:"bytes,10,opt,name=content,proto3" json:"content"`
-	Summary               string         `protobuf:"bytes,11,opt,name=summary,proto3" json:"summary"`
-	SellingPoint          string         `protobuf:"bytes,12,opt,name=selling_point,json=sellingPoint,proto3" json:"selling_point"`
-	MinBuy                int32          `protobuf:"varint,13,opt,name=min_buy,json=minBuy,proto3" json:"min_buy"`
-	NostoreSell           bool           `protobuf:"varint,14,opt,name=nostore_sell,json=nostoreSell,proto3" json:"nostore_sell"`
-	ThumbUrl              string         `protobuf:"bytes,15,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url"`
-	TemplateId            int32          `protobuf:"varint,16,opt,name=template_id,json=templateId,proto3" json:"template_id"`
-	Barcode               string         `protobuf:"bytes,17,opt,name=barcode,proto3" json:"barcode"`
-	Price                 float32        `protobuf:"fixed32,18,opt,name=price,proto3" json:"price"`
-	OriginPrice           float32        `protobuf:"fixed32,19,opt,name=origin_price,json=originPrice,proto3" json:"origin_price"`
-	MinPrice              float32        `protobuf:"fixed32,20,opt,name=min_price,json=minPrice,proto3" json:"min_price"`
-	MaxPrice              float32        `protobuf:"fixed32,21,opt,name=max_price,json=maxPrice,proto3" json:"max_price"`
-	Weight                float32        `protobuf:"fixed32,22,opt,name=weight,proto3" json:"weight"`
-	ReviewNum             int32          `protobuf:"varint,23,opt,name=review_num,json=reviewNum,proto3" json:"review_num"`
-	ViewCount             int32          `protobuf:"varint,24,opt,name=view_count,json=viewCount,proto3" json:"view_count"`
+	Id                    int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                  string         `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Unit                  string         `protobuf:"bytes,3,opt,name=unit,proto3" json:"unit,omitempty"`
+	ItemSn                string         `protobuf:"bytes,4,opt,name=item_sn,json=itemSn,proto3" json:"item_sn,omitempty"`
+	TaxonomyId            int64          `protobuf:"varint,5,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id,omitempty"`
+	Quantity              int32          `protobuf:"varint,6,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	SoldNum               int32          `protobuf:"varint,7,opt,name=sold_num,json=soldNum,proto3" json:"sold_num,omitempty"`
+	ModelType             string         `protobuf:"bytes,8,opt,name=model_type,json=modelType,proto3" json:"model_type,omitempty"`
+	HideStock             bool           `protobuf:"varint,9,opt,name=hide_stock,json=hideStock,proto3" json:"hide_stock,omitempty"`
+	Content               string         `protobuf:"bytes,10,opt,name=content,proto3" json:"content,omitempty"`
+	Summary               string         `protobuf:"bytes,11,opt,name=summary,proto3" json:"summary,omitempty"`
+	SellingPoint          string         `protobuf:"bytes,12,opt,name=selling_point,json=sellingPoint,proto3" json:"selling_point,omitempty"`
+	MinBuy                int32          `protobuf:"varint,13,opt,name=min_buy,json=minBuy,proto3" json:"min_buy,omitempty"`
+	NostoreSell           bool           `protobuf:"varint,14,opt,name=nostore_sell,json=nostoreSell,proto3" json:"nostore_sell,omitempty"`
+	ThumbUrl              string         `protobuf:"bytes,15,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url,omitempty"`
+	TemplateId            int32          `protobuf:"varint,16,opt,name=template_id,json=templateId,proto3" json:"template_id,omitempty"`
+	Barcode               string         `protobuf:"bytes,17,opt,name=barcode,proto3" json:"barcode,omitempty"`
+	Price                 float32        `protobuf:"fixed32,18,opt,name=price,proto3" json:"price,omitempty"`
+	OriginPrice           float32        `protobuf:"fixed32,19,opt,name=origin_price,json=originPrice,proto3" json:"origin_price,omitempty"`
+	MinPrice              float32        `protobuf:"fixed32,20,opt,name=min_price,json=minPrice,proto3" json:"min_price,omitempty"`
+	MaxPrice              float32        `protobuf:"fixed32,21,opt,name=max_price,json=maxPrice,proto3" json:"max_price,omitempty"`
+	Weight                float32        `protobuf:"fixed32,22,opt,name=weight,proto3" json:"weight,omitempty"`
+	ReviewNum             int32          `protobuf:"varint,23,opt,name=review_num,json=reviewNum,proto3" json:"review_num,omitempty"`
+	ViewCount             int32          `protobuf:"varint,24,opt,name=view_count,json=viewCount,proto3" json:"view_count,omitempty"`
 	Brand                 *Brand         `protobuf:"bytes,25,opt,name=brand,proto3" json:"brand,omitempty"`
-	Cats                  []*Cat         `protobuf:"bytes,26,rep,name=cats,proto3" json:"cats,omitempty" gorm:"many2many:item_cats;`
-	Tags                  []*Tag         `protobuf:"bytes,27,rep,name=tags,proto3" json:"tags,omitempty" gorm:"many2many:item_tags;"`
+	Cats                  []*Cat         `protobuf:"bytes,26,rep,name=cats,proto3" json:"cats,omitempty"`
+	Tags                  []*Tag         `protobuf:"bytes,27,rep,name=tags,proto3" json:"tags,omitempty"`
 	Skus                  []*Sku         `protobuf:"bytes,28,rep,name=skus,proto3" json:"skus,omitempty"`
 	Galleries             []*ItemGallery `protobuf:"bytes,29,rep,name=galleries,proto3" json:"galleries,omitempty"`
-	Specs                 []*Spec        `protobuf:"bytes,30,rep,name=specs,proto3" json:"specs,omitempty" gorm:"many2many:spec_item_indices;"`
-	IsMemberGoods         bool           `protobuf:"varint,31,opt,name=is_member_goods,json=isMemberGoods,proto3" json:"is_member_goods"`
-	IsBuy                 bool           `protobuf:"varint,32,opt,name=is_buy,json=isBuy,proto3" json:"is_buy"`
-	IsMember              bool           `protobuf:"varint,33,opt,name=is_member,json=isMember,proto3" json:"is_member"`
-	MemberPrice           float32        `protobuf:"fixed32,34,opt,name=member_price,json=memberPrice,proto3" json:"member_price"`
-	IsDistribution        bool           `protobuf:"varint,35,opt,name=is_distribution,json=isDistribution,proto3" json:"is_distribution"`
-	DistributionShareIcon string         `protobuf:"bytes,36,opt,name=distribution_share_icon,json=distributionShareIcon,proto3" json:"distribution_share_icon"`
+	Specs                 []*Spec        `protobuf:"bytes,30,rep,name=specs,proto3" json:"specs,omitempty"`
+	IsMemberGoods         bool           `protobuf:"varint,31,opt,name=is_member_goods,json=isMemberGoods,proto3" json:"is_member_goods,omitempty"`
+	IsBuy                 bool           `protobuf:"varint,32,opt,name=is_buy,json=isBuy,proto3" json:"is_buy,omitempty"`
+	IsMember              bool           `protobuf:"varint,33,opt,name=is_member,json=isMember,proto3" json:"is_member,omitempty"`
+	MemberPrice           float32        `protobuf:"fixed32,34,opt,name=member_price,json=memberPrice,proto3" json:"member_price,omitempty"`
+	IsDistribution        bool           `protobuf:"varint,35,opt,name=is_distribution,json=isDistribution,proto3" json:"is_distribution,omitempty"`
+	DistributionShareIcon string         `protobuf:"bytes,36,opt,name=distribution_share_icon,json=distributionShareIcon,proto3" json:"distribution_share_icon,omitempty"`
 	XXX_NoUnkeyedLiteral  struct{}       `json:"-"`
 	XXX_unrecognized      []byte         `json:"-"`
 	XXX_sizecache         int32          `json:"-"`
 }
-
-func (*ItemDisplay) TableName() string { return "items" }
 
 func (m *ItemDisplay) Reset()         { *m = ItemDisplay{} }
 func (m *ItemDisplay) String() string { return proto.CompactTextString(m) }
@@ -481,7 +479,9 @@ func init() {
 	proto.RegisterType((*ItemDisplayResponse)(nil), "geiqin.srv.pdm.ItemDisplayResponse")
 }
 
-func init() { proto.RegisterFile("itemDisplay.proto", fileDescriptor_efb47c94d29c250f) }
+func init() {
+	proto.RegisterFile("itemDisplay.proto", fileDescriptor_efb47c94d29c250f)
+}
 
 var fileDescriptor_efb47c94d29c250f = []byte{
 	// 913 bytes of a gzipped FileDescriptorProto

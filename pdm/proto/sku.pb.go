@@ -21,27 +21,27 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Sku struct {
-	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	ItemId               int64        `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuSn                string       `protobuf:"bytes,3,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn"`
-	Name                 string       `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
-	Barcode              string       `protobuf:"bytes,5,opt,name=barcode,proto3" json:"barcode"`
-	Price                float32      `protobuf:"fixed32,6,opt,name=price,proto3" json:"price"`
-	OriginPrice          float32      `protobuf:"fixed32,7,opt,name=origin_price,json=originPrice,proto3" json:"origin_price"`
-	CostPrice            float32      `protobuf:"fixed32,8,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`
-	Weight               float32      `protobuf:"fixed32,9,opt,name=weight,proto3" json:"weight"`
-	Quantity             int32        `protobuf:"varint,10,opt,name=quantity,proto3" json:"quantity"`
-	SoldNum              int32        `protobuf:"varint,11,opt,name=sold_num,json=soldNum,proto3" json:"sold_num"`
-	InitSoldNum          int32        `protobuf:"varint,12,opt,name=init_sold_num,json=initSoldNum,proto3" json:"init_sold_num"`
-	FrozenNum            int32        `protobuf:"varint,13,opt,name=frozen_num,json=frozenNum,proto3" json:"frozen_num"`
-	Listed               bool         `protobuf:"varint,14,opt,name=listed,proto3" json:"listed"`
-	OutSkuNo             string       `protobuf:"bytes,15,opt,name=out_sku_no,json=outSkuNo,proto3" json:"out_sku_no"`
-	SpecDesc             string       `protobuf:"bytes,16,opt,name=spec_desc,json=specDesc,proto3" json:"spec_desc"`
-	Defaulted            bool         `protobuf:"varint,17,opt,name=defaulted,proto3" json:"defaulted"`
-	BuyQuota             int32        `protobuf:"varint,18,opt,name=buy_quota,json=buyQuota,proto3" json:"buy_quota"`
+	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	ItemId               int64        `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuSn                string       `protobuf:"bytes,3,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn,omitempty"`
+	Name                 string       `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Barcode              string       `protobuf:"bytes,5,opt,name=barcode,proto3" json:"barcode,omitempty"`
+	Price                float32      `protobuf:"fixed32,6,opt,name=price,proto3" json:"price,omitempty"`
+	OriginPrice          float32      `protobuf:"fixed32,7,opt,name=origin_price,json=originPrice,proto3" json:"origin_price,omitempty"`
+	CostPrice            float32      `protobuf:"fixed32,8,opt,name=cost_price,json=costPrice,proto3" json:"cost_price,omitempty"`
+	Weight               float32      `protobuf:"fixed32,9,opt,name=weight,proto3" json:"weight,omitempty"`
+	Quantity             int32        `protobuf:"varint,10,opt,name=quantity,proto3" json:"quantity,omitempty"`
+	SoldNum              int32        `protobuf:"varint,11,opt,name=sold_num,json=soldNum,proto3" json:"sold_num,omitempty"`
+	InitSoldNum          int32        `protobuf:"varint,12,opt,name=init_sold_num,json=initSoldNum,proto3" json:"init_sold_num,omitempty"`
+	FrozenNum            int32        `protobuf:"varint,13,opt,name=frozen_num,json=frozenNum,proto3" json:"frozen_num,omitempty"`
+	Listed               bool         `protobuf:"varint,14,opt,name=listed,proto3" json:"listed,omitempty"`
+	OutSkuNo             string       `protobuf:"bytes,15,opt,name=out_sku_no,json=outSkuNo,proto3" json:"out_sku_no,omitempty"`
+	SpecDesc             string       `protobuf:"bytes,16,opt,name=spec_desc,json=specDesc,proto3" json:"spec_desc,omitempty"`
+	Defaulted            bool         `protobuf:"varint,17,opt,name=defaulted,proto3" json:"defaulted,omitempty"`
+	BuyQuota             int32        `protobuf:"varint,18,opt,name=buy_quota,json=buyQuota,proto3" json:"buy_quota,omitempty"`
 	CreatedAt            string       `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string       `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	SpecValues           []*SpecValue `protobuf:"bytes,21,rep,name=spec_values,json=specValues,proto3" json:"spec_values,omitempty" gorm:"many2many:spec_item_indices;"`
+	SpecValues           []*SpecValue `protobuf:"bytes,21,rep,name=spec_values,json=specValues,proto3" json:"spec_values,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -367,7 +367,9 @@ func init() {
 	proto.RegisterType((*SkuResponse)(nil), "geiqin.srv.pdm.SkuResponse")
 }
 
-func init() { proto.RegisterFile("sku.proto", fileDescriptor_eccf7b4430f71abf) }
+func init() {
+	proto.RegisterFile("sku.proto", fileDescriptor_eccf7b4430f71abf)
+}
 
 var fileDescriptor_eccf7b4430f71abf = []byte{
 	// 611 bytes of a gzipped FileDescriptorProto

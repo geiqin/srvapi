@@ -71,7 +71,9 @@ func init() {
 	proto.RegisterType((*StatsRequest)(nil), "geiqin.srv.pdm.StatsRequest")
 }
 
-func init() { proto.RegisterFile("statistics.proto", fileDescriptor_fe4ebcdede33dbb6) }
+func init() {
+	proto.RegisterFile("statistics.proto", fileDescriptor_fe4ebcdede33dbb6)
+}
 
 var fileDescriptor_fe4ebcdede33dbb6 = []byte{
 	// 165 bytes of a gzipped FileDescriptorProto

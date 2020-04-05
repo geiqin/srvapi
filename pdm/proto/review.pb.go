@@ -135,7 +135,9 @@ func init() {
 	proto.RegisterType((*ReviewResponse)(nil), "geiqin.srv.pdm.ReviewResponse")
 }
 
-func init() { proto.RegisterFile("review.proto", fileDescriptor_deed8eefad2f709e) }
+func init() {
+	proto.RegisterFile("review.proto", fileDescriptor_deed8eefad2f709e)
+}
 
 var fileDescriptor_deed8eefad2f709e = []byte{
 	// 274 bytes of a gzipped FileDescriptorProto

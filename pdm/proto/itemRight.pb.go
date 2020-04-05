@@ -159,7 +159,9 @@ func init() {
 	proto.RegisterType((*ItemRightResponse)(nil), "geiqin.srv.pdm.ItemRightResponse")
 }
 
-func init() { proto.RegisterFile("itemRight.proto", fileDescriptor_e7691599d9360138) }
+func init() {
+	proto.RegisterFile("itemRight.proto", fileDescriptor_e7691599d9360138)
+}
 
 var fileDescriptor_e7691599d9360138 = []byte{
 	// 259 bytes of a gzipped FileDescriptorProto

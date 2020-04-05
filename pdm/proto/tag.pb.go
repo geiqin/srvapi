@@ -199,7 +199,9 @@ func init() {
 	proto.RegisterType((*TagResponse)(nil), "geiqin.srv.pdm.TagResponse")
 }
 
-func init() { proto.RegisterFile("tag.proto", fileDescriptor_27f545bcde37ecb5) }
+func init() {
+	proto.RegisterFile("tag.proto", fileDescriptor_27f545bcde37ecb5)
+}
 
 var fileDescriptor_27f545bcde37ecb5 = []byte{
 	// 397 bytes of a gzipped FileDescriptorProto
