@@ -15,23 +15,24 @@ service FanService {
 
 message Fan {
     int64 id = 1;
-    string source = 2;
-    string open_id = 3;
-    string union_id = 4;
-    string nick_name = 5;
-    string avatar_url = 6;
-    int32 gender = 7;
-    string province = 8;
-    string city = 9;
-    string country = 10;
-    bool followed = 11;
-    string followed_at = 12;
-    int64 customer_id = 13;
-    string remark = 14;
-    string mobile = 15;
-    string email = 16;
-    string created_at = 17;
-    string updated_at = 18;
+    string fan_sn = 2;
+    string source = 3;
+    string open_id = 4;
+    string union_id = 5;
+    string nick_name = 6;
+    string avatar_url = 7;
+    int32 gender = 8;
+    string province = 9;
+    string city = 10;
+    string country = 11;
+    bool followed = 12;
+    string followed_at = 13;
+    int64 customer_id = 14;
+    string remark = 15;
+    string mobile = 16;
+    string email = 17;
+    string created_at = 18;
+    string updated_at = 19;
     repeated int64 ids = 20;
 }
 
