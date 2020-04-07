@@ -21,20 +21,20 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type OrderAddress struct {
-	Id                   int64     `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name                 string    `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	AreaId               int64     `protobuf:"varint,4,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
-	Addr                 string    `protobuf:"bytes,5,opt,name=addr,proto3" json:"addr,omitempty"`
-	Zip                  string    `protobuf:"bytes,6,opt,name=zip,proto3" json:"zip,omitempty"`
-	Phone                string    `protobuf:"bytes,7,opt,name=phone,proto3" json:"phone,omitempty"`
-	Mobile               string    `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email                string    `protobuf:"bytes,9,opt,name=email,proto3" json:"email,omitempty"`
-	DeliveryTime         string    `protobuf:"bytes,10,opt,name=delivery_time,json=deliveryTime,proto3" json:"delivery_time,omitempty"`
-	Confirmed            bool      `protobuf:"varint,11,opt,name=confirmed,proto3" json:"confirmed,omitempty"`
-	OrderId              int64     `protobuf:"varint,12,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
-	AddressId            int64     `protobuf:"varint,13,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
-	CreatedAt            string    `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string    `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id                   int64     `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name                 string    `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	AreaId               int64     `protobuf:"varint,4,opt,name=area_id,json=areaId,proto3" json:"area_id"`
+	Addr                 string    `protobuf:"bytes,5,opt,name=addr,proto3" json:"addr"`
+	Zip                  string    `protobuf:"bytes,6,opt,name=zip,proto3" json:"zip"`
+	Phone                string    `protobuf:"bytes,7,opt,name=phone,proto3" json:"phone"`
+	Mobile               string    `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile"`
+	Email                string    `protobuf:"bytes,9,opt,name=email,proto3" json:"email"`
+	DeliveryTime         string    `protobuf:"bytes,10,opt,name=delivery_time,json=deliveryTime,proto3" json:"delivery_time"`
+	Confirmed            bool      `protobuf:"varint,11,opt,name=confirmed,proto3" json:"confirmed"`
+	OrderId              int64     `protobuf:"varint,12,opt,name=order_id,json=orderId,proto3" json:"order_id"`
+	AddressId            int64     `protobuf:"varint,13,opt,name=address_id,json=addressId,proto3" json:"address_id"`
+	CreatedAt            string    `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string    `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	Area                 *AreaInfo `protobuf:"bytes,16,opt,name=area,proto3" json:"area,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`

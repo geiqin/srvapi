@@ -22,9 +22,9 @@ service MySafeguardService {
     // 提交退货物流信息
     rpc ExpressConfirm (Safeguard) returns (SafeguardResponse) {}
     // 获取维权信息（基本信息）
-    rpc Get (SafeguardWhere) returns (SafeguardResponse) {}
+    rpc Get (Safeguard) returns (SafeguardResponse) {}
     // 获取维权信息
-    rpc Display (SafeguardWhere) returns (SafeguardResponse) {}
+    rpc Display (Safeguard) returns (SafeguardResponse) {}
     // 退换/售后查询
     rpc Search (SafeguardWhere) returns (SafeguardResponse) {}
 
@@ -38,9 +38,9 @@ service SafeguardService {
     //维权订单退款
     rpc Refund (Safeguard) returns (SafeguardResponse) {}
     // 获取维权信息（基本信息）
-    rpc Get (SafeguardWhere) returns (SafeguardResponse) {}
+    rpc Get (Safeguard) returns (SafeguardResponse) {}
     // 获取维权信息
-    rpc Display (SafeguardWhere) returns (SafeguardResponse) {}
+    rpc Display (Safeguard) returns (SafeguardResponse) {}
     //查询维权信息
     rpc Search (SafeguardWhere) returns (SafeguardResponse) {}
 }

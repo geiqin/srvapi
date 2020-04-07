@@ -51,9 +51,9 @@ type MySafeguardService interface {
 	// 提交退货物流信息
 	ExpressConfirm(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error)
 	// 获取维权信息（基本信息）
-	Get(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error)
+	Get(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error)
 	// 获取维权信息
-	Display(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error)
+	Display(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error)
 	// 退换/售后查询
 	Search(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error)
 }
@@ -150,7 +150,7 @@ func (c *mySafeguardService) ExpressConfirm(ctx context.Context, in *Safeguard, 
 	return out, nil
 }
 
-func (c *mySafeguardService) Get(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error) {
+func (c *mySafeguardService) Get(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error) {
 	req := c.c.NewRequest(c.name, "MySafeguardService.Get", in)
 	out := new(SafeguardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -160,7 +160,7 @@ func (c *mySafeguardService) Get(ctx context.Context, in *SafeguardWhere, opts .
 	return out, nil
 }
 
-func (c *mySafeguardService) Display(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error) {
+func (c *mySafeguardService) Display(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error) {
 	req := c.c.NewRequest(c.name, "MySafeguardService.Display", in)
 	out := new(SafeguardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -200,9 +200,9 @@ type MySafeguardServiceHandler interface {
 	// 提交退货物流信息
 	ExpressConfirm(context.Context, *Safeguard, *SafeguardResponse) error
 	// 获取维权信息（基本信息）
-	Get(context.Context, *SafeguardWhere, *SafeguardResponse) error
+	Get(context.Context, *Safeguard, *SafeguardResponse) error
 	// 获取维权信息
-	Display(context.Context, *SafeguardWhere, *SafeguardResponse) error
+	Display(context.Context, *Safeguard, *SafeguardResponse) error
 	// 退换/售后查询
 	Search(context.Context, *SafeguardWhere, *SafeguardResponse) error
 }
@@ -217,8 +217,8 @@ func RegisterMySafeguardServiceHandler(s server.Server, hdlr MySafeguardServiceH
 		GetType(ctx context.Context, in *SafeguardWhere, out *SafeguardTypeResponse) error
 		ConfirmType(ctx context.Context, in *SafeguardWhere, out *SafeguardTypeResponse) error
 		ExpressConfirm(ctx context.Context, in *Safeguard, out *SafeguardResponse) error
-		Get(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error
-		Display(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error
+		Get(ctx context.Context, in *Safeguard, out *SafeguardResponse) error
+		Display(ctx context.Context, in *Safeguard, out *SafeguardResponse) error
 		Search(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error
 	}
 	type MySafeguardService struct {
@@ -264,11 +264,11 @@ func (h *mySafeguardServiceHandler) ExpressConfirm(ctx context.Context, in *Safe
 	return h.MySafeguardServiceHandler.ExpressConfirm(ctx, in, out)
 }
 
-func (h *mySafeguardServiceHandler) Get(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error {
+func (h *mySafeguardServiceHandler) Get(ctx context.Context, in *Safeguard, out *SafeguardResponse) error {
 	return h.MySafeguardServiceHandler.Get(ctx, in, out)
 }
 
-func (h *mySafeguardServiceHandler) Display(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error {
+func (h *mySafeguardServiceHandler) Display(ctx context.Context, in *Safeguard, out *SafeguardResponse) error {
 	return h.MySafeguardServiceHandler.Display(ctx, in, out)
 }
 
@@ -286,9 +286,9 @@ type SafeguardService interface {
 	//维权订单退款
 	Refund(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error)
 	// 获取维权信息（基本信息）
-	Get(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error)
+	Get(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error)
 	// 获取维权信息
-	Display(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error)
+	Display(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error)
 	//查询维权信息
 	Search(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error)
 }
@@ -335,7 +335,7 @@ func (c *safeguardService) Refund(ctx context.Context, in *Safeguard, opts ...cl
 	return out, nil
 }
 
-func (c *safeguardService) Get(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error) {
+func (c *safeguardService) Get(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error) {
 	req := c.c.NewRequest(c.name, "SafeguardService.Get", in)
 	out := new(SafeguardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -345,7 +345,7 @@ func (c *safeguardService) Get(ctx context.Context, in *SafeguardWhere, opts ...
 	return out, nil
 }
 
-func (c *safeguardService) Display(ctx context.Context, in *SafeguardWhere, opts ...client.CallOption) (*SafeguardResponse, error) {
+func (c *safeguardService) Display(ctx context.Context, in *Safeguard, opts ...client.CallOption) (*SafeguardResponse, error) {
 	req := c.c.NewRequest(c.name, "SafeguardService.Display", in)
 	out := new(SafeguardResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -375,9 +375,9 @@ type SafeguardServiceHandler interface {
 	//维权订单退款
 	Refund(context.Context, *Safeguard, *SafeguardResponse) error
 	// 获取维权信息（基本信息）
-	Get(context.Context, *SafeguardWhere, *SafeguardResponse) error
+	Get(context.Context, *Safeguard, *SafeguardResponse) error
 	// 获取维权信息
-	Display(context.Context, *SafeguardWhere, *SafeguardResponse) error
+	Display(context.Context, *Safeguard, *SafeguardResponse) error
 	//查询维权信息
 	Search(context.Context, *SafeguardWhere, *SafeguardResponse) error
 }
@@ -387,8 +387,8 @@ func RegisterSafeguardServiceHandler(s server.Server, hdlr SafeguardServiceHandl
 		Agreed(ctx context.Context, in *Safeguard, out *SafeguardResponse) error
 		Refused(ctx context.Context, in *Safeguard, out *SafeguardResponse) error
 		Refund(ctx context.Context, in *Safeguard, out *SafeguardResponse) error
-		Get(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error
-		Display(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error
+		Get(ctx context.Context, in *Safeguard, out *SafeguardResponse) error
+		Display(ctx context.Context, in *Safeguard, out *SafeguardResponse) error
 		Search(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error
 	}
 	type SafeguardService struct {
@@ -414,11 +414,11 @@ func (h *safeguardServiceHandler) Refund(ctx context.Context, in *Safeguard, out
 	return h.SafeguardServiceHandler.Refund(ctx, in, out)
 }
 
-func (h *safeguardServiceHandler) Get(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error {
+func (h *safeguardServiceHandler) Get(ctx context.Context, in *Safeguard, out *SafeguardResponse) error {
 	return h.SafeguardServiceHandler.Get(ctx, in, out)
 }
 
-func (h *safeguardServiceHandler) Display(ctx context.Context, in *SafeguardWhere, out *SafeguardResponse) error {
+func (h *safeguardServiceHandler) Display(ctx context.Context, in *Safeguard, out *SafeguardResponse) error {
 	return h.SafeguardServiceHandler.Display(ctx, in, out)
 }
 

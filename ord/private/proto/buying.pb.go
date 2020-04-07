@@ -22,24 +22,24 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //购买清单
 type Buying struct {
-	Solution             string         `protobuf:"bytes,1,opt,name=solution,proto3" json:"solution,omitempty"`
-	Changed              bool           `protobuf:"varint,2,opt,name=changed,proto3" json:"changed,omitempty"`
-	Count                int32          `protobuf:"varint,3,opt,name=count,proto3" json:"count,omitempty"`
-	Total                float32        `protobuf:"fixed32,4,opt,name=total,proto3" json:"total,omitempty"`
-	Discount             float32        `protobuf:"fixed32,5,opt,name=discount,proto3" json:"discount,omitempty"`
-	Freight              float32        `protobuf:"fixed32,6,opt,name=freight,proto3" json:"freight,omitempty"`
-	Amount               float32        `protobuf:"fixed32,7,opt,name=amount,proto3" json:"amount,omitempty"`
-	AddressId            int64          `protobuf:"varint,8,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
-	CustomerId           int64          `protobuf:"varint,9,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	UseTicketId          int64          `protobuf:"varint,10,opt,name=use_ticket_id,json=useTicketId,proto3" json:"use_ticket_id,omitempty"`
-	Message              string         `protobuf:"bytes,11,opt,name=message,proto3" json:"message,omitempty"`
-	AvailableTicketIds   []int64        `protobuf:"varint,12,rep,packed,name=available_ticket_ids,json=availableTicketIds,proto3" json:"available_ticket_ids,omitempty"`
-	Items                []*BuyingItem  `protobuf:"bytes,13,rep,name=items,proto3" json:"items,omitempty"`
-	CartRowIds           []string       `protobuf:"bytes,14,rep,name=cart_row_ids,json=cartRowIds,proto3" json:"cart_row_ids,omitempty"`
-	Coupons              []*OrderCoupon `protobuf:"bytes,15,rep,name=coupons,proto3" json:"coupons,omitempty"`
-	Address              *OrderAddress  `protobuf:"bytes,16,opt,name=address,proto3" json:"address,omitempty"`
-	UseTicket            *CouponTicket  `protobuf:"bytes,17,opt,name=use_ticket,json=useTicket,proto3" json:"use_ticket,omitempty"`
-	PlatformSource       string         `protobuf:"bytes,18,opt,name=platform_source,json=platformSource,proto3" json:"platform_source,omitempty"`
+	Solution             string         `protobuf:"bytes,1,opt,name=solution,proto3" json:"solution"`
+	Changed              bool           `protobuf:"varint,2,opt,name=changed,proto3" json:"changed"`
+	Count                int32          `protobuf:"varint,3,opt,name=count,proto3" json:"count"`
+	Total                float32        `protobuf:"fixed32,4,opt,name=total,proto3" json:"total"`
+	Discount             float32        `protobuf:"fixed32,5,opt,name=discount,proto3" json:"discount"`
+	Freight              float32        `protobuf:"fixed32,6,opt,name=freight,proto3" json:"freight"`
+	Amount               float32        `protobuf:"fixed32,7,opt,name=amount,proto3" json:"amount"`
+	AddressId            int64          `protobuf:"varint,8,opt,name=address_id,json=addressId,proto3" json:"address_id"`
+	CustomerId           int64          `protobuf:"varint,9,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	UseTicketId          int64          `protobuf:"varint,10,opt,name=use_ticket_id,json=useTicketId,proto3" json:"use_ticket_id"`
+	Message              string         `protobuf:"bytes,11,opt,name=message,proto3" json:"message"`
+	AvailableTicketIds   []int64        `protobuf:"varint,12,rep,packed,name=available_ticket_ids,json=availableTicketIds,proto3" json:"available_ticket_ids"`
+	Items                []*BuyingItem  `protobuf:"bytes,13,rep,name=items,proto3" json:"items"`
+	CartRowIds           []string       `protobuf:"bytes,14,rep,name=cart_row_ids,json=cartRowIds,proto3" json:"cart_row_ids"`
+	Coupons              []*OrderCoupon `protobuf:"bytes,15,rep,name=coupons,proto3" json:"coupons"`
+	Address              *OrderAddress  `protobuf:"bytes,16,opt,name=address,proto3" json:"address"`
+	UseTicket            *CouponTicket  `protobuf:"bytes,17,opt,name=use_ticket,json=useTicket,proto3" json:"use_ticket"`
+	PlatformSource       string         `protobuf:"bytes,18,opt,name=platform_source,json=platformSource,proto3" json:"platform_source"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`

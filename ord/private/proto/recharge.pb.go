@@ -21,21 +21,21 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Recharge struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	RechargeSn           string   `protobuf:"bytes,2,opt,name=recharge_sn,json=rechargeSn,proto3" json:"recharge_sn,omitempty"`
-	BranchId             int64    `protobuf:"varint,3,opt,name=branch_id,json=branchId,proto3" json:"branch_id,omitempty"`
-	Type                 string   `protobuf:"bytes,4,opt,name=type,proto3" json:"type,omitempty"`
-	Content              string   `protobuf:"bytes,5,opt,name=content,proto3" json:"content,omitempty"`
-	Currency             string   `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency,omitempty"`
-	Amount               float32  `protobuf:"fixed32,7,opt,name=amount,proto3" json:"amount,omitempty"`
-	BackType             string   `protobuf:"bytes,8,opt,name=back_type,json=backType,proto3" json:"back_type,omitempty"`
-	BackValue            string   `protobuf:"bytes,9,opt,name=back_value,json=backValue,proto3" json:"back_value,omitempty"`
-	CustomerId           int64    `protobuf:"varint,10,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	Meno                 string   `protobuf:"bytes,11,opt,name=meno,proto3" json:"meno,omitempty"`
-	Metadata             string   `protobuf:"bytes,12,opt,name=metadata,proto3" json:"metadata,omitempty"`
-	PayStatus            string   `protobuf:"bytes,13,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"`
-	Status               string   `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
-	PaidAt               string   `protobuf:"bytes,15,opt,name=paid_at,json=paidAt,proto3" json:"paid_at,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	RechargeSn           string   `protobuf:"bytes,2,opt,name=recharge_sn,json=rechargeSn,proto3" json:"recharge_sn"`
+	BranchId             int64    `protobuf:"varint,3,opt,name=branch_id,json=branchId,proto3" json:"branch_id"`
+	Type                 string   `protobuf:"bytes,4,opt,name=type,proto3" json:"type"`
+	Content              string   `protobuf:"bytes,5,opt,name=content,proto3" json:"content"`
+	Currency             string   `protobuf:"bytes,6,opt,name=currency,proto3" json:"currency"`
+	Amount               float32  `protobuf:"fixed32,7,opt,name=amount,proto3" json:"amount"`
+	BackType             string   `protobuf:"bytes,8,opt,name=back_type,json=backType,proto3" json:"back_type"`
+	BackValue            string   `protobuf:"bytes,9,opt,name=back_value,json=backValue,proto3" json:"back_value"`
+	CustomerId           int64    `protobuf:"varint,10,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Meno                 string   `protobuf:"bytes,11,opt,name=meno,proto3" json:"meno"`
+	Metadata             string   `protobuf:"bytes,12,opt,name=metadata,proto3" json:"metadata"`
+	PayStatus            string   `protobuf:"bytes,13,opt,name=pay_status,json=payStatus,proto3" json:"pay_status"`
+	Status               string   `protobuf:"bytes,14,opt,name=status,proto3" json:"status"`
+	PaidAt               string   `protobuf:"bytes,15,opt,name=paid_at,json=paidAt,proto3" json:"paid_at"`
 	CreatedAt            string   `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
