@@ -34,7 +34,7 @@ type User struct {
 	CreatedAt            string   `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Profile              *Profile `protobuf:"bytes,12,opt,name=profile,proto3" json:"profile,omitempty"`
-	Roles                []*Role  `protobuf:"bytes,13,rep,name=roles,proto3" json:"roles,omitempty"`
+	Roles                []*Role  `protobuf:"bytes,13,rep,name=roles,proto3" json:"roles,omitempty" gorm:"many2many:user_roles;"`
 	Ids                  []int64  `protobuf:"varint,14,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`

@@ -45,8 +45,8 @@ type Article struct {
 	PublishedAt          string   `protobuf:"bytes,20,opt,name=published_at,json=publishedAt,proto3" json:"published_at,omitempty"`
 	CreatedAt            string   `protobuf:"bytes,21,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string   `protobuf:"bytes,22,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Cats                 []*Cat   `protobuf:"bytes,23,rep,name=cats,proto3" json:"cats,omitempty"`
-	Tags                 []*Tag   `protobuf:"bytes,24,rep,name=tags,proto3" json:"tags,omitempty"`
+	Cats                 []*Cat   `protobuf:"bytes,23,rep,name=cats,proto3" json:"cats,omitempty" gorm:"many2many:article_cats;"`
+	Tags                 []*Tag   `protobuf:"bytes,24,rep,name=tags,proto3" json:"tags,omitempty" gorm:"many2many:article_tags;"`
 	Ids                  []int32  `protobuf:"varint,25,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
