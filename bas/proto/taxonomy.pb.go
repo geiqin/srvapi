@@ -22,15 +22,15 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //标准分类信息
 type Taxonomy struct {
-	Id                   int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name                 string      `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Type                 string      `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	TaxonomyId           int64       `protobuf:"varint,4,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id,omitempty"`
-	Depth                int32       `protobuf:"varint,5,opt,name=depth,proto3" json:"depth,omitempty"`
-	Path                 string      `protobuf:"bytes,6,opt,name=path,proto3" json:"path,omitempty"`
-	Memo                 string      `protobuf:"bytes,7,opt,name=memo,proto3" json:"memo,omitempty"`
-	Sorting              int32       `protobuf:"varint,8,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	Children             []*Taxonomy `protobuf:"bytes,9,rep,name=children,proto3" json:"children,omitempty"`
+	Id                   int64       `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name                 string      `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	Type                 string      `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
+	TaxonomyId           int64       `protobuf:"varint,4,opt,name=taxonomy_id,json=taxonomyId,proto3" json:"taxonomy_id"`
+	Depth                int32       `protobuf:"varint,5,opt,name=depth,proto3" json:"depth"`
+	Path                 string      `protobuf:"bytes,6,opt,name=path,proto3" json:"path"`
+	Memo                 string      `protobuf:"bytes,7,opt,name=memo,proto3" json:"memo"`
+	Sorting              int32       `protobuf:"varint,8,opt,name=sorting,proto3" json:"sorting"`
+	Children             []*Taxonomy `protobuf:"bytes,9,rep,name=children,proto3" json:"children"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
@@ -125,11 +125,11 @@ func (m *Taxonomy) GetChildren() []*Taxonomy {
 }
 
 type TaxonomyResponse struct {
-	Entity               *Taxonomy   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Taxonomy `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Taxonomy   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Taxonomy `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
@@ -200,9 +200,7 @@ func init() {
 	proto.RegisterType((*TaxonomyResponse)(nil), "geiqin.srv.bas.TaxonomyResponse")
 }
 
-func init() {
-	proto.RegisterFile("taxonomy.proto", fileDescriptor_1b3e90e04276df48)
-}
+func init() { proto.RegisterFile("taxonomy.proto", fileDescriptor_1b3e90e04276df48) }
 
 var fileDescriptor_1b3e90e04276df48 = []byte{
 	// 384 bytes of a gzipped FileDescriptorProto
