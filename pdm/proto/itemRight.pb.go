@@ -21,10 +21,10 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type ItemRight struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Type                 string   `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
-	TypeValueId          int64    `protobuf:"varint,3,opt,name=type_value_id,json=typeValueId,proto3" json:"type_value_id,omitempty"`
-	ItemId               int64    `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Type                 string   `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`
+	TypeValueId          int64    `protobuf:"varint,3,opt,name=type_value_id,json=typeValueId,proto3" json:"type_value_id"`
+	ItemId               int64    `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -84,11 +84,11 @@ func (m *ItemRight) GetItemId() int64 {
 }
 
 type ItemRightResponse struct {
-	Entity               *ItemRight   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager       `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*ItemRight `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error       `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info        `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *ItemRight   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager       `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*ItemRight `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error       `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info        `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -159,9 +159,7 @@ func init() {
 	proto.RegisterType((*ItemRightResponse)(nil), "geiqin.srv.pdm.ItemRightResponse")
 }
 
-func init() {
-	proto.RegisterFile("itemRight.proto", fileDescriptor_e7691599d9360138)
-}
+func init() { proto.RegisterFile("itemRight.proto", fileDescriptor_e7691599d9360138) }
 
 var fileDescriptor_e7691599d9360138 = []byte{
 	// 259 bytes of a gzipped FileDescriptorProto

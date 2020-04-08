@@ -21,10 +21,10 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type StatsRequest struct {
-	Type                 string   `protobuf:"bytes,1,opt,name=type,proto3" json:"type,omitempty"`
-	Days                 int32    `protobuf:"varint,2,opt,name=days,proto3" json:"days,omitempty"`
-	Paged                int32    `protobuf:"varint,3,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize             int32    `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Type                 string   `protobuf:"bytes,1,opt,name=type,proto3" json:"type"`
+	Days                 int32    `protobuf:"varint,2,opt,name=days,proto3" json:"days"`
+	Paged                int32    `protobuf:"varint,3,opt,name=paged,proto3" json:"paged"`
+	PageSize             int32    `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -87,9 +87,7 @@ func init() {
 	proto.RegisterType((*StatsRequest)(nil), "geiqin.srv.ord.private.StatsRequest")
 }
 
-func init() {
-	proto.RegisterFile("statistics.proto", fileDescriptor_fe4ebcdede33dbb6)
-}
+func init() { proto.RegisterFile("statistics.proto", fileDescriptor_fe4ebcdede33dbb6) }
 
 var fileDescriptor_fe4ebcdede33dbb6 = []byte{
 	// 266 bytes of a gzipped FileDescriptorProto

@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/v2/client"
-	server "github.com/micro/go-micro/v2/server"
+	client "github.com/micro/go-micro/client"
+	server "github.com/micro/go-micro/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -46,6 +46,12 @@ type reviewService struct {
 }
 
 func NewReviewService(name string, c client.Client) ReviewService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.pdm"
+	}
 	return &reviewService{
 		c:    c,
 		name: name,

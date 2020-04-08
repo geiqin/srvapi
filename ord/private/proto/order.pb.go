@@ -65,10 +65,10 @@ type Order struct {
 	CreatedAt            string         `protobuf:"bytes,44,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
 	UpdatedAt            string         `protobuf:"bytes,45,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	PlatformSource       string         `protobuf:"bytes,46,opt,name=platform_source,json=platformSource,proto3" json:"platform_source"`
-	Address              *OrderAddress  `protobuf:"bytes,54,opt,name=address,proto3" json:"address,omitempty"`
-	Details              []*OrderDetail `protobuf:"bytes,55,rep,name=details,proto3" json:"details,omitempty"`
-	Customer             *Customer      `protobuf:"bytes,56,opt,name=customer,proto3" json:"customer,omitempty"`
-	Delivery             []*Delivery    `protobuf:"bytes,57,rep,name=delivery,proto3" json:"delivery,omitempty"`
+	Address              *OrderAddress  `protobuf:"bytes,54,opt,name=address,proto3" json:"address"`
+	Details              []*OrderDetail `protobuf:"bytes,55,rep,name=details,proto3" json:"details"`
+	Customer             *Customer      `protobuf:"bytes,56,opt,name=customer,proto3" json:"customer"`
+	Delivery             []*Delivery    `protobuf:"bytes,57,rep,name=delivery,proto3" json:"delivery"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -555,27 +555,27 @@ func (m *Customer) GetAvatarUrl() string {
 }
 
 type OrderWhere struct {
-	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	Keywords             string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	OrderSn              string   `protobuf:"bytes,5,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
-	OrderType            string   `protobuf:"bytes,6,opt,name=order_type,json=orderType,proto3" json:"order_type,omitempty"`
-	PayType              string   `protobuf:"bytes,7,opt,name=pay_type,json=payType,proto3" json:"pay_type,omitempty"`
-	CanDelivery          bool     `protobuf:"varint,8,opt,name=can_delivery,json=canDelivery,proto3" json:"can_delivery,omitempty"`
-	CanCod               bool     `protobuf:"varint,9,opt,name=can_cod,json=canCod,proto3" json:"can_cod,omitempty"`
-	CustomerId           int64    `protobuf:"varint,10,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	Payment              float32  `protobuf:"fixed32,11,opt,name=payment,proto3" json:"payment,omitempty"`
-	IsFree               bool     `protobuf:"varint,13,opt,name=is_free,json=isFree,proto3" json:"is_free,omitempty"`
-	Status               string   `protobuf:"bytes,26,opt,name=status,proto3" json:"status,omitempty"`
-	PayStatus            string   `protobuf:"bytes,27,opt,name=pay_status,json=payStatus,proto3" json:"pay_status,omitempty"`
-	RefundStatus         string   `protobuf:"bytes,28,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status,omitempty"`
-	DeliverStatus        string   `protobuf:"bytes,29,opt,name=deliver_status,json=deliverStatus,proto3" json:"deliver_status,omitempty"`
-	BranchId             int32    `protobuf:"varint,32,opt,name=branch_id,json=branchId,proto3" json:"branch_id,omitempty"`
-	Flag                 int32    `protobuf:"varint,41,opt,name=flag,proto3" json:"flag,omitempty"`
-	Safeguarded          bool     `protobuf:"varint,43,opt,name=safeguarded,proto3" json:"safeguarded,omitempty"`
-	StartAt              string   `protobuf:"bytes,51,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
-	EndAt                string   `protobuf:"bytes,52,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
+	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Keywords             string   `protobuf:"bytes,4,opt,name=keywords,proto3" json:"keywords"`
+	OrderSn              string   `protobuf:"bytes,5,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
+	OrderType            string   `protobuf:"bytes,6,opt,name=order_type,json=orderType,proto3" json:"order_type"`
+	PayType              string   `protobuf:"bytes,7,opt,name=pay_type,json=payType,proto3" json:"pay_type"`
+	CanDelivery          bool     `protobuf:"varint,8,opt,name=can_delivery,json=canDelivery,proto3" json:"can_delivery"`
+	CanCod               bool     `protobuf:"varint,9,opt,name=can_cod,json=canCod,proto3" json:"can_cod"`
+	CustomerId           int64    `protobuf:"varint,10,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Payment              float32  `protobuf:"fixed32,11,opt,name=payment,proto3" json:"payment"`
+	IsFree               bool     `protobuf:"varint,13,opt,name=is_free,json=isFree,proto3" json:"is_free"`
+	Status               string   `protobuf:"bytes,26,opt,name=status,proto3" json:"status"`
+	PayStatus            string   `protobuf:"bytes,27,opt,name=pay_status,json=payStatus,proto3" json:"pay_status"`
+	RefundStatus         string   `protobuf:"bytes,28,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status"`
+	DeliverStatus        string   `protobuf:"bytes,29,opt,name=deliver_status,json=deliverStatus,proto3" json:"deliver_status"`
+	BranchId             int32    `protobuf:"varint,32,opt,name=branch_id,json=branchId,proto3" json:"branch_id"`
+	Flag                 int32    `protobuf:"varint,41,opt,name=flag,proto3" json:"flag"`
+	Safeguarded          bool     `protobuf:"varint,43,opt,name=safeguarded,proto3" json:"safeguarded"`
+	StartAt              string   `protobuf:"bytes,51,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt                string   `protobuf:"bytes,52,opt,name=end_at,json=endAt,proto3" json:"end_at"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -754,11 +754,11 @@ func (m *OrderWhere) GetEndAt() string {
 }
 
 type OrderResponse struct {
-	Entity               *Order   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Order `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Order   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Order `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -831,9 +831,7 @@ func init() {
 	proto.RegisterType((*OrderResponse)(nil), "geiqin.srv.ord.private.OrderResponse")
 }
 
-func init() {
-	proto.RegisterFile("order.proto", fileDescriptor_cd01338c35d87077)
-}
+func init() { proto.RegisterFile("order.proto", fileDescriptor_cd01338c35d87077) }
 
 var fileDescriptor_cd01338c35d87077 = []byte{
 	// 1478 bytes of a gzipped FileDescriptorProto

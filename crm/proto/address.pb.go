@@ -35,9 +35,9 @@ type Address struct {
 	DeliveryDay          string   `protobuf:"bytes,12,opt,name=delivery_day,json=deliveryDay,proto3" json:"delivery_day"`
 	DeliveryTime         string   `protobuf:"bytes,13,opt,name=delivery_time,json=deliveryTime,proto3" json:"delivery_time"`
 	Defaulted            bool     `protobuf:"varint,14,opt,name=defaulted,proto3" json:"defaulted"`
-	CreatedAt            string   `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Area                 *Area    `protobuf:"bytes,17,opt,name=area,proto3" json:"area,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string   `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Area                 *Area    `protobuf:"bytes,17,opt,name=area,proto3" json:"area"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -188,26 +188,26 @@ func (m *Address) GetArea() *Area {
 }
 
 type Area struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	AreaId               int64    `protobuf:"varint,2,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
-	LevelType            string   `protobuf:"bytes,3,opt,name=level_type,json=levelType,proto3" json:"level_type,omitempty"`
-	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Shortname            string   `protobuf:"bytes,5,opt,name=shortname,proto3" json:"shortname,omitempty"`
-	ParentPath           string   `protobuf:"bytes,6,opt,name=parent_path,json=parentPath,proto3" json:"parent_path,omitempty"`
-	Province             string   `protobuf:"bytes,7,opt,name=province,proto3" json:"province,omitempty"`
-	City                 string   `protobuf:"bytes,8,opt,name=city,proto3" json:"city,omitempty"`
-	District             string   `protobuf:"bytes,9,opt,name=district,proto3" json:"district,omitempty"`
-	ProvinceShortname    string   `protobuf:"bytes,10,opt,name=province_shortname,json=provinceShortname,proto3" json:"province_shortname,omitempty"`
-	CityShortname        string   `protobuf:"bytes,11,opt,name=city_shortname,json=cityShortname,proto3" json:"city_shortname,omitempty"`
-	DistrictShortname    string   `protobuf:"bytes,12,opt,name=district_shortname,json=districtShortname,proto3" json:"district_shortname,omitempty"`
-	ProvincePinyin       string   `protobuf:"bytes,13,opt,name=province_pinyin,json=provincePinyin,proto3" json:"province_pinyin,omitempty"`
-	CityPinyin           string   `protobuf:"bytes,14,opt,name=city_pinyin,json=cityPinyin,proto3" json:"city_pinyin,omitempty"`
-	DistrictPinyin       string   `protobuf:"bytes,15,opt,name=district_pinyin,json=districtPinyin,proto3" json:"district_pinyin,omitempty"`
-	Pinyin               string   `protobuf:"bytes,16,opt,name=pinyin,proto3" json:"pinyin,omitempty"`
-	Jianpin              string   `protobuf:"bytes,17,opt,name=jianpin,proto3" json:"jianpin,omitempty"`
-	FirstChar            string   `protobuf:"bytes,18,opt,name=first_char,json=firstChar,proto3" json:"first_char,omitempty"`
-	CityCode             string   `protobuf:"bytes,19,opt,name=city_code,json=cityCode,proto3" json:"city_code,omitempty"`
-	ZipCode              string   `protobuf:"bytes,20,opt,name=zip_code,json=zipCode,proto3" json:"zip_code,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	AreaId               int64    `protobuf:"varint,2,opt,name=area_id,json=areaId,proto3" json:"area_id"`
+	LevelType            string   `protobuf:"bytes,3,opt,name=level_type,json=levelType,proto3" json:"level_type"`
+	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
+	Shortname            string   `protobuf:"bytes,5,opt,name=shortname,proto3" json:"shortname"`
+	ParentPath           string   `protobuf:"bytes,6,opt,name=parent_path,json=parentPath,proto3" json:"parent_path"`
+	Province             string   `protobuf:"bytes,7,opt,name=province,proto3" json:"province"`
+	City                 string   `protobuf:"bytes,8,opt,name=city,proto3" json:"city"`
+	District             string   `protobuf:"bytes,9,opt,name=district,proto3" json:"district"`
+	ProvinceShortname    string   `protobuf:"bytes,10,opt,name=province_shortname,json=provinceShortname,proto3" json:"province_shortname"`
+	CityShortname        string   `protobuf:"bytes,11,opt,name=city_shortname,json=cityShortname,proto3" json:"city_shortname"`
+	DistrictShortname    string   `protobuf:"bytes,12,opt,name=district_shortname,json=districtShortname,proto3" json:"district_shortname"`
+	ProvincePinyin       string   `protobuf:"bytes,13,opt,name=province_pinyin,json=provincePinyin,proto3" json:"province_pinyin"`
+	CityPinyin           string   `protobuf:"bytes,14,opt,name=city_pinyin,json=cityPinyin,proto3" json:"city_pinyin"`
+	DistrictPinyin       string   `protobuf:"bytes,15,opt,name=district_pinyin,json=districtPinyin,proto3" json:"district_pinyin"`
+	Pinyin               string   `protobuf:"bytes,16,opt,name=pinyin,proto3" json:"pinyin"`
+	Jianpin              string   `protobuf:"bytes,17,opt,name=jianpin,proto3" json:"jianpin"`
+	FirstChar            string   `protobuf:"bytes,18,opt,name=first_char,json=firstChar,proto3" json:"first_char"`
+	CityCode             string   `protobuf:"bytes,19,opt,name=city_code,json=cityCode,proto3" json:"city_code"`
+	ZipCode              string   `protobuf:"bytes,20,opt,name=zip_code,json=zipCode,proto3" json:"zip_code"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -380,10 +380,10 @@ func (m *Area) GetZipCode() string {
 
 //地址查询参数
 type AddressWhere struct {
-	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
 	//以下为自定义参数
-	CustomerId           int64    `protobuf:"varint,4,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	CustomerId           int64    `protobuf:"varint,4,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -437,11 +437,11 @@ func (m *AddressWhere) GetCustomerId() int64 {
 
 //
 type AddressResponse struct {
-	Entity               *Address   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Address `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Address   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Address `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -514,9 +514,7 @@ func init() {
 	proto.RegisterType((*AddressResponse)(nil), "geiqin.srv.crm.AddressResponse")
 }
 
-func init() {
-	proto.RegisterFile("address.proto", fileDescriptor_982c640dad8fe78e)
-}
+func init() { proto.RegisterFile("address.proto", fileDescriptor_982c640dad8fe78e) }
 
 var fileDescriptor_982c640dad8fe78e = []byte{
 	// 836 bytes of a gzipped FileDescriptorProto

@@ -21,13 +21,13 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type SpecValue struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	SpecId               int32    `protobuf:"varint,2,opt,name=spec_id,json=specId,proto3" json:"spec_id,omitempty"`
-	Alias                string   `protobuf:"bytes,3,opt,name=alias,proto3" json:"alias,omitempty"`
-	SpecValue            string   `protobuf:"bytes,4,opt,name=spec_value,json=specValue,proto3" json:"spec_value,omitempty"`
-	SpecImgId            int64    `protobuf:"varint,5,opt,name=spec_img_id,json=specImgId,proto3" json:"spec_img_id,omitempty"`
-	SpecImgUrl           string   `protobuf:"bytes,6,opt,name=spec_img_url,json=specImgUrl,proto3" json:"spec_img_url,omitempty"`
-	Sorting              int32    `protobuf:"varint,7,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	SpecId               int32    `protobuf:"varint,2,opt,name=spec_id,json=specId,proto3" json:"spec_id"`
+	Alias                string   `protobuf:"bytes,3,opt,name=alias,proto3" json:"alias"`
+	SpecValue            string   `protobuf:"bytes,4,opt,name=spec_value,json=specValue,proto3" json:"spec_value"`
+	SpecImgId            int64    `protobuf:"varint,5,opt,name=spec_img_id,json=specImgId,proto3" json:"spec_img_id"`
+	SpecImgUrl           string   `protobuf:"bytes,6,opt,name=spec_img_url,json=specImgUrl,proto3" json:"spec_img_url"`
+	Sorting              int32    `protobuf:"varint,7,opt,name=sorting,proto3" json:"sorting"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -108,11 +108,11 @@ func (m *SpecValue) GetSorting() int32 {
 }
 
 type SpecValueResponse struct {
-	Entity               *SpecValue   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager       `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*SpecValue `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error       `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info        `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *SpecValue   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager       `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*SpecValue `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error       `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info        `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -183,9 +183,7 @@ func init() {
 	proto.RegisterType((*SpecValueResponse)(nil), "geiqin.srv.pdm.SpecValueResponse")
 }
 
-func init() {
-	proto.RegisterFile("specValue.proto", fileDescriptor_d3cfe65595187a36)
-}
+func init() { proto.RegisterFile("specValue.proto", fileDescriptor_d3cfe65595187a36) }
 
 var fileDescriptor_d3cfe65595187a36 = []byte{
 	// 371 bytes of a gzipped FileDescriptorProto

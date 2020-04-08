@@ -21,17 +21,17 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type StockDetail struct {
-	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	StockId              int64      `protobuf:"varint,2,opt,name=stock_id,json=stockId,proto3" json:"stock_id,omitempty"`
-	ItemId               int64      `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	SkuId                int64      `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	Quantity             int32      `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity,omitempty"`
-	CostPrice            float32    `protobuf:"fixed32,6,opt,name=cost_price,json=costPrice,proto3" json:"cost_price,omitempty"`
-	CostTotal            float32    `protobuf:"fixed32,7,opt,name=cost_total,json=costTotal,proto3" json:"cost_total,omitempty"`
-	Memo                 string     `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo,omitempty"`
-	CreatedAt            string     `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string     `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Goods                *GoodsInfo `protobuf:"bytes,11,opt,name=goods,proto3" json:"goods,omitempty"`
+	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	StockId              int64      `protobuf:"varint,2,opt,name=stock_id,json=stockId,proto3" json:"stock_id"`
+	ItemId               int64      `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id"`
+	SkuId                int64      `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	Quantity             int32      `protobuf:"varint,5,opt,name=quantity,proto3" json:"quantity"`
+	CostPrice            float32    `protobuf:"fixed32,6,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`
+	CostTotal            float32    `protobuf:"fixed32,7,opt,name=cost_total,json=costTotal,proto3" json:"cost_total"`
+	Memo                 string     `protobuf:"bytes,8,opt,name=memo,proto3" json:"memo"`
+	CreatedAt            string     `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string     `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Goods                *GoodsInfo `protobuf:"bytes,11,opt,name=goods,proto3" json:"goods"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -140,11 +140,11 @@ func (m *StockDetail) GetGoods() *GoodsInfo {
 }
 
 type StockDetailResponse struct {
-	Entity               *StockDetail   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*StockDetail `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *StockDetail   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*StockDetail `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -215,9 +215,7 @@ func init() {
 	proto.RegisterType((*StockDetailResponse)(nil), "geiqin.srv.wms.StockDetailResponse")
 }
 
-func init() {
-	proto.RegisterFile("stockDetail.proto", fileDescriptor_4b41bd475f57d2ba)
-}
+func init() { proto.RegisterFile("stockDetail.proto", fileDescriptor_4b41bd475f57d2ba) }
 
 var fileDescriptor_4b41bd475f57d2ba = []byte{
 	// 453 bytes of a gzipped FileDescriptorProto

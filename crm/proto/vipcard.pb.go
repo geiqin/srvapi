@@ -31,11 +31,11 @@ type Vipcard struct {
 	DisplayName          string   `protobuf:"bytes,8,opt,name=display_name,json=displayName,proto3" json:"display_name"`
 	Issuer               string   `protobuf:"bytes,9,opt,name=issuer,proto3" json:"issuer"`
 	Status               int32    `protobuf:"varint,10,opt,name=status,proto3" json:"status"`
-	CreatedAt            string   `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	DeletedAt            string   `protobuf:"bytes,13,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
-	Card                 *Card    `protobuf:"bytes,14,opt,name=card,proto3" json:"card,omitempty"`
-	Ids                  []int64  `protobuf:"varint,15,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string   `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	DeletedAt            string   `protobuf:"bytes,13,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at"`
+	Card                 *Card    `protobuf:"bytes,14,opt,name=card,proto3" json:"card"`
+	Ids                  []int64  `protobuf:"varint,15,rep,packed,name=ids,proto3" json:"ids"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -173,14 +173,14 @@ func (m *Vipcard) GetIds() []int64 {
 
 //查询参数
 type VipcardWhere struct {
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//以下为自定义参数
-	Number               string   `protobuf:"bytes,4,opt,name=number,proto3" json:"number,omitempty"`
-	CustomerId           int64    `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	CardId               int32    `protobuf:"varint,6,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
-	Status               int32    `protobuf:"varint,7,opt,name=status,proto3" json:"status,omitempty"`
+	Number               string   `protobuf:"bytes,4,opt,name=number,proto3" json:"number"`
+	CustomerId           int64    `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	CardId               int32    `protobuf:"varint,6,opt,name=card_id,json=cardId,proto3" json:"card_id"`
+	Status               int32    `protobuf:"varint,7,opt,name=status,proto3" json:"status"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -262,11 +262,11 @@ func (m *VipcardWhere) GetStatus() int32 {
 
 //
 type VipcardResponse struct {
-	Entity               *Vipcard   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Vipcard `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Vipcard   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Vipcard `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -338,9 +338,7 @@ func init() {
 	proto.RegisterType((*VipcardResponse)(nil), "geiqin.srv.crm.VipcardResponse")
 }
 
-func init() {
-	proto.RegisterFile("vipcard.proto", fileDescriptor_c8280ff148761e10)
-}
+func init() { proto.RegisterFile("vipcard.proto", fileDescriptor_c8280ff148761e10) }
 
 var fileDescriptor_c8280ff148761e10 = []byte{
 	// 617 bytes of a gzipped FileDescriptorProto

@@ -21,21 +21,21 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Reward struct {
-	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name                 string         `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	StartAt              string         `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at,omitempty"`
-	EndAt                string         `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at,omitempty"`
-	RangeType            int32          `protobuf:"varint,5,opt,name=range_type,json=rangeType,proto3" json:"range_type,omitempty"`
-	ConditionType        int32          `protobuf:"varint,6,opt,name=condition_type,json=conditionType,proto3" json:"condition_type,omitempty"`
-	StepNum              int32          `protobuf:"varint,7,opt,name=step_num,json=stepNum,proto3" json:"step_num,omitempty"`
-	Description          string         `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
-	CreatedAt            string         `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string         `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Goodses              []*RewardGoods `protobuf:"bytes,11,rep,name=goodses,proto3" json:"goodses,omitempty"`
-	Steps                []*RewardStep  `protobuf:"bytes,12,rep,name=steps,proto3" json:"steps,omitempty"`
-	Looped               bool           `protobuf:"varint,13,opt,name=looped,proto3" json:"looped,omitempty"`
-	Status               int32          `protobuf:"varint,14,opt,name=status,proto3" json:"status,omitempty"`
-	StatusName           string         `protobuf:"bytes,15,opt,name=status_name,json=statusName,proto3" json:"status_name,omitempty"`
+	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name                 string         `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	StartAt              string         `protobuf:"bytes,3,opt,name=start_at,json=startAt,proto3" json:"start_at"`
+	EndAt                string         `protobuf:"bytes,4,opt,name=end_at,json=endAt,proto3" json:"end_at"`
+	RangeType            int32          `protobuf:"varint,5,opt,name=range_type,json=rangeType,proto3" json:"range_type"`
+	ConditionType        int32          `protobuf:"varint,6,opt,name=condition_type,json=conditionType,proto3" json:"condition_type"`
+	StepNum              int32          `protobuf:"varint,7,opt,name=step_num,json=stepNum,proto3" json:"step_num"`
+	Description          string         `protobuf:"bytes,8,opt,name=description,proto3" json:"description"`
+	CreatedAt            string         `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string         `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Goodses              []*RewardGoods `protobuf:"bytes,11,rep,name=goodses,proto3" json:"goodses"`
+	Steps                []*RewardStep  `protobuf:"bytes,12,rep,name=steps,proto3" json:"steps"`
+	Looped               bool           `protobuf:"varint,13,opt,name=looped,proto3" json:"looped"`
+	Status               int32          `protobuf:"varint,14,opt,name=status,proto3" json:"status"`
+	StatusName           string         `protobuf:"bytes,15,opt,name=status_name,json=statusName,proto3" json:"status_name"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -173,11 +173,11 @@ func (m *Reward) GetStatusName() string {
 
 //
 type RewardResponse struct {
-	Entity               *Reward   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Reward `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Reward   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Reward `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -248,9 +248,7 @@ func init() {
 	proto.RegisterType((*RewardResponse)(nil), "geiqin.srv.ims.reward.RewardResponse")
 }
 
-func init() {
-	proto.RegisterFile("reward.proto", fileDescriptor_9aa76dc13de95b4d)
-}
+func init() { proto.RegisterFile("reward.proto", fileDescriptor_9aa76dc13de95b4d) }
 
 var fileDescriptor_9aa76dc13de95b4d = []byte{
 	// 542 bytes of a gzipped FileDescriptorProto

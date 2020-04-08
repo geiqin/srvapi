@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/v2/client"
-	server "github.com/micro/go-micro/v2/server"
+	client "github.com/micro/go-micro/client"
+	server "github.com/micro/go-micro/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -44,6 +44,12 @@ type myGoodsService struct {
 }
 
 func NewMyGoodsService(name string, c client.Client) MyGoodsService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.dms"
+	}
 	return &myGoodsService{
 		c:    c,
 		name: name,
@@ -94,9 +100,9 @@ type GoodsService interface {
 	//商品取消/参与推广
 	Disabled(ctx context.Context, in *GoodsWhere, opts ...client.CallOption) (*GoodsResponse, error)
 	// 检查商品是否参与分销
-	Check(ctx context.Context, in *GoodsWhere, opts ...client.CallOption) (*GoodsResponse, error)
+	Check(ctx context.Context, in *Goods, opts ...client.CallOption) (*GoodsResponse, error)
 	//获取分销商品信息
-	Get(ctx context.Context, in *GoodsWhere, opts ...client.CallOption) (*GoodsResponse, error)
+	Get(ctx context.Context, in *Goods, opts ...client.CallOption) (*GoodsResponse, error)
 	//设置分销商品信息
 	Set(ctx context.Context, in *Goods, opts ...client.CallOption) (*GoodsResponse, error)
 }
@@ -107,6 +113,12 @@ type goodsService struct {
 }
 
 func NewGoodsService(name string, c client.Client) GoodsService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.dms"
+	}
 	return &goodsService{
 		c:    c,
 		name: name,
@@ -133,7 +145,7 @@ func (c *goodsService) Disabled(ctx context.Context, in *GoodsWhere, opts ...cli
 	return out, nil
 }
 
-func (c *goodsService) Check(ctx context.Context, in *GoodsWhere, opts ...client.CallOption) (*GoodsResponse, error) {
+func (c *goodsService) Check(ctx context.Context, in *Goods, opts ...client.CallOption) (*GoodsResponse, error) {
 	req := c.c.NewRequest(c.name, "GoodsService.Check", in)
 	out := new(GoodsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -143,7 +155,7 @@ func (c *goodsService) Check(ctx context.Context, in *GoodsWhere, opts ...client
 	return out, nil
 }
 
-func (c *goodsService) Get(ctx context.Context, in *GoodsWhere, opts ...client.CallOption) (*GoodsResponse, error) {
+func (c *goodsService) Get(ctx context.Context, in *Goods, opts ...client.CallOption) (*GoodsResponse, error) {
 	req := c.c.NewRequest(c.name, "GoodsService.Get", in)
 	out := new(GoodsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -171,9 +183,9 @@ type GoodsServiceHandler interface {
 	//商品取消/参与推广
 	Disabled(context.Context, *GoodsWhere, *GoodsResponse) error
 	// 检查商品是否参与分销
-	Check(context.Context, *GoodsWhere, *GoodsResponse) error
+	Check(context.Context, *Goods, *GoodsResponse) error
 	//获取分销商品信息
-	Get(context.Context, *GoodsWhere, *GoodsResponse) error
+	Get(context.Context, *Goods, *GoodsResponse) error
 	//设置分销商品信息
 	Set(context.Context, *Goods, *GoodsResponse) error
 }
@@ -182,8 +194,8 @@ func RegisterGoodsServiceHandler(s server.Server, hdlr GoodsServiceHandler, opts
 	type goodsService interface {
 		Search(ctx context.Context, in *GoodsWhere, out *GoodsInfoResponse) error
 		Disabled(ctx context.Context, in *GoodsWhere, out *GoodsResponse) error
-		Check(ctx context.Context, in *GoodsWhere, out *GoodsResponse) error
-		Get(ctx context.Context, in *GoodsWhere, out *GoodsResponse) error
+		Check(ctx context.Context, in *Goods, out *GoodsResponse) error
+		Get(ctx context.Context, in *Goods, out *GoodsResponse) error
 		Set(ctx context.Context, in *Goods, out *GoodsResponse) error
 	}
 	type GoodsService struct {
@@ -205,11 +217,11 @@ func (h *goodsServiceHandler) Disabled(ctx context.Context, in *GoodsWhere, out 
 	return h.GoodsServiceHandler.Disabled(ctx, in, out)
 }
 
-func (h *goodsServiceHandler) Check(ctx context.Context, in *GoodsWhere, out *GoodsResponse) error {
+func (h *goodsServiceHandler) Check(ctx context.Context, in *Goods, out *GoodsResponse) error {
 	return h.GoodsServiceHandler.Check(ctx, in, out)
 }
 
-func (h *goodsServiceHandler) Get(ctx context.Context, in *GoodsWhere, out *GoodsResponse) error {
+func (h *goodsServiceHandler) Get(ctx context.Context, in *Goods, out *GoodsResponse) error {
 	return h.GoodsServiceHandler.Get(ctx, in, out)
 }
 

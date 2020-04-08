@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/v2/client"
-	server "github.com/micro/go-micro/v2/server"
+	client "github.com/micro/go-micro/client"
+	server "github.com/micro/go-micro/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -43,6 +43,12 @@ type itemGalleryService struct {
 }
 
 func NewItemGalleryService(name string, c client.Client) ItemGalleryService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.pdm"
+	}
 	return &itemGalleryService{
 		c:    c,
 		name: name,

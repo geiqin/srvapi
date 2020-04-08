@@ -52,10 +52,10 @@ func (m *Empty) XXX_DiscardUnknown() {
 var xxx_messageInfo_Empty proto.InternalMessageInfo
 
 type Info struct {
-	Number               int32    `protobuf:"varint,1,opt,name=number,proto3" json:"number,omitempty"`
-	Passed               bool     `protobuf:"varint,2,opt,name=passed,proto3" json:"passed,omitempty"`
-	Content              string   `protobuf:"bytes,3,opt,name=content,proto3" json:"content,omitempty"`
-	Status               string   `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	Number               int32    `protobuf:"varint,1,opt,name=number,proto3" json:"number"`
+	Passed               bool     `protobuf:"varint,2,opt,name=passed,proto3" json:"passed"`
+	Content              string   `protobuf:"bytes,3,opt,name=content,proto3" json:"content"`
+	Status               string   `protobuf:"bytes,4,opt,name=status,proto3" json:"status"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -115,8 +115,8 @@ func (m *Info) GetStatus() string {
 }
 
 type Error struct {
-	Code                 int32    `protobuf:"varint,1,opt,name=code,proto3" json:"code,omitempty"`
-	Message              string   `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Code                 int32    `protobuf:"varint,1,opt,name=code,proto3" json:"code"`
+	Message              string   `protobuf:"bytes,2,opt,name=message,proto3" json:"message"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -162,12 +162,12 @@ func (m *Error) GetMessage() string {
 }
 
 type Pager struct {
-	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	Total                int32    `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-	PageCount            int32    `protobuf:"varint,3,opt,name=page_count,json=pageCount,proto3" json:"page_count,omitempty"`
-	PageSize             int32    `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	PrevPage             int32    `protobuf:"varint,5,opt,name=prev_page,json=prevPage,proto3" json:"prev_page,omitempty"`
-	LastPage             int32    `protobuf:"varint,6,opt,name=last_page,json=lastPage,proto3" json:"last_page,omitempty"`
+	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	Total                int32    `protobuf:"varint,2,opt,name=total,proto3" json:"total"`
+	PageCount            int32    `protobuf:"varint,3,opt,name=page_count,json=pageCount,proto3" json:"page_count"`
+	PageSize             int32    `protobuf:"varint,4,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	PrevPage             int32    `protobuf:"varint,5,opt,name=prev_page,json=prevPage,proto3" json:"prev_page"`
+	LastPage             int32    `protobuf:"varint,6,opt,name=last_page,json=lastPage,proto3" json:"last_page"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -241,22 +241,22 @@ func (m *Pager) GetLastPage() int32 {
 }
 
 type BaseWhere struct {
-	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Top      int32 `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
+	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Top      int32 `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
 	//base params
-	Id                   int64    `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
-	Mobile               string   `protobuf:"bytes,5,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Name                 string   `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	Title                string   `protobuf:"bytes,7,opt,name=title,proto3" json:"title,omitempty"`
-	Keywords             string   `protobuf:"bytes,8,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Status               string   `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
-	AreaId               int64    `protobuf:"varint,10,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
-	TypeId               int32    `protobuf:"varint,11,opt,name=type_id,json=typeId,proto3" json:"type_id,omitempty"`
-	CatId                int32    `protobuf:"varint,12,opt,name=cat_id,json=catId,proto3" json:"cat_id,omitempty"`
-	StartDate            string   `protobuf:"bytes,13,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
-	EndDate              string   `protobuf:"bytes,14,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
-	Ids                  []int64  `protobuf:"varint,15,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id                   int64    `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
+	Mobile               string   `protobuf:"bytes,5,opt,name=mobile,proto3" json:"mobile"`
+	Name                 string   `protobuf:"bytes,6,opt,name=name,proto3" json:"name"`
+	Title                string   `protobuf:"bytes,7,opt,name=title,proto3" json:"title"`
+	Keywords             string   `protobuf:"bytes,8,opt,name=keywords,proto3" json:"keywords"`
+	Status               string   `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
+	AreaId               int64    `protobuf:"varint,10,opt,name=area_id,json=areaId,proto3" json:"area_id"`
+	TypeId               int32    `protobuf:"varint,11,opt,name=type_id,json=typeId,proto3" json:"type_id"`
+	CatId                int32    `protobuf:"varint,12,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
+	StartDate            string   `protobuf:"bytes,13,opt,name=start_date,json=startDate,proto3" json:"start_date"`
+	EndDate              string   `protobuf:"bytes,14,opt,name=end_date,json=endDate,proto3" json:"end_date"`
+	Ids                  []int64  `protobuf:"varint,15,rep,packed,name=ids,proto3" json:"ids"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -400,9 +400,7 @@ func init() {
 	proto.RegisterType((*BaseWhere)(nil), "geiqin.srv.ims.reward.BaseWhere")
 }
 
-func init() {
-	proto.RegisterFile("common.proto", fileDescriptor_555bd8c177793206)
-}
+func init() { proto.RegisterFile("common.proto", fileDescriptor_555bd8c177793206) }
 
 var fileDescriptor_555bd8c177793206 = []byte{
 	// 440 bytes of a gzipped FileDescriptorProto

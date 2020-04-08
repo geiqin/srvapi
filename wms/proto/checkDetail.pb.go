@@ -21,18 +21,18 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type CheckDetail struct {
-	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	CheckId              int64      `protobuf:"varint,2,opt,name=check_id,json=checkId,proto3" json:"check_id,omitempty"`
-	ItemId               int64      `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	SkuId                int64      `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	StockNum             int32      `protobuf:"varint,5,opt,name=stock_num,json=stockNum,proto3" json:"stock_num,omitempty"`
-	CheckNum             int32      `protobuf:"varint,6,opt,name=check_num,json=checkNum,proto3" json:"check_num,omitempty"`
-	Balance              int32      `protobuf:"varint,7,opt,name=balance,proto3" json:"balance,omitempty"`
-	CostPrice            float32    `protobuf:"fixed32,8,opt,name=cost_price,json=costPrice,proto3" json:"cost_price,omitempty"`
-	Memo                 string     `protobuf:"bytes,9,opt,name=memo,proto3" json:"memo,omitempty"`
-	CreatedAt            string     `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string     `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Goods                *GoodsInfo `protobuf:"bytes,12,opt,name=goods,proto3" json:"goods,omitempty"`
+	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	CheckId              int64      `protobuf:"varint,2,opt,name=check_id,json=checkId,proto3" json:"check_id"`
+	ItemId               int64      `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id"`
+	SkuId                int64      `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	StockNum             int32      `protobuf:"varint,5,opt,name=stock_num,json=stockNum,proto3" json:"stock_num"`
+	CheckNum             int32      `protobuf:"varint,6,opt,name=check_num,json=checkNum,proto3" json:"check_num"`
+	Balance              int32      `protobuf:"varint,7,opt,name=balance,proto3" json:"balance"`
+	CostPrice            float32    `protobuf:"fixed32,8,opt,name=cost_price,json=costPrice,proto3" json:"cost_price"`
+	Memo                 string     `protobuf:"bytes,9,opt,name=memo,proto3" json:"memo"`
+	CreatedAt            string     `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string     `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Goods                *GoodsInfo `protobuf:"bytes,12,opt,name=goods,proto3" json:"goods"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -148,11 +148,11 @@ func (m *CheckDetail) GetGoods() *GoodsInfo {
 }
 
 type CheckDetailResponse struct {
-	Entity               *CheckDetail   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*CheckDetail `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *CheckDetail   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*CheckDetail `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -223,9 +223,7 @@ func init() {
 	proto.RegisterType((*CheckDetailResponse)(nil), "geiqin.srv.wms.CheckDetailResponse")
 }
 
-func init() {
-	proto.RegisterFile("checkDetail.proto", fileDescriptor_49e7117e10deaef0)
-}
+func init() { proto.RegisterFile("checkDetail.proto", fileDescriptor_49e7117e10deaef0) }
 
 var fileDescriptor_49e7117e10deaef0 = []byte{
 	// 394 bytes of a gzipped FileDescriptorProto

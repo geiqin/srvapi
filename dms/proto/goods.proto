@@ -16,9 +16,9 @@ service GoodsService {
     //商品取消/参与推广
     rpc Disabled (GoodsWhere) returns (GoodsResponse) {}
     // 检查商品是否参与分销
-    rpc Check (GoodsWhere) returns (GoodsResponse) {}
+    rpc Check (Goods) returns (GoodsResponse) {}
     //获取分销商品信息
-    rpc Get (GoodsWhere) returns (GoodsResponse) {}
+    rpc Get (Goods) returns (GoodsResponse) {}
     //设置分销商品信息
     rpc Set (Goods) returns (GoodsResponse) {}
 }

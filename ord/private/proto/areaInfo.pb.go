@@ -247,9 +247,7 @@ func init() {
 	proto.RegisterType((*AreaInfo)(nil), "geiqin.srv.ord.private.AreaInfo")
 }
 
-func init() {
-	proto.RegisterFile("areaInfo.proto", fileDescriptor_e4d5c69474b95158)
-}
+func init() { proto.RegisterFile("areaInfo.proto", fileDescriptor_e4d5c69474b95158) }
 
 var fileDescriptor_e4d5c69474b95158 = []byte{
 	// 413 bytes of a gzipped FileDescriptorProto

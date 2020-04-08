@@ -198,15 +198,15 @@ func (m *Buying) GetPlatformSource() string {
 
 //购买清单明细
 type BuyingItem struct {
-	ItemId               int64      `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	SkuId                int64      `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	Num                  int32      `protobuf:"varint,3,opt,name=num,proto3" json:"num,omitempty"`
-	Price                float32    `protobuf:"fixed32,4,opt,name=price,proto3" json:"price,omitempty"`
-	OriginPrice          float32    `protobuf:"fixed32,5,opt,name=origin_price,json=originPrice,proto3" json:"origin_price,omitempty"`
-	SubTotal             float32    `protobuf:"fixed32,6,opt,name=sub_total,json=subTotal,proto3" json:"sub_total,omitempty"`
-	IsGift               bool       `protobuf:"varint,7,opt,name=is_gift,json=isGift,proto3" json:"is_gift,omitempty"`
-	PromotionId          int64      `protobuf:"varint,8,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id,omitempty"`
-	Goods                *GoodsInfo `protobuf:"bytes,9,opt,name=goods,proto3" json:"goods,omitempty"`
+	ItemId               int64      `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id"`
+	SkuId                int64      `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	Num                  int32      `protobuf:"varint,3,opt,name=num,proto3" json:"num"`
+	Price                float32    `protobuf:"fixed32,4,opt,name=price,proto3" json:"price"`
+	OriginPrice          float32    `protobuf:"fixed32,5,opt,name=origin_price,json=originPrice,proto3" json:"origin_price"`
+	SubTotal             float32    `protobuf:"fixed32,6,opt,name=sub_total,json=subTotal,proto3" json:"sub_total"`
+	IsGift               bool       `protobuf:"varint,7,opt,name=is_gift,json=isGift,proto3" json:"is_gift"`
+	PromotionId          int64      `protobuf:"varint,8,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id"`
+	Goods                *GoodsInfo `protobuf:"bytes,9,opt,name=goods,proto3" json:"goods"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -302,15 +302,15 @@ func (m *BuyingItem) GetGoods() *GoodsInfo {
 
 //购买清单请求(订单下单使用)
 type BuyingRequest struct {
-	CustomerId           int64         `protobuf:"varint,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	Source               int32         `protobuf:"varint,2,opt,name=source,proto3" json:"source,omitempty"`
-	AddressId            int64         `protobuf:"varint,3,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
-	Message              string        `protobuf:"bytes,4,opt,name=message,proto3" json:"message,omitempty"`
-	VipcardId            int64         `protobuf:"varint,5,opt,name=vipcard_id,json=vipcardId,proto3" json:"vipcard_id,omitempty"`
-	PayMethod            int32         `protobuf:"varint,6,opt,name=pay_method,json=payMethod,proto3" json:"pay_method,omitempty"`
-	UseTicketId          int64         `protobuf:"varint,7,opt,name=use_ticket_id,json=useTicketId,proto3" json:"use_ticket_id,omitempty"`
-	PlatformSource       string        `protobuf:"bytes,8,opt,name=platform_source,json=platformSource,proto3" json:"platform_source,omitempty"`
-	Items                []*BuyingItem `protobuf:"bytes,9,rep,name=items,proto3" json:"items,omitempty"`
+	CustomerId           int64         `protobuf:"varint,1,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Source               int32         `protobuf:"varint,2,opt,name=source,proto3" json:"source"`
+	AddressId            int64         `protobuf:"varint,3,opt,name=address_id,json=addressId,proto3" json:"address_id"`
+	Message              string        `protobuf:"bytes,4,opt,name=message,proto3" json:"message"`
+	VipcardId            int64         `protobuf:"varint,5,opt,name=vipcard_id,json=vipcardId,proto3" json:"vipcard_id"`
+	PayMethod            int32         `protobuf:"varint,6,opt,name=pay_method,json=payMethod,proto3" json:"pay_method"`
+	UseTicketId          int64         `protobuf:"varint,7,opt,name=use_ticket_id,json=useTicketId,proto3" json:"use_ticket_id"`
+	PlatformSource       string        `protobuf:"bytes,8,opt,name=platform_source,json=platformSource,proto3" json:"platform_source"`
+	Items                []*BuyingItem `protobuf:"bytes,9,rep,name=items,proto3" json:"items"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
 	XXX_sizecache        int32         `json:"-"`
@@ -405,11 +405,11 @@ func (m *BuyingRequest) GetItems() []*BuyingItem {
 }
 
 type BuyingResponse struct {
-	Entity               *Buying   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Buying `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Buying   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Buying `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -482,9 +482,7 @@ func init() {
 	proto.RegisterType((*BuyingResponse)(nil), "geiqin.srv.ord.private.BuyingResponse")
 }
 
-func init() {
-	proto.RegisterFile("buying.proto", fileDescriptor_fc0a9e5c6a9833d6)
-}
+func init() { proto.RegisterFile("buying.proto", fileDescriptor_fc0a9e5c6a9833d6) }
 
 var fileDescriptor_fc0a9e5c6a9833d6 = []byte{
 	// 805 bytes of a gzipped FileDescriptorProto

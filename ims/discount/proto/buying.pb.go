@@ -22,18 +22,18 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //购买清单
 type Buying struct {
-	Solution             string        `protobuf:"bytes,1,opt,name=solution,proto3" json:"solution,omitempty"`
-	Count                int32         `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
-	Total                float32       `protobuf:"fixed32,3,opt,name=total,proto3" json:"total,omitempty"`
-	Discount             float32       `protobuf:"fixed32,4,opt,name=discount,proto3" json:"discount,omitempty"`
-	Freight              float32       `protobuf:"fixed32,5,opt,name=freight,proto3" json:"freight,omitempty"`
-	Amount               float32       `protobuf:"fixed32,6,opt,name=amount,proto3" json:"amount,omitempty"`
-	AddressId            int64         `protobuf:"varint,7,opt,name=address_id,json=addressId,proto3" json:"address_id,omitempty"`
-	CustomerId           int64         `protobuf:"varint,8,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	UseTicketId          int64         `protobuf:"varint,9,opt,name=use_ticket_id,json=useTicketId,proto3" json:"use_ticket_id,omitempty"`
-	AvailableTicketIds   []int64       `protobuf:"varint,10,rep,packed,name=available_ticket_ids,json=availableTicketIds,proto3" json:"available_ticket_ids,omitempty"`
-	Items                []*BuyingItem `protobuf:"bytes,11,rep,name=items,proto3" json:"items,omitempty"`
-	Changed              bool          `protobuf:"varint,12,opt,name=changed,proto3" json:"changed,omitempty"`
+	Solution             string        `protobuf:"bytes,1,opt,name=solution,proto3" json:"solution"`
+	Count                int32         `protobuf:"varint,2,opt,name=count,proto3" json:"count"`
+	Total                float32       `protobuf:"fixed32,3,opt,name=total,proto3" json:"total"`
+	Discount             float32       `protobuf:"fixed32,4,opt,name=discount,proto3" json:"discount"`
+	Freight              float32       `protobuf:"fixed32,5,opt,name=freight,proto3" json:"freight"`
+	Amount               float32       `protobuf:"fixed32,6,opt,name=amount,proto3" json:"amount"`
+	AddressId            int64         `protobuf:"varint,7,opt,name=address_id,json=addressId,proto3" json:"address_id"`
+	CustomerId           int64         `protobuf:"varint,8,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	UseTicketId          int64         `protobuf:"varint,9,opt,name=use_ticket_id,json=useTicketId,proto3" json:"use_ticket_id"`
+	AvailableTicketIds   []int64       `protobuf:"varint,10,rep,packed,name=available_ticket_ids,json=availableTicketIds,proto3" json:"available_ticket_ids"`
+	Items                []*BuyingItem `protobuf:"bytes,11,rep,name=items,proto3" json:"items"`
+	Changed              bool          `protobuf:"varint,12,opt,name=changed,proto3" json:"changed"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
 	XXX_sizecache        int32         `json:"-"`
@@ -150,13 +150,13 @@ func (m *Buying) GetChanged() bool {
 
 //购买清单明细
 type BuyingItem struct {
-	ItemId               int64    `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
-	SkuId                int64    `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
-	Num                  int32    `protobuf:"varint,3,opt,name=num,proto3" json:"num,omitempty"`
-	Price                float32  `protobuf:"fixed32,4,opt,name=price,proto3" json:"price,omitempty"`
-	OriginPrice          float32  `protobuf:"fixed32,5,opt,name=origin_price,json=originPrice,proto3" json:"origin_price,omitempty"`
-	SubTotal             float32  `protobuf:"fixed32,6,opt,name=sub_total,json=subTotal,proto3" json:"sub_total,omitempty"`
-	PromotionId          int64    `protobuf:"varint,7,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id,omitempty"`
+	ItemId               int64    `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id"`
+	SkuId                int64    `protobuf:"varint,2,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
+	Num                  int32    `protobuf:"varint,3,opt,name=num,proto3" json:"num"`
+	Price                float32  `protobuf:"fixed32,4,opt,name=price,proto3" json:"price"`
+	OriginPrice          float32  `protobuf:"fixed32,5,opt,name=origin_price,json=originPrice,proto3" json:"origin_price"`
+	SubTotal             float32  `protobuf:"fixed32,6,opt,name=sub_total,json=subTotal,proto3" json:"sub_total"`
+	PromotionId          int64    `protobuf:"varint,7,opt,name=promotion_id,json=promotionId,proto3" json:"promotion_id"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -237,11 +237,11 @@ func (m *BuyingItem) GetPromotionId() int64 {
 }
 
 type BuyingResponse struct {
-	Entity               *Buying   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Buying `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Buying   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Buying `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -313,9 +313,7 @@ func init() {
 	proto.RegisterType((*BuyingResponse)(nil), "geiqin.srv.ims.discount.BuyingResponse")
 }
 
-func init() {
-	proto.RegisterFile("buying.proto", fileDescriptor_fc0a9e5c6a9833d6)
-}
+func init() { proto.RegisterFile("buying.proto", fileDescriptor_fc0a9e5c6a9833d6) }
 
 var fileDescriptor_fc0a9e5c6a9833d6 = []byte{
 	// 532 bytes of a gzipped FileDescriptorProto

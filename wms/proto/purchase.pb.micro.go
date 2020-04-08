@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/v2/client"
-	server "github.com/micro/go-micro/v2/server"
+	client "github.com/micro/go-micro/client"
+	server "github.com/micro/go-micro/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -50,6 +50,12 @@ type purchaseInService struct {
 }
 
 func NewPurchaseInService(name string, c client.Client) PurchaseInService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.wms"
+	}
 	return &purchaseInService{
 		c:    c,
 		name: name,
@@ -222,6 +228,12 @@ type purchaseOutService struct {
 }
 
 func NewPurchaseOutService(name string, c client.Client) PurchaseOutService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.wms"
+	}
 	return &purchaseOutService{
 		c:    c,
 		name: name,

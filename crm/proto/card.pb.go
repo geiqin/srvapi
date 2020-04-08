@@ -38,11 +38,11 @@ type Card struct {
 	Description          string         `protobuf:"bytes,15,opt,name=description,proto3" json:"description"`
 	Phone                string         `protobuf:"bytes,16,opt,name=phone,proto3" json:"phone"`
 	Disabled             bool           `protobuf:"varint,17,opt,name=disabled,proto3" json:"disabled"`
-	CreatedAt            string         `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string         `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	CardBenefits         []*CardBenefit `protobuf:"bytes,21,rep,name=card_benefits,json=cardBenefits,proto3" json:"card_benefits,omitempty"`
-	Ids                  []int32        `protobuf:"varint,22,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Status               int32          `protobuf:"varint,23,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt            string         `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string         `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	CardBenefits         []*CardBenefit `protobuf:"bytes,21,rep,name=card_benefits,json=cardBenefits,proto3" json:"card_benefits"`
+	Ids                  []int32        `protobuf:"varint,22,rep,packed,name=ids,proto3" json:"ids"`
+	Status               int32          `protobuf:"varint,23,opt,name=status,proto3" json:"status"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -229,12 +229,12 @@ func (m *Card) GetStatus() int32 {
 
 //查询参数
 type CardWhere struct {
-	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Paged    int32 `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32 `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
 	//以下为自定义参数
-	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	Status               int32    `protobuf:"varint,4,opt,name=status,proto3" json:"status,omitempty"`
-	Method               int32    `protobuf:"varint,5,opt,name=method,proto3" json:"method,omitempty"`
+	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	Status               int32    `protobuf:"varint,4,opt,name=status,proto3" json:"status"`
+	Method               int32    `protobuf:"varint,5,opt,name=method,proto3" json:"method"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -302,11 +302,11 @@ func (m *CardWhere) GetMethod() int32 {
 
 //
 type CardResponse struct {
-	Entity               *Card    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Card  `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Card    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Card  `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -378,9 +378,7 @@ func init() {
 	proto.RegisterType((*CardResponse)(nil), "geiqin.srv.crm.CardResponse")
 }
 
-func init() {
-	proto.RegisterFile("card.proto", fileDescriptor_95fd8cb6caa913ee)
-}
+func init() { proto.RegisterFile("card.proto", fileDescriptor_95fd8cb6caa913ee) }
 
 var fileDescriptor_95fd8cb6caa913ee = []byte{
 	// 688 bytes of a gzipped FileDescriptorProto

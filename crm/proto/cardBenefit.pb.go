@@ -25,10 +25,10 @@ type CardBenefit struct {
 	CardId               int32    `protobuf:"varint,2,opt,name=card_id,json=cardId,proto3" json:"card_id"`
 	BenefitId            int32    `protobuf:"varint,3,opt,name=benefit_id,json=benefitId,proto3" json:"benefit_id"`
 	Params               string   `protobuf:"bytes,4,opt,name=params,proto3" json:"params"`
-	CreatedAt            string   `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Benefit              *Benefit `protobuf:"bytes,7,opt,name=benefit,proto3" json:"benefit,omitempty"`
-	Ids                  []int32  `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string   `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Benefit              *Benefit `protobuf:"bytes,7,opt,name=benefit,proto3" json:"benefit"`
+	Ids                  []int32  `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -117,11 +117,11 @@ func (m *CardBenefit) GetIds() []int32 {
 
 //
 type CardBenefitResponse struct {
-	Entity               *CardBenefit   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*CardBenefit `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *CardBenefit   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*CardBenefit `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -192,9 +192,7 @@ func init() {
 	proto.RegisterType((*CardBenefitResponse)(nil), "geiqin.srv.crm.CardBenefitResponse")
 }
 
-func init() {
-	proto.RegisterFile("cardBenefit.proto", fileDescriptor_f69b83a596fd8713)
-}
+func init() { proto.RegisterFile("cardBenefit.proto", fileDescriptor_f69b83a596fd8713) }
 
 var fileDescriptor_f69b83a596fd8713 = []byte{
 	// 403 bytes of a gzipped FileDescriptorProto

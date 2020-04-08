@@ -13,7 +13,7 @@ service CommissionService {
     //分页查询结算列表
     rpc Search (BaseWhere) returns (CommissionResponse) {}
     //分页查询业绩报表
-    rpc searchPerformance  (BaseWhere) returns (CommissionResponse) {}
+    rpc SearchPerformance  (BaseWhere) returns (CommissionResponse) {}
 }
 
 message Commission {

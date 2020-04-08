@@ -21,23 +21,23 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Stock struct {
-	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	StockSn              string         `protobuf:"bytes,2,opt,name=stock_sn,json=stockSn,proto3" json:"stock_sn,omitempty"`
-	Type                 string         `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	SheetType            string         `protobuf:"bytes,4,opt,name=sheet_type,json=sheetType,proto3" json:"sheet_type,omitempty"`
-	HandledAt            string         `protobuf:"bytes,5,opt,name=handled_at,json=handledAt,proto3" json:"handled_at,omitempty"`
-	SourceNo             string         `protobuf:"bytes,6,opt,name=source_no,json=sourceNo,proto3" json:"source_no,omitempty"`
-	UserId               int64          `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Autoed               bool           `protobuf:"varint,8,opt,name=autoed,proto3" json:"autoed,omitempty"`
-	Memo                 string         `protobuf:"bytes,9,opt,name=memo,proto3" json:"memo,omitempty"`
-	RowTotal             int32          `protobuf:"varint,10,opt,name=row_total,json=rowTotal,proto3" json:"row_total,omitempty"`
-	QuantityTotal        int32          `protobuf:"varint,11,opt,name=quantity_total,json=quantityTotal,proto3" json:"quantity_total,omitempty"`
-	Status               int32          `protobuf:"varint,12,opt,name=status,proto3" json:"status,omitempty"`
-	Failure              string         `protobuf:"bytes,13,opt,name=failure,proto3" json:"failure,omitempty"`
-	CreatedAt            string         `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string         `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Details              []*StockDetail `protobuf:"bytes,16,rep,name=details,proto3" json:"details,omitempty"`
-	Ok                   bool           `protobuf:"varint,17,opt,name=ok,proto3" json:"ok,omitempty"`
+	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	StockSn              string         `protobuf:"bytes,2,opt,name=stock_sn,json=stockSn,proto3" json:"stock_sn"`
+	Type                 string         `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
+	SheetType            string         `protobuf:"bytes,4,opt,name=sheet_type,json=sheetType,proto3" json:"sheet_type"`
+	HandledAt            string         `protobuf:"bytes,5,opt,name=handled_at,json=handledAt,proto3" json:"handled_at"`
+	SourceNo             string         `protobuf:"bytes,6,opt,name=source_no,json=sourceNo,proto3" json:"source_no"`
+	UserId               int64          `protobuf:"varint,7,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	Autoed               bool           `protobuf:"varint,8,opt,name=autoed,proto3" json:"autoed"`
+	Memo                 string         `protobuf:"bytes,9,opt,name=memo,proto3" json:"memo"`
+	RowTotal             int32          `protobuf:"varint,10,opt,name=row_total,json=rowTotal,proto3" json:"row_total"`
+	QuantityTotal        int32          `protobuf:"varint,11,opt,name=quantity_total,json=quantityTotal,proto3" json:"quantity_total"`
+	Status               int32          `protobuf:"varint,12,opt,name=status,proto3" json:"status"`
+	Failure              string         `protobuf:"bytes,13,opt,name=failure,proto3" json:"failure"`
+	CreatedAt            string         `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string         `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Details              []*StockDetail `protobuf:"bytes,16,rep,name=details,proto3" json:"details"`
+	Ok                   bool           `protobuf:"varint,17,opt,name=ok,proto3" json:"ok"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -188,11 +188,11 @@ func (m *Stock) GetOk() bool {
 }
 
 type StockResponse struct {
-	Entity               *Stock   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Stock `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Stock   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Stock `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -263,9 +263,7 @@ func init() {
 	proto.RegisterType((*StockResponse)(nil), "geiqin.srv.wms.StockResponse")
 }
 
-func init() {
-	proto.RegisterFile("stock.proto", fileDescriptor_c87a7814fbd674bd)
-}
+func init() { proto.RegisterFile("stock.proto", fileDescriptor_c87a7814fbd674bd) }
 
 var fileDescriptor_c87a7814fbd674bd = []byte{
 	// 579 bytes of a gzipped FileDescriptorProto

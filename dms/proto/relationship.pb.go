@@ -21,17 +21,17 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Relationship struct {
-	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	DistributorId        int64        `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id,omitempty"`
-	CustomerId           int64        `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	Type                 int32        `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"`
-	Status               string       `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
-	ContinueNum          int32        `protobuf:"varint,6,opt,name=continue_num,json=continueNum,proto3" json:"continue_num,omitempty"`
-	LastContinueAt       string       `protobuf:"bytes,7,opt,name=last_continue_at,json=lastContinueAt,proto3" json:"last_continue_at,omitempty"`
-	CreatedAt            string       `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string       `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Distributor          *Distributor `protobuf:"bytes,10,opt,name=distributor,proto3" json:"distributor,omitempty"`
-	Invitee              *Distributor `protobuf:"bytes,11,opt,name=invitee,proto3" json:"invitee,omitempty"`
+	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	DistributorId        int64        `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id"`
+	CustomerId           int64        `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Type                 int32        `protobuf:"varint,4,opt,name=type,proto3" json:"type"`
+	Status               string       `protobuf:"bytes,5,opt,name=status,proto3" json:"status"`
+	ContinueNum          int32        `protobuf:"varint,6,opt,name=continue_num,json=continueNum,proto3" json:"continue_num"`
+	LastContinueAt       string       `protobuf:"bytes,7,opt,name=last_continue_at,json=lastContinueAt,proto3" json:"last_continue_at"`
+	CreatedAt            string       `protobuf:"bytes,8,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string       `protobuf:"bytes,9,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Distributor          *Distributor `protobuf:"bytes,10,opt,name=distributor,proto3" json:"distributor"`
+	Invitee              *Distributor `protobuf:"bytes,11,opt,name=invitee,proto3" json:"invitee"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -140,11 +140,11 @@ func (m *Relationship) GetInvitee() *Distributor {
 }
 
 type RelationshipWhere struct {
-	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	Type                 int32    `protobuf:"varint,4,opt,name=type,proto3" json:"type,omitempty"`
-	Status               string   `protobuf:"bytes,5,opt,name=status,proto3" json:"status,omitempty"`
+	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Type                 int32    `protobuf:"varint,4,opt,name=type,proto3" json:"type"`
+	Status               string   `protobuf:"bytes,5,opt,name=status,proto3" json:"status"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -211,11 +211,11 @@ func (m *RelationshipWhere) GetStatus() string {
 }
 
 type RelationshipResponse struct {
-	Entity               *Relationship   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager          `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Relationship `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error          `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info           `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Relationship   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager          `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Relationship `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error          `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info           `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`
@@ -287,9 +287,7 @@ func init() {
 	proto.RegisterType((*RelationshipResponse)(nil), "geiqin.srv.dms.RelationshipResponse")
 }
 
-func init() {
-	proto.RegisterFile("relationship.proto", fileDescriptor_a5623305174737df)
-}
+func init() { proto.RegisterFile("relationship.proto", fileDescriptor_a5623305174737df) }
 
 var fileDescriptor_a5623305174737df = []byte{
 	// 515 bytes of a gzipped FileDescriptorProto

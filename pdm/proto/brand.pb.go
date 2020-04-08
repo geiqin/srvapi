@@ -21,16 +21,16 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Brand struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	Website              string   `protobuf:"bytes,3,opt,name=website,proto3" json:"website,omitempty"`
-	LogoId               int64    `protobuf:"varint,4,opt,name=logo_id,json=logoId,proto3" json:"logo_id,omitempty"`
-	LogoUrl              string   `protobuf:"bytes,5,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
-	BrandType            string   `protobuf:"bytes,6,opt,name=brand_type,json=brandType,proto3" json:"brand_type,omitempty"`
-	ItemNum              int32    `protobuf:"varint,7,opt,name=item_num,json=itemNum,proto3" json:"item_num,omitempty"`
-	Description          string   `protobuf:"bytes,8,opt,name=description,proto3" json:"description,omitempty"`
-	CreatedAt            string   `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	Website              string   `protobuf:"bytes,3,opt,name=website,proto3" json:"website"`
+	LogoId               int64    `protobuf:"varint,4,opt,name=logo_id,json=logoId,proto3" json:"logo_id"`
+	LogoUrl              string   `protobuf:"bytes,5,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url"`
+	BrandType            string   `protobuf:"bytes,6,opt,name=brand_type,json=brandType,proto3" json:"brand_type"`
+	ItemNum              int32    `protobuf:"varint,7,opt,name=item_num,json=itemNum,proto3" json:"item_num"`
+	Description          string   `protobuf:"bytes,8,opt,name=description,proto3" json:"description"`
+	CreatedAt            string   `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string   `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -132,11 +132,11 @@ func (m *Brand) GetUpdatedAt() string {
 }
 
 type BrandResponse struct {
-	Entity               *Brand   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Brand `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Brand   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Brand `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -207,9 +207,7 @@ func init() {
 	proto.RegisterType((*BrandResponse)(nil), "geiqin.srv.pdm.BrandResponse")
 }
 
-func init() {
-	proto.RegisterFile("brand.proto", fileDescriptor_0b213c818d79a472)
-}
+func init() { proto.RegisterFile("brand.proto", fileDescriptor_0b213c818d79a472) }
 
 var fileDescriptor_0b213c818d79a472 = []byte{
 	// 419 bytes of a gzipped FileDescriptorProto

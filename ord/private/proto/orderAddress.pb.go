@@ -35,7 +35,7 @@ type OrderAddress struct {
 	AddressId            int64     `protobuf:"varint,13,opt,name=address_id,json=addressId,proto3" json:"address_id"`
 	CreatedAt            string    `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
 	UpdatedAt            string    `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Area                 *AreaInfo `protobuf:"bytes,16,opt,name=area,proto3" json:"area,omitempty"`
+	Area                 *AreaInfo `protobuf:"bytes,16,opt,name=area,proto3" json:"area"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -172,11 +172,11 @@ func (m *OrderAddress) GetArea() *AreaInfo {
 }
 
 type OrderAddressResponse struct {
-	Entity               *OrderAddress   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager          `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*OrderAddress `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error          `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info           `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *OrderAddress   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager          `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*OrderAddress `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error          `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info           `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}        `json:"-"`
 	XXX_unrecognized     []byte          `json:"-"`
 	XXX_sizecache        int32           `json:"-"`
@@ -247,9 +247,7 @@ func init() {
 	proto.RegisterType((*OrderAddressResponse)(nil), "geiqin.srv.ord.private.OrderAddressResponse")
 }
 
-func init() {
-	proto.RegisterFile("orderAddress.proto", fileDescriptor_1cd915234d95bb37)
-}
+func init() { proto.RegisterFile("orderAddress.proto", fileDescriptor_1cd915234d95bb37) }
 
 var fileDescriptor_1cd915234d95bb37 = []byte{
 	// 505 bytes of a gzipped FileDescriptorProto

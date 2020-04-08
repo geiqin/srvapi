@@ -47,8 +47,8 @@ type OrderDetail struct {
 	AttachType           string   `protobuf:"bytes,24,opt,name=attach_type,json=attachType,proto3" json:"attach_type"`
 	ShipStatus           string   `protobuf:"bytes,25,opt,name=ship_status,json=shipStatus,proto3" json:"ship_status"`
 	RefundStatus         string   `protobuf:"bytes,26,opt,name=refund_status,json=refundStatus,proto3" json:"refund_status"`
-	CreatedAt            string   `protobuf:"bytes,27,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,28,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,27,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string   `protobuf:"bytes,28,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -279,9 +279,7 @@ func init() {
 	proto.RegisterType((*OrderDetail)(nil), "geiqin.srv.ord.private.OrderDetail")
 }
 
-func init() {
-	proto.RegisterFile("orderDetail.proto", fileDescriptor_28901a6159ef662a)
-}
+func init() { proto.RegisterFile("orderDetail.proto", fileDescriptor_28901a6159ef662a) }
 
 var fileDescriptor_28901a6159ef662a = []byte{
 	// 479 bytes of a gzipped FileDescriptorProto

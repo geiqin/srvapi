@@ -21,26 +21,26 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Fan struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	FanSn                string   `protobuf:"bytes,2,opt,name=fan_sn,json=fanSn,proto3" json:"fan_sn,omitempty"`
-	Source               string   `protobuf:"bytes,3,opt,name=source,proto3" json:"source,omitempty"`
-	OpenId               string   `protobuf:"bytes,4,opt,name=open_id,json=openId,proto3" json:"open_id,omitempty"`
-	UnionId              string   `protobuf:"bytes,5,opt,name=union_id,json=unionId,proto3" json:"union_id,omitempty"`
-	NickName             string   `protobuf:"bytes,6,opt,name=nick_name,json=nickName,proto3" json:"nick_name,omitempty"`
-	AvatarUrl            string   `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
-	Gender               int32    `protobuf:"varint,8,opt,name=gender,proto3" json:"gender,omitempty"`
-	Province             string   `protobuf:"bytes,9,opt,name=province,proto3" json:"province,omitempty"`
-	City                 string   `protobuf:"bytes,10,opt,name=city,proto3" json:"city,omitempty"`
-	Country              string   `protobuf:"bytes,11,opt,name=country,proto3" json:"country,omitempty"`
-	Followed             bool     `protobuf:"varint,12,opt,name=followed,proto3" json:"followed,omitempty"`
-	FollowedAt           string   `protobuf:"bytes,13,opt,name=followed_at,json=followedAt,proto3" json:"followed_at,omitempty"`
-	CustomerId           int64    `protobuf:"varint,14,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	Remark               string   `protobuf:"bytes,15,opt,name=remark,proto3" json:"remark,omitempty"`
-	Mobile               string   `protobuf:"bytes,16,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email                string   `protobuf:"bytes,17,opt,name=email,proto3" json:"email,omitempty"`
-	CreatedAt            string   `protobuf:"bytes,18,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,19,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Ids                  []int64  `protobuf:"varint,20,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	FanSn                string   `protobuf:"bytes,2,opt,name=fan_sn,json=fanSn,proto3" json:"fan_sn"`
+	Source               string   `protobuf:"bytes,3,opt,name=source,proto3" json:"source"`
+	OpenId               string   `protobuf:"bytes,4,opt,name=open_id,json=openId,proto3" json:"open_id"`
+	UnionId              string   `protobuf:"bytes,5,opt,name=union_id,json=unionId,proto3" json:"union_id"`
+	NickName             string   `protobuf:"bytes,6,opt,name=nick_name,json=nickName,proto3" json:"nick_name"`
+	AvatarUrl            string   `protobuf:"bytes,7,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
+	Gender               int32    `protobuf:"varint,8,opt,name=gender,proto3" json:"gender"`
+	Province             string   `protobuf:"bytes,9,opt,name=province,proto3" json:"province"`
+	City                 string   `protobuf:"bytes,10,opt,name=city,proto3" json:"city"`
+	Country              string   `protobuf:"bytes,11,opt,name=country,proto3" json:"country"`
+	Followed             bool     `protobuf:"varint,12,opt,name=followed,proto3" json:"followed"`
+	FollowedAt           string   `protobuf:"bytes,13,opt,name=followed_at,json=followedAt,proto3" json:"followed_at"`
+	CustomerId           int64    `protobuf:"varint,14,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Remark               string   `protobuf:"bytes,15,opt,name=remark,proto3" json:"remark"`
+	Mobile               string   `protobuf:"bytes,16,opt,name=mobile,proto3" json:"mobile"`
+	Email                string   `protobuf:"bytes,17,opt,name=email,proto3" json:"email"`
+	CreatedAt            string   `protobuf:"bytes,18,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string   `protobuf:"bytes,19,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Ids                  []int64  `protobuf:"varint,20,rep,packed,name=ids,proto3" json:"ids"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -213,16 +213,16 @@ func (m *Fan) GetIds() []int64 {
 
 //粉丝查询参数
 type FanWhere struct {
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//以下为自定义参数
-	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Gender               int32    `protobuf:"varint,5,opt,name=gender,proto3" json:"gender,omitempty"`
-	Mobile               string   `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Source               string   `protobuf:"bytes,7,opt,name=source,proto3" json:"source,omitempty"`
-	Status               string   `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
-	Keywords             string   `protobuf:"bytes,14,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
+	Gender               int32    `protobuf:"varint,5,opt,name=gender,proto3" json:"gender"`
+	Mobile               string   `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile"`
+	Source               string   `protobuf:"bytes,7,opt,name=source,proto3" json:"source"`
+	Status               string   `protobuf:"bytes,13,opt,name=status,proto3" json:"status"`
+	Keywords             string   `protobuf:"bytes,14,opt,name=keywords,proto3" json:"keywords"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -318,11 +318,11 @@ func (m *FanWhere) GetKeywords() string {
 
 //
 type FanResponse struct {
-	Entity               *Fan     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Fan   `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Fan     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Fan   `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -394,9 +394,7 @@ func init() {
 	proto.RegisterType((*FanResponse)(nil), "geiqin.srv.sns.FanResponse")
 }
 
-func init() {
-	proto.RegisterFile("fan.proto", fileDescriptor_7a953796bd812057)
-}
+func init() { proto.RegisterFile("fan.proto", fileDescriptor_7a953796bd812057) }
 
 var fileDescriptor_7a953796bd812057 = []byte{
 	// 652 bytes of a gzipped FileDescriptorProto

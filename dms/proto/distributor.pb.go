@@ -21,34 +21,34 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Distributor struct {
-	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Code                 string         `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
-	CustomerId           int64          `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	InviterId            int64          `protobuf:"varint,4,opt,name=inviter_id,json=inviterId,proto3" json:"inviter_id,omitempty"`
-	DisplayName          string         `protobuf:"bytes,5,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	RankId               int32          `protobuf:"varint,6,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
-	Deposit              float32        `protobuf:"fixed32,7,opt,name=deposit,proto3" json:"deposit,omitempty"`
-	Commission           float32        `protobuf:"fixed32,8,opt,name=commission,proto3" json:"commission,omitempty"`
-	ApplyCommission      float32        `protobuf:"fixed32,9,opt,name=apply_commission,json=applyCommission,proto3" json:"apply_commission,omitempty"`
-	WaitSettleCommission float32        `protobuf:"fixed32,10,opt,name=wait_settle_commission,json=waitSettleCommission,proto3" json:"wait_settle_commission,omitempty"`
-	WaitGrantCommission  float32        `protobuf:"fixed32,11,opt,name=wait_grant_commission,json=waitGrantCommission,proto3" json:"wait_grant_commission,omitempty"`
-	CommissionTotal      float32        `protobuf:"fixed32,12,opt,name=commission_total,json=commissionTotal,proto3" json:"commission_total,omitempty"`
-	CommissionFrozen     float32        `protobuf:"fixed32,13,opt,name=commission_frozen,json=commissionFrozen,proto3" json:"commission_frozen,omitempty"`
-	CommissionWithdrew   float32        `protobuf:"fixed32,14,opt,name=commission_withdrew,json=commissionWithdrew,proto3" json:"commission_withdrew,omitempty"`
-	RecommendAmount      float32        `protobuf:"fixed32,15,opt,name=recommend_amount,json=recommendAmount,proto3" json:"recommend_amount,omitempty"`
-	RecommendNum         int32          `protobuf:"varint,16,opt,name=recommend_num,json=recommendNum,proto3" json:"recommend_num,omitempty"`
-	CustomerNum          int32          `protobuf:"varint,17,opt,name=customer_num,json=customerNum,proto3" json:"customer_num,omitempty"`
-	PromotionAmount      float32        `protobuf:"fixed32,18,opt,name=promotion_amount,json=promotionAmount,proto3" json:"promotion_amount,omitempty"`
-	PromotionNum         int32          `protobuf:"varint,19,opt,name=promotion_num,json=promotionNum,proto3" json:"promotion_num,omitempty"`
-	WithdrewNum          int32          `protobuf:"varint,20,opt,name=withdrew_num,json=withdrewNum,proto3" json:"withdrew_num,omitempty"`
-	Status               int32          `protobuf:"varint,21,opt,name=status,proto3" json:"status,omitempty"`
-	Mobile               string         `protobuf:"bytes,28,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	CreatedAt            string         `protobuf:"bytes,22,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string         `protobuf:"bytes,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Rank                 *Rank          `protobuf:"bytes,24,opt,name=rank,proto3" json:"rank,omitempty"`
-	Inviter              *Distributor   `protobuf:"bytes,25,opt,name=inviter,proto3" json:"inviter,omitempty" gorm:"ForeignKey:inviter_id"`
-	Children             []*Distributor `protobuf:"bytes,26,rep,name=children,proto3" json:"children,omitempty"`
-	Ids                  []int64        `protobuf:"varint,27,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id                   int64          `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Code                 string         `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
+	CustomerId           int64          `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	InviterId            int64          `protobuf:"varint,4,opt,name=inviter_id,json=inviterId,proto3" json:"inviter_id"`
+	DisplayName          string         `protobuf:"bytes,5,opt,name=display_name,json=displayName,proto3" json:"display_name"`
+	RankId               int32          `protobuf:"varint,6,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
+	Deposit              float32        `protobuf:"fixed32,7,opt,name=deposit,proto3" json:"deposit"`
+	Commission           float32        `protobuf:"fixed32,8,opt,name=commission,proto3" json:"commission"`
+	ApplyCommission      float32        `protobuf:"fixed32,9,opt,name=apply_commission,json=applyCommission,proto3" json:"apply_commission"`
+	WaitSettleCommission float32        `protobuf:"fixed32,10,opt,name=wait_settle_commission,json=waitSettleCommission,proto3" json:"wait_settle_commission"`
+	WaitGrantCommission  float32        `protobuf:"fixed32,11,opt,name=wait_grant_commission,json=waitGrantCommission,proto3" json:"wait_grant_commission"`
+	CommissionTotal      float32        `protobuf:"fixed32,12,opt,name=commission_total,json=commissionTotal,proto3" json:"commission_total"`
+	CommissionFrozen     float32        `protobuf:"fixed32,13,opt,name=commission_frozen,json=commissionFrozen,proto3" json:"commission_frozen"`
+	CommissionWithdrew   float32        `protobuf:"fixed32,14,opt,name=commission_withdrew,json=commissionWithdrew,proto3" json:"commission_withdrew"`
+	RecommendAmount      float32        `protobuf:"fixed32,15,opt,name=recommend_amount,json=recommendAmount,proto3" json:"recommend_amount"`
+	RecommendNum         int32          `protobuf:"varint,16,opt,name=recommend_num,json=recommendNum,proto3" json:"recommend_num"`
+	CustomerNum          int32          `protobuf:"varint,17,opt,name=customer_num,json=customerNum,proto3" json:"customer_num"`
+	PromotionAmount      float32        `protobuf:"fixed32,18,opt,name=promotion_amount,json=promotionAmount,proto3" json:"promotion_amount"`
+	PromotionNum         int32          `protobuf:"varint,19,opt,name=promotion_num,json=promotionNum,proto3" json:"promotion_num"`
+	WithdrewNum          int32          `protobuf:"varint,20,opt,name=withdrew_num,json=withdrewNum,proto3" json:"withdrew_num"`
+	Status               int32          `protobuf:"varint,21,opt,name=status,proto3" json:"status"`
+	Mobile               string         `protobuf:"bytes,28,opt,name=mobile,proto3" json:"mobile"`
+	CreatedAt            string         `protobuf:"bytes,22,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string         `protobuf:"bytes,23,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Rank                 *Rank          `protobuf:"bytes,24,opt,name=rank,proto3" json:"rank"`
+	Inviter              *Distributor   `protobuf:"bytes,25,opt,name=inviter,proto3" json:"inviter"`
+	Children             []*Distributor `protobuf:"bytes,26,rep,name=children,proto3" json:"children"`
+	Ids                  []int64        `protobuf:"varint,27,rep,packed,name=ids,proto3" json:"ids"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -276,14 +276,14 @@ func (m *Distributor) GetIds() []int64 {
 }
 
 type DistributorWhere struct {
-	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
-	Mobile               string   `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	RankId               int32    `protobuf:"varint,5,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
-	Keywords             string   `protobuf:"bytes,6,opt,name=keywords,proto3" json:"keywords,omitempty"`
-	Id                   int64    `protobuf:"varint,7,opt,name=id,proto3" json:"id,omitempty"`
-	Ids                  []int64  `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Mobile               string   `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile"`
+	RankId               int32    `protobuf:"varint,5,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
+	Keywords             string   `protobuf:"bytes,6,opt,name=keywords,proto3" json:"keywords"`
+	Id                   int64    `protobuf:"varint,7,opt,name=id,proto3" json:"id"`
+	Ids                  []int64  `protobuf:"varint,8,rep,packed,name=ids,proto3" json:"ids"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -371,11 +371,11 @@ func (m *DistributorWhere) GetIds() []int64 {
 }
 
 type DistributorResponse struct {
-	Entity               *Distributor   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Distributor `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Distributor   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Distributor `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -447,9 +447,7 @@ func init() {
 	proto.RegisterType((*DistributorResponse)(nil), "geiqin.srv.dms.DistributorResponse")
 }
 
-func init() {
-	proto.RegisterFile("distributor.proto", fileDescriptor_c518e33639ca565d)
-}
+func init() { proto.RegisterFile("distributor.proto", fileDescriptor_c518e33639ca565d) }
 
 var fileDescriptor_c518e33639ca565d = []byte{
 	// 856 bytes of a gzipped FileDescriptorProto

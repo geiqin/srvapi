@@ -21,23 +21,23 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Applier struct {
-	Id                   int64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	DistributorId        int64                 `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id,omitempty"`
-	RankId               int32                 `protobuf:"varint,3,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
-	DisplayName          string                `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
-	Autoed               bool                  `protobuf:"varint,5,opt,name=autoed,proto3" json:"autoed,omitempty"`
-	CustomerId           int64                 `protobuf:"varint,6,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
-	Status               string                `protobuf:"bytes,7,opt,name=status,proto3" json:"status,omitempty"`
-	Reason               string                `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason,omitempty"`
-	Remarks              string                `protobuf:"bytes,9,opt,name=remarks,proto3" json:"remarks,omitempty"`
-	Addons               string                `protobuf:"bytes,10,opt,name=addons,proto3" json:"addons,omitempty"`
-	CreatedAt            string                `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string                `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Distributor          *Distributor          `protobuf:"bytes,13,opt,name=distributor,proto3" json:"distributor,omitempty"`
-	Rank                 *Rank                 `protobuf:"bytes,14,opt,name=rank,proto3" json:"rank,omitempty"`
-	InviteSn             string                `protobuf:"bytes,15,opt,name=invite_sn,json=inviteSn,proto3" json:"invite_sn,omitempty"`
-	Condition            *ApplierCondition     `protobuf:"bytes,16,opt,name=condition,proto3" json:"condition,omitempty"`
-	MeetCondition        *ApplierMeetCondition `protobuf:"bytes,17,opt,name=meet_condition,json=meetCondition,proto3" json:"meet_condition,omitempty"`
+	Id                   int64                 `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	DistributorId        int64                 `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id"`
+	RankId               int32                 `protobuf:"varint,3,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
+	DisplayName          string                `protobuf:"bytes,4,opt,name=display_name,json=displayName,proto3" json:"display_name"`
+	Autoed               bool                  `protobuf:"varint,5,opt,name=autoed,proto3" json:"autoed"`
+	CustomerId           int64                 `protobuf:"varint,6,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Status               string                `protobuf:"bytes,7,opt,name=status,proto3" json:"status"`
+	Reason               string                `protobuf:"bytes,8,opt,name=reason,proto3" json:"reason"`
+	Remarks              string                `protobuf:"bytes,9,opt,name=remarks,proto3" json:"remarks"`
+	Addons               string                `protobuf:"bytes,10,opt,name=addons,proto3" json:"addons"`
+	CreatedAt            string                `protobuf:"bytes,11,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string                `protobuf:"bytes,12,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Distributor          *Distributor          `protobuf:"bytes,13,opt,name=distributor,proto3" json:"distributor"`
+	Rank                 *Rank                 `protobuf:"bytes,14,opt,name=rank,proto3" json:"rank"`
+	InviteSn             string                `protobuf:"bytes,15,opt,name=invite_sn,json=inviteSn,proto3" json:"invite_sn"`
+	Condition            *ApplierCondition     `protobuf:"bytes,16,opt,name=condition,proto3" json:"condition"`
+	MeetCondition        *ApplierMeetCondition `protobuf:"bytes,17,opt,name=meet_condition,json=meetCondition,proto3" json:"meet_condition"`
 	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
 	XXX_unrecognized     []byte                `json:"-"`
 	XXX_sizecache        int32                 `json:"-"`
@@ -188,11 +188,11 @@ func (m *Applier) GetMeetCondition() *ApplierMeetCondition {
 }
 
 type ApplierResponse struct {
-	Entity               *Applier   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Applier `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Applier   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Applier `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -259,11 +259,11 @@ func (m *ApplierResponse) GetInfo() *Info {
 }
 
 type ApplyInfo struct {
-	IsApply              bool                    `protobuf:"varint,1,opt,name=is_apply,json=isApply,proto3" json:"is_apply,omitempty"`
-	Applier              *Applier                `protobuf:"bytes,2,opt,name=applier,proto3" json:"applier,omitempty"`
-	Ranks                []*Rank                 `protobuf:"bytes,3,rep,name=ranks,proto3" json:"ranks,omitempty"`
-	Condition            []*ApplierCondition     `protobuf:"bytes,4,rep,name=condition,proto3" json:"condition,omitempty"`
-	MeetCondition        []*ApplierMeetCondition `protobuf:"bytes,5,rep,name=meet_condition,json=meetCondition,proto3" json:"meet_condition,omitempty"`
+	IsApply              bool                    `protobuf:"varint,1,opt,name=is_apply,json=isApply,proto3" json:"is_apply"`
+	Applier              *Applier                `protobuf:"bytes,2,opt,name=applier,proto3" json:"applier"`
+	Ranks                []*Rank                 `protobuf:"bytes,3,rep,name=ranks,proto3" json:"ranks"`
+	Condition            []*ApplierCondition     `protobuf:"bytes,4,rep,name=condition,proto3" json:"condition"`
+	MeetCondition        []*ApplierMeetCondition `protobuf:"bytes,5,rep,name=meet_condition,json=meetCondition,proto3" json:"meet_condition"`
 	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
 	XXX_unrecognized     []byte                  `json:"-"`
 	XXX_sizecache        int32                   `json:"-"`
@@ -330,9 +330,9 @@ func (m *ApplyInfo) GetMeetCondition() []*ApplierMeetCondition {
 }
 
 type ApplyInfoResponse struct {
-	Entity               *ApplyInfo `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Error                *Error     `protobuf:"bytes,2,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info      `protobuf:"bytes,3,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *ApplyInfo `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Error                *Error     `protobuf:"bytes,2,opt,name=error,proto3" json:"error"`
+	Info                 *Info      `protobuf:"bytes,3,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -386,20 +386,20 @@ func (m *ApplyInfoResponse) GetInfo() *Info {
 
 // 加入销售员的配置条件
 type ApplierCondition struct {
-	RankId               int32             `protobuf:"varint,1,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
-	IsBought             bool              `protobuf:"varint,2,opt,name=is_bought,json=isBought,proto3" json:"is_bought,omitempty"`
-	ConsumptionAmount    float32           `protobuf:"fixed32,3,opt,name=consumption_amount,json=consumptionAmount,proto3" json:"consumption_amount,omitempty"`
-	ConsumptionNum       int32             `protobuf:"varint,4,opt,name=consumption_num,json=consumptionNum,proto3" json:"consumption_num,omitempty"`
-	IsBindIdcard         bool              `protobuf:"varint,5,opt,name=is_bind_idcard,json=isBindIdcard,proto3" json:"is_bind_idcard,omitempty"`
-	IsBindMobile         bool              `protobuf:"varint,6,opt,name=is_bind_mobile,json=isBindMobile,proto3" json:"is_bind_mobile,omitempty"`
-	IsInformation        bool              `protobuf:"varint,7,opt,name=is_information,json=isInformation,proto3" json:"is_information,omitempty"`
-	InformationFields    string            `protobuf:"bytes,8,opt,name=information_fields,json=informationFields,proto3" json:"information_fields,omitempty"`
-	Joined               bool              `protobuf:"varint,9,opt,name=joined,proto3" json:"joined,omitempty"`
-	JoinAmount           float32           `protobuf:"fixed32,10,opt,name=join_amount,json=joinAmount,proto3" json:"join_amount,omitempty"`
-	PromotionAmount      float32           `protobuf:"fixed32,11,opt,name=promotion_amount,json=promotionAmount,proto3" json:"promotion_amount,omitempty"`
-	PrimaryNum           int32             `protobuf:"varint,12,opt,name=primary_num,json=primaryNum,proto3" json:"primary_num,omitempty"`
-	SecondNum            int32             `protobuf:"varint,13,opt,name=second_num,json=secondNum,proto3" json:"second_num,omitempty"`
-	GoodsCondition       []*GoodsCondition `protobuf:"bytes,14,rep,name=goods_condition,json=goodsCondition,proto3" json:"goods_condition,omitempty"`
+	RankId               int32             `protobuf:"varint,1,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
+	IsBought             bool              `protobuf:"varint,2,opt,name=is_bought,json=isBought,proto3" json:"is_bought"`
+	ConsumptionAmount    float32           `protobuf:"fixed32,3,opt,name=consumption_amount,json=consumptionAmount,proto3" json:"consumption_amount"`
+	ConsumptionNum       int32             `protobuf:"varint,4,opt,name=consumption_num,json=consumptionNum,proto3" json:"consumption_num"`
+	IsBindIdcard         bool              `protobuf:"varint,5,opt,name=is_bind_idcard,json=isBindIdcard,proto3" json:"is_bind_idcard"`
+	IsBindMobile         bool              `protobuf:"varint,6,opt,name=is_bind_mobile,json=isBindMobile,proto3" json:"is_bind_mobile"`
+	IsInformation        bool              `protobuf:"varint,7,opt,name=is_information,json=isInformation,proto3" json:"is_information"`
+	InformationFields    string            `protobuf:"bytes,8,opt,name=information_fields,json=informationFields,proto3" json:"information_fields"`
+	Joined               bool              `protobuf:"varint,9,opt,name=joined,proto3" json:"joined"`
+	JoinAmount           float32           `protobuf:"fixed32,10,opt,name=join_amount,json=joinAmount,proto3" json:"join_amount"`
+	PromotionAmount      float32           `protobuf:"fixed32,11,opt,name=promotion_amount,json=promotionAmount,proto3" json:"promotion_amount"`
+	PrimaryNum           int32             `protobuf:"varint,12,opt,name=primary_num,json=primaryNum,proto3" json:"primary_num"`
+	SecondNum            int32             `protobuf:"varint,13,opt,name=second_num,json=secondNum,proto3" json:"second_num"`
+	GoodsCondition       []*GoodsCondition `protobuf:"bytes,14,rep,name=goods_condition,json=goodsCondition,proto3" json:"goods_condition"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -530,17 +530,17 @@ func (m *ApplierCondition) GetGoodsCondition() []*GoodsCondition {
 
 // 满足加入销售员配置条件项
 type ApplierMeetCondition struct {
-	RankId               int32    `protobuf:"varint,1,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
-	HasBought            bool     `protobuf:"varint,2,opt,name=has_bought,json=hasBought,proto3" json:"has_bought,omitempty"`
-	HasConsumptionAmount bool     `protobuf:"varint,3,opt,name=has_consumption_amount,json=hasConsumptionAmount,proto3" json:"has_consumption_amount,omitempty"`
-	HasConsumptionNum    bool     `protobuf:"varint,4,opt,name=has_consumption_num,json=hasConsumptionNum,proto3" json:"has_consumption_num,omitempty"`
-	HasBindIdcard        bool     `protobuf:"varint,5,opt,name=has_bind_idcard,json=hasBindIdcard,proto3" json:"has_bind_idcard,omitempty"`
-	HasBindMobile        bool     `protobuf:"varint,6,opt,name=has_bind_mobile,json=hasBindMobile,proto3" json:"has_bind_mobile,omitempty"`
-	HasInformation       bool     `protobuf:"varint,7,opt,name=has_information,json=hasInformation,proto3" json:"has_information,omitempty"`
-	HasJoined            bool     `protobuf:"varint,8,opt,name=has_joined,json=hasJoined,proto3" json:"has_joined,omitempty"`
-	HasPromotionAmount   bool     `protobuf:"varint,9,opt,name=has_promotion_amount,json=hasPromotionAmount,proto3" json:"has_promotion_amount,omitempty"`
-	HasPrimaryNum        bool     `protobuf:"varint,10,opt,name=has_primary_num,json=hasPrimaryNum,proto3" json:"has_primary_num,omitempty"`
-	HasSecondNum         bool     `protobuf:"varint,11,opt,name=has_second_num,json=hasSecondNum,proto3" json:"has_second_num,omitempty"`
+	RankId               int32    `protobuf:"varint,1,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
+	HasBought            bool     `protobuf:"varint,2,opt,name=has_bought,json=hasBought,proto3" json:"has_bought"`
+	HasConsumptionAmount bool     `protobuf:"varint,3,opt,name=has_consumption_amount,json=hasConsumptionAmount,proto3" json:"has_consumption_amount"`
+	HasConsumptionNum    bool     `protobuf:"varint,4,opt,name=has_consumption_num,json=hasConsumptionNum,proto3" json:"has_consumption_num"`
+	HasBindIdcard        bool     `protobuf:"varint,5,opt,name=has_bind_idcard,json=hasBindIdcard,proto3" json:"has_bind_idcard"`
+	HasBindMobile        bool     `protobuf:"varint,6,opt,name=has_bind_mobile,json=hasBindMobile,proto3" json:"has_bind_mobile"`
+	HasInformation       bool     `protobuf:"varint,7,opt,name=has_information,json=hasInformation,proto3" json:"has_information"`
+	HasJoined            bool     `protobuf:"varint,8,opt,name=has_joined,json=hasJoined,proto3" json:"has_joined"`
+	HasPromotionAmount   bool     `protobuf:"varint,9,opt,name=has_promotion_amount,json=hasPromotionAmount,proto3" json:"has_promotion_amount"`
+	HasPrimaryNum        bool     `protobuf:"varint,10,opt,name=has_primary_num,json=hasPrimaryNum,proto3" json:"has_primary_num"`
+	HasSecondNum         bool     `protobuf:"varint,11,opt,name=has_second_num,json=hasSecondNum,proto3" json:"has_second_num"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -657,9 +657,7 @@ func init() {
 	proto.RegisterType((*ApplierMeetCondition)(nil), "geiqin.srv.dms.ApplierMeetCondition")
 }
 
-func init() {
-	proto.RegisterFile("applier.proto", fileDescriptor_83e53247d573818c)
-}
+func init() { proto.RegisterFile("applier.proto", fileDescriptor_83e53247d573818c) }
 
 var fileDescriptor_83e53247d573818c = []byte{
 	// 1068 bytes of a gzipped FileDescriptorProto

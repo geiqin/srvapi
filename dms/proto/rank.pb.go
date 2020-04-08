@@ -21,28 +21,28 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Rank struct {
-	Id                   int32             `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Name                 string            `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
-	PrimaryRate          float32           `protobuf:"fixed32,3,opt,name=primary_rate,json=primaryRate,proto3" json:"primary_rate,omitempty"`
-	SecondRate           float32           `protobuf:"fixed32,4,opt,name=second_rate,json=secondRate,proto3" json:"second_rate,omitempty"`
-	ThreeRate            float32           `protobuf:"fixed32,5,opt,name=three_rate,json=threeRate,proto3" json:"three_rate,omitempty"`
-	RewardMoney          float32           `protobuf:"fixed32,6,opt,name=reward_money,json=rewardMoney,proto3" json:"reward_money,omitempty"`
-	MonthDrawMoney       float32           `protobuf:"fixed32,7,opt,name=month_draw_money,json=monthDrawMoney,proto3" json:"month_draw_money,omitempty"`
-	MonthDrawNum         int32             `protobuf:"varint,8,opt,name=month_draw_num,json=monthDrawNum,proto3" json:"month_draw_num,omitempty"`
-	LevelId              int32             `protobuf:"varint,9,opt,name=level_id,json=levelId,proto3" json:"level_id,omitempty"`
-	IsCondition          bool              `protobuf:"varint,10,opt,name=is_condition,json=isCondition,proto3" json:"is_condition,omitempty"`
-	PromotionAmount      float32           `protobuf:"fixed32,11,opt,name=promotion_amount,json=promotionAmount,proto3" json:"promotion_amount,omitempty"`
-	PrimaryNum           int32             `protobuf:"varint,12,opt,name=primary_num,json=primaryNum,proto3" json:"primary_num,omitempty"`
-	SecondNum            int32             `protobuf:"varint,13,opt,name=second_num,json=secondNum,proto3" json:"second_num,omitempty"`
-	IsBought             bool              `protobuf:"varint,14,opt,name=is_bought,json=isBought,proto3" json:"is_bought,omitempty"`
-	ConsumeAmount        float32           `protobuf:"fixed32,15,opt,name=consume_amount,json=consumeAmount,proto3" json:"consume_amount,omitempty"`
-	ConsumeNum           int32             `protobuf:"varint,16,opt,name=consume_num,json=consumeNum,proto3" json:"consume_num,omitempty"`
-	IsBindIdcard         bool              `protobuf:"varint,17,opt,name=is_bind_idcard,json=isBindIdcard,proto3" json:"is_bind_idcard,omitempty"`
-	IsBindMobile         bool              `protobuf:"varint,18,opt,name=is_bind_mobile,json=isBindMobile,proto3" json:"is_bind_mobile,omitempty"`
-	JoinFee              float32           `protobuf:"fixed32,19,opt,name=join_fee,json=joinFee,proto3" json:"join_fee,omitempty"`
-	Defaulted            bool              `protobuf:"varint,20,opt,name=defaulted,proto3" json:"defaulted,omitempty"`
-	Goodses              []*GoodsCondition `protobuf:"bytes,21,rep,name=goodses,proto3" json:"goodses,omitempty"`
-	Ids                  []int32           `protobuf:"varint,22,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	Id                   int32             `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Name                 string            `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
+	PrimaryRate          float32           `protobuf:"fixed32,3,opt,name=primary_rate,json=primaryRate,proto3" json:"primary_rate"`
+	SecondRate           float32           `protobuf:"fixed32,4,opt,name=second_rate,json=secondRate,proto3" json:"second_rate"`
+	ThreeRate            float32           `protobuf:"fixed32,5,opt,name=three_rate,json=threeRate,proto3" json:"three_rate"`
+	RewardMoney          float32           `protobuf:"fixed32,6,opt,name=reward_money,json=rewardMoney,proto3" json:"reward_money"`
+	MonthDrawMoney       float32           `protobuf:"fixed32,7,opt,name=month_draw_money,json=monthDrawMoney,proto3" json:"month_draw_money"`
+	MonthDrawNum         int32             `protobuf:"varint,8,opt,name=month_draw_num,json=monthDrawNum,proto3" json:"month_draw_num"`
+	LevelId              int32             `protobuf:"varint,9,opt,name=level_id,json=levelId,proto3" json:"level_id"`
+	IsCondition          bool              `protobuf:"varint,10,opt,name=is_condition,json=isCondition,proto3" json:"is_condition"`
+	PromotionAmount      float32           `protobuf:"fixed32,11,opt,name=promotion_amount,json=promotionAmount,proto3" json:"promotion_amount"`
+	PrimaryNum           int32             `protobuf:"varint,12,opt,name=primary_num,json=primaryNum,proto3" json:"primary_num"`
+	SecondNum            int32             `protobuf:"varint,13,opt,name=second_num,json=secondNum,proto3" json:"second_num"`
+	IsBought             bool              `protobuf:"varint,14,opt,name=is_bought,json=isBought,proto3" json:"is_bought"`
+	ConsumeAmount        float32           `protobuf:"fixed32,15,opt,name=consume_amount,json=consumeAmount,proto3" json:"consume_amount"`
+	ConsumeNum           int32             `protobuf:"varint,16,opt,name=consume_num,json=consumeNum,proto3" json:"consume_num"`
+	IsBindIdcard         bool              `protobuf:"varint,17,opt,name=is_bind_idcard,json=isBindIdcard,proto3" json:"is_bind_idcard"`
+	IsBindMobile         bool              `protobuf:"varint,18,opt,name=is_bind_mobile,json=isBindMobile,proto3" json:"is_bind_mobile"`
+	JoinFee              float32           `protobuf:"fixed32,19,opt,name=join_fee,json=joinFee,proto3" json:"join_fee"`
+	Defaulted            bool              `protobuf:"varint,20,opt,name=defaulted,proto3" json:"defaulted"`
+	Goodses              []*GoodsCondition `protobuf:"bytes,21,rep,name=goodses,proto3" json:"goodses"`
+	Ids                  []int32           `protobuf:"varint,22,rep,packed,name=ids,proto3" json:"ids"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -228,11 +228,11 @@ func (m *Rank) GetIds() []int32 {
 }
 
 type RankResponse struct {
-	Entity               *Rank    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Rank  `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Rank    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Rank  `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -303,9 +303,7 @@ func init() {
 	proto.RegisterType((*RankResponse)(nil), "geiqin.srv.dms.RankResponse")
 }
 
-func init() {
-	proto.RegisterFile("rank.proto", fileDescriptor_28127d302aca29e8)
-}
+func init() { proto.RegisterFile("rank.proto", fileDescriptor_28127d302aca29e8) }
 
 var fileDescriptor_28127d302aca29e8 = []byte{
 	// 657 bytes of a gzipped FileDescriptorProto

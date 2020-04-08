@@ -21,7 +21,7 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Invoice struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -60,11 +60,11 @@ func (m *Invoice) GetId() int64 {
 }
 
 type InvoiceResponse struct {
-	Entity               *Invoice   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Invoice `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Invoice   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Invoice `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -135,9 +135,7 @@ func init() {
 	proto.RegisterType((*InvoiceResponse)(nil), "geiqin.srv.ord.private.InvoiceResponse")
 }
 
-func init() {
-	proto.RegisterFile("invoice.proto", fileDescriptor_3b1832ff34ba7c07)
-}
+func init() { proto.RegisterFile("invoice.proto", fileDescriptor_3b1832ff34ba7c07) }
 
 var fileDescriptor_3b1832ff34ba7c07 = []byte{
 	// 287 bytes of a gzipped FileDescriptorProto

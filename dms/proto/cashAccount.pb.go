@@ -21,18 +21,18 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type CashAccount struct {
-	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	DistributorId        int64        `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id,omitempty"`
-	Type                 string       `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
-	RealName             string       `protobuf:"bytes,4,opt,name=real_name,json=realName,proto3" json:"real_name,omitempty"`
-	PayeeName            string       `protobuf:"bytes,5,opt,name=payee_name,json=payeeName,proto3" json:"payee_name,omitempty"`
-	PayeeAccount         string       `protobuf:"bytes,6,opt,name=payee_account,json=payeeAccount,proto3" json:"payee_account,omitempty"`
-	PayeeBank            string       `protobuf:"bytes,7,opt,name=payee_bank,json=payeeBank,proto3" json:"payee_bank,omitempty"`
-	PlatformAccount      string       `protobuf:"bytes,8,opt,name=platform_account,json=platformAccount,proto3" json:"platform_account,omitempty"`
-	Status               string       `protobuf:"bytes,9,opt,name=status,proto3" json:"status,omitempty"`
-	CreatedAt            string       `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string       `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Distributor          *Distributor `protobuf:"bytes,12,opt,name=distributor,proto3" json:"distributor,omitempty"`
+	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	DistributorId        int64        `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id"`
+	Type                 string       `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
+	RealName             string       `protobuf:"bytes,4,opt,name=real_name,json=realName,proto3" json:"real_name"`
+	PayeeName            string       `protobuf:"bytes,5,opt,name=payee_name,json=payeeName,proto3" json:"payee_name"`
+	PayeeAccount         string       `protobuf:"bytes,6,opt,name=payee_account,json=payeeAccount,proto3" json:"payee_account"`
+	PayeeBank            string       `protobuf:"bytes,7,opt,name=payee_bank,json=payeeBank,proto3" json:"payee_bank"`
+	PlatformAccount      string       `protobuf:"bytes,8,opt,name=platform_account,json=platformAccount,proto3" json:"platform_account"`
+	Status               string       `protobuf:"bytes,9,opt,name=status,proto3" json:"status"`
+	CreatedAt            string       `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string       `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Distributor          *Distributor `protobuf:"bytes,12,opt,name=distributor,proto3" json:"distributor"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -148,11 +148,11 @@ func (m *CashAccount) GetDistributor() *Distributor {
 }
 
 type CashAccountResponse struct {
-	Entity               *CashAccount   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*CashAccount `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *CashAccount   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*CashAccount `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -223,9 +223,7 @@ func init() {
 	proto.RegisterType((*CashAccountResponse)(nil), "geiqin.srv.dms.CashAccountResponse")
 }
 
-func init() {
-	proto.RegisterFile("cashAccount.proto", fileDescriptor_4b8a2214f459de5b)
-}
+func init() { proto.RegisterFile("cashAccount.proto", fileDescriptor_4b8a2214f459de5b) }
 
 var fileDescriptor_4b8a2214f459de5b = []byte{
 	// 467 bytes of a gzipped FileDescriptorProto

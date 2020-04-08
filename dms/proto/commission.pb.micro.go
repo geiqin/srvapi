@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/v2/client"
-	server "github.com/micro/go-micro/v2/server"
+	client "github.com/micro/go-micro/client"
+	server "github.com/micro/go-micro/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -50,6 +50,12 @@ type commissionService struct {
 }
 
 func NewCommissionService(name string, c client.Client) CommissionService {
+	if c == nil {
+		c = client.NewClient()
+	}
+	if len(name) == 0 {
+		name = "geiqin.srv.dms"
+	}
 	return &commissionService{
 		c:    c,
 		name: name,
@@ -87,7 +93,7 @@ func (c *commissionService) Search(ctx context.Context, in *BaseWhere, opts ...c
 }
 
 func (c *commissionService) SearchPerformance(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CommissionResponse, error) {
-	req := c.c.NewRequest(c.name, "CommissionService.searchPerformance", in)
+	req := c.c.NewRequest(c.name, "CommissionService.SearchPerformance", in)
 	out := new(CommissionResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {

@@ -50,14 +50,14 @@ type Customer struct {
 	SourceType           int32      `protobuf:"varint,27,opt,name=source_type,json=sourceType,proto3" json:"source_type"`
 	Birthday             string     `protobuf:"bytes,28,opt,name=birthday,proto3" json:"birthday"`
 	Memo                 string     `protobuf:"bytes,29,opt,name=memo,proto3" json:"memo"`
-	CreatedAt            string     `protobuf:"bytes,30,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string     `protobuf:"bytes,31,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	DeletedAt            string     `protobuf:"bytes,32,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
-	Level                *Level     `protobuf:"bytes,33,opt,name=level,proto3" json:"level,omitempty"`
-	Tags                 []*Tag     `protobuf:"bytes,35,rep,name=tags,proto3" json:"tags,omitempty" gorm:"many2many:customer_tags;"`
-	Vipcards             []*Vipcard `protobuf:"bytes,36,rep,name=vipcards,proto3" json:"vipcards,omitempty"`
-	Addrs                []*Address `protobuf:"bytes,37,rep,name=addrs,proto3" json:"addrs,omitempty"`
-	Ids                  []int64    `protobuf:"varint,38,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	CreatedAt            string     `protobuf:"bytes,30,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string     `protobuf:"bytes,31,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	DeletedAt            string     `protobuf:"bytes,32,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at"`
+	Level                *Level     `protobuf:"bytes,33,opt,name=level,proto3" json:"level"`
+	Tags                 []*Tag     `protobuf:"bytes,35,rep,name=tags,proto3" json:"tags"`
+	Vipcards             []*Vipcard `protobuf:"bytes,36,rep,name=vipcards,proto3" json:"vipcards"`
+	Addrs                []*Address `protobuf:"bytes,37,rep,name=addrs,proto3" json:"addrs"`
+	Ids                  []int64    `protobuf:"varint,38,rep,packed,name=ids,proto3" json:"ids"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -349,21 +349,21 @@ func (m *Customer) GetIds() []int64 {
 
 //客户查询参数
 type CustomerWhere struct {
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
 	//以下为自定义参数
-	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
-	Gender               int32    `protobuf:"varint,5,opt,name=gender,proto3" json:"gender,omitempty"`
-	Mobile               string   `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile,omitempty"`
-	Email                string   `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
-	LevelId              int32    `protobuf:"varint,8,opt,name=level_id,json=levelId,proto3" json:"level_id,omitempty"`
-	CardId               int32    `protobuf:"varint,9,opt,name=card_id,json=cardId,proto3" json:"card_id,omitempty"`
-	TagId                int32    `protobuf:"varint,10,opt,name=tag_id,json=tagId,proto3" json:"tag_id,omitempty"`
-	SourceType           int32    `protobuf:"varint,11,opt,name=source_type,json=sourceType,proto3" json:"source_type,omitempty"`
-	AreaId               int64    `protobuf:"varint,12,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
-	Status               string   `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
-	Keywords             string   `protobuf:"bytes,14,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
+	Gender               int32    `protobuf:"varint,5,opt,name=gender,proto3" json:"gender"`
+	Mobile               string   `protobuf:"bytes,6,opt,name=mobile,proto3" json:"mobile"`
+	Email                string   `protobuf:"bytes,7,opt,name=email,proto3" json:"email"`
+	LevelId              int32    `protobuf:"varint,8,opt,name=level_id,json=levelId,proto3" json:"level_id"`
+	CardId               int32    `protobuf:"varint,9,opt,name=card_id,json=cardId,proto3" json:"card_id"`
+	TagId                int32    `protobuf:"varint,10,opt,name=tag_id,json=tagId,proto3" json:"tag_id"`
+	SourceType           int32    `protobuf:"varint,11,opt,name=source_type,json=sourceType,proto3" json:"source_type"`
+	AreaId               int64    `protobuf:"varint,12,opt,name=area_id,json=areaId,proto3" json:"area_id"`
+	Status               string   `protobuf:"bytes,13,opt,name=status,proto3" json:"status"`
+	Keywords             string   `protobuf:"bytes,14,opt,name=keywords,proto3" json:"keywords"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -494,11 +494,11 @@ func (m *CustomerWhere) GetKeywords() string {
 
 //
 type CustomerResponse struct {
-	Entity               *Customer   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Customer `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Customer   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Customer `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
@@ -570,9 +570,7 @@ func init() {
 	proto.RegisterType((*CustomerResponse)(nil), "geiqin.srv.crm.CustomerResponse")
 }
 
-func init() {
-	proto.RegisterFile("customer.proto", fileDescriptor_9efa92dae3d6ec46)
-}
+func init() { proto.RegisterFile("customer.proto", fileDescriptor_9efa92dae3d6ec46) }
 
 var fileDescriptor_9efa92dae3d6ec46 = []byte{
 	// 1043 bytes of a gzipped FileDescriptorProto

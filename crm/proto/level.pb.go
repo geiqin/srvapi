@@ -40,9 +40,9 @@ type Level struct {
 	Disabled             bool     `protobuf:"varint,17,opt,name=disabled,proto3" json:"disabled"`
 	Locked               bool     `protobuf:"varint,18,opt,name=locked,proto3" json:"locked"`
 	Description          string   `protobuf:"bytes,19,opt,name=description,proto3" json:"description"`
-	CreatedAt            string   `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	Ids                  []int32  `protobuf:"varint,22,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string   `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Ids                  []int32  `protobuf:"varint,22,rep,packed,name=ids,proto3" json:"ids"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -229,11 +229,11 @@ func (m *Level) GetIds() []int32 {
 
 //
 type LevelResponse struct {
-	Entity               *Level   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Level `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Level   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Level `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -304,9 +304,7 @@ func init() {
 	proto.RegisterType((*LevelResponse)(nil), "geiqin.srv.crm.LevelResponse")
 }
 
-func init() {
-	proto.RegisterFile("level.proto", fileDescriptor_c8d18daab47a3117)
-}
+func init() { proto.RegisterFile("level.proto", fileDescriptor_c8d18daab47a3117) }
 
 var fileDescriptor_c8d18daab47a3117 = []byte{
 	// 622 bytes of a gzipped FileDescriptorProto

@@ -46,3 +46,4 @@ message LevelResponse {
     Error error = 4;
     Info info =5;
 }
+
