@@ -21,11 +21,11 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Management struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	UserId               int64    `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	StoreId              int64    `protobuf:"varint,3,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
-	RoleId               int64    `protobuf:"varint,4,opt,name=role_id,json=roleId,proto3" json:"role_id,omitempty"`
-	Store                *Store   `protobuf:"bytes,5,opt,name=store,proto3" json:"store,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	UserId               int64    `protobuf:"varint,2,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	StoreId              int64    `protobuf:"varint,3,opt,name=store_id,json=storeId,proto3" json:"store_id"`
+	RoleId               int64    `protobuf:"varint,4,opt,name=role_id,json=roleId,proto3" json:"role_id"`
+	Store                *Store   `protobuf:"bytes,5,opt,name=store,proto3" json:"store"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -93,11 +93,11 @@ func (m *Management) GetStore() *Store {
 
 //
 type ManagementResponse struct {
-	Entity               *Management   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager        `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Management `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error        `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info         `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Management   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager        `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Management `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error        `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info         `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
 	XXX_sizecache        int32         `json:"-"`
@@ -168,9 +168,7 @@ func init() {
 	proto.RegisterType((*ManagementResponse)(nil), "geiqin.srv.mts.ManagementResponse")
 }
 
-func init() {
-	proto.RegisterFile("management.proto", fileDescriptor_edc174f991dc0a25)
-}
+func init() { proto.RegisterFile("management.proto", fileDescriptor_edc174f991dc0a25) }
 
 var fileDescriptor_edc174f991dc0a25 = []byte{
 	// 351 bytes of a gzipped FileDescriptorProto

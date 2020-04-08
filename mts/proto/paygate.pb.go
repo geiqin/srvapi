@@ -21,13 +21,13 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Paygate struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Channel              string   `protobuf:"bytes,2,opt,name=channel,proto3" json:"channel,omitempty"`
-	Mode                 string   `protobuf:"bytes,3,opt,name=mode,proto3" json:"mode,omitempty"`
-	Configs              string   `protobuf:"bytes,4,opt,name=configs,proto3" json:"configs,omitempty"`
-	StoreId              int64    `protobuf:"varint,5,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
-	UserId               int64    `protobuf:"varint,6,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Disabled             bool     `protobuf:"varint,7,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Channel              string   `protobuf:"bytes,2,opt,name=channel,proto3" json:"channel"`
+	Mode                 string   `protobuf:"bytes,3,opt,name=mode,proto3" json:"mode"`
+	Configs              string   `protobuf:"bytes,4,opt,name=configs,proto3" json:"configs"`
+	StoreId              int64    `protobuf:"varint,5,opt,name=store_id,json=storeId,proto3" json:"store_id"`
+	UserId               int64    `protobuf:"varint,6,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	Disabled             bool     `protobuf:"varint,7,opt,name=disabled,proto3" json:"disabled"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -109,11 +109,11 @@ func (m *Paygate) GetDisabled() bool {
 
 //
 type PaygateResponse struct {
-	Entity               *Paygate   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Paygate `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Paygate   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Paygate `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -184,9 +184,7 @@ func init() {
 	proto.RegisterType((*PaygateResponse)(nil), "geiqin.srv.mts.PaygateResponse")
 }
 
-func init() {
-	proto.RegisterFile("paygate.proto", fileDescriptor_3cfcd5bde813e8e3)
-}
+func init() { proto.RegisterFile("paygate.proto", fileDescriptor_3cfcd5bde813e8e3) }
 
 var fileDescriptor_3cfcd5bde813e8e3 = []byte{
 	// 386 bytes of a gzipped FileDescriptorProto

@@ -22,20 +22,20 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // 应用信息
 type Application struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
-	Slug                 string   `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
-	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
-	ShortName            string   `protobuf:"bytes,4,opt,name=short_name,json=shortName,proto3" json:"short_name,omitempty"`
-	Type                 string   `protobuf:"bytes,5,opt,name=type,proto3" json:"type,omitempty"`
-	Icon                 string   `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon,omitempty"`
-	CssClass             string   `protobuf:"bytes,7,opt,name=css_class,json=cssClass,proto3" json:"css_class,omitempty"`
-	Url                  string   `protobuf:"bytes,8,opt,name=url,proto3" json:"url,omitempty"`
-	Desc                 string   `protobuf:"bytes,9,opt,name=desc,proto3" json:"desc,omitempty"`
-	Intro                string   `protobuf:"bytes,10,opt,name=intro,proto3" json:"intro,omitempty"`
-	Released             bool     `protobuf:"varint,11,opt,name=released,proto3" json:"released,omitempty"`
-	Disabled             bool     `protobuf:"varint,12,opt,name=disabled,proto3" json:"disabled,omitempty"`
-	CreatedAt            string   `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
+	Slug                 string   `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug"`
+	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
+	ShortName            string   `protobuf:"bytes,4,opt,name=short_name,json=shortName,proto3" json:"short_name"`
+	Type                 string   `protobuf:"bytes,5,opt,name=type,proto3" json:"type"`
+	Icon                 string   `protobuf:"bytes,6,opt,name=icon,proto3" json:"icon"`
+	CssClass             string   `protobuf:"bytes,7,opt,name=css_class,json=cssClass,proto3" json:"css_class"`
+	Url                  string   `protobuf:"bytes,8,opt,name=url,proto3" json:"url"`
+	Desc                 string   `protobuf:"bytes,9,opt,name=desc,proto3" json:"desc"`
+	Intro                string   `protobuf:"bytes,10,opt,name=intro,proto3" json:"intro"`
+	Released             bool     `protobuf:"varint,11,opt,name=released,proto3" json:"released"`
+	Disabled             bool     `protobuf:"varint,12,opt,name=disabled,proto3" json:"disabled"`
+	CreatedAt            string   `protobuf:"bytes,13,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
+	UpdatedAt            string   `protobuf:"bytes,14,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -166,11 +166,11 @@ func (m *Application) GetUpdatedAt() string {
 
 //
 type ApplicationResponse struct {
-	Entity               *Application   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
-	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
-	Items                []*Application `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
-	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
-	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	Entity               *Application   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
+	Pager                *Pager         `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
+	Items                []*Application `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
+	Error                *Error         `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
+	Info                 *Info          `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
 	XXX_NoUnkeyedLiteral struct{}       `json:"-"`
 	XXX_unrecognized     []byte         `json:"-"`
 	XXX_sizecache        int32          `json:"-"`
@@ -241,9 +241,7 @@ func init() {
 	proto.RegisterType((*ApplicationResponse)(nil), "geiqin.srv.mts.ApplicationResponse")
 }
 
-func init() {
-	proto.RegisterFile("application.proto", fileDescriptor_fc846aced8fe6ea6)
-}
+func init() { proto.RegisterFile("application.proto", fileDescriptor_fc846aced8fe6ea6) }
 
 var fileDescriptor_fc846aced8fe6ea6 = []byte{
 	// 435 bytes of a gzipped FileDescriptorProto
