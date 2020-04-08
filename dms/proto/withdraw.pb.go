@@ -21,23 +21,23 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Withdraw struct {
-	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	WithdrawSn           string       `protobuf:"bytes,2,opt,name=withdraw_sn,json=withdrawSn,proto3" json:"withdraw_sn"`
-	DistributorId        int64        `protobuf:"varint,3,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id"`
-	Money                float32      `protobuf:"fixed32,4,opt,name=money,proto3" json:"money"`
-	TransferId           int64        `protobuf:"varint,5,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id"`
-	TransactionIdId      string       `protobuf:"bytes,6,opt,name=transactionId_id,json=transactionIdId,proto3" json:"transactionId_id"`
-	Method               string       `protobuf:"bytes,7,opt,name=method,proto3" json:"method"`
-	CashAccountId        int32        `protobuf:"varint,8,opt,name=cash_account_id,json=cashAccountId,proto3" json:"cash_account_id"`
-	PayeeName            string       `protobuf:"bytes,9,opt,name=payee_name,json=payeeName,proto3" json:"payee_name"`
-	PayeeAccount         string       `protobuf:"bytes,10,opt,name=payee_account,json=payeeAccount,proto3" json:"payee_account"`
-	PayeeBank            string       `protobuf:"bytes,11,opt,name=payee_bank,json=payeeBank,proto3" json:"payee_bank"`
-	PlatformAccount      string       `protobuf:"bytes,12,opt,name=platform_account,json=platformAccount,proto3" json:"platform_account"`
-	Memo                 string       `protobuf:"bytes,13,opt,name=memo,proto3" json:"memo"`
-	Status               string       `protobuf:"bytes,14,opt,name=status,proto3" json:"status"`
-	CreatedAt            string       `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string       `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Distributor          *Distributor `protobuf:"bytes,17,opt,name=distributor,proto3" json:"distributor"`
+	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	WithdrawSn           string       `protobuf:"bytes,2,opt,name=withdraw_sn,json=withdrawSn,proto3" json:"withdraw_sn,omitempty"`
+	DistributorId        int64        `protobuf:"varint,3,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id,omitempty"`
+	Money                float32      `protobuf:"fixed32,4,opt,name=money,proto3" json:"money,omitempty"`
+	TransferId           int64        `protobuf:"varint,5,opt,name=transfer_id,json=transferId,proto3" json:"transfer_id,omitempty"`
+	TransactionIdId      string       `protobuf:"bytes,6,opt,name=transactionId_id,json=transactionIdId,proto3" json:"transactionId_id,omitempty"`
+	Method               string       `protobuf:"bytes,7,opt,name=method,proto3" json:"method,omitempty"`
+	CashAccountId        int32        `protobuf:"varint,8,opt,name=cash_account_id,json=cashAccountId,proto3" json:"cash_account_id,omitempty"`
+	PayeeName            string       `protobuf:"bytes,9,opt,name=payee_name,json=payeeName,proto3" json:"payee_name,omitempty"`
+	PayeeAccount         string       `protobuf:"bytes,10,opt,name=payee_account,json=payeeAccount,proto3" json:"payee_account,omitempty"`
+	PayeeBank            string       `protobuf:"bytes,11,opt,name=payee_bank,json=payeeBank,proto3" json:"payee_bank,omitempty"`
+	PlatformAccount      string       `protobuf:"bytes,12,opt,name=platform_account,json=platformAccount,proto3" json:"platform_account,omitempty"`
+	Memo                 string       `protobuf:"bytes,13,opt,name=memo,proto3" json:"memo,omitempty"`
+	Status               string       `protobuf:"bytes,14,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt            string       `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string       `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Distributor          *Distributor `protobuf:"bytes,17,opt,name=distributor,proto3" json:"distributor,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -188,11 +188,11 @@ func (m *Withdraw) GetDistributor() *Distributor {
 }
 
 type WithdrawResponse struct {
-	Entity               *Withdraw   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Withdraw `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Withdraw   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Withdraw `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
@@ -263,7 +263,9 @@ func init() {
 	proto.RegisterType((*WithdrawResponse)(nil), "geiqin.srv.dms.WithdrawResponse")
 }
 
-func init() { proto.RegisterFile("withdraw.proto", fileDescriptor_b0dd7acb611886fa) }
+func init() {
+	proto.RegisterFile("withdraw.proto", fileDescriptor_b0dd7acb611886fa)
+}
 
 var fileDescriptor_b0dd7acb611886fa = []byte{
 	// 574 bytes of a gzipped FileDescriptorProto

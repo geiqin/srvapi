@@ -11,8 +11,8 @@ import (
 
 import (
 	context "context"
-	client "github.com/micro/go-micro/client"
-	server "github.com/micro/go-micro/server"
+	client "github.com/micro/go-micro/v2/client"
+	server "github.com/micro/go-micro/v2/server"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -48,12 +48,6 @@ type myWithdrawService struct {
 }
 
 func NewMyWithdrawService(name string, c client.Client) MyWithdrawService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.dms"
-	}
 	return &myWithdrawService{
 		c:    c,
 		name: name,
@@ -149,12 +143,6 @@ type withdrawService struct {
 }
 
 func NewWithdrawService(name string, c client.Client) WithdrawService {
-	if c == nil {
-		c = client.NewClient()
-	}
-	if len(name) == 0 {
-		name = "geiqin.srv.dms"
-	}
 	return &withdrawService{
 		c:    c,
 		name: name,

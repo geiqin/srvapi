@@ -21,14 +21,14 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type GoodsCondition struct {
-	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	RankId               int32      `protobuf:"varint,2,opt,name=rank_id,json=rankId,proto3" json:"rank_id"`
-	ItemId               int64      `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuId                int64      `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	Num                  int32      `protobuf:"varint,5,opt,name=num,proto3" json:"num"`
-	CreatedAt            string     `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string     `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Detail               *ItemWhere `protobuf:"bytes,8,opt,name=detail,proto3" json:"detail"`
+	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	RankId               int32      `protobuf:"varint,2,opt,name=rank_id,json=rankId,proto3" json:"rank_id,omitempty"`
+	ItemId               int64      `protobuf:"varint,3,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuId                int64      `protobuf:"varint,4,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Num                  int32      `protobuf:"varint,5,opt,name=num,proto3" json:"num,omitempty"`
+	CreatedAt            string     `protobuf:"bytes,6,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string     `protobuf:"bytes,7,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Detail               *ItemWhere `protobuf:"bytes,8,opt,name=detail,proto3" json:"detail,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -116,11 +116,11 @@ func (m *GoodsCondition) GetDetail() *ItemWhere {
 }
 
 type GoodsConditionResponse struct {
-	Entity               *GoodsCondition   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager            `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*GoodsCondition `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error            `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info             `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *GoodsCondition   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager            `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*GoodsCondition `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error            `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info             `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -187,10 +187,10 @@ func (m *GoodsConditionResponse) GetInfo() *Info {
 }
 
 type ItemWhere struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	Price                float32  `protobuf:"fixed32,3,opt,name=price,proto3" json:"price"`
-	ThumbUrl             string   `protobuf:"bytes,4,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Price                float32  `protobuf:"fixed32,3,opt,name=price,proto3" json:"price,omitempty"`
+	ThumbUrl             string   `protobuf:"bytes,4,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -255,7 +255,9 @@ func init() {
 	proto.RegisterType((*ItemWhere)(nil), "geiqin.srv.dms.ItemWhere")
 }
 
-func init() { proto.RegisterFile("goodsCondition.proto", fileDescriptor_8c59e60cdc1b27a4) }
+func init() {
+	proto.RegisterFile("goodsCondition.proto", fileDescriptor_8c59e60cdc1b27a4)
+}
 
 var fileDescriptor_8c59e60cdc1b27a4 = []byte{
 	// 411 bytes of a gzipped FileDescriptorProto

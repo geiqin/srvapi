@@ -21,33 +21,33 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Delivery struct {
-	Id                   int64             `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Type                 string            `protobuf:"bytes,2,opt,name=type,proto3" json:"type"`
-	OrderId              int64             `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	DeliveryType         string            `protobuf:"bytes,4,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type"`
-	DeliverySn           string            `protobuf:"bytes,5,opt,name=delivery_sn,json=deliverySn,proto3" json:"delivery_sn"`
-	Freight              float32           `protobuf:"fixed32,6,opt,name=freight,proto3" json:"freight"`
-	Protected            bool              `protobuf:"varint,7,opt,name=protected,proto3" json:"protected"`
-	ExpressId            int32             `protobuf:"varint,8,opt,name=express_id,json=expressId,proto3" json:"express_id"`
-	ExpressName          string            `protobuf:"bytes,9,opt,name=express_name,json=expressName,proto3" json:"express_name"`
-	ExpressCode          string            `protobuf:"bytes,10,opt,name=express_code,json=expressCode,proto3" json:"express_code"`
-	ExpressNo            string            `protobuf:"bytes,11,opt,name=express_no,json=expressNo,proto3" json:"express_no"`
-	CustomerId           int64             `protobuf:"varint,12,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	ReceiverName         string            `protobuf:"bytes,13,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name"`
-	ReceiverAreaId       int64             `protobuf:"varint,14,opt,name=receiver_area_id,json=receiverAreaId,proto3" json:"receiver_area_id"`
-	ReceiverAddr         string            `protobuf:"bytes,15,opt,name=receiver_addr,json=receiverAddr,proto3" json:"receiver_addr"`
-	ReceiverZip          string            `protobuf:"bytes,16,opt,name=receiver_zip,json=receiverZip,proto3" json:"receiver_zip"`
-	ReceiverTel          string            `protobuf:"bytes,17,opt,name=receiver_tel,json=receiverTel,proto3" json:"receiver_tel"`
-	ReceiverMobile       string            `protobuf:"bytes,18,opt,name=receiver_mobile,json=receiverMobile,proto3" json:"receiver_mobile"`
-	ReceiverEmail        string            `protobuf:"bytes,19,opt,name=receiver_email,json=receiverEmail,proto3" json:"receiver_email"`
-	OpId                 int64             `protobuf:"varint,20,opt,name=op_id,json=opId,proto3" json:"op_id"`
-	Status               string            `protobuf:"bytes,21,opt,name=status,proto3" json:"status"`
-	Memo                 string            `protobuf:"bytes,22,opt,name=memo,proto3" json:"memo"`
-	ArrivedAt            string            `protobuf:"bytes,23,opt,name=arrived_at,json=arrivedAt,proto3" json:"arrived_at"`
-	CreatedAt            string            `protobuf:"bytes,24,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string            `protobuf:"bytes,25,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Details              []*DeliveryDetail `protobuf:"bytes,26,rep,name=details,proto3" json:"details"`
-	SafeguardId          int64             `protobuf:"varint,27,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id"`
+	Id                   int64             `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Type                 string            `protobuf:"bytes,2,opt,name=type,proto3" json:"type,omitempty"`
+	OrderId              int64             `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	DeliveryType         string            `protobuf:"bytes,4,opt,name=delivery_type,json=deliveryType,proto3" json:"delivery_type,omitempty"`
+	DeliverySn           string            `protobuf:"bytes,5,opt,name=delivery_sn,json=deliverySn,proto3" json:"delivery_sn,omitempty"`
+	Freight              float32           `protobuf:"fixed32,6,opt,name=freight,proto3" json:"freight,omitempty"`
+	Protected            bool              `protobuf:"varint,7,opt,name=protected,proto3" json:"protected,omitempty"`
+	ExpressId            int32             `protobuf:"varint,8,opt,name=express_id,json=expressId,proto3" json:"express_id,omitempty"`
+	ExpressName          string            `protobuf:"bytes,9,opt,name=express_name,json=expressName,proto3" json:"express_name,omitempty"`
+	ExpressCode          string            `protobuf:"bytes,10,opt,name=express_code,json=expressCode,proto3" json:"express_code,omitempty"`
+	ExpressNo            string            `protobuf:"bytes,11,opt,name=express_no,json=expressNo,proto3" json:"express_no,omitempty"`
+	CustomerId           int64             `protobuf:"varint,12,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	ReceiverName         string            `protobuf:"bytes,13,opt,name=receiver_name,json=receiverName,proto3" json:"receiver_name,omitempty"`
+	ReceiverAreaId       int64             `protobuf:"varint,14,opt,name=receiver_area_id,json=receiverAreaId,proto3" json:"receiver_area_id,omitempty"`
+	ReceiverAddr         string            `protobuf:"bytes,15,opt,name=receiver_addr,json=receiverAddr,proto3" json:"receiver_addr,omitempty"`
+	ReceiverZip          string            `protobuf:"bytes,16,opt,name=receiver_zip,json=receiverZip,proto3" json:"receiver_zip,omitempty"`
+	ReceiverTel          string            `protobuf:"bytes,17,opt,name=receiver_tel,json=receiverTel,proto3" json:"receiver_tel,omitempty"`
+	ReceiverMobile       string            `protobuf:"bytes,18,opt,name=receiver_mobile,json=receiverMobile,proto3" json:"receiver_mobile,omitempty"`
+	ReceiverEmail        string            `protobuf:"bytes,19,opt,name=receiver_email,json=receiverEmail,proto3" json:"receiver_email,omitempty"`
+	OpId                 int64             `protobuf:"varint,20,opt,name=op_id,json=opId,proto3" json:"op_id,omitempty"`
+	Status               string            `protobuf:"bytes,21,opt,name=status,proto3" json:"status,omitempty"`
+	Memo                 string            `protobuf:"bytes,22,opt,name=memo,proto3" json:"memo,omitempty"`
+	ArrivedAt            string            `protobuf:"bytes,23,opt,name=arrived_at,json=arrivedAt,proto3" json:"arrived_at,omitempty"`
+	CreatedAt            string            `protobuf:"bytes,24,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string            `protobuf:"bytes,25,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Details              []*DeliveryDetail `protobuf:"bytes,26,rep,name=details,proto3" json:"details,omitempty"`
+	SafeguardId          int64             `protobuf:"varint,27,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -268,13 +268,13 @@ func (m *Delivery) GetSafeguardId() int64 {
 }
 
 type DeliveryDetail struct {
-	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	DeliveryId           int64      `protobuf:"varint,2,opt,name=delivery_id,json=deliveryId,proto3" json:"delivery_id"`
-	OrderDetailId        int64      `protobuf:"varint,3,opt,name=order_detail_id,json=orderDetailId,proto3" json:"order_detail_id"`
-	ItemId               int64      `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuId                int64      `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	Num                  int32      `protobuf:"varint,6,opt,name=num,proto3" json:"num"`
-	Goods                *GoodsInfo `protobuf:"bytes,7,opt,name=goods,proto3" json:"goods"`
+	Id                   int64      `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	DeliveryId           int64      `protobuf:"varint,2,opt,name=delivery_id,json=deliveryId,proto3" json:"delivery_id,omitempty"`
+	OrderDetailId        int64      `protobuf:"varint,3,opt,name=order_detail_id,json=orderDetailId,proto3" json:"order_detail_id,omitempty"`
+	ItemId               int64      `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuId                int64      `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Num                  int32      `protobuf:"varint,6,opt,name=num,proto3" json:"num,omitempty"`
+	Goods                *GoodsInfo `protobuf:"bytes,7,opt,name=goods,proto3" json:"goods,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -355,11 +355,11 @@ func (m *DeliveryDetail) GetGoods() *GoodsInfo {
 }
 
 type DeliveryResponse struct {
-	Entity               *Delivery   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Delivery `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Delivery   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Delivery `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
@@ -431,7 +431,9 @@ func init() {
 	proto.RegisterType((*DeliveryResponse)(nil), "geiqin.srv.ord.private.DeliveryResponse")
 }
 
-func init() { proto.RegisterFile("delivery.proto", fileDescriptor_bf387bcb4e23d880) }
+func init() {
+	proto.RegisterFile("delivery.proto", fileDescriptor_bf387bcb4e23d880)
+}
 
 var fileDescriptor_bf387bcb4e23d880 = []byte{
 	// 736 bytes of a gzipped FileDescriptorProto

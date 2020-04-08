@@ -21,26 +21,26 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Commission struct {
-	Id                   int64               `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	CommissionSn         string              `protobuf:"bytes,2,opt,name=commission_sn,json=commissionSn,proto3" json:"commission_sn"`
-	OrderId              int64               `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	OrderSn              string              `protobuf:"bytes,4,opt,name=order_sn,json=orderSn,proto3" json:"order_sn"`
-	PlatformSource       string              `protobuf:"bytes,5,opt,name=platform_source,json=platformSource,proto3" json:"platform_source"`
-	OrderAmount          float32             `protobuf:"fixed32,6,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount"`
-	DistributorId        int64               `protobuf:"varint,7,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id"`
-	InviteeId            int64               `protobuf:"varint,8,opt,name=invitee_id,json=inviteeId,proto3" json:"invitee_id"`
-	Direction            string              `protobuf:"bytes,9,opt,name=direction,proto3" json:"direction"`
-	Money                float32             `protobuf:"fixed32,10,opt,name=money,proto3" json:"money"`
-	IncomeType           string              `protobuf:"bytes,11,opt,name=income_type,json=incomeType,proto3" json:"income_type"`
-	IncomeRate           float32             `protobuf:"fixed32,12,opt,name=income_rate,json=incomeRate,proto3" json:"income_rate"`
-	Status               int32               `protobuf:"varint,15,opt,name=status,proto3" json:"status"`
-	Memo                 string              `protobuf:"bytes,16,opt,name=memo,proto3" json:"memo"`
-	OperatorId           int64               `protobuf:"varint,17,opt,name=operator_id,json=operatorId,proto3" json:"operator_id"`
-	CreatedAt            string              `protobuf:"bytes,18,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string              `protobuf:"bytes,19,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Details              []*CommissionDetail `protobuf:"bytes,20,rep,name=details,proto3" json:"details"`
-	Invitee              *Distributor        `protobuf:"bytes,21,opt,name=invitee,proto3" json:"invitee"`
-	Distributor          *Distributor        `protobuf:"bytes,22,opt,name=distributor,proto3" json:"distributor"`
+	Id                   int64               `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CommissionSn         string              `protobuf:"bytes,2,opt,name=commission_sn,json=commissionSn,proto3" json:"commission_sn,omitempty"`
+	OrderId              int64               `protobuf:"varint,3,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	OrderSn              string              `protobuf:"bytes,4,opt,name=order_sn,json=orderSn,proto3" json:"order_sn,omitempty"`
+	PlatformSource       string              `protobuf:"bytes,5,opt,name=platform_source,json=platformSource,proto3" json:"platform_source,omitempty"`
+	OrderAmount          float32             `protobuf:"fixed32,6,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
+	DistributorId        int64               `protobuf:"varint,7,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id,omitempty"`
+	InviteeId            int64               `protobuf:"varint,8,opt,name=invitee_id,json=inviteeId,proto3" json:"invitee_id,omitempty"`
+	Direction            string              `protobuf:"bytes,9,opt,name=direction,proto3" json:"direction,omitempty"`
+	Money                float32             `protobuf:"fixed32,10,opt,name=money,proto3" json:"money,omitempty"`
+	IncomeType           string              `protobuf:"bytes,11,opt,name=income_type,json=incomeType,proto3" json:"income_type,omitempty"`
+	IncomeRate           float32             `protobuf:"fixed32,12,opt,name=income_rate,json=incomeRate,proto3" json:"income_rate,omitempty"`
+	Status               int32               `protobuf:"varint,15,opt,name=status,proto3" json:"status,omitempty"`
+	Memo                 string              `protobuf:"bytes,16,opt,name=memo,proto3" json:"memo,omitempty"`
+	OperatorId           int64               `protobuf:"varint,17,opt,name=operator_id,json=operatorId,proto3" json:"operator_id,omitempty"`
+	CreatedAt            string              `protobuf:"bytes,18,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string              `protobuf:"bytes,19,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Details              []*CommissionDetail `protobuf:"bytes,20,rep,name=details,proto3" json:"details,omitempty"`
+	Invitee              *Distributor        `protobuf:"bytes,21,opt,name=invitee,proto3" json:"invitee,omitempty"`
+	Distributor          *Distributor        `protobuf:"bytes,22,opt,name=distributor,proto3" json:"distributor,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}            `json:"-"`
 	XXX_unrecognized     []byte              `json:"-"`
 	XXX_sizecache        int32               `json:"-"`
@@ -212,11 +212,11 @@ func (m *Commission) GetDistributor() *Distributor {
 }
 
 type CommissionResponse struct {
-	Entity               *Commission   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager        `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Commission `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error        `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info         `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Commission   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager        `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Commission `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error        `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info         `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}      `json:"-"`
 	XXX_unrecognized     []byte        `json:"-"`
 	XXX_sizecache        int32         `json:"-"`
@@ -287,7 +287,9 @@ func init() {
 	proto.RegisterType((*CommissionResponse)(nil), "geiqin.srv.dms.CommissionResponse")
 }
 
-func init() { proto.RegisterFile("commission.proto", fileDescriptor_a3823d0793ff9520) }
+func init() {
+	proto.RegisterFile("commission.proto", fileDescriptor_a3823d0793ff9520)
+}
 
 var fileDescriptor_a3823d0793ff9520 = []byte{
 	// 608 bytes of a gzipped FileDescriptorProto

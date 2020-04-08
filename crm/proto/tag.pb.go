@@ -21,13 +21,13 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Tag struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	Type                 int32    `protobuf:"varint,3,opt,name=type,proto3" json:"type"`
-	ConditionType        int32    `protobuf:"varint,4,opt,name=condition_type,json=conditionType,proto3" json:"condition_type"`
-	CreatedAt            string   `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string   `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	IsUse                int32    `protobuf:"varint,7,opt,name=is_use,json=isUse,proto3" json:"is_use"`
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Type                 int32    `protobuf:"varint,3,opt,name=type,proto3" json:"type,omitempty"`
+	ConditionType        int32    `protobuf:"varint,4,opt,name=condition_type,json=conditionType,proto3" json:"condition_type,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,5,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,6,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	IsUse                int32    `protobuf:"varint,7,opt,name=is_use,json=isUse,proto3" json:"is_use,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -109,12 +109,12 @@ func (m *Tag) GetIsUse() int32 {
 
 //标签查询参数
 type TagWhere struct {
-	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
+	Paged    int32  `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize int32  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Sorting  string `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
 	//以下为自定义参数
-	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
-	CustomerId           int64    `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	CustomerId           int64    `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -182,11 +182,11 @@ func (m *TagWhere) GetCustomerId() int64 {
 
 //
 type TagResponse struct {
-	Entity               *Tag     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Tag   `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Tag     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Tag   `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -258,7 +258,9 @@ func init() {
 	proto.RegisterType((*TagResponse)(nil), "geiqin.srv.crm.TagResponse")
 }
 
-func init() { proto.RegisterFile("tag.proto", fileDescriptor_27f545bcde37ecb5) }
+func init() {
+	proto.RegisterFile("tag.proto", fileDescriptor_27f545bcde37ecb5)
+}
 
 var fileDescriptor_27f545bcde37ecb5 = []byte{
 	// 450 bytes of a gzipped FileDescriptorProto

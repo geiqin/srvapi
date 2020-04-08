@@ -22,26 +22,26 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // 图片信息
 type Image struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Title                string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title"`
-	Type                 string   `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
-	CatId                int32    `protobuf:"varint,4,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
-	FileName             string   `protobuf:"bytes,5,opt,name=file_name,json=fileName,proto3" json:"file_name"`
-	RawName              string   `protobuf:"bytes,6,opt,name=raw_name,json=rawName,proto3" json:"raw_name"`
-	Hash                 string   `protobuf:"bytes,7,opt,name=hash,proto3" json:"hash"`
-	Path                 string   `protobuf:"bytes,8,opt,name=path,proto3" json:"path"`
-	Url                  string   `protobuf:"bytes,9,opt,name=url,proto3" json:"url"`
-	MimeType             string   `protobuf:"bytes,10,opt,name=mime_type,json=mimeType,proto3" json:"mime_type"`
-	Size                 float32  `protobuf:"fixed32,11,opt,name=size,proto3" json:"size"`
-	Width                int32    `protobuf:"varint,12,opt,name=width,proto3" json:"width"`
-	Height               int32    `protobuf:"varint,13,opt,name=height,proto3" json:"height"`
-	Memo                 string   `protobuf:"bytes,14,opt,name=memo,proto3" json:"memo"`
-	Taxonomy             string   `protobuf:"bytes,15,opt,name=taxonomy,proto3" json:"taxonomy"`
-	UserId               int64    `protobuf:"varint,19,opt,name=user_id,json=userId,proto3" json:"user_id"`
-	CreatedAt            string   `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string   `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Cat                  *Cat     `protobuf:"bytes,22,opt,name=cat,proto3" json:"cat"`
-	Ids                  []int64  `protobuf:"varint,23,rep,packed,name=ids,proto3" json:"ids"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title                string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Type                 string   `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	CatId                int32    `protobuf:"varint,4,opt,name=cat_id,json=catId,proto3" json:"cat_id,omitempty"`
+	FileName             string   `protobuf:"bytes,5,opt,name=file_name,json=fileName,proto3" json:"file_name,omitempty"`
+	RawName              string   `protobuf:"bytes,6,opt,name=raw_name,json=rawName,proto3" json:"raw_name,omitempty"`
+	Hash                 string   `protobuf:"bytes,7,opt,name=hash,proto3" json:"hash,omitempty"`
+	Path                 string   `protobuf:"bytes,8,opt,name=path,proto3" json:"path,omitempty"`
+	Url                  string   `protobuf:"bytes,9,opt,name=url,proto3" json:"url,omitempty"`
+	MimeType             string   `protobuf:"bytes,10,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	Size                 float32  `protobuf:"fixed32,11,opt,name=size,proto3" json:"size,omitempty"`
+	Width                int32    `protobuf:"varint,12,opt,name=width,proto3" json:"width,omitempty"`
+	Height               int32    `protobuf:"varint,13,opt,name=height,proto3" json:"height,omitempty"`
+	Memo                 string   `protobuf:"bytes,14,opt,name=memo,proto3" json:"memo,omitempty"`
+	Taxonomy             string   `protobuf:"bytes,15,opt,name=taxonomy,proto3" json:"taxonomy,omitempty"`
+	UserId               int64    `protobuf:"varint,19,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Cat                  *Cat     `protobuf:"bytes,22,opt,name=cat,proto3" json:"cat,omitempty"`
+	Ids                  []int64  `protobuf:"varint,23,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -214,10 +214,10 @@ func (m *Image) GetIds() []int64 {
 
 // 修改图片信息
 type UpdateImage struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Title                string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title"`
-	CatId                int32    `protobuf:"varint,4,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
-	Memo                 string   `protobuf:"bytes,14,opt,name=memo,proto3" json:"memo"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title                string   `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	CatId                int32    `protobuf:"varint,4,opt,name=cat_id,json=catId,proto3" json:"cat_id,omitempty"`
+	Memo                 string   `protobuf:"bytes,14,opt,name=memo,proto3" json:"memo,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -278,11 +278,11 @@ func (m *UpdateImage) GetMemo() string {
 
 //
 type ImageResponse struct {
-	Entity               *Image   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Image `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Image   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Image `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -354,7 +354,9 @@ func init() {
 	proto.RegisterType((*ImageResponse)(nil), "geiqin.srv.cms.media.ImageResponse")
 }
 
-func init() { proto.RegisterFile("image.proto", fileDescriptor_9624c68e2b547544) }
+func init() {
+	proto.RegisterFile("image.proto", fileDescriptor_9624c68e2b547544)
+}
 
 var fileDescriptor_9624c68e2b547544 = []byte{
 	// 577 bytes of a gzipped FileDescriptorProto

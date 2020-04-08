@@ -21,17 +21,17 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Cat struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Slug                 string   `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug"`
-	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	CatId                int32    `protobuf:"varint,4,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
-	Depth                int32    `protobuf:"varint,5,opt,name=depth,proto3" json:"depth"`
-	Memo                 string   `protobuf:"bytes,6,opt,name=memo,proto3" json:"memo"`
-	ItemNum              int32    `protobuf:"varint,7,opt,name=item_num,json=itemNum,proto3" json:"item_num"`
-	Sorting              int32    `protobuf:"varint,8,opt,name=sorting,proto3" json:"sorting"`
-	CreatedAt            string   `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string   `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Children             []*Cat   `protobuf:"bytes,11,rep,name=children,proto3" json:"children"`
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Slug                 string   `protobuf:"bytes,2,opt,name=slug,proto3" json:"slug,omitempty"`
+	Name                 string   `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	CatId                int32    `protobuf:"varint,4,opt,name=cat_id,json=catId,proto3" json:"cat_id,omitempty"`
+	Depth                int32    `protobuf:"varint,5,opt,name=depth,proto3" json:"depth,omitempty"`
+	Memo                 string   `protobuf:"bytes,6,opt,name=memo,proto3" json:"memo,omitempty"`
+	ItemNum              int32    `protobuf:"varint,7,opt,name=item_num,json=itemNum,proto3" json:"item_num,omitempty"`
+	Sorting              int32    `protobuf:"varint,8,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,9,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,10,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Children             []*Cat   `protobuf:"bytes,11,rep,name=children,proto3" json:"children,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -140,11 +140,11 @@ func (m *Cat) GetChildren() []*Cat {
 }
 
 type CatResponse struct {
-	Entity               *Cat     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Cat   `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Cat     `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Cat   `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -215,7 +215,9 @@ func init() {
 	proto.RegisterType((*CatResponse)(nil), "geiqin.srv.pdm.CatResponse")
 }
 
-func init() { proto.RegisterFile("cat.proto", fileDescriptor_c0a5ac8640cab35d) }
+func init() {
+	proto.RegisterFile("cat.proto", fileDescriptor_c0a5ac8640cab35d)
+}
 
 var fileDescriptor_c0a5ac8640cab35d = []byte{
 	// 446 bytes of a gzipped FileDescriptorProto

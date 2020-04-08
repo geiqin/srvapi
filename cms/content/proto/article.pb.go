@@ -22,32 +22,32 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //文章信息
 type Article struct {
-	Id             int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Title          string `protobuf:"bytes,2,opt,name=title,proto3" json:"title"`
-	Name           string `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	Content        string `protobuf:"bytes,4,opt,name=content,proto3" json:"content"`
-	Excerpt        string `protobuf:"bytes,5,opt,name=excerpt,proto3" json:"excerpt"`
-	Type           string `protobuf:"bytes,6,opt,name=type,proto3" json:"type"`
-	MimeType       string `protobuf:"bytes,7,opt,name=mime_type,json=mimeType,proto3" json:"mime_type"`
-	Keywords       string `protobuf:"bytes,8,opt,name=keywords,proto3" json:"keywords"`
-	ThumbId        int64  `protobuf:"varint,9,opt,name=thumb_id,json=thumbId,proto3" json:"thumb_id"`
-	ThumbUrl       string `protobuf:"bytes,10,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url"`
-	ParentId       int64  `protobuf:"varint,11,opt,name=parent_id,json=parentId,proto3" json:"parent_id"`
-	Drafted        bool   `protobuf:"varint,12,opt,name=drafted,proto3" json:"drafted"`
-	Status         string `protobuf:"bytes,13,opt,name=status,proto3" json:"status"`
-	CommentEnabled bool   `protobuf:"varint,14,opt,name=comment_enabled,json=commentEnabled,proto3" json:"comment_enabled"`
-	CommentCount   int32  `protobuf:"varint,15,opt,name=comment_count,json=commentCount,proto3" json:"comment_count"`
-	ViewCount      int32  `protobuf:"varint,16,opt,name=view_count,json=viewCount,proto3" json:"view_count"`
-	System         bool   `protobuf:"varint,17,opt,name=system,proto3" json:"system"`
-	Sorting        int32  `protobuf:"varint,18,opt,name=sorting,proto3" json:"sorting"`
-	UserId         int64  `protobuf:"varint,19,opt,name=user_id,json=userId,proto3" json:"user_id"`
+	Id             int64  `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Title          string `protobuf:"bytes,2,opt,name=title,proto3" json:"title,omitempty"`
+	Name           string `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Content        string `protobuf:"bytes,4,opt,name=content,proto3" json:"content,omitempty"`
+	Excerpt        string `protobuf:"bytes,5,opt,name=excerpt,proto3" json:"excerpt,omitempty"`
+	Type           string `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
+	MimeType       string `protobuf:"bytes,7,opt,name=mime_type,json=mimeType,proto3" json:"mime_type,omitempty"`
+	Keywords       string `protobuf:"bytes,8,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	ThumbId        int64  `protobuf:"varint,9,opt,name=thumb_id,json=thumbId,proto3" json:"thumb_id,omitempty"`
+	ThumbUrl       string `protobuf:"bytes,10,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url,omitempty"`
+	ParentId       int64  `protobuf:"varint,11,opt,name=parent_id,json=parentId,proto3" json:"parent_id,omitempty"`
+	Drafted        bool   `protobuf:"varint,12,opt,name=drafted,proto3" json:"drafted,omitempty"`
+	Status         string `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
+	CommentEnabled bool   `protobuf:"varint,14,opt,name=comment_enabled,json=commentEnabled,proto3" json:"comment_enabled,omitempty"`
+	CommentCount   int32  `protobuf:"varint,15,opt,name=comment_count,json=commentCount,proto3" json:"comment_count,omitempty"`
+	ViewCount      int32  `protobuf:"varint,16,opt,name=view_count,json=viewCount,proto3" json:"view_count,omitempty"`
+	System         bool   `protobuf:"varint,17,opt,name=system,proto3" json:"system,omitempty"`
+	Sorting        int32  `protobuf:"varint,18,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	UserId         int64  `protobuf:"varint,19,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
 	//google.protobuf.Timestamp published_at =20;
-	PublishedAt          string   `protobuf:"bytes,20,opt,name=published_at,json=publishedAt,proto3" json:"published_at"`
-	CreatedAt            string   `protobuf:"bytes,21,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string   `protobuf:"bytes,22,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Cats                 []*Cat   `protobuf:"bytes,23,rep,name=cats,proto3" json:"cats" gorm:"many2many:article_cats;"`
-	Tags                 []*Tag   `protobuf:"bytes,24,rep,name=tags,proto3" json:"tags" gorm:"many2many:article_tags;"`
-	Ids                  []int32  `protobuf:"varint,25,rep,packed,name=ids,proto3" json:"ids"`
+	PublishedAt          string   `protobuf:"bytes,20,opt,name=published_at,json=publishedAt,proto3" json:"published_at,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,21,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,22,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Cats                 []*Cat   `protobuf:"bytes,23,rep,name=cats,proto3" json:"cats,omitempty"`
+	Tags                 []*Tag   `protobuf:"bytes,24,rep,name=tags,proto3" json:"tags,omitempty"`
+	Ids                  []int32  `protobuf:"varint,25,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -255,13 +255,13 @@ func (m *Article) GetIds() []int32 {
 
 //文章查询参数
 type ArticleWhere struct {
-	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Top                  int32    `protobuf:"varint,3,opt,name=top,proto3" json:"top"`
-	Title                string   `protobuf:"bytes,4,opt,name=title,proto3" json:"title"`
-	CatId                int32    `protobuf:"varint,5,opt,name=cat_id,json=catId,proto3" json:"cat_id"`
-	CatSlug              string   `protobuf:"bytes,6,opt,name=cat_slug,json=catSlug,proto3" json:"cat_slug"`
-	Type                 string   `protobuf:"bytes,7,opt,name=type,proto3" json:"type"`
+	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Top                  int32    `protobuf:"varint,3,opt,name=top,proto3" json:"top,omitempty"`
+	Title                string   `protobuf:"bytes,4,opt,name=title,proto3" json:"title,omitempty"`
+	CatId                int32    `protobuf:"varint,5,opt,name=cat_id,json=catId,proto3" json:"cat_id,omitempty"`
+	CatSlug              string   `protobuf:"bytes,6,opt,name=cat_slug,json=catSlug,proto3" json:"cat_slug,omitempty"`
+	Type                 string   `protobuf:"bytes,7,opt,name=type,proto3" json:"type,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -343,11 +343,11 @@ func (m *ArticleWhere) GetType() string {
 
 //
 type ArticleResponse struct {
-	Entity               *Article   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Article `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Article   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager     `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Article `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error     `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info      `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -419,7 +419,9 @@ func init() {
 	proto.RegisterType((*ArticleResponse)(nil), "geiqin.srv.cms.content.ArticleResponse")
 }
 
-func init() { proto.RegisterFile("article.proto", fileDescriptor_5c593d380f9840a2) }
+func init() {
+	proto.RegisterFile("article.proto", fileDescriptor_5c593d380f9840a2)
+}
 
 var fileDescriptor_5c593d380f9840a2 = []byte{
 	// 731 bytes of a gzipped FileDescriptorProto

@@ -21,13 +21,13 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Cart struct {
-	Id                   string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id"`
-	Count                int32       `protobuf:"varint,2,opt,name=count,proto3" json:"count"`
-	Total                float32     `protobuf:"fixed32,3,opt,name=total,proto3" json:"total"`
-	Discount             float32     `protobuf:"fixed32,4,opt,name=discount,proto3" json:"discount"`
-	Freight              float32     `protobuf:"fixed32,5,opt,name=freight,proto3" json:"freight"`
-	Amount               float32     `protobuf:"fixed32,6,opt,name=amount,proto3" json:"amount"`
-	Items                []*CartItem `protobuf:"bytes,7,rep,name=items,proto3" json:"items"`
+	Id                   string      `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+	Count                int32       `protobuf:"varint,2,opt,name=count,proto3" json:"count,omitempty"`
+	Total                float32     `protobuf:"fixed32,3,opt,name=total,proto3" json:"total,omitempty"`
+	Discount             float32     `protobuf:"fixed32,4,opt,name=discount,proto3" json:"discount,omitempty"`
+	Freight              float32     `protobuf:"fixed32,5,opt,name=freight,proto3" json:"freight,omitempty"`
+	Amount               float32     `protobuf:"fixed32,6,opt,name=amount,proto3" json:"amount,omitempty"`
+	Items                []*CartItem `protobuf:"bytes,7,rep,name=items,proto3" json:"items,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
@@ -108,15 +108,15 @@ func (m *Cart) GetItems() []*CartItem {
 }
 
 type CartItem struct {
-	RowId                string     `protobuf:"bytes,1,opt,name=row_id,json=rowId,proto3" json:"row_id"`
-	ItemId               int64      `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuId                int64      `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	Name                 string     `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
-	Num                  int32      `protobuf:"varint,5,opt,name=num,proto3" json:"num"`
-	Price                float32    `protobuf:"fixed32,6,opt,name=price,proto3" json:"price"`
-	TaxRate              float32    `protobuf:"fixed32,7,opt,name=tax_rate,json=taxRate,proto3" json:"tax_rate"`
-	SubTotal             float32    `protobuf:"fixed32,8,opt,name=sub_total,json=subTotal,proto3" json:"sub_total"`
-	Goods                *GoodsInfo `protobuf:"bytes,9,opt,name=goods,proto3" json:"goods"`
+	RowId                string     `protobuf:"bytes,1,opt,name=row_id,json=rowId,proto3" json:"row_id,omitempty"`
+	ItemId               int64      `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuId                int64      `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Name                 string     `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	Num                  int32      `protobuf:"varint,5,opt,name=num,proto3" json:"num,omitempty"`
+	Price                float32    `protobuf:"fixed32,6,opt,name=price,proto3" json:"price,omitempty"`
+	TaxRate              float32    `protobuf:"fixed32,7,opt,name=tax_rate,json=taxRate,proto3" json:"tax_rate,omitempty"`
+	SubTotal             float32    `protobuf:"fixed32,8,opt,name=sub_total,json=subTotal,proto3" json:"sub_total,omitempty"`
+	Goods                *GoodsInfo `protobuf:"bytes,9,opt,name=goods,proto3" json:"goods,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}   `json:"-"`
 	XXX_unrecognized     []byte     `json:"-"`
 	XXX_sizecache        int32      `json:"-"`
@@ -211,12 +211,12 @@ func (m *CartItem) GetGoods() *GoodsInfo {
 }
 
 type CartRequest struct {
-	RowId                string   `protobuf:"bytes,1,opt,name=row_id,json=rowId,proto3" json:"row_id"`
-	ItemId               int64    `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuId                int64    `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	Direction            string   `protobuf:"bytes,4,opt,name=direction,proto3" json:"direction"`
-	Num                  int32    `protobuf:"varint,5,opt,name=num,proto3" json:"num"`
-	RowIds               []string `protobuf:"bytes,6,rep,name=row_ids,json=rowIds,proto3" json:"row_ids"`
+	RowId                string   `protobuf:"bytes,1,opt,name=row_id,json=rowId,proto3" json:"row_id,omitempty"`
+	ItemId               int64    `protobuf:"varint,2,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuId                int64    `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Direction            string   `protobuf:"bytes,4,opt,name=direction,proto3" json:"direction,omitempty"`
+	Num                  int32    `protobuf:"varint,5,opt,name=num,proto3" json:"num,omitempty"`
+	RowIds               []string `protobuf:"bytes,6,rep,name=row_ids,json=rowIds,proto3" json:"row_ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -290,11 +290,11 @@ func (m *CartRequest) GetRowIds() []string {
 }
 
 type CartResponse struct {
-	Entity               *Cart    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Cart  `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Cart    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Cart  `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -367,7 +367,9 @@ func init() {
 	proto.RegisterType((*CartResponse)(nil), "geiqin.srv.ord.private.CartResponse")
 }
 
-func init() { proto.RegisterFile("cart.proto", fileDescriptor_bf731a5c8f9a516f) }
+func init() {
+	proto.RegisterFile("cart.proto", fileDescriptor_bf731a5c8f9a516f)
+}
 
 var fileDescriptor_bf731a5c8f9a516f = []byte{
 	// 603 bytes of a gzipped FileDescriptorProto

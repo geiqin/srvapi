@@ -21,24 +21,24 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Consumer struct {
-	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	DistributorId        int64        `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id"`
-	CustomerId           int64        `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	OrderNum             int32        `protobuf:"varint,4,opt,name=order_num,json=orderNum,proto3" json:"order_num"`
-	OrderAmount          float32      `protobuf:"fixed32,5,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount"`
-	TotalOrderNum        int32        `protobuf:"varint,6,opt,name=total_order_num,json=totalOrderNum,proto3" json:"total_order_num"`
-	TotalOrderAmount     float32      `protobuf:"fixed32,7,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount"`
-	Status               int32        `protobuf:"varint,8,opt,name=status,proto3" json:"status"`
-	ChangeNum            int32        `protobuf:"varint,9,opt,name=change_num,json=changeNum,proto3" json:"change_num"`
-	LastChangeAt         string       `protobuf:"bytes,10,opt,name=last_change_at,json=lastChangeAt,proto3" json:"last_change_at"`
-	JoinAt               string       `protobuf:"bytes,11,opt,name=join_at,json=joinAt,proto3" json:"join_at"`
-	Mobile               string       `protobuf:"bytes,12,opt,name=mobile,proto3" json:"mobile"`
-	ConsumerDisplayName  string       `protobuf:"bytes,13,opt,name=consumer_display_name,json=consumerDisplayName,proto3" json:"consumer_display_name"`
-	ConsumerAvatarUrl    string       `protobuf:"bytes,14,opt,name=consumer_avatar_url,json=consumerAvatarUrl,proto3" json:"consumer_avatar_url"`
-	DisDisplayName       string       `protobuf:"bytes,15,opt,name=dis_display_name,json=disDisplayName,proto3" json:"dis_display_name"`
-	CreatedAt            string       `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string       `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Distributor          *Distributor `protobuf:"bytes,18,opt,name=distributor,proto3" json:"distributor"`
+	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	DistributorId        int64        `protobuf:"varint,2,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id,omitempty"`
+	CustomerId           int64        `protobuf:"varint,3,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	OrderNum             int32        `protobuf:"varint,4,opt,name=order_num,json=orderNum,proto3" json:"order_num,omitempty"`
+	OrderAmount          float32      `protobuf:"fixed32,5,opt,name=order_amount,json=orderAmount,proto3" json:"order_amount,omitempty"`
+	TotalOrderNum        int32        `protobuf:"varint,6,opt,name=total_order_num,json=totalOrderNum,proto3" json:"total_order_num,omitempty"`
+	TotalOrderAmount     float32      `protobuf:"fixed32,7,opt,name=total_order_amount,json=totalOrderAmount,proto3" json:"total_order_amount,omitempty"`
+	Status               int32        `protobuf:"varint,8,opt,name=status,proto3" json:"status,omitempty"`
+	ChangeNum            int32        `protobuf:"varint,9,opt,name=change_num,json=changeNum,proto3" json:"change_num,omitempty"`
+	LastChangeAt         string       `protobuf:"bytes,10,opt,name=last_change_at,json=lastChangeAt,proto3" json:"last_change_at,omitempty"`
+	JoinAt               string       `protobuf:"bytes,11,opt,name=join_at,json=joinAt,proto3" json:"join_at,omitempty"`
+	Mobile               string       `protobuf:"bytes,12,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	ConsumerDisplayName  string       `protobuf:"bytes,13,opt,name=consumer_display_name,json=consumerDisplayName,proto3" json:"consumer_display_name,omitempty"`
+	ConsumerAvatarUrl    string       `protobuf:"bytes,14,opt,name=consumer_avatar_url,json=consumerAvatarUrl,proto3" json:"consumer_avatar_url,omitempty"`
+	DisDisplayName       string       `protobuf:"bytes,15,opt,name=dis_display_name,json=disDisplayName,proto3" json:"dis_display_name,omitempty"`
+	CreatedAt            string       `protobuf:"bytes,16,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string       `protobuf:"bytes,17,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Distributor          *Distributor `protobuf:"bytes,18,opt,name=distributor,proto3" json:"distributor,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -196,13 +196,13 @@ func (m *Consumer) GetDistributor() *Distributor {
 }
 
 type ConsumerWhere struct {
-	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Mobile               string   `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile"`
-	Status               string   `protobuf:"bytes,4,opt,name=status,proto3" json:"status"`
-	StartDate            string   `protobuf:"bytes,5,opt,name=start_date,json=startDate,proto3" json:"start_date"`
-	EndDate              string   `protobuf:"bytes,6,opt,name=end_date,json=endDate,proto3" json:"end_date"`
-	CustomerId           int64    `protobuf:"varint,7,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
+	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Mobile               string   `protobuf:"bytes,3,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Status               string   `protobuf:"bytes,4,opt,name=status,proto3" json:"status,omitempty"`
+	StartDate            string   `protobuf:"bytes,5,opt,name=start_date,json=startDate,proto3" json:"start_date,omitempty"`
+	EndDate              string   `protobuf:"bytes,6,opt,name=end_date,json=endDate,proto3" json:"end_date,omitempty"`
+	CustomerId           int64    `protobuf:"varint,7,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -283,11 +283,11 @@ func (m *ConsumerWhere) GetCustomerId() int64 {
 }
 
 type ConsumerResponse struct {
-	Entity               *Consumer   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Consumer `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Consumer   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Consumer `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
@@ -359,7 +359,9 @@ func init() {
 	proto.RegisterType((*ConsumerResponse)(nil), "geiqin.srv.dms.ConsumerResponse")
 }
 
-func init() { proto.RegisterFile("consumer.proto", fileDescriptor_376dcb7dada8cc1b) }
+func init() {
+	proto.RegisterFile("consumer.proto", fileDescriptor_376dcb7dada8cc1b)
+}
 
 var fileDescriptor_376dcb7dada8cc1b = []byte{
 	// 663 bytes of a gzipped FileDescriptorProto

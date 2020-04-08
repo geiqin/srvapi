@@ -21,12 +21,12 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Wechat struct {
-	Signature            string   `protobuf:"bytes,1,opt,name=signature,proto3" json:"signature"`
-	Code                 string   `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
-	RawData              string   `protobuf:"bytes,3,opt,name=rawData,proto3" json:"rawData"`
-	EncryptedData        string   `protobuf:"bytes,4,opt,name=encryptedData,proto3" json:"encryptedData"`
-	Iv                   string   `protobuf:"bytes,5,opt,name=iv,proto3" json:"iv"`
-	Scene                string   `protobuf:"bytes,6,opt,name=scene,proto3" json:"scene"`
+	Signature            string   `protobuf:"bytes,1,opt,name=signature,proto3" json:"signature,omitempty"`
+	Code                 string   `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	RawData              string   `protobuf:"bytes,3,opt,name=rawData,proto3" json:"rawData,omitempty"`
+	EncryptedData        string   `protobuf:"bytes,4,opt,name=encryptedData,proto3" json:"encryptedData,omitempty"`
+	Iv                   string   `protobuf:"bytes,5,opt,name=iv,proto3" json:"iv,omitempty"`
+	Scene                string   `protobuf:"bytes,6,opt,name=scene,proto3" json:"scene,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -100,11 +100,11 @@ func (m *Wechat) GetScene() string {
 }
 
 type WechatResponse struct {
-	Entity               *Wechat   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Wechat `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Wechat   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Wechat `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -175,7 +175,9 @@ func init() {
 	proto.RegisterType((*WechatResponse)(nil), "geiqin.srv.sns.WechatResponse")
 }
 
-func init() { proto.RegisterFile("wechat.proto", fileDescriptor_e74b134486e7456c) }
+func init() {
+	proto.RegisterFile("wechat.proto", fileDescriptor_e74b134486e7456c)
+}
 
 var fileDescriptor_e74b134486e7456c = []byte{
 	// 434 bytes of a gzipped FileDescriptorProto

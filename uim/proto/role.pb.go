@@ -22,14 +22,14 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // 用户信息
 type Role struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	DisplayName          string   `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name"`
-	Memo                 string   `protobuf:"bytes,4,opt,name=memo,proto3" json:"memo"`
-	Level                int32    `protobuf:"varint,5,opt,name=level,proto3" json:"level"`
-	StoreId              int64    `protobuf:"varint,6,opt,name=store_id,json=storeId,proto3" json:"store_id"`
-	CreatedAt            string   `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string   `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName          string   `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Memo                 string   `protobuf:"bytes,4,opt,name=memo,proto3" json:"memo,omitempty"`
+	Level                int32    `protobuf:"varint,5,opt,name=level,proto3" json:"level,omitempty"`
+	StoreId              int64    `protobuf:"varint,6,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -117,11 +117,11 @@ func (m *Role) GetUpdatedAt() string {
 }
 
 type RoleResponse struct {
-	Entity               *Role    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Role  `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Role    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Role  `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -192,7 +192,9 @@ func init() {
 	proto.RegisterType((*RoleResponse)(nil), "geiqin.srv.uim.RoleResponse")
 }
 
-func init() { proto.RegisterFile("role.proto", fileDescriptor_48a3ff9f7c9032f8) }
+func init() {
+	proto.RegisterFile("role.proto", fileDescriptor_48a3ff9f7c9032f8)
+}
 
 var fileDescriptor_48a3ff9f7c9032f8 = []byte{
 	// 385 bytes of a gzipped FileDescriptorProto

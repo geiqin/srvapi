@@ -22,20 +22,20 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 // 用户信息
 type User struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	DisplayName          string   `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name"`
-	AvatarId             string   `protobuf:"bytes,4,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id"`
-	AvatarUrl            string   `protobuf:"bytes,5,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url"`
-	Password             string   `protobuf:"bytes,6,opt,name=password,proto3" json:"password"`
-	Email                string   `protobuf:"bytes,7,opt,name=email,proto3" json:"email"`
-	Mobile               string   `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile"`
-	Gender               string   `protobuf:"bytes,9,opt,name=gender,proto3" json:"gender"`
-	CreatedAt            string   `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string   `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Profile              *Profile `protobuf:"bytes,12,opt,name=profile,proto3" json:"profile"`
-	Roles                []*Role  `protobuf:"bytes,13,rep,name=roles,proto3" json:"roles" gorm:"many2many:user_roles;"`
-	Ids                  []int64  `protobuf:"varint,14,rep,packed,name=ids,proto3" json:"ids"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName          string   `protobuf:"bytes,3,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	AvatarId             string   `protobuf:"bytes,4,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id,omitempty"`
+	AvatarUrl            string   `protobuf:"bytes,5,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
+	Password             string   `protobuf:"bytes,6,opt,name=password,proto3" json:"password,omitempty"`
+	Email                string   `protobuf:"bytes,7,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile               string   `protobuf:"bytes,8,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Gender               string   `protobuf:"bytes,9,opt,name=gender,proto3" json:"gender,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Profile              *Profile `protobuf:"bytes,12,opt,name=profile,proto3" json:"profile,omitempty"`
+	Roles                []*Role  `protobuf:"bytes,13,rep,name=roles,proto3" json:"roles,omitempty"`
+	Ids                  []int64  `protobuf:"varint,14,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -166,15 +166,15 @@ func (m *User) GetIds() []int64 {
 
 // 用户信息
 type UserWhere struct {
-	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
-	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name"`
-	DisplayName          string   `protobuf:"bytes,5,opt,name=display_name,json=displayName,proto3" json:"display_name"`
-	Email                string   `protobuf:"bytes,6,opt,name=email,proto3" json:"email"`
-	Mobile               string   `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile"`
-	Gender               string   `protobuf:"bytes,8,opt,name=gender,proto3" json:"gender"`
-	Password             string   `protobuf:"bytes,9,opt,name=password,proto3" json:"password"`
+	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Name                 string   `protobuf:"bytes,4,opt,name=name,proto3" json:"name,omitempty"`
+	DisplayName          string   `protobuf:"bytes,5,opt,name=display_name,json=displayName,proto3" json:"display_name,omitempty"`
+	Email                string   `protobuf:"bytes,6,opt,name=email,proto3" json:"email,omitempty"`
+	Mobile               string   `protobuf:"bytes,7,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Gender               string   `protobuf:"bytes,8,opt,name=gender,proto3" json:"gender,omitempty"`
+	Password             string   `protobuf:"bytes,9,opt,name=password,proto3" json:"password,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -269,11 +269,11 @@ func (m *UserWhere) GetPassword() string {
 }
 
 type UserResponse struct {
-	Entity               *User    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*User  `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *User    `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*User  `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -345,7 +345,9 @@ func init() {
 	proto.RegisterType((*UserResponse)(nil), "geiqin.srv.uim.UserResponse")
 }
 
-func init() { proto.RegisterFile("user.proto", fileDescriptor_116e343673f7ffaf) }
+func init() {
+	proto.RegisterFile("user.proto", fileDescriptor_116e343673f7ffaf)
+}
 
 var fileDescriptor_116e343673f7ffaf = []byte{
 	// 600 bytes of a gzipped FileDescriptorProto

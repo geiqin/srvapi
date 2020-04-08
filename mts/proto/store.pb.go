@@ -21,28 +21,28 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Store struct {
-	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                 string       `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	LogoId               int64        `protobuf:"varint,3,opt,name=logo_id,json=logoId,proto3" json:"logo_id"`
-	LogoUrl              string       `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url"`
-	CreatorId            int64        `protobuf:"varint,6,opt,name=creator_id,json=creatorId,proto3" json:"creator_id"`
-	ApplicationId        int32        `protobuf:"varint,7,opt,name=application_id,json=applicationId,proto3" json:"application_id"`
-	Version              string       `protobuf:"bytes,8,opt,name=version,proto3" json:"version"`
-	Industry             int64        `protobuf:"varint,9,opt,name=industry,proto3" json:"industry"`
-	AreaId               int64        `protobuf:"varint,10,opt,name=area_id,json=areaId,proto3" json:"area_id"`
-	Address              string       `protobuf:"bytes,11,opt,name=address,proto3" json:"address"`
-	Lng                  string       `protobuf:"bytes,12,opt,name=lng,proto3" json:"lng"`
-	Lat                  string       `protobuf:"bytes,13,opt,name=lat,proto3" json:"lat"`
-	CustomDomain         string       `protobuf:"bytes,14,opt,name=custom_domain,json=customDomain,proto3" json:"custom_domain"`
-	Status               string       `protobuf:"bytes,15,opt,name=status,proto3" json:"status"`
-	Enabled              bool         `protobuf:"varint,16,opt,name=enabled,proto3" json:"enabled"`
-	Trusted              bool         `protobuf:"varint,17,opt,name=trusted,proto3" json:"trusted"`
-	StartedAt            string       `protobuf:"bytes,18,opt,name=started_at,json=startedAt,proto3" json:"started_at"`
-	ExpiredAt            string       `protobuf:"bytes,19,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at"`
-	CreatedAt            string       `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string       `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Application          *Application `protobuf:"bytes,22,opt,name=application,proto3" json:"application"`
-	Ids                  []int64      `protobuf:"varint,23,rep,packed,name=ids,proto3" json:"ids"`
+	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string       `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	LogoId               int64        `protobuf:"varint,3,opt,name=logo_id,json=logoId,proto3" json:"logo_id,omitempty"`
+	LogoUrl              string       `protobuf:"bytes,4,opt,name=logo_url,json=logoUrl,proto3" json:"logo_url,omitempty"`
+	CreatorId            int64        `protobuf:"varint,6,opt,name=creator_id,json=creatorId,proto3" json:"creator_id,omitempty"`
+	ApplicationId        int32        `protobuf:"varint,7,opt,name=application_id,json=applicationId,proto3" json:"application_id,omitempty"`
+	Version              string       `protobuf:"bytes,8,opt,name=version,proto3" json:"version,omitempty"`
+	Industry             int64        `protobuf:"varint,9,opt,name=industry,proto3" json:"industry,omitempty"`
+	AreaId               int64        `protobuf:"varint,10,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
+	Address              string       `protobuf:"bytes,11,opt,name=address,proto3" json:"address,omitempty"`
+	Lng                  string       `protobuf:"bytes,12,opt,name=lng,proto3" json:"lng,omitempty"`
+	Lat                  string       `protobuf:"bytes,13,opt,name=lat,proto3" json:"lat,omitempty"`
+	CustomDomain         string       `protobuf:"bytes,14,opt,name=custom_domain,json=customDomain,proto3" json:"custom_domain,omitempty"`
+	Status               string       `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"`
+	Enabled              bool         `protobuf:"varint,16,opt,name=enabled,proto3" json:"enabled,omitempty"`
+	Trusted              bool         `protobuf:"varint,17,opt,name=trusted,proto3" json:"trusted,omitempty"`
+	StartedAt            string       `protobuf:"bytes,18,opt,name=started_at,json=startedAt,proto3" json:"started_at,omitempty"`
+	ExpiredAt            string       `protobuf:"bytes,19,opt,name=expired_at,json=expiredAt,proto3" json:"expired_at,omitempty"`
+	CreatedAt            string       `protobuf:"bytes,20,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string       `protobuf:"bytes,21,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Application          *Application `protobuf:"bytes,22,opt,name=application,proto3" json:"application,omitempty"`
+	Ids                  []int64      `protobuf:"varint,23,rep,packed,name=ids,proto3" json:"ids,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -228,8 +228,8 @@ func (m *Store) GetIds() []int64 {
 }
 
 type StoreSecret struct {
-	StoreKey             string   `protobuf:"bytes,1,opt,name=store_key,json=storeKey,proto3" json:"store_key"`
-	StoreSecret          string   `protobuf:"bytes,2,opt,name=store_secret,json=storeSecret,proto3" json:"store_secret"`
+	StoreKey             string   `protobuf:"bytes,1,opt,name=store_key,json=storeKey,proto3" json:"store_key,omitempty"`
+	StoreSecret          string   `protobuf:"bytes,2,opt,name=store_secret,json=storeSecret,proto3" json:"store_secret,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -276,11 +276,11 @@ func (m *StoreSecret) GetStoreSecret() string {
 
 //
 type StoreResponse struct {
-	Entity               *Store   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Store `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Store   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Store `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -352,7 +352,9 @@ func init() {
 	proto.RegisterType((*StoreResponse)(nil), "geiqin.srv.mts.StoreResponse")
 }
 
-func init() { proto.RegisterFile("store.proto", fileDescriptor_98bbca36ef968dfc) }
+func init() {
+	proto.RegisterFile("store.proto", fileDescriptor_98bbca36ef968dfc)
+}
 
 var fileDescriptor_98bbca36ef968dfc = []byte{
 	// 668 bytes of a gzipped FileDescriptorProto

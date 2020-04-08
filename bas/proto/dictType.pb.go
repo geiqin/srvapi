@@ -22,11 +22,11 @@ const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 //字段类型
 type DictType struct {
-	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	Title                string   `protobuf:"bytes,3,opt,name=title,proto3" json:"title"`
-	Editable             bool     `protobuf:"varint,4,opt,name=editable,proto3" json:"editable"`
-	Dicts                []*Dict  `protobuf:"bytes,5,rep,name=dicts,proto3" json:"dicts"`
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Title                string   `protobuf:"bytes,3,opt,name=title,proto3" json:"title,omitempty"`
+	Editable             bool     `protobuf:"varint,4,opt,name=editable,proto3" json:"editable,omitempty"`
+	Dicts                []*Dict  `protobuf:"bytes,5,rep,name=dicts,proto3" json:"dicts,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -93,7 +93,7 @@ func (m *DictType) GetDicts() []*Dict {
 }
 
 type DictTypeRequest struct {
-	Types                []string `protobuf:"bytes,1,rep,name=types,proto3" json:"types"`
+	Types                []string `protobuf:"bytes,1,rep,name=types,proto3" json:"types,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -132,11 +132,11 @@ func (m *DictTypeRequest) GetTypes() []string {
 }
 
 type DictTypeResponse struct {
-	Entity               *DictType   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*DictType `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *DictType   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*DictType `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
@@ -208,7 +208,9 @@ func init() {
 	proto.RegisterType((*DictTypeResponse)(nil), "geiqin.srv.bas.DictTypeResponse")
 }
 
-func init() { proto.RegisterFile("dictType.proto", fileDescriptor_25937c3ebe87c716) }
+func init() {
+	proto.RegisterFile("dictType.proto", fileDescriptor_25937c3ebe87c716)
+}
 
 var fileDescriptor_25937c3ebe87c716 = []byte{
 	// 367 bytes of a gzipped FileDescriptorProto

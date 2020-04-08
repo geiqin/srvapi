@@ -21,14 +21,14 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Statement struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	SourceId             int64    `protobuf:"varint,2,opt,name=source_id,json=sourceId,proto3" json:"source_id"`
-	DistributorId        int64    `protobuf:"varint,3,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id"`
-	Money                float32  `protobuf:"fixed32,4,opt,name=money,proto3" json:"money"`
-	Source               string   `protobuf:"bytes,5,opt,name=source,proto3" json:"source"`
-	Type                 string   `protobuf:"bytes,6,opt,name=type,proto3" json:"type"`
-	CreatedAt            string   `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string   `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	SourceId             int64    `protobuf:"varint,2,opt,name=source_id,json=sourceId,proto3" json:"source_id,omitempty"`
+	DistributorId        int64    `protobuf:"varint,3,opt,name=distributor_id,json=distributorId,proto3" json:"distributor_id,omitempty"`
+	Money                float32  `protobuf:"fixed32,4,opt,name=money,proto3" json:"money,omitempty"`
+	Source               string   `protobuf:"bytes,5,opt,name=source,proto3" json:"source,omitempty"`
+	Type                 string   `protobuf:"bytes,6,opt,name=type,proto3" json:"type,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,7,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,8,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -116,11 +116,11 @@ func (m *Statement) GetUpdatedAt() string {
 }
 
 type StatementResponse struct {
-	Entity               *Statement   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager       `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Statement `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error       `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info        `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Statement   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager       `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Statement `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error       `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info        `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -191,7 +191,9 @@ func init() {
 	proto.RegisterType((*StatementResponse)(nil), "geiqin.srv.dms.StatementResponse")
 }
 
-func init() { proto.RegisterFile("statement.proto", fileDescriptor_4430318ac3171d1a) }
+func init() {
+	proto.RegisterFile("statement.proto", fileDescriptor_4430318ac3171d1a)
+}
 
 var fileDescriptor_4430318ac3171d1a = []byte{
 	// 383 bytes of a gzipped FileDescriptorProto

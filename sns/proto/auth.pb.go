@@ -21,12 +21,12 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type WxMiniLogin struct {
-	Signature            string   `protobuf:"bytes,1,opt,name=signature,proto3" json:"signature"`
-	Code                 string   `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
-	RawData              string   `protobuf:"bytes,3,opt,name=rawData,proto3" json:"rawData"`
-	EncryptedData        string   `protobuf:"bytes,4,opt,name=encryptedData,proto3" json:"encryptedData"`
-	Iv                   string   `protobuf:"bytes,5,opt,name=iv,proto3" json:"iv"`
-	Scene                string   `protobuf:"bytes,6,opt,name=scene,proto3" json:"scene"`
+	Signature            string   `protobuf:"bytes,1,opt,name=signature,proto3" json:"signature,omitempty"`
+	Code                 string   `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	RawData              string   `protobuf:"bytes,3,opt,name=rawData,proto3" json:"rawData,omitempty"`
+	EncryptedData        string   `protobuf:"bytes,4,opt,name=encryptedData,proto3" json:"encryptedData,omitempty"`
+	Iv                   string   `protobuf:"bytes,5,opt,name=iv,proto3" json:"iv,omitempty"`
+	Scene                string   `protobuf:"bytes,6,opt,name=scene,proto3" json:"scene,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -100,8 +100,8 @@ func (m *WxMiniLogin) GetScene() string {
 }
 
 type AlipayLogin struct {
-	Signature            string   `protobuf:"bytes,1,opt,name=signature,proto3" json:"signature"`
-	Code                 string   `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
+	Signature            string   `protobuf:"bytes,1,opt,name=signature,proto3" json:"signature,omitempty"`
+	Code                 string   `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -151,7 +151,9 @@ func init() {
 	proto.RegisterType((*AlipayLogin)(nil), "geiqin.srv.sns.AlipayLogin")
 }
 
-func init() { proto.RegisterFile("auth.proto", fileDescriptor_8bbd6f3875b0e874) }
+func init() {
+	proto.RegisterFile("auth.proto", fileDescriptor_8bbd6f3875b0e874)
+}
 
 var fileDescriptor_8bbd6f3875b0e874 = []byte{
 	// 252 bytes of a gzipped FileDescriptorProto

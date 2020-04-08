@@ -21,22 +21,22 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Supplier struct {
-	Id                   int64              `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Code                 string             `protobuf:"bytes,2,opt,name=code,proto3" json:"code"`
-	Name                 string             `protobuf:"bytes,3,opt,name=name,proto3" json:"name"`
-	Shortname            string             `protobuf:"bytes,4,opt,name=shortname,proto3" json:"shortname"`
-	RegistedCode         string             `protobuf:"bytes,5,opt,name=registed_code,json=registedCode,proto3" json:"registed_code"`
-	SupplyType           string             `protobuf:"bytes,6,opt,name=supply_type,json=supplyType,proto3" json:"supply_type"`
-	LogisticsType        int32              `protobuf:"varint,7,opt,name=logistics_type,json=logisticsType,proto3" json:"logistics_type"`
-	Website              string             `protobuf:"bytes,8,opt,name=website,proto3" json:"website"`
-	AreaId               int64              `protobuf:"varint,9,opt,name=area_id,json=areaId,proto3" json:"area_id"`
-	Address              string             `protobuf:"bytes,10,opt,name=address,proto3" json:"address"`
-	Memo                 string             `protobuf:"bytes,11,opt,name=memo,proto3" json:"memo"`
-	Verified             bool               `protobuf:"varint,12,opt,name=verified,proto3" json:"verified"`
-	Status               string             `protobuf:"bytes,13,opt,name=status,proto3" json:"status"`
-	CreatedAt            string             `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string             `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Contacts             []*SupplierContact `protobuf:"bytes,16,rep,name=contacts,proto3" json:"contacts"`
+	Id                   int64              `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Code                 string             `protobuf:"bytes,2,opt,name=code,proto3" json:"code,omitempty"`
+	Name                 string             `protobuf:"bytes,3,opt,name=name,proto3" json:"name,omitempty"`
+	Shortname            string             `protobuf:"bytes,4,opt,name=shortname,proto3" json:"shortname,omitempty"`
+	RegistedCode         string             `protobuf:"bytes,5,opt,name=registed_code,json=registedCode,proto3" json:"registed_code,omitempty"`
+	SupplyType           string             `protobuf:"bytes,6,opt,name=supply_type,json=supplyType,proto3" json:"supply_type,omitempty"`
+	LogisticsType        int32              `protobuf:"varint,7,opt,name=logistics_type,json=logisticsType,proto3" json:"logistics_type,omitempty"`
+	Website              string             `protobuf:"bytes,8,opt,name=website,proto3" json:"website,omitempty"`
+	AreaId               int64              `protobuf:"varint,9,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
+	Address              string             `protobuf:"bytes,10,opt,name=address,proto3" json:"address,omitempty"`
+	Memo                 string             `protobuf:"bytes,11,opt,name=memo,proto3" json:"memo,omitempty"`
+	Verified             bool               `protobuf:"varint,12,opt,name=verified,proto3" json:"verified,omitempty"`
+	Status               string             `protobuf:"bytes,13,opt,name=status,proto3" json:"status,omitempty"`
+	CreatedAt            string             `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string             `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Contacts             []*SupplierContact `protobuf:"bytes,16,rep,name=contacts,proto3" json:"contacts,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}           `json:"-"`
 	XXX_unrecognized     []byte             `json:"-"`
 	XXX_sizecache        int32              `json:"-"`
@@ -180,16 +180,16 @@ func (m *Supplier) GetContacts() []*SupplierContact {
 }
 
 type SupplierWhere struct {
-	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
-	Code                 string   `protobuf:"bytes,4,opt,name=code,proto3" json:"code"`
-	Name                 string   `protobuf:"bytes,5,opt,name=name,proto3" json:"name"`
-	Shortname            string   `protobuf:"bytes,6,opt,name=shortname,proto3" json:"shortname"`
-	RegistedCode         string   `protobuf:"bytes,7,opt,name=registed_code,json=registedCode,proto3" json:"registed_code"`
-	SupplyType           string   `protobuf:"bytes,8,opt,name=supply_type,json=supplyType,proto3" json:"supply_type"`
-	AreaId               int64    `protobuf:"varint,9,opt,name=area_id,json=areaId,proto3" json:"area_id"`
-	Status               string   `protobuf:"bytes,10,opt,name=status,proto3" json:"status"`
+	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Code                 string   `protobuf:"bytes,4,opt,name=code,proto3" json:"code,omitempty"`
+	Name                 string   `protobuf:"bytes,5,opt,name=name,proto3" json:"name,omitempty"`
+	Shortname            string   `protobuf:"bytes,6,opt,name=shortname,proto3" json:"shortname,omitempty"`
+	RegistedCode         string   `protobuf:"bytes,7,opt,name=registed_code,json=registedCode,proto3" json:"registed_code,omitempty"`
+	SupplyType           string   `protobuf:"bytes,8,opt,name=supply_type,json=supplyType,proto3" json:"supply_type,omitempty"`
+	AreaId               int64    `protobuf:"varint,9,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
+	Status               string   `protobuf:"bytes,10,opt,name=status,proto3" json:"status,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -291,11 +291,11 @@ func (m *SupplierWhere) GetStatus() string {
 }
 
 type SupplierResponse struct {
-	Entity               *Supplier   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Supplier `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Supplier   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager      `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Supplier `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error      `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info       `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}    `json:"-"`
 	XXX_unrecognized     []byte      `json:"-"`
 	XXX_sizecache        int32       `json:"-"`
@@ -367,7 +367,9 @@ func init() {
 	proto.RegisterType((*SupplierResponse)(nil), "geiqin.srv.wms.SupplierResponse")
 }
 
-func init() { proto.RegisterFile("supplier.proto", fileDescriptor_86038919225469b2) }
+func init() {
+	proto.RegisterFile("supplier.proto", fileDescriptor_86038919225469b2)
+}
 
 var fileDescriptor_86038919225469b2 = []byte{
 	// 592 bytes of a gzipped FileDescriptorProto

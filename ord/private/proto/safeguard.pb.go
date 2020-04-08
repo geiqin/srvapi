@@ -21,36 +21,36 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Safeguard struct {
-	Id                   int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	OrderId              int64                   `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	Type                 string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type"`
-	SafeguardSn          string                  `protobuf:"bytes,4,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn"`
-	CustomerId           int64                   `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	ExchangeDeliveryId   int64                   `protobuf:"varint,6,opt,name=exchange_delivery_id,json=exchangeDeliveryId,proto3" json:"exchange_delivery_id"`
-	ExpressName          string                  `protobuf:"bytes,7,opt,name=express_name,json=expressName,proto3" json:"express_name"`
-	ExpressNo            string                  `protobuf:"bytes,8,opt,name=express_no,json=expressNo,proto3" json:"express_no"`
-	ExpressCode          string                  `protobuf:"bytes,9,opt,name=express_code,json=expressCode,proto3" json:"express_code"`
-	Mobile               string                  `protobuf:"bytes,10,opt,name=mobile,proto3" json:"mobile"`
-	Refunded             bool                    `protobuf:"varint,11,opt,name=refunded,proto3" json:"refunded"`
-	RefundFee            float32                 `protobuf:"fixed32,12,opt,name=refund_fee,json=refundFee,proto3" json:"refund_fee"`
-	RefundMethod         string                  `protobuf:"bytes,13,opt,name=refund_method,json=refundMethod,proto3" json:"refund_method"`
-	CheckStatus          string                  `protobuf:"bytes,142,opt,name=check_status,json=checkStatus,proto3" json:"check_status"`
-	Status               string                  `protobuf:"bytes,15,opt,name=status,proto3" json:"status"`
-	Reason               string                  `protobuf:"bytes,16,opt,name=reason,proto3" json:"reason"`
-	Description          string                  `protobuf:"bytes,17,opt,name=description,proto3" json:"description"`
-	OpId                 int64                   `protobuf:"varint,18,opt,name=op_id,json=opId,proto3" json:"op_id"`
-	OpName               string                  `protobuf:"bytes,19,opt,name=op_name,json=opName,proto3" json:"op_name"`
-	Memo                 string                  `protobuf:"bytes,20,opt,name=memo,proto3" json:"memo"`
-	GoodsStatus          string                  `protobuf:"bytes,21,opt,name=goods_status,json=goodsStatus,proto3" json:"goods_status"`
-	RefundedAt           string                  `protobuf:"bytes,22,opt,name=refunded_at,json=refundedAt,proto3" json:"refunded_at"`
-	Metadata             string                  `protobuf:"bytes,23,opt,name=metadata,proto3" json:"metadata"`
-	CheckedAt            string                  `protobuf:"bytes,24,opt,name=checked_at,json=checkedAt,proto3" json:"checked_at"`
-	CreatedAt            string                  `protobuf:"bytes,25,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string                  `protobuf:"bytes,26,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
-	Details              []*SafeguardDetail      `protobuf:"bytes,27,rep,name=details,proto3" json:"details"`
-	Images               []*SafeguardImage       `protobuf:"bytes,28,rep,name=images,proto3" json:"images"`
-	Address              *SafeguardAddress       `protobuf:"bytes,29,opt,name=address,proto3" json:"address"`
-	ReturnExpress        *SafeguardReturnExpress `protobuf:"bytes,30,opt,name=return_express,json=returnExpress,proto3" json:"return_express"`
+	Id                   int64                   `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	OrderId              int64                   `protobuf:"varint,2,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	Type                 string                  `protobuf:"bytes,3,opt,name=type,proto3" json:"type,omitempty"`
+	SafeguardSn          string                  `protobuf:"bytes,4,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn,omitempty"`
+	CustomerId           int64                   `protobuf:"varint,5,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	ExchangeDeliveryId   int64                   `protobuf:"varint,6,opt,name=exchange_delivery_id,json=exchangeDeliveryId,proto3" json:"exchange_delivery_id,omitempty"`
+	ExpressName          string                  `protobuf:"bytes,7,opt,name=express_name,json=expressName,proto3" json:"express_name,omitempty"`
+	ExpressNo            string                  `protobuf:"bytes,8,opt,name=express_no,json=expressNo,proto3" json:"express_no,omitempty"`
+	ExpressCode          string                  `protobuf:"bytes,9,opt,name=express_code,json=expressCode,proto3" json:"express_code,omitempty"`
+	Mobile               string                  `protobuf:"bytes,10,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Refunded             bool                    `protobuf:"varint,11,opt,name=refunded,proto3" json:"refunded,omitempty"`
+	RefundFee            float32                 `protobuf:"fixed32,12,opt,name=refund_fee,json=refundFee,proto3" json:"refund_fee,omitempty"`
+	RefundMethod         string                  `protobuf:"bytes,13,opt,name=refund_method,json=refundMethod,proto3" json:"refund_method,omitempty"`
+	CheckStatus          string                  `protobuf:"bytes,142,opt,name=check_status,json=checkStatus,proto3" json:"check_status,omitempty"`
+	Status               string                  `protobuf:"bytes,15,opt,name=status,proto3" json:"status,omitempty"`
+	Reason               string                  `protobuf:"bytes,16,opt,name=reason,proto3" json:"reason,omitempty"`
+	Description          string                  `protobuf:"bytes,17,opt,name=description,proto3" json:"description,omitempty"`
+	OpId                 int64                   `protobuf:"varint,18,opt,name=op_id,json=opId,proto3" json:"op_id,omitempty"`
+	OpName               string                  `protobuf:"bytes,19,opt,name=op_name,json=opName,proto3" json:"op_name,omitempty"`
+	Memo                 string                  `protobuf:"bytes,20,opt,name=memo,proto3" json:"memo,omitempty"`
+	GoodsStatus          string                  `protobuf:"bytes,21,opt,name=goods_status,json=goodsStatus,proto3" json:"goods_status,omitempty"`
+	RefundedAt           string                  `protobuf:"bytes,22,opt,name=refunded_at,json=refundedAt,proto3" json:"refunded_at,omitempty"`
+	Metadata             string                  `protobuf:"bytes,23,opt,name=metadata,proto3" json:"metadata,omitempty"`
+	CheckedAt            string                  `protobuf:"bytes,24,opt,name=checked_at,json=checkedAt,proto3" json:"checked_at,omitempty"`
+	CreatedAt            string                  `protobuf:"bytes,25,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string                  `protobuf:"bytes,26,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	Details              []*SafeguardDetail      `protobuf:"bytes,27,rep,name=details,proto3" json:"details,omitempty"`
+	Images               []*SafeguardImage       `protobuf:"bytes,28,rep,name=images,proto3" json:"images,omitempty"`
+	Address              *SafeguardAddress       `protobuf:"bytes,29,opt,name=address,proto3" json:"address,omitempty"`
+	ReturnExpress        *SafeguardReturnExpress `protobuf:"bytes,30,opt,name=return_express,json=returnExpress,proto3" json:"return_express,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
 	XXX_unrecognized     []byte                  `json:"-"`
 	XXX_sizecache        int32                   `json:"-"`
@@ -292,13 +292,13 @@ func (m *Safeguard) GetReturnExpress() *SafeguardReturnExpress {
 }
 
 type SafeguardDetail struct {
-	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	SafeguardId          int64        `protobuf:"varint,2,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id"`
-	OrderDetailId        int64        `protobuf:"varint,3,opt,name=order_detail_id,json=orderDetailId,proto3" json:"order_detail_id"`
-	ItemId               int64        `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id"`
-	SkuId                int64        `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id"`
-	Num                  int32        `protobuf:"varint,6,opt,name=num,proto3" json:"num"`
-	Detail               *OrderDetail `protobuf:"bytes,7,opt,name=detail,proto3" json:"detail"`
+	Id                   int64        `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	SafeguardId          int64        `protobuf:"varint,2,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id,omitempty"`
+	OrderDetailId        int64        `protobuf:"varint,3,opt,name=order_detail_id,json=orderDetailId,proto3" json:"order_detail_id,omitempty"`
+	ItemId               int64        `protobuf:"varint,4,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	SkuId                int64        `protobuf:"varint,5,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	Num                  int32        `protobuf:"varint,6,opt,name=num,proto3" json:"num,omitempty"`
+	Detail               *OrderDetail `protobuf:"bytes,7,opt,name=detail,proto3" json:"detail,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -379,10 +379,10 @@ func (m *SafeguardDetail) GetDetail() *OrderDetail {
 }
 
 type SafeguardImage struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	SafeguardId          int64    `protobuf:"varint,2,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id"`
-	ImageId              int64    `protobuf:"varint,3,opt,name=image_id,json=imageId,proto3" json:"image_id"`
-	ImageUrl             string   `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	SafeguardId          int64    `protobuf:"varint,2,opt,name=safeguard_id,json=safeguardId,proto3" json:"safeguard_id,omitempty"`
+	ImageId              int64    `protobuf:"varint,3,opt,name=image_id,json=imageId,proto3" json:"image_id,omitempty"`
+	ImageUrl             string   `protobuf:"bytes,4,opt,name=image_url,json=imageUrl,proto3" json:"image_url,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -443,11 +443,11 @@ func (m *SafeguardImage) GetImageUrl() string {
 
 // 维权收货人地址
 type SafeguardAddress struct {
-	Name                 string    `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
-	AreaId               int64     `protobuf:"varint,2,opt,name=area_id,json=areaId,proto3" json:"area_id"`
-	Addr                 string    `protobuf:"bytes,3,opt,name=addr,proto3" json:"addr"`
-	Mobile               string    `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile"`
-	Area                 *AreaInfo `protobuf:"bytes,5,opt,name=area,proto3" json:"area"`
+	Name                 string    `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	AreaId               int64     `protobuf:"varint,2,opt,name=area_id,json=areaId,proto3" json:"area_id,omitempty"`
+	Addr                 string    `protobuf:"bytes,3,opt,name=addr,proto3" json:"addr,omitempty"`
+	Mobile               string    `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Area                 *AreaInfo `protobuf:"bytes,5,opt,name=area,proto3" json:"area,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -515,11 +515,11 @@ func (m *SafeguardAddress) GetArea() *AreaInfo {
 
 // 买家退货填写的退货物流信息
 type SafeguardReturnExpress struct {
-	ExpressName          string            `protobuf:"bytes,1,opt,name=express_name,json=expressName,proto3" json:"express_name"`
-	ExpressNo            string            `protobuf:"bytes,2,opt,name=express_no,json=expressNo,proto3" json:"express_no"`
-	ExpressCode          string            `protobuf:"bytes,3,opt,name=express_code,json=expressCode,proto3" json:"express_code"`
-	Mobile               string            `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile"`
-	Images               []*SafeguardImage `protobuf:"bytes,5,rep,name=images,proto3" json:"images"`
+	ExpressName          string            `protobuf:"bytes,1,opt,name=express_name,json=expressName,proto3" json:"express_name,omitempty"`
+	ExpressNo            string            `protobuf:"bytes,2,opt,name=express_no,json=expressNo,proto3" json:"express_no,omitempty"`
+	ExpressCode          string            `protobuf:"bytes,3,opt,name=express_code,json=expressCode,proto3" json:"express_code,omitempty"`
+	Mobile               string            `protobuf:"bytes,4,opt,name=mobile,proto3" json:"mobile,omitempty"`
+	Images               []*SafeguardImage `protobuf:"bytes,5,rep,name=images,proto3" json:"images,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -586,8 +586,8 @@ func (m *SafeguardReturnExpress) GetImages() []*SafeguardImage {
 }
 
 type SafeguardMetadata struct {
-	Address              *SafeguardAddress       `protobuf:"bytes,1,opt,name=address,proto3" json:"address"`
-	ReturnExpress        *SafeguardReturnExpress `protobuf:"bytes,2,opt,name=return_express,json=returnExpress,proto3" json:"return_express"`
+	Address              *SafeguardAddress       `protobuf:"bytes,1,opt,name=address,proto3" json:"address,omitempty"`
+	ReturnExpress        *SafeguardReturnExpress `protobuf:"bytes,2,opt,name=return_express,json=returnExpress,proto3" json:"return_express,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}                `json:"-"`
 	XXX_unrecognized     []byte                  `json:"-"`
 	XXX_sizecache        int32                   `json:"-"`
@@ -633,19 +633,19 @@ func (m *SafeguardMetadata) GetReturnExpress() *SafeguardReturnExpress {
 }
 
 type SafeguardWhere struct {
-	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged"`
-	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size"`
-	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting"`
-	Id                   int64    `protobuf:"varint,4,opt,name=id,proto3" json:"id"`
-	Ids                  []int64  `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids"`
-	OrderId              int64    `protobuf:"varint,6,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	CustomerId           int64    `protobuf:"varint,7,opt,name=customer_id,json=customerId,proto3" json:"customer_id"`
-	Type                 string   `protobuf:"bytes,8,opt,name=type,proto3" json:"type"`
-	KeywordsType         string   `protobuf:"bytes,9,opt,name=keywords_type,json=keywordsType,proto3" json:"keywords_type"`
-	Keywords             string   `protobuf:"bytes,10,opt,name=keywords,proto3" json:"keywords"`
-	OrderDetailIds       []int64  `protobuf:"varint,11,rep,packed,name=order_detail_ids,json=orderDetailIds,proto3" json:"order_detail_ids"`
-	Status               string   `protobuf:"bytes,12,opt,name=status,proto3" json:"status"`
-	SafeguardSn          string   `protobuf:"bytes,13,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn"`
+	Paged                int32    `protobuf:"varint,1,opt,name=paged,proto3" json:"paged,omitempty"`
+	PageSize             int32    `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	Sorting              string   `protobuf:"bytes,3,opt,name=sorting,proto3" json:"sorting,omitempty"`
+	Id                   int64    `protobuf:"varint,4,opt,name=id,proto3" json:"id,omitempty"`
+	Ids                  []int64  `protobuf:"varint,5,rep,packed,name=ids,proto3" json:"ids,omitempty"`
+	OrderId              int64    `protobuf:"varint,6,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	CustomerId           int64    `protobuf:"varint,7,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	Type                 string   `protobuf:"bytes,8,opt,name=type,proto3" json:"type,omitempty"`
+	KeywordsType         string   `protobuf:"bytes,9,opt,name=keywords_type,json=keywordsType,proto3" json:"keywords_type,omitempty"`
+	Keywords             string   `protobuf:"bytes,10,opt,name=keywords,proto3" json:"keywords,omitempty"`
+	OrderDetailIds       []int64  `protobuf:"varint,11,rep,packed,name=order_detail_ids,json=orderDetailIds,proto3" json:"order_detail_ids,omitempty"`
+	Status               string   `protobuf:"bytes,12,opt,name=status,proto3" json:"status,omitempty"`
+	SafeguardSn          string   `protobuf:"bytes,13,opt,name=safeguard_sn,json=safeguardSn,proto3" json:"safeguard_sn,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -768,15 +768,15 @@ func (m *SafeguardWhere) GetSafeguardSn() string {
 }
 
 type SafeguardType struct {
-	OrderId              int64             `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id"`
-	IsRefund             bool              `protobuf:"varint,2,opt,name=is_refund,json=isRefund,proto3" json:"is_refund"`
-	IsReturn             bool              `protobuf:"varint,3,opt,name=is_return,json=isReturn,proto3" json:"is_return"`
-	IsExchange           bool              `protobuf:"varint,4,opt,name=is_exchange,json=isExchange,proto3" json:"is_exchange"`
-	IsRepair             bool              `protobuf:"varint,5,opt,name=is_repair,json=isRepair,proto3" json:"is_repair"`
-	MaxRefundPrice       float32           `protobuf:"fixed32,6,opt,name=max_refund_price,json=maxRefundPrice,proto3" json:"max_refund_price"`
-	ExpressFee           float32           `protobuf:"fixed32,7,opt,name=express_fee,json=expressFee,proto3" json:"express_fee"`
-	Address              *SafeguardAddress `protobuf:"bytes,8,opt,name=address,proto3" json:"address"`
-	Details              []*OrderDetail    `protobuf:"bytes,9,rep,name=details,proto3" json:"details"`
+	OrderId              int64             `protobuf:"varint,1,opt,name=order_id,json=orderId,proto3" json:"order_id,omitempty"`
+	IsRefund             bool              `protobuf:"varint,2,opt,name=is_refund,json=isRefund,proto3" json:"is_refund,omitempty"`
+	IsReturn             bool              `protobuf:"varint,3,opt,name=is_return,json=isReturn,proto3" json:"is_return,omitempty"`
+	IsExchange           bool              `protobuf:"varint,4,opt,name=is_exchange,json=isExchange,proto3" json:"is_exchange,omitempty"`
+	IsRepair             bool              `protobuf:"varint,5,opt,name=is_repair,json=isRepair,proto3" json:"is_repair,omitempty"`
+	MaxRefundPrice       float32           `protobuf:"fixed32,6,opt,name=max_refund_price,json=maxRefundPrice,proto3" json:"max_refund_price,omitempty"`
+	ExpressFee           float32           `protobuf:"fixed32,7,opt,name=express_fee,json=expressFee,proto3" json:"express_fee,omitempty"`
+	Address              *SafeguardAddress `protobuf:"bytes,8,opt,name=address,proto3" json:"address,omitempty"`
+	Details              []*OrderDetail    `protobuf:"bytes,9,rep,name=details,proto3" json:"details,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}          `json:"-"`
 	XXX_unrecognized     []byte            `json:"-"`
 	XXX_sizecache        int32             `json:"-"`
@@ -871,11 +871,11 @@ func (m *SafeguardType) GetDetails() []*OrderDetail {
 }
 
 type SafeguardResponse struct {
-	Entity               *Safeguard   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager       `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Safeguard `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error       `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info        `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Safeguard   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager       `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Safeguard `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error       `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info        `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`
@@ -942,11 +942,11 @@ func (m *SafeguardResponse) GetInfo() *Info {
 }
 
 type SafeguardTypeResponse struct {
-	Entity               *SafeguardType   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager           `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*SafeguardType `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error           `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info            `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *SafeguardType   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager           `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*SafeguardType `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error           `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info            `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
 	XXX_unrecognized     []byte           `json:"-"`
 	XXX_sizecache        int32            `json:"-"`
@@ -1025,7 +1025,9 @@ func init() {
 	proto.RegisterType((*SafeguardTypeResponse)(nil), "geiqin.srv.ord.private.SafeguardTypeResponse")
 }
 
-func init() { proto.RegisterFile("safeguard.proto", fileDescriptor_a3d93130ef4c1d08) }
+func init() {
+	proto.RegisterFile("safeguard.proto", fileDescriptor_a3d93130ef4c1d08)
+}
 
 var fileDescriptor_a3d93130ef4c1d08 = []byte{
 	// 1380 bytes of a gzipped FileDescriptorProto

@@ -21,19 +21,19 @@ var _ = math.Inf
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
 type Snsapp struct {
-	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name"`
-	Channel              string   `protobuf:"bytes,3,opt,name=channel,proto3" json:"channel"`
-	StoreId              int64    `protobuf:"varint,4,opt,name=store_id,json=storeId,proto3" json:"store_id"`
-	AppId                string   `protobuf:"bytes,5,opt,name=app_id,json=appId,proto3" json:"app_id"`
-	AppSecret            string   `protobuf:"bytes,6,opt,name=app_secret,json=appSecret,proto3" json:"app_secret"`
-	Scope                string   `protobuf:"bytes,7,opt,name=scope,proto3" json:"scope"`
-	PemPrivate           string   `protobuf:"bytes,8,opt,name=pem_private,json=pemPrivate,proto3" json:"pem_private"`
-	PemPublic            string   `protobuf:"bytes,9,opt,name=pem_public,json=pemPublic,proto3" json:"pem_public"`
-	Configs              string   `protobuf:"bytes,10,opt,name=configs,proto3" json:"configs"`
-	Disabled             bool     `protobuf:"varint,11,opt,name=disabled,proto3" json:"disabled"`
-	CreatedAt            string   `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at"`
-	UpdatedAt            string   `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Channel              string   `protobuf:"bytes,3,opt,name=channel,proto3" json:"channel,omitempty"`
+	StoreId              int64    `protobuf:"varint,4,opt,name=store_id,json=storeId,proto3" json:"store_id,omitempty"`
+	AppId                string   `protobuf:"bytes,5,opt,name=app_id,json=appId,proto3" json:"app_id,omitempty"`
+	AppSecret            string   `protobuf:"bytes,6,opt,name=app_secret,json=appSecret,proto3" json:"app_secret,omitempty"`
+	Scope                string   `protobuf:"bytes,7,opt,name=scope,proto3" json:"scope,omitempty"`
+	PemPrivate           string   `protobuf:"bytes,8,opt,name=pem_private,json=pemPrivate,proto3" json:"pem_private,omitempty"`
+	PemPublic            string   `protobuf:"bytes,9,opt,name=pem_public,json=pemPublic,proto3" json:"pem_public,omitempty"`
+	Configs              string   `protobuf:"bytes,10,opt,name=configs,proto3" json:"configs,omitempty"`
+	Disabled             bool     `protobuf:"varint,11,opt,name=disabled,proto3" json:"disabled,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -157,11 +157,11 @@ func (m *Snsapp) GetUpdatedAt() string {
 
 //
 type SnsappResponse struct {
-	Entity               *Snsapp   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity"`
-	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager"`
-	Items                []*Snsapp `protobuf:"bytes,3,rep,name=items,proto3" json:"items"`
-	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error"`
-	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info"`
+	Entity               *Snsapp   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager    `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*Snsapp `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error    `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info     `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}  `json:"-"`
 	XXX_unrecognized     []byte    `json:"-"`
 	XXX_sizecache        int32     `json:"-"`
@@ -232,7 +232,9 @@ func init() {
 	proto.RegisterType((*SnsappResponse)(nil), "geiqin.srv.mts.SnsappResponse")
 }
 
-func init() { proto.RegisterFile("snsapp.proto", fileDescriptor_5d13bb8a5c580430) }
+func init() {
+	proto.RegisterFile("snsapp.proto", fileDescriptor_5d13bb8a5c580430)
+}
 
 var fileDescriptor_5d13bb8a5c580430 = []byte{
 	// 472 bytes of a gzipped FileDescriptorProto
