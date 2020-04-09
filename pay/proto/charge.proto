@@ -30,8 +30,8 @@ message Charge{
     string open_id = 8;
     string target_user_type = 10;
     int64 target_user_id = 11;
-    int64 out_trade_id = 13;
-    string out_trade_sn = 14;
+    int64 order_id = 13;
+    string order_sn = 14;
     float amount = 15;
     string currency = 16;
     string subject = 17;
