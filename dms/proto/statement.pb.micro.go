@@ -31,15 +31,87 @@ var _ context.Context
 var _ client.Option
 var _ server.Option
 
+// Client API for MyStatementService service
+
+type MyStatementService interface {
+	//获取佣金收支明细
+	Get(ctx context.Context, in *Statement, opts ...client.CallOption) (*StatementResponse, error)
+	//查询佣金收支明细
+	Search(ctx context.Context, in *StatementWhere, opts ...client.CallOption) (*StatementResponse, error)
+}
+
+type myStatementService struct {
+	c    client.Client
+	name string
+}
+
+func NewMyStatementService(name string, c client.Client) MyStatementService {
+	return &myStatementService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *myStatementService) Get(ctx context.Context, in *Statement, opts ...client.CallOption) (*StatementResponse, error) {
+	req := c.c.NewRequest(c.name, "MyStatementService.Get", in)
+	out := new(StatementResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myStatementService) Search(ctx context.Context, in *StatementWhere, opts ...client.CallOption) (*StatementResponse, error) {
+	req := c.c.NewRequest(c.name, "MyStatementService.Search", in)
+	out := new(StatementResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for MyStatementService service
+
+type MyStatementServiceHandler interface {
+	//获取佣金收支明细
+	Get(context.Context, *Statement, *StatementResponse) error
+	//查询佣金收支明细
+	Search(context.Context, *StatementWhere, *StatementResponse) error
+}
+
+func RegisterMyStatementServiceHandler(s server.Server, hdlr MyStatementServiceHandler, opts ...server.HandlerOption) error {
+	type myStatementService interface {
+		Get(ctx context.Context, in *Statement, out *StatementResponse) error
+		Search(ctx context.Context, in *StatementWhere, out *StatementResponse) error
+	}
+	type MyStatementService struct {
+		myStatementService
+	}
+	h := &myStatementServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&MyStatementService{h}, opts...))
+}
+
+type myStatementServiceHandler struct {
+	MyStatementServiceHandler
+}
+
+func (h *myStatementServiceHandler) Get(ctx context.Context, in *Statement, out *StatementResponse) error {
+	return h.MyStatementServiceHandler.Get(ctx, in, out)
+}
+
+func (h *myStatementServiceHandler) Search(ctx context.Context, in *StatementWhere, out *StatementResponse) error {
+	return h.MyStatementServiceHandler.Search(ctx, in, out)
+}
+
 // Client API for StatementService service
 
 type StatementService interface {
-	//处理计算佣金
-	Handle(ctx context.Context, in *Statement, opts ...client.CallOption) (*StatementResponse, error)
-	//获取结算佣金
+	//获取佣金收支明细
 	Get(ctx context.Context, in *Statement, opts ...client.CallOption) (*StatementResponse, error)
-	//查询结算佣金
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StatementResponse, error)
+	//查询佣金收支明细
+	Search(ctx context.Context, in *StatementWhere, opts ...client.CallOption) (*StatementResponse, error)
 }
 
 type statementService struct {
@@ -54,16 +126,6 @@ func NewStatementService(name string, c client.Client) StatementService {
 	}
 }
 
-func (c *statementService) Handle(ctx context.Context, in *Statement, opts ...client.CallOption) (*StatementResponse, error) {
-	req := c.c.NewRequest(c.name, "StatementService.Handle", in)
-	out := new(StatementResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *statementService) Get(ctx context.Context, in *Statement, opts ...client.CallOption) (*StatementResponse, error) {
 	req := c.c.NewRequest(c.name, "StatementService.Get", in)
 	out := new(StatementResponse)
@@ -74,7 +136,7 @@ func (c *statementService) Get(ctx context.Context, in *Statement, opts ...clien
 	return out, nil
 }
 
-func (c *statementService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StatementResponse, error) {
+func (c *statementService) Search(ctx context.Context, in *StatementWhere, opts ...client.CallOption) (*StatementResponse, error) {
 	req := c.c.NewRequest(c.name, "StatementService.Search", in)
 	out := new(StatementResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -87,19 +149,16 @@ func (c *statementService) Search(ctx context.Context, in *BaseWhere, opts ...cl
 // Server API for StatementService service
 
 type StatementServiceHandler interface {
-	//处理计算佣金
-	Handle(context.Context, *Statement, *StatementResponse) error
-	//获取结算佣金
+	//获取佣金收支明细
 	Get(context.Context, *Statement, *StatementResponse) error
-	//查询结算佣金
-	Search(context.Context, *BaseWhere, *StatementResponse) error
+	//查询佣金收支明细
+	Search(context.Context, *StatementWhere, *StatementResponse) error
 }
 
 func RegisterStatementServiceHandler(s server.Server, hdlr StatementServiceHandler, opts ...server.HandlerOption) error {
 	type statementService interface {
-		Handle(ctx context.Context, in *Statement, out *StatementResponse) error
 		Get(ctx context.Context, in *Statement, out *StatementResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *StatementResponse) error
+		Search(ctx context.Context, in *StatementWhere, out *StatementResponse) error
 	}
 	type StatementService struct {
 		statementService
@@ -112,14 +171,10 @@ type statementServiceHandler struct {
 	StatementServiceHandler
 }
 
-func (h *statementServiceHandler) Handle(ctx context.Context, in *Statement, out *StatementResponse) error {
-	return h.StatementServiceHandler.Handle(ctx, in, out)
-}
-
 func (h *statementServiceHandler) Get(ctx context.Context, in *Statement, out *StatementResponse) error {
 	return h.StatementServiceHandler.Get(ctx, in, out)
 }
 
-func (h *statementServiceHandler) Search(ctx context.Context, in *BaseWhere, out *StatementResponse) error {
+func (h *statementServiceHandler) Search(ctx context.Context, in *StatementWhere, out *StatementResponse) error {
 	return h.StatementServiceHandler.Search(ctx, in, out)
 }

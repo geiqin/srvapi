@@ -7,23 +7,23 @@ package geiqin.srv.dms;
 //佣金提现服务(客户专用)
 service MyWithdrawService {
     //申请佣金提现
-    rpc Apply (Withdraw) returns (WithdrawResponse) {}
+    rpc Apply (WithdrawApply) returns (WithdrawApplyResponse) {}
+    //提交佣金提现申请
+    rpc Submit (Withdraw) returns (WithdrawResponse) {}
     //获取佣金提现信息
     rpc Get (Withdraw) returns (WithdrawResponse) {}
     //查询我的提现记录
-    rpc Search (BaseWhere) returns (WithdrawResponse) {}
+    rpc Search (WithdrawWhere) returns (WithdrawResponse) {}
 }
 
 //佣金提现服务(后台专用)
 service WithdrawService {
-    //申请佣金提现
-    rpc Create (Withdraw) returns (WithdrawResponse) {}
     //审核佣金提现
     rpc Check (Withdraw) returns (WithdrawResponse) {}
     //获取佣金提现信息
     rpc Get (Withdraw) returns (WithdrawResponse) {}
     //分页查询佣金提现记录
-    rpc Search (BaseWhere) returns (WithdrawResponse) {}
+    rpc Search (WithdrawWhere) returns (WithdrawResponse) {}
 }
 
 message Withdraw {
@@ -46,11 +46,35 @@ message Withdraw {
     Distributor distributor = 17;
 }
 
+message WithdrawWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //base params
+    int64 id = 4;
+    repeated int64 ids = 5;
+    string status = 6;
+    int64 distributor_id = 7;
+}
+
+message WithdrawApply {
+    bool disabled = 1; // 是否可提现
+    float min_money = 2; // 最小提现佣金
+    float max_money = 3; // 最大提现佣金
+}
 
 message WithdrawResponse {
     Withdraw entity = 1;
     Pager pager =2;
     repeated Withdraw items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message WithdrawApplyResponse {
+    WithdrawApply entity = 1;
+    Pager pager =2;
+    repeated WithdrawApply items = 3;
     Error error = 4;
     Info info =5;
 }

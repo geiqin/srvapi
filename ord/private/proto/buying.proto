@@ -3,6 +3,7 @@ import "common.proto";
 import "goodsInfo.proto";
 import "orderAddress.proto";
 import "orderCoupon.proto";
+import "orderPromotion.proto";
 import "couponTicketInfo.proto";
 
 package geiqin.srv.ord.private;
@@ -14,24 +15,29 @@ service BuyingService {
 
 //购买清单
 message Buying {
-    string solution =1;
-    bool changed =2;
-    int32 count =3;
-    float total =4;
+    string solution = 1;
+    bool changed = 2;
+    int32 count = 3;
+    float total = 4;
     float discount = 5;
     float freight = 6;
     float amount = 7;
-    int64 address_id =8;
-    int64 customer_id =9;
-    int64 use_ticket_id =10; //正在使用的优惠劵ID
-    string message =11; //买家留言(50字以内)
-    repeated int64 available_ticket_ids =12; //可以使用的优惠劵
+    int64 address_id = 8;
+    int64 customer_id = 9;
+    int64 use_ticket_id = 10; //正在使用的优惠劵ID
+    string message = 11; //买家留言(50字以内)
+    repeated int64 available_ticket_ids = 12; //可以使用的优惠劵
     repeated BuyingItem items = 13;
-    repeated string cart_row_ids =14;
-    repeated OrderCoupon coupons =15;
-    OrderAddress address =16;
-    CouponTicket use_ticket = 17;
-    string platform_source =18; //下单来源
+    repeated string cart_row_ids = 14;
+    repeated OrderCoupon coupons = 15;
+    repeated OrderPromotion promotions = 16;
+    OrderAddress address = 17;
+    CouponTicket use_ticket = 18;
+    string platform_source = 19; //下单来源
+    float member_money = 20; // 会员优惠金额
+    float limit_discount_money = 21; // 限时活动优惠金额
+    float reward_money = 22; // 满减送活动优惠金额
+    float coupon_money = 23; // 优惠券优惠金额
 }
 
 //购买清单明细
@@ -44,7 +50,11 @@ message BuyingItem {
     float sub_total =6;
     bool is_gift =7;
     int64 promotion_id =8;
-    GoodsInfo goods =9;
+    float member_price =9;// 会员价
+    float limit_discount_price =10;// 限时折扣价
+    int32 limit_discount_num =11;// 享受限时折扣的商品数量
+    int32 exchange_num =12;// 兑换券兑换商品的数量
+    GoodsInfo goods =13;
 }
 
 

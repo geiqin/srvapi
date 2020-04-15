@@ -34,14 +34,14 @@ var _ server.Option
 // Client API for CommissionService service
 
 type CommissionService interface {
-	//下单后创建佣金相关数据
-	Create(ctx context.Context, in *Commission, opts ...client.CallOption) (*CommissionResponse, error)
-	//查看结算详情
+	// 查看结算详情
 	Get(ctx context.Context, in *Commission, opts ...client.CallOption) (*CommissionResponse, error)
-	//分页查询结算列表
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CommissionResponse, error)
-	//分页查询业绩报表
-	SearchPerformance(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CommissionResponse, error)
+	// 分页查询结算列表
+	Search(ctx context.Context, in *CommissionWhere, opts ...client.CallOption) (*CommissionResponse, error)
+	// 分页查询业绩报表
+	SearchPerformance(ctx context.Context, in *PerformanceWhere, opts ...client.CallOption) (*PerformanceResponse, error)
+	// 结算佣金
+	Settlement(ctx context.Context, in *CommissionWhere, opts ...client.CallOption) (*CommissionResponse, error)
 }
 
 type commissionService struct {
@@ -56,16 +56,6 @@ func NewCommissionService(name string, c client.Client) CommissionService {
 	}
 }
 
-func (c *commissionService) Create(ctx context.Context, in *Commission, opts ...client.CallOption) (*CommissionResponse, error) {
-	req := c.c.NewRequest(c.name, "CommissionService.Create", in)
-	out := new(CommissionResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *commissionService) Get(ctx context.Context, in *Commission, opts ...client.CallOption) (*CommissionResponse, error) {
 	req := c.c.NewRequest(c.name, "CommissionService.Get", in)
 	out := new(CommissionResponse)
@@ -76,7 +66,7 @@ func (c *commissionService) Get(ctx context.Context, in *Commission, opts ...cli
 	return out, nil
 }
 
-func (c *commissionService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CommissionResponse, error) {
+func (c *commissionService) Search(ctx context.Context, in *CommissionWhere, opts ...client.CallOption) (*CommissionResponse, error) {
 	req := c.c.NewRequest(c.name, "CommissionService.Search", in)
 	out := new(CommissionResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -86,8 +76,18 @@ func (c *commissionService) Search(ctx context.Context, in *BaseWhere, opts ...c
 	return out, nil
 }
 
-func (c *commissionService) SearchPerformance(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CommissionResponse, error) {
+func (c *commissionService) SearchPerformance(ctx context.Context, in *PerformanceWhere, opts ...client.CallOption) (*PerformanceResponse, error) {
 	req := c.c.NewRequest(c.name, "CommissionService.SearchPerformance", in)
+	out := new(PerformanceResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *commissionService) Settlement(ctx context.Context, in *CommissionWhere, opts ...client.CallOption) (*CommissionResponse, error) {
+	req := c.c.NewRequest(c.name, "CommissionService.Settlement", in)
 	out := new(CommissionResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -99,22 +99,22 @@ func (c *commissionService) SearchPerformance(ctx context.Context, in *BaseWhere
 // Server API for CommissionService service
 
 type CommissionServiceHandler interface {
-	//下单后创建佣金相关数据
-	Create(context.Context, *Commission, *CommissionResponse) error
-	//查看结算详情
+	// 查看结算详情
 	Get(context.Context, *Commission, *CommissionResponse) error
-	//分页查询结算列表
-	Search(context.Context, *BaseWhere, *CommissionResponse) error
-	//分页查询业绩报表
-	SearchPerformance(context.Context, *BaseWhere, *CommissionResponse) error
+	// 分页查询结算列表
+	Search(context.Context, *CommissionWhere, *CommissionResponse) error
+	// 分页查询业绩报表
+	SearchPerformance(context.Context, *PerformanceWhere, *PerformanceResponse) error
+	// 结算佣金
+	Settlement(context.Context, *CommissionWhere, *CommissionResponse) error
 }
 
 func RegisterCommissionServiceHandler(s server.Server, hdlr CommissionServiceHandler, opts ...server.HandlerOption) error {
 	type commissionService interface {
-		Create(ctx context.Context, in *Commission, out *CommissionResponse) error
 		Get(ctx context.Context, in *Commission, out *CommissionResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *CommissionResponse) error
-		SearchPerformance(ctx context.Context, in *BaseWhere, out *CommissionResponse) error
+		Search(ctx context.Context, in *CommissionWhere, out *CommissionResponse) error
+		SearchPerformance(ctx context.Context, in *PerformanceWhere, out *PerformanceResponse) error
+		Settlement(ctx context.Context, in *CommissionWhere, out *CommissionResponse) error
 	}
 	type CommissionService struct {
 		commissionService
@@ -127,18 +127,18 @@ type commissionServiceHandler struct {
 	CommissionServiceHandler
 }
 
-func (h *commissionServiceHandler) Create(ctx context.Context, in *Commission, out *CommissionResponse) error {
-	return h.CommissionServiceHandler.Create(ctx, in, out)
-}
-
 func (h *commissionServiceHandler) Get(ctx context.Context, in *Commission, out *CommissionResponse) error {
 	return h.CommissionServiceHandler.Get(ctx, in, out)
 }
 
-func (h *commissionServiceHandler) Search(ctx context.Context, in *BaseWhere, out *CommissionResponse) error {
+func (h *commissionServiceHandler) Search(ctx context.Context, in *CommissionWhere, out *CommissionResponse) error {
 	return h.CommissionServiceHandler.Search(ctx, in, out)
 }
 
-func (h *commissionServiceHandler) SearchPerformance(ctx context.Context, in *BaseWhere, out *CommissionResponse) error {
+func (h *commissionServiceHandler) SearchPerformance(ctx context.Context, in *PerformanceWhere, out *PerformanceResponse) error {
 	return h.CommissionServiceHandler.SearchPerformance(ctx, in, out)
+}
+
+func (h *commissionServiceHandler) Settlement(ctx context.Context, in *CommissionWhere, out *CommissionResponse) error {
+	return h.CommissionServiceHandler.Settlement(ctx, in, out)
 }

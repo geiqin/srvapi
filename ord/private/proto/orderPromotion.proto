@@ -42,8 +42,9 @@ message OrderPromotionGoods {
     int64 sku_id = 4;
     int32 goods_num = 5;
     float price = 6;
-    string created_at = 7;
-    string updated_at = 8;
+    float before_price = 7;
+    string created_at = 8;
+    string updated_at = 9;
 }
 
 

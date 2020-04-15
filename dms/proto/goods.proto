@@ -6,7 +6,7 @@ package geiqin.srv.dms;
 
 //分销商品（用户端使用）
 service MyGoodsService {
-    //分页查询分销商品列表
+    // 分页查询分销商品列表
     rpc Search (GoodsWhere) returns (GoodsInfoResponse) {}
 }
 

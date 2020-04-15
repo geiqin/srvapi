@@ -62,15 +62,15 @@ type Item struct {
 	CreatedAt            string           `protobuf:"bytes,39,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string           `protobuf:"bytes,40,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	Brand                *Brand           `protobuf:"bytes,41,opt,name=brand,proto3" json:"brand,omitempty"`
-	Cats                 []*Cat           `protobuf:"bytes,42,rep,name=cats,proto3" json:"cats,omitempty"`
-	Tags                 []*Tag           `protobuf:"bytes,43,rep,name=tags,proto3" json:"tags,omitempty"`
+	Cats                 []*Cat           `protobuf:"bytes,42,rep,name=cats,proto3" json:"cats,omitempty" gorm:"many2many:item_cats;"`
+	Tags                 []*Tag           `protobuf:"bytes,43,rep,name=tags,proto3" json:"tags,omitempty" gorm:"many2many:item_tags;"`
 	Skus                 []*Sku           `protobuf:"bytes,44,rep,name=skus,proto3" json:"skus,omitempty"`
 	Galleries            []*ItemGallery   `protobuf:"bytes,45,rep,name=galleries,proto3" json:"galleries,omitempty"`
 	Prices               []*ItemPrice     `protobuf:"bytes,46,rep,name=prices,proto3" json:"prices,omitempty"`
 	Rights               []*ItemRight     `protobuf:"bytes,47,rep,name=rights,proto3" json:"rights,omitempty"`
 	SpecIndexes          []*SpecItemIndex `protobuf:"bytes,48,rep,name=spec_indexes,json=specIndexes,proto3" json:"spec_indexes,omitempty"`
 	Ids                  []int64          `protobuf:"varint,49,rep,packed,name=ids,proto3" json:"ids,omitempty"`
-	Specs                []*Spec          `protobuf:"bytes,50,rep,name=specs,proto3" json:"specs,omitempty"`
+	Specs                []*Spec          `protobuf:"bytes,50,rep,name=specs,proto3" json:"specs,omitempty" gorm:"many2many:spec_item_indices;"`
 	Skuitem              *Sku             `protobuf:"bytes,51,opt,name=skuitem,proto3" json:"skuitem,omitempty"`
 	SkuId                int64            `protobuf:"varint,52,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{}         `json:"-"`

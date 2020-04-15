@@ -41,7 +41,7 @@ type Sku struct {
 	BuyQuota             int32        `protobuf:"varint,18,opt,name=buy_quota,json=buyQuota,proto3" json:"buy_quota,omitempty"`
 	CreatedAt            string       `protobuf:"bytes,19,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	UpdatedAt            string       `protobuf:"bytes,20,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
-	SpecValues           []*SpecValue `protobuf:"bytes,21,rep,name=spec_values,json=specValues,proto3" json:"spec_values,omitempty"`
+	SpecValues           []*SpecValue `protobuf:"bytes,21,rep,name=spec_values,json=specValues,proto3" json:"spec_values,omitempty" gorm:"many2many:spec_item_indices;"`
 	XXX_NoUnkeyedLiteral struct{}     `json:"-"`
 	XXX_unrecognized     []byte       `json:"-"`
 	XXX_sizecache        int32        `json:"-"`

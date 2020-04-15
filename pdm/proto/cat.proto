@@ -23,12 +23,13 @@ message Cat {
     string	name	=3;
     int32	cat_id	=4;
     int32	depth	=5;
-    string	memo	=6;
-    int32	item_num =7;
-    int32	sorting	=8;
-    string	created_at	=9;
-    string	updated_at	=10;
-    repeated Cat children =11;
+    int64 media_id =6;
+    string media_url =7;
+    string	memo	=8;
+    int32	sorting	=9;
+    string	created_at	=10;
+    string	updated_at	=11;
+    repeated Cat children =12;
 }
 
 message CatResponse {

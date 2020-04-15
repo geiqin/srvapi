@@ -16,7 +16,7 @@ message OrderCoupon {
     int64 customer_id = 3;
     int64 coupon_id = 4;
     int32 coupon_num = 5;
-    string coupon_type = 6;
+    string Method = 6;
     float coupon_price = 7;
     string created_at = 8;
     string updated_at = 9;

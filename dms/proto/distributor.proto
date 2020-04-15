@@ -49,13 +49,13 @@ message Distributor {
     int32 promotion_num = 19;
     int32 withdrew_num = 20;
     int32 status = 21;
-    string mobile = 28;
     string created_at = 22;
     string updated_at = 23;
     Rank rank = 24;
     Distributor inviter = 25;
     repeated Distributor children = 26;
     repeated int64 ids = 27;
+    string mobile = 28;
 }
 
 message DistributorWhere {
@@ -67,6 +67,7 @@ message DistributorWhere {
     string keywords =6;
     int64 id = 7;
     repeated int64 ids = 8;
+    int64 inviter_id = 9;
 }
 
 message DistributorResponse {

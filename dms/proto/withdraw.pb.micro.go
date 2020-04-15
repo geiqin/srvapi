@@ -35,11 +35,13 @@ var _ server.Option
 
 type MyWithdrawService interface {
 	//申请佣金提现
-	Apply(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
+	Apply(ctx context.Context, in *WithdrawApply, opts ...client.CallOption) (*WithdrawApplyResponse, error)
+	//提交佣金提现申请
+	Submit(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
 	//获取佣金提现信息
 	Get(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
 	//查询我的提现记录
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*WithdrawResponse, error)
+	Search(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
 }
 
 type myWithdrawService struct {
@@ -54,8 +56,18 @@ func NewMyWithdrawService(name string, c client.Client) MyWithdrawService {
 	}
 }
 
-func (c *myWithdrawService) Apply(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error) {
+func (c *myWithdrawService) Apply(ctx context.Context, in *WithdrawApply, opts ...client.CallOption) (*WithdrawApplyResponse, error) {
 	req := c.c.NewRequest(c.name, "MyWithdrawService.Apply", in)
+	out := new(WithdrawApplyResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myWithdrawService) Submit(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error) {
+	req := c.c.NewRequest(c.name, "MyWithdrawService.Submit", in)
 	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -74,7 +86,7 @@ func (c *myWithdrawService) Get(ctx context.Context, in *Withdraw, opts ...clien
 	return out, nil
 }
 
-func (c *myWithdrawService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
+func (c *myWithdrawService) Search(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
 	req := c.c.NewRequest(c.name, "MyWithdrawService.Search", in)
 	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -88,18 +100,21 @@ func (c *myWithdrawService) Search(ctx context.Context, in *BaseWhere, opts ...c
 
 type MyWithdrawServiceHandler interface {
 	//申请佣金提现
-	Apply(context.Context, *Withdraw, *WithdrawResponse) error
+	Apply(context.Context, *WithdrawApply, *WithdrawApplyResponse) error
+	//提交佣金提现申请
+	Submit(context.Context, *Withdraw, *WithdrawResponse) error
 	//获取佣金提现信息
 	Get(context.Context, *Withdraw, *WithdrawResponse) error
 	//查询我的提现记录
-	Search(context.Context, *BaseWhere, *WithdrawResponse) error
+	Search(context.Context, *WithdrawWhere, *WithdrawResponse) error
 }
 
 func RegisterMyWithdrawServiceHandler(s server.Server, hdlr MyWithdrawServiceHandler, opts ...server.HandlerOption) error {
 	type myWithdrawService interface {
-		Apply(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
+		Apply(ctx context.Context, in *WithdrawApply, out *WithdrawApplyResponse) error
+		Submit(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
 		Get(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *WithdrawResponse) error
+		Search(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
 	}
 	type MyWithdrawService struct {
 		myWithdrawService
@@ -112,29 +127,31 @@ type myWithdrawServiceHandler struct {
 	MyWithdrawServiceHandler
 }
 
-func (h *myWithdrawServiceHandler) Apply(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {
+func (h *myWithdrawServiceHandler) Apply(ctx context.Context, in *WithdrawApply, out *WithdrawApplyResponse) error {
 	return h.MyWithdrawServiceHandler.Apply(ctx, in, out)
+}
+
+func (h *myWithdrawServiceHandler) Submit(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {
+	return h.MyWithdrawServiceHandler.Submit(ctx, in, out)
 }
 
 func (h *myWithdrawServiceHandler) Get(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {
 	return h.MyWithdrawServiceHandler.Get(ctx, in, out)
 }
 
-func (h *myWithdrawServiceHandler) Search(ctx context.Context, in *BaseWhere, out *WithdrawResponse) error {
+func (h *myWithdrawServiceHandler) Search(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
 	return h.MyWithdrawServiceHandler.Search(ctx, in, out)
 }
 
 // Client API for WithdrawService service
 
 type WithdrawService interface {
-	//申请佣金提现
-	Create(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
 	//审核佣金提现
 	Check(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
 	//获取佣金提现信息
 	Get(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
 	//分页查询佣金提现记录
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*WithdrawResponse, error)
+	Search(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
 }
 
 type withdrawService struct {
@@ -147,16 +164,6 @@ func NewWithdrawService(name string, c client.Client) WithdrawService {
 		c:    c,
 		name: name,
 	}
-}
-
-func (c *withdrawService) Create(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error) {
-	req := c.c.NewRequest(c.name, "WithdrawService.Create", in)
-	out := new(WithdrawResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *withdrawService) Check(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error) {
@@ -179,7 +186,7 @@ func (c *withdrawService) Get(ctx context.Context, in *Withdraw, opts ...client.
 	return out, nil
 }
 
-func (c *withdrawService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
+func (c *withdrawService) Search(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
 	req := c.c.NewRequest(c.name, "WithdrawService.Search", in)
 	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -192,22 +199,19 @@ func (c *withdrawService) Search(ctx context.Context, in *BaseWhere, opts ...cli
 // Server API for WithdrawService service
 
 type WithdrawServiceHandler interface {
-	//申请佣金提现
-	Create(context.Context, *Withdraw, *WithdrawResponse) error
 	//审核佣金提现
 	Check(context.Context, *Withdraw, *WithdrawResponse) error
 	//获取佣金提现信息
 	Get(context.Context, *Withdraw, *WithdrawResponse) error
 	//分页查询佣金提现记录
-	Search(context.Context, *BaseWhere, *WithdrawResponse) error
+	Search(context.Context, *WithdrawWhere, *WithdrawResponse) error
 }
 
 func RegisterWithdrawServiceHandler(s server.Server, hdlr WithdrawServiceHandler, opts ...server.HandlerOption) error {
 	type withdrawService interface {
-		Create(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
 		Check(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
 		Get(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *WithdrawResponse) error
+		Search(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
 	}
 	type WithdrawService struct {
 		withdrawService
@@ -220,10 +224,6 @@ type withdrawServiceHandler struct {
 	WithdrawServiceHandler
 }
 
-func (h *withdrawServiceHandler) Create(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {
-	return h.WithdrawServiceHandler.Create(ctx, in, out)
-}
-
 func (h *withdrawServiceHandler) Check(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {
 	return h.WithdrawServiceHandler.Check(ctx, in, out)
 }
@@ -232,6 +232,6 @@ func (h *withdrawServiceHandler) Get(ctx context.Context, in *Withdraw, out *Wit
 	return h.WithdrawServiceHandler.Get(ctx, in, out)
 }
 
-func (h *withdrawServiceHandler) Search(ctx context.Context, in *BaseWhere, out *WithdrawResponse) error {
+func (h *withdrawServiceHandler) Search(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
 	return h.WithdrawServiceHandler.Search(ctx, in, out)
 }

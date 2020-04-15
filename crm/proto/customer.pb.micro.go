@@ -36,6 +36,10 @@ var _ server.Option
 type CustomerService interface {
 	//手动添加用户
 	Create(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//手动添加单位用户
+	CreateCompany(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
+	//手动修改单位用户
+	UpdateCompany(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//从粉丝添加用户
 	CreateByFan(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error)
 	//客户注册
@@ -78,6 +82,26 @@ func NewCustomerService(name string, c client.Client) CustomerService {
 
 func (c *customerService) Create(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
 	req := c.c.NewRequest(c.name, "CustomerService.Create", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) CreateCompany(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.CreateCompany", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *customerService) UpdateCompany(ctx context.Context, in *Customer, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "CustomerService.UpdateCompany", in)
 	out := new(CustomerResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -221,6 +245,10 @@ func (c *customerService) UpdateMobile(ctx context.Context, in *Customer, opts .
 type CustomerServiceHandler interface {
 	//手动添加用户
 	Create(context.Context, *Customer, *CustomerResponse) error
+	//手动添加单位用户
+	CreateCompany(context.Context, *Customer, *CustomerResponse) error
+	//手动修改单位用户
+	UpdateCompany(context.Context, *Customer, *CustomerResponse) error
 	//从粉丝添加用户
 	CreateByFan(context.Context, *Customer, *CustomerResponse) error
 	//客户注册
@@ -252,6 +280,8 @@ type CustomerServiceHandler interface {
 func RegisterCustomerServiceHandler(s server.Server, hdlr CustomerServiceHandler, opts ...server.HandlerOption) error {
 	type customerService interface {
 		Create(ctx context.Context, in *Customer, out *CustomerResponse) error
+		CreateCompany(ctx context.Context, in *Customer, out *CustomerResponse) error
+		UpdateCompany(ctx context.Context, in *Customer, out *CustomerResponse) error
 		CreateByFan(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Register(ctx context.Context, in *Customer, out *CustomerResponse) error
 		Update(ctx context.Context, in *Customer, out *CustomerResponse) error
@@ -279,6 +309,14 @@ type customerServiceHandler struct {
 
 func (h *customerServiceHandler) Create(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.Create(ctx, in, out)
+}
+
+func (h *customerServiceHandler) CreateCompany(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.CreateCompany(ctx, in, out)
+}
+
+func (h *customerServiceHandler) UpdateCompany(ctx context.Context, in *Customer, out *CustomerResponse) error {
+	return h.CustomerServiceHandler.UpdateCompany(ctx, in, out)
 }
 
 func (h *customerServiceHandler) CreateByFan(ctx context.Context, in *Customer, out *CustomerResponse) error {

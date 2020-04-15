@@ -2,13 +2,18 @@ syntax = "proto3";
 import "common.proto";
 package geiqin.srv.dms;
 
-service StatementService {
-    //处理计算佣金
-    rpc Handle (Statement) returns (StatementResponse) {}
-    //获取结算佣金
+service MyStatementService {
+    //获取佣金收支明细
     rpc Get (Statement) returns (StatementResponse) {}
-    //查询结算佣金
-    rpc Search (BaseWhere) returns (StatementResponse) {}
+    //查询佣金收支明细
+    rpc Search (StatementWhere) returns (StatementResponse) {}
+}
+
+service StatementService {
+    //获取佣金收支明细
+    rpc Get (Statement) returns (StatementResponse) {}
+    //查询佣金收支明细
+    rpc Search (StatementWhere) returns (StatementResponse) {}
 }
 
 message Statement {
@@ -22,6 +27,16 @@ message Statement {
     string updated_at = 8;
 }
 
+message StatementWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //base params
+    int64 id = 4;
+    repeated int64 ids = 5;
+    string type = 6;
+    int64 distributor_id = 7;
+}
 
 message StatementResponse {
     Statement entity = 1;
