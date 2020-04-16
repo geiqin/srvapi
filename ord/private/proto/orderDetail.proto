@@ -28,6 +28,7 @@ message OrderDetail {
     string attach_type = 24;
     string ship_status = 25;
     string refund_status = 26;
-    string created_at  = 27;
-    string updated_at  = 28;
+    int64  present_id = 27;
+    string created_at  = 28;
+    string updated_at  = 29;
 }
