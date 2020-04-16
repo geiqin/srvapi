@@ -4,6 +4,7 @@ import "buying.proto";
 import "orderDetail.proto";
 import "orderAddress.proto";
 import "delivery.proto";
+import "orderCoupon.proto";
 package geiqin.srv.ord.private;
 
 service MyOrderService {
@@ -23,8 +24,6 @@ service MyOrderService {
     rpc Display (Order) returns (OrderResponse) {}
     //查询订单
     rpc Search (OrderWhere) returns (OrderResponse) {}
-
-    //Route::post('qin.ord.my.order.choose.coupon', 'MyOrderController@chooseCoupon');// 下单选择优惠券
 }
 
 service OrderService {
@@ -52,6 +51,8 @@ service OrderService {
     rpc RepairShip (Delivery) returns (DeliveryResponse) {}
     //订单换货发货
     rpc ExchangeShip (Delivery) returns (DeliveryResponse) {}
+    // 获取订单赠送\使用的优惠券列表
+    rpc OrderCouponList (OrderCoupon) returns (OrderCouponResponse) {}
 }
 
 message Order {

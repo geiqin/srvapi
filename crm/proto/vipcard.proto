@@ -12,6 +12,8 @@ service MyVipcardService {
     rpc Renew (Vipcard) returns (VipcardResponse) {}
     //获取会员卡
     rpc Get (Vipcard) returns (VipcardResponse) {}
+    //获取默认使用的会员卡
+    rpc GetDefault (Vipcard) returns (VipcardResponse) {}
     //查询会员卡
     rpc Search (VipcardWhere) returns (VipcardResponse) {}
     //会员是否有会员卡

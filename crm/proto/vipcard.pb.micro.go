@@ -40,6 +40,8 @@ type MyVipcardService interface {
 	Renew(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
 	//获取会员卡
 	Get(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
+	//获取默认使用的会员卡
+	GetDefault(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error)
 	//查询会员卡
 	Search(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error)
 	//会员是否有会员卡
@@ -90,6 +92,16 @@ func (c *myVipcardService) Get(ctx context.Context, in *Vipcard, opts ...client.
 	return out, nil
 }
 
+func (c *myVipcardService) GetDefault(ctx context.Context, in *Vipcard, opts ...client.CallOption) (*VipcardResponse, error) {
+	req := c.c.NewRequest(c.name, "MyVipcardService.GetDefault", in)
+	out := new(VipcardResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *myVipcardService) Search(ctx context.Context, in *VipcardWhere, opts ...client.CallOption) (*VipcardResponse, error) {
 	req := c.c.NewRequest(c.name, "MyVipcardService.Search", in)
 	out := new(VipcardResponse)
@@ -129,6 +141,8 @@ type MyVipcardServiceHandler interface {
 	Renew(context.Context, *Vipcard, *VipcardResponse) error
 	//获取会员卡
 	Get(context.Context, *Vipcard, *VipcardResponse) error
+	//获取默认使用的会员卡
+	GetDefault(context.Context, *Vipcard, *VipcardResponse) error
 	//查询会员卡
 	Search(context.Context, *VipcardWhere, *VipcardResponse) error
 	//会员是否有会员卡
@@ -142,6 +156,7 @@ func RegisterMyVipcardServiceHandler(s server.Server, hdlr MyVipcardServiceHandl
 		Apply(ctx context.Context, in *Vipcard, out *VipcardResponse) error
 		Renew(ctx context.Context, in *Vipcard, out *VipcardResponse) error
 		Get(ctx context.Context, in *Vipcard, out *VipcardResponse) error
+		GetDefault(ctx context.Context, in *Vipcard, out *VipcardResponse) error
 		Search(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error
 		HasCard(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error
 		ValidList(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error
@@ -167,6 +182,10 @@ func (h *myVipcardServiceHandler) Renew(ctx context.Context, in *Vipcard, out *V
 
 func (h *myVipcardServiceHandler) Get(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
 	return h.MyVipcardServiceHandler.Get(ctx, in, out)
+}
+
+func (h *myVipcardServiceHandler) GetDefault(ctx context.Context, in *Vipcard, out *VipcardResponse) error {
+	return h.MyVipcardServiceHandler.GetDefault(ctx, in, out)
 }
 
 func (h *myVipcardServiceHandler) Search(ctx context.Context, in *VipcardWhere, out *VipcardResponse) error {

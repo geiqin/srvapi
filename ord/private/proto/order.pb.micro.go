@@ -246,6 +246,8 @@ type OrderService interface {
 	RepairShip(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error)
 	//订单换货发货
 	ExchangeShip(ctx context.Context, in *Delivery, opts ...client.CallOption) (*DeliveryResponse, error)
+	// 获取订单赠送\使用的优惠券列表
+	OrderCouponList(ctx context.Context, in *OrderCoupon, opts ...client.CallOption) (*OrderCouponResponse, error)
 }
 
 type orderService struct {
@@ -380,6 +382,16 @@ func (c *orderService) ExchangeShip(ctx context.Context, in *Delivery, opts ...c
 	return out, nil
 }
 
+func (c *orderService) OrderCouponList(ctx context.Context, in *OrderCoupon, opts ...client.CallOption) (*OrderCouponResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.OrderCouponList", in)
+	out := new(OrderCouponResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
@@ -407,6 +419,8 @@ type OrderServiceHandler interface {
 	RepairShip(context.Context, *Delivery, *DeliveryResponse) error
 	//订单换货发货
 	ExchangeShip(context.Context, *Delivery, *DeliveryResponse) error
+	// 获取订单赠送\使用的优惠券列表
+	OrderCouponList(context.Context, *OrderCoupon, *OrderCouponResponse) error
 }
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
@@ -423,6 +437,7 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		Ship(ctx context.Context, in *Delivery, out *DeliveryResponse) error
 		RepairShip(ctx context.Context, in *Delivery, out *DeliveryResponse) error
 		ExchangeShip(ctx context.Context, in *Delivery, out *DeliveryResponse) error
+		OrderCouponList(ctx context.Context, in *OrderCoupon, out *OrderCouponResponse) error
 	}
 	type OrderService struct {
 		orderService
@@ -481,4 +496,8 @@ func (h *orderServiceHandler) RepairShip(ctx context.Context, in *Delivery, out 
 
 func (h *orderServiceHandler) ExchangeShip(ctx context.Context, in *Delivery, out *DeliveryResponse) error {
 	return h.OrderServiceHandler.ExchangeShip(ctx, in, out)
+}
+
+func (h *orderServiceHandler) OrderCouponList(ctx context.Context, in *OrderCoupon, out *OrderCouponResponse) error {
+	return h.OrderServiceHandler.OrderCouponList(ctx, in, out)
 }
