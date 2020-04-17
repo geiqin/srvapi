@@ -20,7 +20,7 @@ service RefundService {
 
 //退款
 message Refund{
-    int32 id = 1;
+    int64 id = 1;
     string refund_sn = 2;
     float total_fee = 3;
     float refund_fee = 4;
@@ -35,10 +35,12 @@ message Refund{
     string metadata = 15;
     string return_extra = 16;
     string transaction_no = 17;
-    string status = 18;
-    string finished_at = 19;
-    string created_at = 20;
-    string updated_at = 21;
+    int64 safeguard_id = 18;
+    string safeguard_sn = 19;
+    string status = 20;
+    string finished_at = 21;
+    string created_at = 22;
+    string updated_at = 23;
 
 }
 
