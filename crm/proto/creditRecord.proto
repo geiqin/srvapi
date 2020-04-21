@@ -1,0 +1,41 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm;
+
+service creditRecordService {
+  rpc Create (CreditRecord) returns (CreditRecordResponse) {}
+}
+
+message CreditRecord {
+  int64 id =1;
+  int64 credit_id =2;
+  int64 order_id =3;
+  string order_sn =4;
+  int32 type =5;
+  float amount =6;
+  string memo =7;
+  string created_at =8;
+  string updated_at =9;
+  repeated int32 ids = 10;
+}
+
+
+//查询参数
+message CreditRecordWhere {
+  int32 paged = 1;
+  int32 page_size = 2;
+  //以下为自定义参数
+  string name = 3;
+  string realname =4;
+  string mobile =5;
+}
+
+
+//
+message CreditRecordResponse {
+  CreditRecord entity = 1;
+  Pager pager =2;
+  repeated CreditRecord items = 3;
+  Error error = 4;
+  Info info =5;
+}
