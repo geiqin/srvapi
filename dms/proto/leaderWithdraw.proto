@@ -1,0 +1,80 @@
+syntax = "proto3";
+import "common.proto";
+import "leader.proto";
+
+package geiqin.srv.dms;
+
+//奖金提现服务(客户专用)
+service MyLeaderWithdrawService {
+    //申请奖金提现
+    rpc Apply (LeaderWithdrawApply) returns (LeaderWithdrawApplyResponse) {}
+    //提交奖金提现申请
+    rpc Submit (LeaderWithdraw) returns (LeaderWithdrawResponse) {}
+    //获取奖金提现信息
+    rpc Get (LeaderWithdraw) returns (LeaderWithdrawResponse) {}
+    //查询我的提现记录
+    rpc Search (LeaderWithdrawWhere) returns (LeaderWithdrawResponse) {}
+}
+
+//奖金提现服务(后台专用)
+service LeaderWithdrawService {
+    //审核奖金提现
+    rpc Check (LeaderWithdraw) returns (LeaderWithdrawResponse) {}
+    //获取奖金提现信息
+    rpc Get (LeaderWithdraw) returns (LeaderWithdrawResponse) {}
+    //分页查询奖金提现记录
+    rpc Search (LeaderWithdrawWhere) returns (LeaderWithdrawResponse) {}
+}
+
+message LeaderWithdraw {
+    int64 id = 1;
+    string withdraw_sn = 2;
+    int64 leader_id = 3;
+    float money = 4;
+    int64 transfer_id = 5;
+    string transactionId_id = 6;
+    string method = 7;
+    int32 cash_account_id= 8;
+    string payee_name = 9;
+    string payee_account = 10;
+    string payee_bank = 11;
+    string platform_account =12;
+    string memo = 13;
+    string status = 14;
+    string created_at = 15;
+    string updated_at = 16;
+    Leader leader = 17;
+}
+
+message LeaderWithdrawWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //base params
+    int64 id = 4;
+    repeated int64 ids = 5;
+    string status = 6;
+    int64 leader_id = 7;
+}
+
+message LeaderWithdrawApply {
+    bool disabled = 1; // 是否可提现
+    float min_money = 2; // 最小提现奖金
+    float max_money = 3; // 最大提现奖金
+}
+
+message LeaderWithdrawResponse {
+    LeaderWithdraw entity = 1;
+    Pager pager =2;
+    repeated LeaderWithdraw items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message LeaderWithdrawApplyResponse {
+    LeaderWithdrawApply entity = 1;
+    Pager pager =2;
+    repeated LeaderWithdrawApply items = 3;
+    Error error = 4;
+    Info info =5;
+}

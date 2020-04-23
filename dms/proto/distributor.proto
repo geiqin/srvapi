@@ -6,12 +6,12 @@ package geiqin.srv.dms;
 service MyDistributorService {
     //获取分销员信息
     rpc Get (Distributor) returns (DistributorResponse) {}
-    //查询我的一级分销员
-    rpc PrimarySearch (DistributorWhere) returns (DistributorResponse) {}
-    //查询我的二级分销员
-    rpc SecondSearch (DistributorWhere) returns (DistributorResponse) {}
     //检查用户是否是分销员
     rpc Exists (DistributorWhere) returns (DistributorResponse) {}
+    //获取我的团队数量
+    rpc TeamNum (DistributorTeamWhere) returns (DistributorTeamNumResponse) {}
+    //查询我的团队
+    rpc TeamSearch (DistributorTeamWhere) returns (DistributorTeamResponse) {}
 }
 
 service DistributorService {
@@ -25,6 +25,10 @@ service DistributorService {
     rpc Get (Distributor) returns (DistributorResponse) {}
     //分页查询销售员列表
     rpc Search (DistributorWhere) returns (DistributorResponse) {}
+    //获取销售员的团队数量
+    rpc TeamNum (DistributorTeamWhere) returns (DistributorTeamNumResponse) {}
+    //查询销售员团队
+    rpc TeamSearch (DistributorTeamWhere) returns (DistributorTeamResponse) {}
 }
 
 message Distributor {
@@ -68,12 +72,62 @@ message DistributorWhere {
     int64 id = 7;
     repeated int64 ids = 8;
     int64 inviter_id = 9;
+    repeated int64 inviter_ids = 10;
+    int32 status = 11;
+}
+
+// 分销员团队层级统计
+message DistributorTeamNum {
+    int32 primary_num = 1;
+    int32 second_num = 2;
+}
+
+// 分销员团队
+message DistributorTeam {
+    int64 id = 1;
+    int64 customer_id = 2;
+    int64 inviter_id = 3;
+    string display_name = 4;
+    string avatar_url = 5;
+    int32 rank_id = 6;
+    float recommend_amount = 15;
+    int32 recommend_num = 16;
+    int32 customer_num = 17;
+    float promotion_amount = 18;
+    int32 promotion_num = 19;
+    int32 status = 21;
+    string created_at = 22;
+}
+
+message DistributorTeamWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    int32 level = 4;
+    int64 distributor_id = 5;
+    int64 customer_id = 6;
 }
 
 message DistributorResponse {
     Distributor entity = 1;
     Pager pager =2;
     repeated Distributor items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message DistributorTeamNumResponse {
+    DistributorTeamNum entity = 1;
+    Pager pager =2;
+    repeated DistributorTeamNum items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message DistributorTeamResponse {
+    DistributorTeam entity = 1;
+    Pager pager =2;
+    repeated DistributorTeam items = 3;
     Error error = 4;
     Info info =5;
 }

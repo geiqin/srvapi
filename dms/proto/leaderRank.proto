@@ -1,0 +1,18 @@
+syntax = "proto3";
+import "rank.proto";
+package geiqin.srv.dms;
+
+service LeaderRankService {
+    //创建团长等级
+    rpc Create (Rank) returns (RankResponse) {}
+    //修改团长等级
+    rpc Update (Rank) returns (RankResponse) {}
+    //删除团长等级
+    rpc Delete (Rank) returns (RankResponse) {}
+    //获取团长等级
+    rpc Get (Rank) returns (RankResponse) {}
+    //获取团长等级列表
+    rpc List (Rank) returns (RankResponse) {}
+    //查询团长等级
+    rpc Search (RankWhere) returns (RankResponse) {}
+}

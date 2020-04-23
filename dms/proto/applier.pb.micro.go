@@ -151,7 +151,7 @@ type ApplierService interface {
 	//获取申请者信息
 	Get(ctx context.Context, in *Applier, opts ...client.CallOption) (*ApplierResponse, error)
 	//分页查询申请者
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ApplierResponse, error)
+	Search(ctx context.Context, in *ApplierWhere, opts ...client.CallOption) (*ApplierResponse, error)
 }
 
 type applierService struct {
@@ -186,7 +186,7 @@ func (c *applierService) Get(ctx context.Context, in *Applier, opts ...client.Ca
 	return out, nil
 }
 
-func (c *applierService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*ApplierResponse, error) {
+func (c *applierService) Search(ctx context.Context, in *ApplierWhere, opts ...client.CallOption) (*ApplierResponse, error) {
 	req := c.c.NewRequest(c.name, "ApplierService.Search", in)
 	out := new(ApplierResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -204,14 +204,14 @@ type ApplierServiceHandler interface {
 	//获取申请者信息
 	Get(context.Context, *Applier, *ApplierResponse) error
 	//分页查询申请者
-	Search(context.Context, *BaseWhere, *ApplierResponse) error
+	Search(context.Context, *ApplierWhere, *ApplierResponse) error
 }
 
 func RegisterApplierServiceHandler(s server.Server, hdlr ApplierServiceHandler, opts ...server.HandlerOption) error {
 	type applierService interface {
 		Check(ctx context.Context, in *Applier, out *ApplierResponse) error
 		Get(ctx context.Context, in *Applier, out *ApplierResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *ApplierResponse) error
+		Search(ctx context.Context, in *ApplierWhere, out *ApplierResponse) error
 	}
 	type ApplierService struct {
 		applierService
@@ -232,6 +232,6 @@ func (h *applierServiceHandler) Get(ctx context.Context, in *Applier, out *Appli
 	return h.ApplierServiceHandler.Get(ctx, in, out)
 }
 
-func (h *applierServiceHandler) Search(ctx context.Context, in *BaseWhere, out *ApplierResponse) error {
+func (h *applierServiceHandler) Search(ctx context.Context, in *ApplierWhere, out *ApplierResponse) error {
 	return h.ApplierServiceHandler.Search(ctx, in, out)
 }
