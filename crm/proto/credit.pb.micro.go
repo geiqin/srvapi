@@ -34,9 +34,9 @@ var _ server.Option
 // Client API for CreditService service
 
 type CreditService interface {
-	Search(ctx context.Context, in *CreditWhere, opts ...client.CallOption) (*CreditResponse, error)
 	Set(ctx context.Context, in *Credit, opts ...client.CallOption) (*CreditResponse, error)
 	Detail(ctx context.Context, in *Credit, opts ...client.CallOption) (*CreditResponse, error)
+	Search(ctx context.Context, in *CreditWhere, opts ...client.CallOption) (*CreditResponse, error)
 }
 
 type creditService struct {
@@ -49,16 +49,6 @@ func NewCreditService(name string, c client.Client) CreditService {
 		c:    c,
 		name: name,
 	}
-}
-
-func (c *creditService) Search(ctx context.Context, in *CreditWhere, opts ...client.CallOption) (*CreditResponse, error) {
-	req := c.c.NewRequest(c.name, "CreditService.Search", in)
-	out := new(CreditResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *creditService) Set(ctx context.Context, in *Credit, opts ...client.CallOption) (*CreditResponse, error) {
@@ -81,19 +71,29 @@ func (c *creditService) Detail(ctx context.Context, in *Credit, opts ...client.C
 	return out, nil
 }
 
+func (c *creditService) Search(ctx context.Context, in *CreditWhere, opts ...client.CallOption) (*CreditResponse, error) {
+	req := c.c.NewRequest(c.name, "CreditService.Search", in)
+	out := new(CreditResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for CreditService service
 
 type CreditServiceHandler interface {
-	Search(context.Context, *CreditWhere, *CreditResponse) error
 	Set(context.Context, *Credit, *CreditResponse) error
 	Detail(context.Context, *Credit, *CreditResponse) error
+	Search(context.Context, *CreditWhere, *CreditResponse) error
 }
 
 func RegisterCreditServiceHandler(s server.Server, hdlr CreditServiceHandler, opts ...server.HandlerOption) error {
 	type creditService interface {
-		Search(ctx context.Context, in *CreditWhere, out *CreditResponse) error
 		Set(ctx context.Context, in *Credit, out *CreditResponse) error
 		Detail(ctx context.Context, in *Credit, out *CreditResponse) error
+		Search(ctx context.Context, in *CreditWhere, out *CreditResponse) error
 	}
 	type CreditService struct {
 		creditService
@@ -106,14 +106,14 @@ type creditServiceHandler struct {
 	CreditServiceHandler
 }
 
-func (h *creditServiceHandler) Search(ctx context.Context, in *CreditWhere, out *CreditResponse) error {
-	return h.CreditServiceHandler.Search(ctx, in, out)
-}
-
 func (h *creditServiceHandler) Set(ctx context.Context, in *Credit, out *CreditResponse) error {
 	return h.CreditServiceHandler.Set(ctx, in, out)
 }
 
 func (h *creditServiceHandler) Detail(ctx context.Context, in *Credit, out *CreditResponse) error {
 	return h.CreditServiceHandler.Detail(ctx, in, out)
+}
+
+func (h *creditServiceHandler) Search(ctx context.Context, in *CreditWhere, out *CreditResponse) error {
+	return h.CreditServiceHandler.Search(ctx, in, out)
 }

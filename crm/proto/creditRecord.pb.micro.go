@@ -34,7 +34,14 @@ var _ server.Option
 // Client API for CreditRecordService service
 
 type CreditRecordService interface {
-	Create(ctx context.Context, in *CreditRecord, opts ...client.CallOption) (*CreditRecordResponse, error)
+	//增加信用额度（收入）
+	Income(ctx context.Context, in *CreditRecord, opts ...client.CallOption) (*CreditRecordResponse, error)
+	//消费信用额度(支出)
+	Expend(ctx context.Context, in *CreditRecord, opts ...client.CallOption) (*CreditRecordResponse, error)
+	//获取信用额度信息
+	Get(ctx context.Context, in *CreditRecord, opts ...client.CallOption) (*CreditRecordResponse, error)
+	//查询信用额度记录
+	Search(ctx context.Context, in *CreditRecordWhere, opts ...client.CallOption) (*CreditRecordResponse, error)
 }
 
 type creditRecordService struct {
@@ -49,8 +56,38 @@ func NewCreditRecordService(name string, c client.Client) CreditRecordService {
 	}
 }
 
-func (c *creditRecordService) Create(ctx context.Context, in *CreditRecord, opts ...client.CallOption) (*CreditRecordResponse, error) {
-	req := c.c.NewRequest(c.name, "CreditRecordService.Create", in)
+func (c *creditRecordService) Income(ctx context.Context, in *CreditRecord, opts ...client.CallOption) (*CreditRecordResponse, error) {
+	req := c.c.NewRequest(c.name, "CreditRecordService.Income", in)
+	out := new(CreditRecordResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *creditRecordService) Expend(ctx context.Context, in *CreditRecord, opts ...client.CallOption) (*CreditRecordResponse, error) {
+	req := c.c.NewRequest(c.name, "CreditRecordService.Expend", in)
+	out := new(CreditRecordResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *creditRecordService) Get(ctx context.Context, in *CreditRecord, opts ...client.CallOption) (*CreditRecordResponse, error) {
+	req := c.c.NewRequest(c.name, "CreditRecordService.Get", in)
+	out := new(CreditRecordResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *creditRecordService) Search(ctx context.Context, in *CreditRecordWhere, opts ...client.CallOption) (*CreditRecordResponse, error) {
+	req := c.c.NewRequest(c.name, "CreditRecordService.Search", in)
 	out := new(CreditRecordResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -62,12 +99,22 @@ func (c *creditRecordService) Create(ctx context.Context, in *CreditRecord, opts
 // Server API for CreditRecordService service
 
 type CreditRecordServiceHandler interface {
-	Create(context.Context, *CreditRecord, *CreditRecordResponse) error
+	//增加信用额度（收入）
+	Income(context.Context, *CreditRecord, *CreditRecordResponse) error
+	//消费信用额度(支出)
+	Expend(context.Context, *CreditRecord, *CreditRecordResponse) error
+	//获取信用额度信息
+	Get(context.Context, *CreditRecord, *CreditRecordResponse) error
+	//查询信用额度记录
+	Search(context.Context, *CreditRecordWhere, *CreditRecordResponse) error
 }
 
 func RegisterCreditRecordServiceHandler(s server.Server, hdlr CreditRecordServiceHandler, opts ...server.HandlerOption) error {
 	type creditRecordService interface {
-		Create(ctx context.Context, in *CreditRecord, out *CreditRecordResponse) error
+		Income(ctx context.Context, in *CreditRecord, out *CreditRecordResponse) error
+		Expend(ctx context.Context, in *CreditRecord, out *CreditRecordResponse) error
+		Get(ctx context.Context, in *CreditRecord, out *CreditRecordResponse) error
+		Search(ctx context.Context, in *CreditRecordWhere, out *CreditRecordResponse) error
 	}
 	type CreditRecordService struct {
 		creditRecordService
@@ -80,6 +127,18 @@ type creditRecordServiceHandler struct {
 	CreditRecordServiceHandler
 }
 
-func (h *creditRecordServiceHandler) Create(ctx context.Context, in *CreditRecord, out *CreditRecordResponse) error {
-	return h.CreditRecordServiceHandler.Create(ctx, in, out)
+func (h *creditRecordServiceHandler) Income(ctx context.Context, in *CreditRecord, out *CreditRecordResponse) error {
+	return h.CreditRecordServiceHandler.Income(ctx, in, out)
+}
+
+func (h *creditRecordServiceHandler) Expend(ctx context.Context, in *CreditRecord, out *CreditRecordResponse) error {
+	return h.CreditRecordServiceHandler.Expend(ctx, in, out)
+}
+
+func (h *creditRecordServiceHandler) Get(ctx context.Context, in *CreditRecord, out *CreditRecordResponse) error {
+	return h.CreditRecordServiceHandler.Get(ctx, in, out)
+}
+
+func (h *creditRecordServiceHandler) Search(ctx context.Context, in *CreditRecordWhere, out *CreditRecordResponse) error {
+	return h.CreditRecordServiceHandler.Search(ctx, in, out)
 }

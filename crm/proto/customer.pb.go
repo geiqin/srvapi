@@ -33,7 +33,7 @@ type Customer struct {
 	AvatarId             int64      `protobuf:"varint,10,opt,name=avatar_id,json=avatarId,proto3" json:"avatar_id,omitempty"`
 	AvatarUrl            string     `protobuf:"bytes,11,opt,name=avatar_url,json=avatarUrl,proto3" json:"avatar_url,omitempty"`
 	LevelId              int32      `protobuf:"varint,12,opt,name=level_id,json=levelId,proto3" json:"level_id,omitempty"`
-	Advance              float32    `protobuf:"fixed32,13,opt,name=advance,proto3" json:"advance,omitempty"`
+	Capital              float32    `protobuf:"fixed32,13,opt,name=capital,proto3" json:"advance,omitempty"`
 	GrowthValue          int32      `protobuf:"varint,14,opt,name=growth_value,json=growthValue,proto3" json:"growth_value,omitempty"`
 	Integral             int32      `protobuf:"varint,15,opt,name=integral,proto3" json:"integral,omitempty"`
 	TradedNum            int32      `protobuf:"varint,16,opt,name=traded_num,json=tradedNum,proto3" json:"traded_num,omitempty"`
@@ -174,9 +174,9 @@ func (m *Customer) GetLevelId() int32 {
 	return 0
 }
 
-func (m *Customer) GetAdvance() float32 {
+func (m *Customer) GetCapital() float32 {
 	if m != nil {
-		return m.Advance
+		return m.Capital
 	}
 	return 0
 }

@@ -1,0 +1,49 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm;
+
+service CapitalRecordService {
+  //增加余额（增加）
+  rpc Income (CapitalRecord) returns (CapitalRecordResponse) {}
+  //消费余额(支出)
+  rpc Expend (CapitalRecord) returns (CapitalRecordResponse) {}
+  //获得余额记录信息
+  rpc Get (CapitalRecord) returns (CapitalRecordResponse) {}
+  //查询余额记录信息
+  rpc Search (CapitalRecordWhere) returns (CapitalRecordResponse) {}
+}
+
+message CapitalRecord {
+  int64 id =1;
+  int64 customer_id =2;
+  int32 direction =3;
+  float amount =4;
+  float balance =5;
+  int32 type =6;
+  int64 order_id =7;
+  string order_sn =8;
+  string memo =9;
+  string created_at =10;
+  string updated_at =11; 
+}
+
+
+//查询参数
+message CapitalRecordWhere {
+  int32 paged = 1;
+  int32 page_size = 2;
+  //以下为自定义参数
+  string name = 3;
+  string realname =4;
+  string mobile =5;
+}
+
+
+//
+message CapitalRecordResponse {
+  CapitalRecord entity = 1;
+  Pager pager =2;
+  repeated CapitalRecord items = 3;
+  Error error = 4;
+  Info info =5;
+}

@@ -54,7 +54,7 @@ message Customer {
     int64 avatar_id =10;
     string avatar_url =11;
     int32 level_id =12;
-    float advance =13;
+    float capital =13;
     int32 growth_value =14;
     int32 integral =15;
     int32 traded_num =16;

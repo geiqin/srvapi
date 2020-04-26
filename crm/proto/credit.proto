@@ -5,9 +5,9 @@ import "creditRecord.proto";
 package geiqin.srv.crm;
 
 service CreditService {
-  rpc Search (CreditWhere) returns (CreditResponse) {}
   rpc Set (Credit) returns (CreditResponse) {}
   rpc Detail (Credit) returns (CreditResponse) {}
+  rpc Search (CreditWhere) returns (CreditResponse) {}
 }
 
 message Credit {
