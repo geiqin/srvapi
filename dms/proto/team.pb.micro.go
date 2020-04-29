@@ -34,7 +34,7 @@ var _ server.Option
 // Client API for MyTeamService service
 
 type MyTeamService interface {
-	//查询我的团队
+	//查询我的团队成员
 	Search(ctx context.Context, in *TeamWhere, opts ...client.CallOption) (*MyTeamResponse, error)
 }
 
@@ -63,7 +63,7 @@ func (c *myTeamService) Search(ctx context.Context, in *TeamWhere, opts ...clien
 // Server API for MyTeamService service
 
 type MyTeamServiceHandler interface {
-	//查询我的团队
+	//查询我的团队成员
 	Search(context.Context, *TeamWhere, *MyTeamResponse) error
 }
 
@@ -91,6 +91,8 @@ func (h *myTeamServiceHandler) Search(ctx context.Context, in *TeamWhere, out *M
 type TeamService interface {
 	//查询团队列表
 	Search(ctx context.Context, in *TeamWhere, opts ...client.CallOption) (*TeamResponse, error)
+	//查询团队成员
+	MembersSearch(ctx context.Context, in *TeamWhere, opts ...client.CallOption) (*MyTeamResponse, error)
 }
 
 type teamService struct {
@@ -115,16 +117,29 @@ func (c *teamService) Search(ctx context.Context, in *TeamWhere, opts ...client.
 	return out, nil
 }
 
+func (c *teamService) MembersSearch(ctx context.Context, in *TeamWhere, opts ...client.CallOption) (*MyTeamResponse, error) {
+	req := c.c.NewRequest(c.name, "TeamService.MembersSearch", in)
+	out := new(MyTeamResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for TeamService service
 
 type TeamServiceHandler interface {
 	//查询团队列表
 	Search(context.Context, *TeamWhere, *TeamResponse) error
+	//查询团队成员
+	MembersSearch(context.Context, *TeamWhere, *MyTeamResponse) error
 }
 
 func RegisterTeamServiceHandler(s server.Server, hdlr TeamServiceHandler, opts ...server.HandlerOption) error {
 	type teamService interface {
 		Search(ctx context.Context, in *TeamWhere, out *TeamResponse) error
+		MembersSearch(ctx context.Context, in *TeamWhere, out *MyTeamResponse) error
 	}
 	type TeamService struct {
 		teamService
@@ -139,4 +154,8 @@ type teamServiceHandler struct {
 
 func (h *teamServiceHandler) Search(ctx context.Context, in *TeamWhere, out *TeamResponse) error {
 	return h.TeamServiceHandler.Search(ctx, in, out)
+}
+
+func (h *teamServiceHandler) MembersSearch(ctx context.Context, in *TeamWhere, out *MyTeamResponse) error {
+	return h.TeamServiceHandler.MembersSearch(ctx, in, out)
 }

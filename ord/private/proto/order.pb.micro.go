@@ -238,6 +238,8 @@ type OrderService interface {
 	Display(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//查询订单
 	Search(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
+	//按条件获取订单列表
+	List(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
 	//订单备注
 	Remarks(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
 	//订单发货
@@ -342,6 +344,16 @@ func (c *orderService) Search(ctx context.Context, in *OrderWhere, opts ...clien
 	return out, nil
 }
 
+func (c *orderService) List(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.List", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderService) Remarks(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.Remarks", in)
 	out := new(OrderResponse)
@@ -411,6 +423,8 @@ type OrderServiceHandler interface {
 	Display(context.Context, *Order, *OrderResponse) error
 	//查询订单
 	Search(context.Context, *OrderWhere, *OrderResponse) error
+	//按条件获取订单列表
+	List(context.Context, *OrderWhere, *OrderResponse) error
 	//订单备注
 	Remarks(context.Context, *Order, *OrderResponse) error
 	//订单发货
@@ -433,6 +447,7 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		Get(ctx context.Context, in *Order, out *OrderResponse) error
 		Display(ctx context.Context, in *Order, out *OrderResponse) error
 		Search(ctx context.Context, in *OrderWhere, out *OrderResponse) error
+		List(ctx context.Context, in *OrderWhere, out *OrderResponse) error
 		Remarks(ctx context.Context, in *Order, out *OrderResponse) error
 		Ship(ctx context.Context, in *Delivery, out *DeliveryResponse) error
 		RepairShip(ctx context.Context, in *Delivery, out *DeliveryResponse) error
@@ -480,6 +495,10 @@ func (h *orderServiceHandler) Display(ctx context.Context, in *Order, out *Order
 
 func (h *orderServiceHandler) Search(ctx context.Context, in *OrderWhere, out *OrderResponse) error {
 	return h.OrderServiceHandler.Search(ctx, in, out)
+}
+
+func (h *orderServiceHandler) List(ctx context.Context, in *OrderWhere, out *OrderResponse) error {
+	return h.OrderServiceHandler.List(ctx, in, out)
 }
 
 func (h *orderServiceHandler) Remarks(ctx context.Context, in *Order, out *OrderResponse) error {

@@ -41,7 +41,7 @@ type StatisticsService interface {
 	//获取订单近30日客单统计明细数据
 	OrderDays(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderDayStatsResponse, error)
 	//获取店铺未处理订单数量
-	Unhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderStatsResponse, error)
+	Unhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderHandledStatsResponse, error)
 	//查询用户购买的商品
 	CustomerGoods(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderStatsResponse, error)
 	//获取用户订单统计数据
@@ -90,9 +90,9 @@ func (c *statisticsService) OrderDays(ctx context.Context, in *StatsRequest, opt
 	return out, nil
 }
 
-func (c *statisticsService) Unhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderStatsResponse, error) {
+func (c *statisticsService) Unhandled(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderHandledStatsResponse, error) {
 	req := c.c.NewRequest(c.name, "Statistics.Unhandled", in)
-	out := new(OrderStatsResponse)
+	out := new(OrderHandledStatsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -130,7 +130,7 @@ type StatisticsHandler interface {
 	//获取订单近30日客单统计明细数据
 	OrderDays(context.Context, *StatsRequest, *OrderDayStatsResponse) error
 	//获取店铺未处理订单数量
-	Unhandled(context.Context, *StatsRequest, *OrderStatsResponse) error
+	Unhandled(context.Context, *StatsRequest, *OrderHandledStatsResponse) error
 	//查询用户购买的商品
 	CustomerGoods(context.Context, *StatsRequest, *OrderStatsResponse) error
 	//获取用户订单统计数据
@@ -142,7 +142,7 @@ func RegisterStatisticsHandler(s server.Server, hdlr StatisticsHandler, opts ...
 		OrderTotal(ctx context.Context, in *StatsRequest, out *OrderStatsResponse) error
 		TodayTotal(ctx context.Context, in *StatsRequest, out *OrderDayStatsResponse) error
 		OrderDays(ctx context.Context, in *StatsRequest, out *OrderDayStatsResponse) error
-		Unhandled(ctx context.Context, in *StatsRequest, out *OrderStatsResponse) error
+		Unhandled(ctx context.Context, in *StatsRequest, out *OrderHandledStatsResponse) error
 		CustomerGoods(ctx context.Context, in *StatsRequest, out *OrderStatsResponse) error
 		CustomerOrder(ctx context.Context, in *StatsRequest, out *OrderStatsResponse) error
 	}
@@ -169,7 +169,7 @@ func (h *statisticsHandler) OrderDays(ctx context.Context, in *StatsRequest, out
 	return h.StatisticsHandler.OrderDays(ctx, in, out)
 }
 
-func (h *statisticsHandler) Unhandled(ctx context.Context, in *StatsRequest, out *OrderStatsResponse) error {
+func (h *statisticsHandler) Unhandled(ctx context.Context, in *StatsRequest, out *OrderHandledStatsResponse) error {
 	return h.StatisticsHandler.Unhandled(ctx, in, out)
 }
 

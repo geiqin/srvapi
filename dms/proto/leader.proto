@@ -37,6 +37,10 @@ message Leader {
     repeated int64 ids = 15;
     Rank rank = 16;
     Distributor distributor = 17;
+    string leader_name = 18;// 团长昵称
+    string mobile = 19;// 手机号
+    string avatar_url = 20;// 用户头像
+    string rank_name = 21;// 等级名称
 }
 
 message LeaderWhere {

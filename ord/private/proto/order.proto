@@ -43,6 +43,8 @@ service OrderService {
     rpc Display (Order) returns (OrderResponse) {}
     //查询订单
     rpc Search (OrderWhere) returns (OrderResponse) {}
+    //按条件获取订单列表
+    rpc List (OrderWhere) returns (OrderResponse) {}
     //订单备注
     rpc Remarks (Order) returns (OrderResponse) {}
     //订单发货
@@ -104,7 +106,6 @@ message Order {
     repeated OrderDetail details = 55;
     Customer customer = 56;
     repeated Delivery delivery = 57;
-
 }
 
 message Customer {
@@ -121,7 +122,6 @@ message Customer {
     string avatar_url =11;
 }
 
-
 message OrderWhere {
     int32 paged =1;
     int32 page_size =2;
@@ -134,16 +134,16 @@ message OrderWhere {
     bool can_cod = 9;
     int64 customer_id = 10;
     float payment = 11;
-    bool is_free = 13;
-    string status = 26;
-    string pay_status = 27;
-    string refund_status = 28;
-    string deliver_status = 29;
-    int32 branch_id = 32;
-    int32 flag = 41;
-    bool safeguarded = 43;
-    string start_at = 51;
-    string end_at = 52;
+    bool is_free = 12;
+    string status = 13;
+    string pay_status = 14;
+    string refund_status = 15;
+    string deliver_status = 16;
+    int32 branch_id = 17;
+    int32 flag = 18;
+    bool safeguarded = 19;
+    string start_at = 20;
+    string end_at = 21;
 }
 
 

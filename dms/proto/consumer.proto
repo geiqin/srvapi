@@ -47,6 +47,7 @@ message ConsumerWhere{
     string start_date = 5; //开始日期
     string end_date = 6;   //结束日期
     int64 customer_id = 7;
+    int64 distributor_id = 8; //所属分销员ID
 }
 
 message ConsumerResponse {

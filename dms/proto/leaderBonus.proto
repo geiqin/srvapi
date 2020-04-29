@@ -43,7 +43,7 @@ message LeaderBonusWhere {
     string start_date = 9;
     string end_date = 10;
     repeated int64 ids = 11;
-    int64 leader_d = 12;
+    int64 leader_id = 12;
 }
 
 message LeaderPerformance {

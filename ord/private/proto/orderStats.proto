@@ -16,8 +16,10 @@ message OrderStats {
     int32 new_customer_num  = 10;
     int32 old_customer_num  = 11;
     string statistic_date  = 12;
-    string created_at  = 13;
-    string updated_at  = 14;
+    float customer_unit_price = 13;
+    string last_stats_at = 14;
+    string created_at  = 15;
+    string updated_at  = 16;
 }
 
 message OrderDayStats {

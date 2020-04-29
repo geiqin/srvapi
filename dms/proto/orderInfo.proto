@@ -17,6 +17,21 @@ service OrderService {
     rpc Search (OrderInfoWhere) returns (OrderInfoResponse) {}
 }
 
+//分红订单
+service BonusOrderService {
+    // 获取分红订单详情
+    rpc Get (OrderInfoWhere) returns (OrderInfoResponse) {}
+    // 查询分红订单列表
+    rpc Search (OrderInfoWhere) returns (OrderInfoResponse) {}
+}
+// 我的分红订单
+service MyBonusOrderService {
+    // 获取分红订单详情
+    rpc Get (OrderInfoWhere) returns (OrderInfoResponse) {}
+    // 查询分红订单列表
+    rpc Search (OrderInfoWhere) returns (OrderInfoResponse) {}
+}
+
 message OrderInfo {
     int64 id = 1;
     int64 order_id = 2;
@@ -35,6 +50,9 @@ message OrderInfo {
     bool can_logistics = 17; // 是否可查看物流
     string order_created_at = 18; // 下单时间
     repeated OrderDetailInfo order_details = 19;
+    int64 leader_id = 20;// 团长ID
+    string leader_name = 21; // 团长昵称
+    string leader_mobile = 22; // 团长手机号码
 }
 
 message OrderDetailInfo {
@@ -64,6 +82,7 @@ message OrderInfoWhere {
     repeated int64 ids = 9;
     int64 distributor_id = 10;
     int64 customer_id = 11;
+    int64 leader_id = 12;
 }
 
 

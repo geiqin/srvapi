@@ -110,7 +110,7 @@ func (h *myLeaderServiceHandler) Exists(ctx context.Context, in *LeaderWhere, ou
 type LeaderService interface {
 	//获取团长信息
 	Get(ctx context.Context, in *Leader, opts ...client.CallOption) (*LeaderResponse, error)
-	//分页查询团长列表
+	//查询团长列表
 	Search(ctx context.Context, in *LeaderWhere, opts ...client.CallOption) (*LeaderResponse, error)
 }
 
@@ -151,7 +151,7 @@ func (c *leaderService) Search(ctx context.Context, in *LeaderWhere, opts ...cli
 type LeaderServiceHandler interface {
 	//获取团长信息
 	Get(context.Context, *Leader, *LeaderResponse) error
-	//分页查询团长列表
+	//查询团长列表
 	Search(context.Context, *LeaderWhere, *LeaderResponse) error
 }
 
