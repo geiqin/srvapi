@@ -34,10 +34,6 @@ var _ server.Option
 // Client API for ChargeService service
 
 type ChargeService interface {
-	//创建支付凭证
-	Create(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error)
-	//修改支付凭证
-	Update(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error)
 	//删除支付凭证
 	Delete(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error)
 	//获得支付凭证
@@ -56,26 +52,6 @@ func NewChargeService(name string, c client.Client) ChargeService {
 		c:    c,
 		name: name,
 	}
-}
-
-func (c *chargeService) Create(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error) {
-	req := c.c.NewRequest(c.name, "ChargeService.Create", in)
-	out := new(ChargeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *chargeService) Update(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error) {
-	req := c.c.NewRequest(c.name, "ChargeService.Update", in)
-	out := new(ChargeResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
 }
 
 func (c *chargeService) Delete(ctx context.Context, in *Charge, opts ...client.CallOption) (*ChargeResponse, error) {
@@ -111,10 +87,6 @@ func (c *chargeService) Search(ctx context.Context, in *BaseWhere, opts ...clien
 // Server API for ChargeService service
 
 type ChargeServiceHandler interface {
-	//创建支付凭证
-	Create(context.Context, *Charge, *ChargeResponse) error
-	//修改支付凭证
-	Update(context.Context, *Charge, *ChargeResponse) error
 	//删除支付凭证
 	Delete(context.Context, *Charge, *ChargeResponse) error
 	//获得支付凭证
@@ -125,8 +97,6 @@ type ChargeServiceHandler interface {
 
 func RegisterChargeServiceHandler(s server.Server, hdlr ChargeServiceHandler, opts ...server.HandlerOption) error {
 	type chargeService interface {
-		Create(ctx context.Context, in *Charge, out *ChargeResponse) error
-		Update(ctx context.Context, in *Charge, out *ChargeResponse) error
 		Delete(ctx context.Context, in *Charge, out *ChargeResponse) error
 		Get(ctx context.Context, in *Charge, out *ChargeResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *ChargeResponse) error
@@ -140,14 +110,6 @@ func RegisterChargeServiceHandler(s server.Server, hdlr ChargeServiceHandler, op
 
 type chargeServiceHandler struct {
 	ChargeServiceHandler
-}
-
-func (h *chargeServiceHandler) Create(ctx context.Context, in *Charge, out *ChargeResponse) error {
-	return h.ChargeServiceHandler.Create(ctx, in, out)
-}
-
-func (h *chargeServiceHandler) Update(ctx context.Context, in *Charge, out *ChargeResponse) error {
-	return h.ChargeServiceHandler.Update(ctx, in, out)
 }
 
 func (h *chargeServiceHandler) Delete(ctx context.Context, in *Charge, out *ChargeResponse) error {

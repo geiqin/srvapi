@@ -6,10 +6,6 @@ package geiqin.srv.pay;
 
 //支付凭证
 service ChargeService {
-    //创建支付凭证
-    rpc Create (Charge) returns (ChargeResponse) {}
-    //修改支付凭证
-    rpc Update (Charge) returns (ChargeResponse) {}
     //删除支付凭证
     rpc Delete (Charge) returns (ChargeResponse) {}
     //获得支付凭证
@@ -30,28 +26,29 @@ message Charge{
     string open_id = 8;
     string target_user_type = 9;
     int64 target_user_id = 10;
-    int64 order_id = 11;
-    string order_sn = 12;
-    float amount = 13;
-    string currency = 14;
-    string subject = 15;
-    string body = 16;
-    string extra = 17;
-    string channel = 18;
-    string trade_type = 19;
-    string transaction_no = 20;
-    float refunded_amount = 21;
-    string failure_code = 22;
-    string failure_msg = 23;
-    string credential = 24;
-    string client_ip = 25;
-    string memo = 26;
-    string metadata = 27;
-    string status = 28;
-    string paid_at = 29;
-    string expired_at = 30;
-    string created_at = 31;
-    string updated_at = 32;
+    string type = 11;
+    int64 order_id = 12;
+    string order_sn = 13;
+    float amount = 14;
+    string currency = 15;
+    string subject = 16;
+    string body = 17;
+    string extra = 18;
+    string channel = 19;
+    string trade_type = 20;
+    string transaction_no = 21;
+    float refunded_amount = 22;
+    string failure_code = 23;
+    string failure_msg = 24;
+    string credential = 25;
+    string client_ip = 26;
+    string memo = 27;
+    string metadata = 28;
+    string status = 29;
+    string paid_at = 30;
+    string expired_at = 31;
+    string created_at = 32;
+    string updated_at = 33;
 }
 
 
