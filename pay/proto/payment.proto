@@ -40,18 +40,17 @@ message WeixinResponse {
     Info info =5;
 }
 
-
-
 //支付请求
 message PaymentRequest{
-    int64 order_id = 1;
-    string order_sn = 12;
-    float amount = 13;
-    string currency = 14;
-    string subject = 15;
-    string body = 16;
-    string extra = 17;
-    string channel = 18;
+    string type =1;
+    int64 order_id = 2;
+    string order_sn = 3;
+    float amount = 4;
+    string currency = 5;
+    string subject = 6;
+    string body = 7;
+    string extra = 8;
+    string channel = 9;
 }
 
 
