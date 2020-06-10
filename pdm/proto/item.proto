@@ -10,6 +10,7 @@ import "brand.proto";
 import "sku.proto";
 import "cat.proto";
 import "spec.proto";
+import "itemPresale.proto";
 
 service ItemService {
     //创建商品
@@ -102,6 +103,8 @@ message Item {
     repeated  Spec specs  =50; //(详情显示专用)
     Sku skuitem =51; //单一规格商品（在购物车，营销活动等场景用到）
     int64 sku_id =52; //单一规格商品输入参数（在获取规格商品时使用）
+    bool is_presale = 53;
+    ItemPresale item_presale = 54;
 }
 
 message GoodsWhere {
@@ -130,6 +133,15 @@ message ItemWhere {
     int64	id	= 18;
     repeated int64 ids = 19;
     int64 sku_id = 20; //单一规格商品输入参数（在获取规格商品时使用）
+    string cat_slug = 21;
+}
+
+message MemberGoods {
+    int64 item_id = 1;
+    int64 sku_id = 2;
+    float min_member_price = 3;
+    float max_member_price = 4;
+    float discount = 5;
 }
 
 message ItemResponse {

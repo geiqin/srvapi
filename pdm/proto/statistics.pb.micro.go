@@ -34,7 +34,14 @@ var _ server.Option
 // Client API for Statistics service
 
 type StatisticsService interface {
-	ItemSale(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*ItemSaleStatsResponse, error)
+	//商品汇总统计
+	ItemAmount(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*ItemStatsResponse, error)
+	//商品销量统计
+	ItemSale(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*ItemSaleStatsInfoResponse, error)
+	//货品销量统计
+	SkuSale(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*SkuSaleStatsResponse, error)
+	//统计重置
+	Reset(ctx context.Context, in *Empty, opts ...client.CallOption) (*ItemStatsResponse, error)
 }
 
 type statisticsService struct {
@@ -49,9 +56,39 @@ func NewStatisticsService(name string, c client.Client) StatisticsService {
 	}
 }
 
-func (c *statisticsService) ItemSale(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*ItemSaleStatsResponse, error) {
+func (c *statisticsService) ItemAmount(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*ItemStatsResponse, error) {
+	req := c.c.NewRequest(c.name, "Statistics.ItemAmount", in)
+	out := new(ItemStatsResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *statisticsService) ItemSale(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*ItemSaleStatsInfoResponse, error) {
 	req := c.c.NewRequest(c.name, "Statistics.ItemSale", in)
-	out := new(ItemSaleStatsResponse)
+	out := new(ItemSaleStatsInfoResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *statisticsService) SkuSale(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*SkuSaleStatsResponse, error) {
+	req := c.c.NewRequest(c.name, "Statistics.SkuSale", in)
+	out := new(SkuSaleStatsResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *statisticsService) Reset(ctx context.Context, in *Empty, opts ...client.CallOption) (*ItemStatsResponse, error) {
+	req := c.c.NewRequest(c.name, "Statistics.Reset", in)
+	out := new(ItemStatsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -62,12 +99,22 @@ func (c *statisticsService) ItemSale(ctx context.Context, in *StatsRequest, opts
 // Server API for Statistics service
 
 type StatisticsHandler interface {
-	ItemSale(context.Context, *StatsRequest, *ItemSaleStatsResponse) error
+	//商品汇总统计
+	ItemAmount(context.Context, *StatsRequest, *ItemStatsResponse) error
+	//商品销量统计
+	ItemSale(context.Context, *StatsRequest, *ItemSaleStatsInfoResponse) error
+	//货品销量统计
+	SkuSale(context.Context, *StatsRequest, *SkuSaleStatsResponse) error
+	//统计重置
+	Reset(context.Context, *Empty, *ItemStatsResponse) error
 }
 
 func RegisterStatisticsHandler(s server.Server, hdlr StatisticsHandler, opts ...server.HandlerOption) error {
 	type statistics interface {
-		ItemSale(ctx context.Context, in *StatsRequest, out *ItemSaleStatsResponse) error
+		ItemAmount(ctx context.Context, in *StatsRequest, out *ItemStatsResponse) error
+		ItemSale(ctx context.Context, in *StatsRequest, out *ItemSaleStatsInfoResponse) error
+		SkuSale(ctx context.Context, in *StatsRequest, out *SkuSaleStatsResponse) error
+		Reset(ctx context.Context, in *Empty, out *ItemStatsResponse) error
 	}
 	type Statistics struct {
 		statistics
@@ -80,6 +127,18 @@ type statisticsHandler struct {
 	StatisticsHandler
 }
 
-func (h *statisticsHandler) ItemSale(ctx context.Context, in *StatsRequest, out *ItemSaleStatsResponse) error {
+func (h *statisticsHandler) ItemAmount(ctx context.Context, in *StatsRequest, out *ItemStatsResponse) error {
+	return h.StatisticsHandler.ItemAmount(ctx, in, out)
+}
+
+func (h *statisticsHandler) ItemSale(ctx context.Context, in *StatsRequest, out *ItemSaleStatsInfoResponse) error {
 	return h.StatisticsHandler.ItemSale(ctx, in, out)
+}
+
+func (h *statisticsHandler) SkuSale(ctx context.Context, in *StatsRequest, out *SkuSaleStatsResponse) error {
+	return h.StatisticsHandler.SkuSale(ctx, in, out)
+}
+
+func (h *statisticsHandler) Reset(ctx context.Context, in *Empty, out *ItemStatsResponse) error {
+	return h.StatisticsHandler.Reset(ctx, in, out)
 }

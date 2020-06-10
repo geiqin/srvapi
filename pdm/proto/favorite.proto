@@ -11,7 +11,7 @@ service MyFavoriteService {
     rpc Create (Favorite) returns (FavoriteResponse) {}
     rpc Delete (FavoriteWhere) returns (FavoriteResponse) {}
     rpc Check (Favorite) returns (FavoriteResponse) {}
-    rpc Search (FavoriteWhere) returns (FavoriteResponse) {}
+    rpc Search (FavoriteWhere) returns (ItemDisplayResponse) {}
 }
 
 message Favorite {

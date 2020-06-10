@@ -46,11 +46,11 @@ type ItemDisplay struct {
 	ReviewNum             int32          `protobuf:"varint,23,opt,name=review_num,json=reviewNum,proto3" json:"review_num,omitempty"`
 	ViewCount             int32          `protobuf:"varint,24,opt,name=view_count,json=viewCount,proto3" json:"view_count,omitempty"`
 	Brand                 *Brand         `protobuf:"bytes,25,opt,name=brand,proto3" json:"brand,omitempty"`
-	Cats                  []*Cat         `protobuf:"bytes,26,rep,name=cats,proto3" json:"cats,omitempty"`
-	Tags                  []*Tag         `protobuf:"bytes,27,rep,name=tags,proto3" json:"tags,omitempty"`
+	Cats                  []*Cat         `protobuf:"bytes,26,rep,name=cats,proto3" json:"cats,omitempty" gorm:"many2many:item_cats;"`
+	Tags                  []*Tag         `protobuf:"bytes,27,rep,name=tags,proto3" json:"tags,omitempty" gorm:"many2many:item_tags;"`
 	Skus                  []*Sku         `protobuf:"bytes,28,rep,name=skus,proto3" json:"skus,omitempty"`
 	Galleries             []*ItemGallery `protobuf:"bytes,29,rep,name=galleries,proto3" json:"galleries,omitempty"`
-	Specs                 []*Spec        `protobuf:"bytes,30,rep,name=specs,proto3" json:"specs,omitempty"`
+	Specs                 []*Spec        `protobuf:"bytes,30,rep,name=specs,proto3" json:"specs,omitempty" gorm:"many2many:spec_item_indices;"`
 	IsMemberGoods         bool           `protobuf:"varint,31,opt,name=is_member_goods,json=isMemberGoods,proto3" json:"is_member_goods,omitempty"`
 	IsBuy                 bool           `protobuf:"varint,32,opt,name=is_buy,json=isBuy,proto3" json:"is_buy,omitempty"`
 	IsMember              bool           `protobuf:"varint,33,opt,name=is_member,json=isMember,proto3" json:"is_member,omitempty"`

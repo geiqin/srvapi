@@ -90,7 +90,7 @@ type MyFavoriteService interface {
 	Create(ctx context.Context, in *Favorite, opts ...client.CallOption) (*FavoriteResponse, error)
 	Delete(ctx context.Context, in *FavoriteWhere, opts ...client.CallOption) (*FavoriteResponse, error)
 	Check(ctx context.Context, in *Favorite, opts ...client.CallOption) (*FavoriteResponse, error)
-	Search(ctx context.Context, in *FavoriteWhere, opts ...client.CallOption) (*FavoriteResponse, error)
+	Search(ctx context.Context, in *FavoriteWhere, opts ...client.CallOption) (*ItemDisplayResponse, error)
 }
 
 type myFavoriteService struct {
@@ -135,9 +135,9 @@ func (c *myFavoriteService) Check(ctx context.Context, in *Favorite, opts ...cli
 	return out, nil
 }
 
-func (c *myFavoriteService) Search(ctx context.Context, in *FavoriteWhere, opts ...client.CallOption) (*FavoriteResponse, error) {
+func (c *myFavoriteService) Search(ctx context.Context, in *FavoriteWhere, opts ...client.CallOption) (*ItemDisplayResponse, error) {
 	req := c.c.NewRequest(c.name, "MyFavoriteService.Search", in)
-	out := new(FavoriteResponse)
+	out := new(ItemDisplayResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -151,7 +151,7 @@ type MyFavoriteServiceHandler interface {
 	Create(context.Context, *Favorite, *FavoriteResponse) error
 	Delete(context.Context, *FavoriteWhere, *FavoriteResponse) error
 	Check(context.Context, *Favorite, *FavoriteResponse) error
-	Search(context.Context, *FavoriteWhere, *FavoriteResponse) error
+	Search(context.Context, *FavoriteWhere, *ItemDisplayResponse) error
 }
 
 func RegisterMyFavoriteServiceHandler(s server.Server, hdlr MyFavoriteServiceHandler, opts ...server.HandlerOption) error {
@@ -159,7 +159,7 @@ func RegisterMyFavoriteServiceHandler(s server.Server, hdlr MyFavoriteServiceHan
 		Create(ctx context.Context, in *Favorite, out *FavoriteResponse) error
 		Delete(ctx context.Context, in *FavoriteWhere, out *FavoriteResponse) error
 		Check(ctx context.Context, in *Favorite, out *FavoriteResponse) error
-		Search(ctx context.Context, in *FavoriteWhere, out *FavoriteResponse) error
+		Search(ctx context.Context, in *FavoriteWhere, out *ItemDisplayResponse) error
 	}
 	type MyFavoriteService struct {
 		myFavoriteService
@@ -184,6 +184,6 @@ func (h *myFavoriteServiceHandler) Check(ctx context.Context, in *Favorite, out 
 	return h.MyFavoriteServiceHandler.Check(ctx, in, out)
 }
 
-func (h *myFavoriteServiceHandler) Search(ctx context.Context, in *FavoriteWhere, out *FavoriteResponse) error {
+func (h *myFavoriteServiceHandler) Search(ctx context.Context, in *FavoriteWhere, out *ItemDisplayResponse) error {
 	return h.MyFavoriteServiceHandler.Search(ctx, in, out)
 }

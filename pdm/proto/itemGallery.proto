@@ -12,10 +12,11 @@ message ItemGallery {
     string	belong	=4;
     int64	media_id	=5;
     string	media_url	=6;
-    bool	defaulted	=7;
-    string	created_at	=8;
-    string	updated_at	=9;
-    repeated  int64 ids  =10;
+    int32 sorting =7;
+    bool defaulted	=8;
+    string created_at	=9;
+    string updated_at	=10;
+    repeated  int64 ids  =11;
 }
 
 message ItemGalleryResponse {

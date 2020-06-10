@@ -7,14 +7,48 @@ message ItemSaleStats {
     int64 id = 1;
     int64 item_id = 2;
     int32 sale_num = 3;
-    string	created_at	=4;
-    string	updated_at	=5;
+    string last_stats_at = 4;
+    string	created_at	= 5;
+    string	updated_at	= 6;
 }
 
 message ItemSaleStatsResponse {
     ItemSaleStats entity = 1;
     Pager pager =2;
     repeated ItemSaleStats items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message ItemSaleDayStats {
+    int64 id = 1;
+    int64 item_id = 2;
+    int32 sale_num = 3;
+    string	statistic_date	=4;
+    string	created_at	=5;
+    string	updated_at	=6;
+}
+
+message ItemSaleDayStatsResponse {
+    ItemSaleDayStats entity = 1;
+    Pager pager =2;
+    repeated ItemSaleDayStats items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message ItemSaleStatsInfo {
+    int64 item_id = 1;
+    string name	= 2;
+    string item_sn = 3;
+    string thumb_url = 4;
+    int32 sold_num = 5;
+}
+
+message ItemSaleStatsInfoResponse {
+    ItemSaleStatsInfo entity = 1;
+    Pager pager =2;
+    repeated ItemSaleStatsInfo items = 3;
     Error error = 4;
     Info info =5;
 }
