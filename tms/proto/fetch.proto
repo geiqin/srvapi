@@ -66,6 +66,7 @@ message Fetch {
   repeated Times fetch_times = 24;
   repeated FetchGallery galleries = 25;
   AreaInfo area = 26;
+  float distance = 27;
 }
 
 
