@@ -1,0 +1,32 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.tms;
+
+service ShipperService {
+  rpc Create (Shipper) returns (ShipperResponse) {}
+  rpc Update (Shipper) returns (ShipperResponse) {}
+  rpc Get (Shipper) returns (ShipperResponse) {}
+  rpc Search (BaseWhere) returns (ShipperResponse) {}
+  rpc List (BaseWhere) returns (ShipperResponse) {}
+}
+
+message Shipper {
+  int32 id =1;
+  string code =2;
+  string name =3;
+  string logo_id =4;
+  string logo_url =5;
+  string tel =6;
+  string memo =7;
+  bool foreign =8;
+}
+
+
+message ShipperResponse {
+  Shipper entity = 1;
+  Pager pager =2;
+  repeated Shipper items = 3;
+  Error error = 4;
+  Info info =5;
+}
+

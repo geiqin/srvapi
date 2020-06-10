@@ -1,0 +1,39 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.tms;
+
+service TrackService {
+  rpc Query (Track) returns (TrackResponse) {}
+}
+
+message Track {
+  int64 id =1;
+  string shipper_code =2;
+  string order_code =3;
+  string logistic_code =4;
+  bool success =5;
+  string reason =6;
+  string state =7;
+  string stateEx =8;
+  string location  =9;
+  repeated  TrackDetail details=10;
+}
+
+message TrackDetail {
+  int64 id =1;
+  int32 track_id =2;
+  string accept_time =3;
+  string accept_station =4;
+  string location =5;
+  string action =6;
+  string remark =7;
+}
+
+message TrackResponse {
+  Track entity = 1;
+  Pager pager =2;
+  repeated Track items = 3;
+  Error error = 4;
+  Info info =5;
+}
+

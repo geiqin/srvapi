@@ -1,0 +1,26 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.tms;
+
+service SettingService {
+  rpc Get(Setting) returns (SettingResponse) {}
+}
+
+message Setting {
+  int32 id = 1;
+  bool is_delivery = 2;
+  bool is_fetch = 3;
+  bool is_express = 4;
+  int32 express_charging_method = 5;
+  string created_at = 6;
+  string updated_at = 7;
+}
+
+message SettingResponse {
+  Setting entity = 1;
+  Pager pager = 2;
+  repeated Setting items = 3;
+  Error error = 4;
+  Info info = 5;
+}
+

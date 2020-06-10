@@ -1,0 +1,64 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.tms;
+
+// 退货地址
+service LocationReturnService {
+    rpc Create (Location) returns (LocationResponse) {}
+    rpc Update (Location) returns (LocationResponse) {}
+    rpc Get (LocationWhere) returns (LocationResponse) {}
+    rpc Delete (LocationWhere) returns (LocationResponse) {}
+    rpc Search (LocationWhere) returns (LocationResponse) {}
+    rpc List (LocationWhere) returns (LocationResponse) {}
+    rpc GetDefaulted (Empty) returns (LocationResponse) {}
+    rpc Defaulted (LocationWhere) returns (LocationResponse) {}
+}
+
+// 发货地址
+service LocationDeliverService {
+    rpc Create (Location) returns (LocationResponse) {}
+    rpc Update (Location) returns (LocationResponse) {}
+    rpc Get (LocationWhere) returns (LocationResponse) {}
+    rpc Delete (LocationWhere) returns (LocationResponse) {}
+    rpc Search (LocationWhere) returns (LocationResponse) {}
+    rpc List (LocationWhere) returns (LocationResponse) {}
+    rpc GetDefaulted (Empty) returns (LocationResponse) {}
+    rpc Defaulted (LocationWhere) returns (LocationResponse) {}
+}
+
+message LocationWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    string keywords = 4;
+    int64 id = 5;
+    repeated int64 ids = 6;
+    string type = 7;
+}
+
+message Location {
+    int64 id = 1;
+    string type = 2;
+    string name = 3;
+    int64 area_id = 4;
+    string addr = 5;
+    string lng = 6;
+    string lat = 7;
+    string contact = 8;
+    string tel = 9;
+    string mobile = 10;
+    string memo = 11;
+    bool defaulted = 12;
+    string created_at = 13;
+    string updated_at = 14;
+}
+
+
+message LocationResponse {
+    Location entity = 1;
+    Pager pager =2;
+    repeated Location items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
