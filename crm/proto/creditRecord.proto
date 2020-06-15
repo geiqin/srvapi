@@ -22,9 +22,10 @@ message CreditRecord {
   int32 type =6;
   int64 order_id =7;
   string order_sn =8;
-  string memo =9;
-  string created_at =10;
-  string updated_at =11;
+  float balance =9;
+  string memo =10;
+  string created_at =11;
+  string updated_at =12;
 }
 
 
