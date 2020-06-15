@@ -38,6 +38,7 @@ message Buying {
     float limit_discount_money = 21; // 限时活动优惠金额
     float reward_money = 22; // 满减送活动优惠金额
     float coupon_money = 23; // 优惠券优惠金额
+    string delivery_method = 24; // 下单选择的配送方式
 }
 
 //购买清单明细
@@ -57,7 +58,6 @@ message BuyingItem {
     GoodsInfo goods =13;
 }
 
-
 //购买清单请求(订单下单使用)
 message BuyingRequest{
     int64 customer_id =1; //后台下单专用
@@ -69,6 +69,7 @@ message BuyingRequest{
     int64 use_ticket_id =7; //选中的优惠劵凭证ID
     string platform_source =8; //下单来源
     repeated BuyingItem items =9;
+    string delivery_method = 10; // 下单选择的配送方式
 }
 
 message BuyingResponse {

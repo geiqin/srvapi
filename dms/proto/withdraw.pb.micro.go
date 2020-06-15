@@ -147,7 +147,11 @@ func (h *myWithdrawServiceHandler) Search(ctx context.Context, in *WithdrawWhere
 
 type WithdrawService interface {
 	//审核佣金提现
-	Check(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
+	Check(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
+	//确认打款（自动打款）
+	ConfirmAuto(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
+	//确认打款（手动打款）
+	ConfirmManual(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
 	//获取佣金提现信息
 	Get(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
 	//分页查询佣金提现记录
@@ -166,8 +170,28 @@ func NewWithdrawService(name string, c client.Client) WithdrawService {
 	}
 }
 
-func (c *withdrawService) Check(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error) {
+func (c *withdrawService) Check(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
 	req := c.c.NewRequest(c.name, "WithdrawService.Check", in)
+	out := new(WithdrawResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *withdrawService) ConfirmAuto(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
+	req := c.c.NewRequest(c.name, "WithdrawService.ConfirmAuto", in)
+	out := new(WithdrawResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *withdrawService) ConfirmManual(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
+	req := c.c.NewRequest(c.name, "WithdrawService.ConfirmManual", in)
 	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -200,7 +224,11 @@ func (c *withdrawService) Search(ctx context.Context, in *WithdrawWhere, opts ..
 
 type WithdrawServiceHandler interface {
 	//审核佣金提现
-	Check(context.Context, *Withdraw, *WithdrawResponse) error
+	Check(context.Context, *WithdrawWhere, *WithdrawResponse) error
+	//确认打款（自动打款）
+	ConfirmAuto(context.Context, *WithdrawWhere, *WithdrawResponse) error
+	//确认打款（手动打款）
+	ConfirmManual(context.Context, *WithdrawWhere, *WithdrawResponse) error
 	//获取佣金提现信息
 	Get(context.Context, *Withdraw, *WithdrawResponse) error
 	//分页查询佣金提现记录
@@ -209,7 +237,9 @@ type WithdrawServiceHandler interface {
 
 func RegisterWithdrawServiceHandler(s server.Server, hdlr WithdrawServiceHandler, opts ...server.HandlerOption) error {
 	type withdrawService interface {
-		Check(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
+		Check(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
+		ConfirmAuto(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
+		ConfirmManual(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
 		Get(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
 		Search(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
 	}
@@ -224,8 +254,16 @@ type withdrawServiceHandler struct {
 	WithdrawServiceHandler
 }
 
-func (h *withdrawServiceHandler) Check(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {
+func (h *withdrawServiceHandler) Check(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
 	return h.WithdrawServiceHandler.Check(ctx, in, out)
+}
+
+func (h *withdrawServiceHandler) ConfirmAuto(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
+	return h.WithdrawServiceHandler.ConfirmAuto(ctx, in, out)
+}
+
+func (h *withdrawServiceHandler) ConfirmManual(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
+	return h.WithdrawServiceHandler.ConfirmManual(ctx, in, out)
 }
 
 func (h *withdrawServiceHandler) Get(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {

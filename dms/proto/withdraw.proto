@@ -1,6 +1,8 @@
 syntax = "proto3";
 import "common.proto";
 import "distributor.proto";
+import "leader.proto";
+import "customerInfo.proto";
 
 package geiqin.srv.dms;
 
@@ -19,7 +21,11 @@ service MyWithdrawService {
 //佣金提现服务(后台专用)
 service WithdrawService {
     //审核佣金提现
-    rpc Check (Withdraw) returns (WithdrawResponse) {}
+    rpc Check (WithdrawWhere) returns (WithdrawResponse) {}
+    //确认打款（自动打款）
+    rpc ConfirmAuto (WithdrawWhere) returns (WithdrawResponse) {}
+    //确认打款（手动打款）
+    rpc ConfirmManual (WithdrawWhere) returns (WithdrawResponse) {}
     //获取佣金提现信息
     rpc Get (Withdraw) returns (WithdrawResponse) {}
     //分页查询佣金提现记录
@@ -29,21 +35,30 @@ service WithdrawService {
 message Withdraw {
     int64 id = 1;
     string withdraw_sn = 2;
-    int64 distributor_id = 3;
-    float money = 4;
-    int64 transfer_id = 5;
-    string transactionId_id = 6;
-    string method = 7;
-    int32 cash_account_id= 8;
-    string payee_name = 9;
-    string payee_account = 10;
-    string payee_bank = 11;
-    string platform_account =12;
-    string memo = 13;
-    string status = 14;
-    string created_at = 15;
-    string updated_at = 16;
-    Distributor distributor = 17;
+    string type = 3;
+    int64 customer_id = 4;
+    int64 target_id = 5;
+    float money = 6;
+    float service_money = 7;
+    int64 transfer_id = 8;
+    string transactionId_id = 9;
+    string method = 10;
+    int32 cash_account_id= 11;
+    string payee_name = 12;
+    string payee_account = 13;
+    string payee_bank = 14;
+    string platform_account =15;
+    string payment = 16;
+    string memo = 17;
+    int32 status = 18;
+    string failure = 19;
+    string audit_at = 20;
+    string payment_at = 21;
+    string created_at = 22;
+    string updated_at = 23;
+    Distributor distributor = 24;
+    Leader leader = 25;
+    CustomerInfo customer = 26;
 }
 
 message WithdrawWhere {
@@ -53,14 +68,23 @@ message WithdrawWhere {
     //base params
     int64 id = 4;
     repeated int64 ids = 5;
-    string status = 6;
-    int64 distributor_id = 7;
+    int32 status = 6;
+    int64 customer_id = 7;
+    string start_at = 8;
+    string end_at = 9;
+    string type = 10;
+    int64 target_id = 11;
+    string method = 12;
+    string payment = 13;
+    bool ok = 14;
+    string failure = 15;
 }
 
 message WithdrawApply {
     bool disabled = 1; // 是否可提现
     float min_money = 2; // 最小提现佣金
     float max_money = 3; // 最大提现佣金
+    float service_money_rate = 4; // 手续费比例
 }
 
 message WithdrawResponse {

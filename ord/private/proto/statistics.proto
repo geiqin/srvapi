@@ -1,8 +1,14 @@
 syntax = "proto3";
+import "common.proto";
 import "orderStats.proto";
 import "orderUnhandledStats.proto";
 
 package geiqin.srv.ord.private;
+
+service MyStatistics {
+    //获取用户未处理订单数量
+    rpc Unhandled (StatsRequest) returns (CustomerOrderHandledStatsResponse) {}
+}
 
 service Statistics {
     //获取订单统计数据
@@ -14,14 +20,23 @@ service Statistics {
     //获取店铺未处理订单数量
     rpc Unhandled (StatsRequest) returns (OrderHandledStatsResponse) {}
     //查询用户购买的商品
-    rpc CustomerGoods (StatsRequest) returns (OrderStatsResponse) {}
+    rpc CustomerGoods (StatsRequest) returns (CustomerGoodsResponse) {}
     //获取用户订单统计数据
-    rpc CustomerOrder (StatsRequest) returns (OrderStatsResponse) {}
+    rpc CustomerOrder (StatsRequest) returns (CustomerOrderStatsResponse) {}
+    //获取用户未处理订单数量
+    rpc CustomerUnhandled (StatsRequest) returns (CustomerOrderHandledStatsResponse) {}
+    //重置统计
+    rpc Reset (Empty) returns (OrderStatsResponse) {}
 }
 
 message StatsRequest {
-    string type=1;
-    int32 days=2;
+    string type = 1;
+    int32 days = 2;
     int32 paged = 3;
     int32 page_size = 4;
+    int64 customer_id = 5;
+    string start_at = 6;
+    string end_at = 7;
+    string statistic_at = 8;
+
 }

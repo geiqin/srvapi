@@ -14,7 +14,7 @@ service CommissionService {
     rpc SearchPerformance (PerformanceWhere) returns (PerformanceResponse) {}
     // 结算佣金
     rpc Settlement (CommissionWhere) returns (CommissionResponse) {}
-    //
+    rpc Recalculate (CommissionWhere) returns (CommissionResponse) {}
 }
 
 message Commission {

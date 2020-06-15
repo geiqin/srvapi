@@ -21,8 +21,6 @@ service Payment{
   rpc AliApp (PayRequest) returns (PayResponse) {}
 }
 
-
-
 //支付请求参数
 message PayRequest {
   int64 order_id = 1;

@@ -35,13 +35,13 @@ var _ server.Option
 
 type MyLeaderWithdrawService interface {
 	//申请奖金提现
-	Apply(ctx context.Context, in *LeaderWithdrawApply, opts ...client.CallOption) (*LeaderWithdrawApplyResponse, error)
+	Apply(ctx context.Context, in *WithdrawApply, opts ...client.CallOption) (*WithdrawApplyResponse, error)
 	//提交奖金提现申请
-	Submit(ctx context.Context, in *LeaderWithdraw, opts ...client.CallOption) (*LeaderWithdrawResponse, error)
+	Submit(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
 	//获取奖金提现信息
-	Get(ctx context.Context, in *LeaderWithdraw, opts ...client.CallOption) (*LeaderWithdrawResponse, error)
+	Get(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
 	//查询我的提现记录
-	Search(ctx context.Context, in *LeaderWithdrawWhere, opts ...client.CallOption) (*LeaderWithdrawResponse, error)
+	Search(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
 }
 
 type myLeaderWithdrawService struct {
@@ -56,9 +56,9 @@ func NewMyLeaderWithdrawService(name string, c client.Client) MyLeaderWithdrawSe
 	}
 }
 
-func (c *myLeaderWithdrawService) Apply(ctx context.Context, in *LeaderWithdrawApply, opts ...client.CallOption) (*LeaderWithdrawApplyResponse, error) {
+func (c *myLeaderWithdrawService) Apply(ctx context.Context, in *WithdrawApply, opts ...client.CallOption) (*WithdrawApplyResponse, error) {
 	req := c.c.NewRequest(c.name, "MyLeaderWithdrawService.Apply", in)
-	out := new(LeaderWithdrawApplyResponse)
+	out := new(WithdrawApplyResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -66,9 +66,9 @@ func (c *myLeaderWithdrawService) Apply(ctx context.Context, in *LeaderWithdrawA
 	return out, nil
 }
 
-func (c *myLeaderWithdrawService) Submit(ctx context.Context, in *LeaderWithdraw, opts ...client.CallOption) (*LeaderWithdrawResponse, error) {
+func (c *myLeaderWithdrawService) Submit(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error) {
 	req := c.c.NewRequest(c.name, "MyLeaderWithdrawService.Submit", in)
-	out := new(LeaderWithdrawResponse)
+	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -76,9 +76,9 @@ func (c *myLeaderWithdrawService) Submit(ctx context.Context, in *LeaderWithdraw
 	return out, nil
 }
 
-func (c *myLeaderWithdrawService) Get(ctx context.Context, in *LeaderWithdraw, opts ...client.CallOption) (*LeaderWithdrawResponse, error) {
+func (c *myLeaderWithdrawService) Get(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error) {
 	req := c.c.NewRequest(c.name, "MyLeaderWithdrawService.Get", in)
-	out := new(LeaderWithdrawResponse)
+	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -86,9 +86,9 @@ func (c *myLeaderWithdrawService) Get(ctx context.Context, in *LeaderWithdraw, o
 	return out, nil
 }
 
-func (c *myLeaderWithdrawService) Search(ctx context.Context, in *LeaderWithdrawWhere, opts ...client.CallOption) (*LeaderWithdrawResponse, error) {
+func (c *myLeaderWithdrawService) Search(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
 	req := c.c.NewRequest(c.name, "MyLeaderWithdrawService.Search", in)
-	out := new(LeaderWithdrawResponse)
+	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -100,21 +100,21 @@ func (c *myLeaderWithdrawService) Search(ctx context.Context, in *LeaderWithdraw
 
 type MyLeaderWithdrawServiceHandler interface {
 	//申请奖金提现
-	Apply(context.Context, *LeaderWithdrawApply, *LeaderWithdrawApplyResponse) error
+	Apply(context.Context, *WithdrawApply, *WithdrawApplyResponse) error
 	//提交奖金提现申请
-	Submit(context.Context, *LeaderWithdraw, *LeaderWithdrawResponse) error
+	Submit(context.Context, *Withdraw, *WithdrawResponse) error
 	//获取奖金提现信息
-	Get(context.Context, *LeaderWithdraw, *LeaderWithdrawResponse) error
+	Get(context.Context, *Withdraw, *WithdrawResponse) error
 	//查询我的提现记录
-	Search(context.Context, *LeaderWithdrawWhere, *LeaderWithdrawResponse) error
+	Search(context.Context, *WithdrawWhere, *WithdrawResponse) error
 }
 
 func RegisterMyLeaderWithdrawServiceHandler(s server.Server, hdlr MyLeaderWithdrawServiceHandler, opts ...server.HandlerOption) error {
 	type myLeaderWithdrawService interface {
-		Apply(ctx context.Context, in *LeaderWithdrawApply, out *LeaderWithdrawApplyResponse) error
-		Submit(ctx context.Context, in *LeaderWithdraw, out *LeaderWithdrawResponse) error
-		Get(ctx context.Context, in *LeaderWithdraw, out *LeaderWithdrawResponse) error
-		Search(ctx context.Context, in *LeaderWithdrawWhere, out *LeaderWithdrawResponse) error
+		Apply(ctx context.Context, in *WithdrawApply, out *WithdrawApplyResponse) error
+		Submit(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
+		Get(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
+		Search(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
 	}
 	type MyLeaderWithdrawService struct {
 		myLeaderWithdrawService
@@ -127,31 +127,35 @@ type myLeaderWithdrawServiceHandler struct {
 	MyLeaderWithdrawServiceHandler
 }
 
-func (h *myLeaderWithdrawServiceHandler) Apply(ctx context.Context, in *LeaderWithdrawApply, out *LeaderWithdrawApplyResponse) error {
+func (h *myLeaderWithdrawServiceHandler) Apply(ctx context.Context, in *WithdrawApply, out *WithdrawApplyResponse) error {
 	return h.MyLeaderWithdrawServiceHandler.Apply(ctx, in, out)
 }
 
-func (h *myLeaderWithdrawServiceHandler) Submit(ctx context.Context, in *LeaderWithdraw, out *LeaderWithdrawResponse) error {
+func (h *myLeaderWithdrawServiceHandler) Submit(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {
 	return h.MyLeaderWithdrawServiceHandler.Submit(ctx, in, out)
 }
 
-func (h *myLeaderWithdrawServiceHandler) Get(ctx context.Context, in *LeaderWithdraw, out *LeaderWithdrawResponse) error {
+func (h *myLeaderWithdrawServiceHandler) Get(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {
 	return h.MyLeaderWithdrawServiceHandler.Get(ctx, in, out)
 }
 
-func (h *myLeaderWithdrawServiceHandler) Search(ctx context.Context, in *LeaderWithdrawWhere, out *LeaderWithdrawResponse) error {
+func (h *myLeaderWithdrawServiceHandler) Search(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
 	return h.MyLeaderWithdrawServiceHandler.Search(ctx, in, out)
 }
 
 // Client API for LeaderWithdrawService service
 
 type LeaderWithdrawService interface {
-	//审核奖金提现
-	Check(ctx context.Context, in *LeaderWithdraw, opts ...client.CallOption) (*LeaderWithdrawResponse, error)
-	//获取奖金提现信息
-	Get(ctx context.Context, in *LeaderWithdraw, opts ...client.CallOption) (*LeaderWithdrawResponse, error)
-	//分页查询奖金提现记录
-	Search(ctx context.Context, in *LeaderWithdrawWhere, opts ...client.CallOption) (*LeaderWithdrawResponse, error)
+	//审核佣金提现
+	Check(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
+	//确认打款（自动打款）
+	ConfirmAuto(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
+	//确认打款（手动打款）
+	ConfirmManual(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
+	//获取佣金提现信息
+	Get(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error)
+	//分页查询佣金提现记录
+	Search(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error)
 }
 
 type leaderWithdrawService struct {
@@ -166,9 +170,9 @@ func NewLeaderWithdrawService(name string, c client.Client) LeaderWithdrawServic
 	}
 }
 
-func (c *leaderWithdrawService) Check(ctx context.Context, in *LeaderWithdraw, opts ...client.CallOption) (*LeaderWithdrawResponse, error) {
+func (c *leaderWithdrawService) Check(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
 	req := c.c.NewRequest(c.name, "LeaderWithdrawService.Check", in)
-	out := new(LeaderWithdrawResponse)
+	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -176,9 +180,29 @@ func (c *leaderWithdrawService) Check(ctx context.Context, in *LeaderWithdraw, o
 	return out, nil
 }
 
-func (c *leaderWithdrawService) Get(ctx context.Context, in *LeaderWithdraw, opts ...client.CallOption) (*LeaderWithdrawResponse, error) {
+func (c *leaderWithdrawService) ConfirmAuto(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
+	req := c.c.NewRequest(c.name, "LeaderWithdrawService.ConfirmAuto", in)
+	out := new(WithdrawResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leaderWithdrawService) ConfirmManual(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
+	req := c.c.NewRequest(c.name, "LeaderWithdrawService.ConfirmManual", in)
+	out := new(WithdrawResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *leaderWithdrawService) Get(ctx context.Context, in *Withdraw, opts ...client.CallOption) (*WithdrawResponse, error) {
 	req := c.c.NewRequest(c.name, "LeaderWithdrawService.Get", in)
-	out := new(LeaderWithdrawResponse)
+	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -186,9 +210,9 @@ func (c *leaderWithdrawService) Get(ctx context.Context, in *LeaderWithdraw, opt
 	return out, nil
 }
 
-func (c *leaderWithdrawService) Search(ctx context.Context, in *LeaderWithdrawWhere, opts ...client.CallOption) (*LeaderWithdrawResponse, error) {
+func (c *leaderWithdrawService) Search(ctx context.Context, in *WithdrawWhere, opts ...client.CallOption) (*WithdrawResponse, error) {
 	req := c.c.NewRequest(c.name, "LeaderWithdrawService.Search", in)
-	out := new(LeaderWithdrawResponse)
+	out := new(WithdrawResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -199,19 +223,25 @@ func (c *leaderWithdrawService) Search(ctx context.Context, in *LeaderWithdrawWh
 // Server API for LeaderWithdrawService service
 
 type LeaderWithdrawServiceHandler interface {
-	//审核奖金提现
-	Check(context.Context, *LeaderWithdraw, *LeaderWithdrawResponse) error
-	//获取奖金提现信息
-	Get(context.Context, *LeaderWithdraw, *LeaderWithdrawResponse) error
-	//分页查询奖金提现记录
-	Search(context.Context, *LeaderWithdrawWhere, *LeaderWithdrawResponse) error
+	//审核佣金提现
+	Check(context.Context, *WithdrawWhere, *WithdrawResponse) error
+	//确认打款（自动打款）
+	ConfirmAuto(context.Context, *WithdrawWhere, *WithdrawResponse) error
+	//确认打款（手动打款）
+	ConfirmManual(context.Context, *WithdrawWhere, *WithdrawResponse) error
+	//获取佣金提现信息
+	Get(context.Context, *Withdraw, *WithdrawResponse) error
+	//分页查询佣金提现记录
+	Search(context.Context, *WithdrawWhere, *WithdrawResponse) error
 }
 
 func RegisterLeaderWithdrawServiceHandler(s server.Server, hdlr LeaderWithdrawServiceHandler, opts ...server.HandlerOption) error {
 	type leaderWithdrawService interface {
-		Check(ctx context.Context, in *LeaderWithdraw, out *LeaderWithdrawResponse) error
-		Get(ctx context.Context, in *LeaderWithdraw, out *LeaderWithdrawResponse) error
-		Search(ctx context.Context, in *LeaderWithdrawWhere, out *LeaderWithdrawResponse) error
+		Check(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
+		ConfirmAuto(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
+		ConfirmManual(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
+		Get(ctx context.Context, in *Withdraw, out *WithdrawResponse) error
+		Search(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error
 	}
 	type LeaderWithdrawService struct {
 		leaderWithdrawService
@@ -224,14 +254,22 @@ type leaderWithdrawServiceHandler struct {
 	LeaderWithdrawServiceHandler
 }
 
-func (h *leaderWithdrawServiceHandler) Check(ctx context.Context, in *LeaderWithdraw, out *LeaderWithdrawResponse) error {
+func (h *leaderWithdrawServiceHandler) Check(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
 	return h.LeaderWithdrawServiceHandler.Check(ctx, in, out)
 }
 
-func (h *leaderWithdrawServiceHandler) Get(ctx context.Context, in *LeaderWithdraw, out *LeaderWithdrawResponse) error {
+func (h *leaderWithdrawServiceHandler) ConfirmAuto(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
+	return h.LeaderWithdrawServiceHandler.ConfirmAuto(ctx, in, out)
+}
+
+func (h *leaderWithdrawServiceHandler) ConfirmManual(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
+	return h.LeaderWithdrawServiceHandler.ConfirmManual(ctx, in, out)
+}
+
+func (h *leaderWithdrawServiceHandler) Get(ctx context.Context, in *Withdraw, out *WithdrawResponse) error {
 	return h.LeaderWithdrawServiceHandler.Get(ctx, in, out)
 }
 
-func (h *leaderWithdrawServiceHandler) Search(ctx context.Context, in *LeaderWithdrawWhere, out *LeaderWithdrawResponse) error {
+func (h *leaderWithdrawServiceHandler) Search(ctx context.Context, in *WithdrawWhere, out *WithdrawResponse) error {
 	return h.LeaderWithdrawServiceHandler.Search(ctx, in, out)
 }

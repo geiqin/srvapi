@@ -60,6 +60,7 @@ message Distributor {
     repeated Distributor children = 26;
     repeated int64 ids = 27;
     string mobile = 28;
+    int32 statement_num = 29;
 }
 
 message DistributorWhere {

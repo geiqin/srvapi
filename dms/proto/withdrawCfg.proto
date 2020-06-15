@@ -1,0 +1,28 @@
+syntax = "proto3";
+import "common.proto";
+
+package geiqin.srv.dms;
+
+service WithdrawCfgService {
+    //获取提现配置信息
+    rpc Get (Empty) returns (WithdrawCfgResponse) {}
+    //设置提现配置信息
+    rpc Set (WithdrawCfg) returns (WithdrawCfgResponse) {}
+}
+
+message WithdrawCfg {
+    int64 id = 1;
+    float min_money = 2;//最小提现金额
+    float daily_limit = 3;//每日提现上限
+    float service_money_rate = 4;//提现手续费比例
+    string created_at = 5;
+    string updated_at = 6;
+}
+
+message WithdrawCfgResponse {
+    WithdrawCfg entity = 1;
+    Pager pager =2;
+    repeated WithdrawCfg items = 3;
+    Error error = 4;
+    Info info =5;
+}

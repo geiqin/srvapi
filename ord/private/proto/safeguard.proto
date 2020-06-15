@@ -1,5 +1,6 @@
 syntax = "proto3";
 import "common.proto";
+import "order.proto";
 import "orderDetail.proto";
 import "areaInfo.proto";
 package geiqin.srv.ord.private;
@@ -22,9 +23,9 @@ service MySafeguardService {
     // 提交退货物流信息
     rpc ExpressConfirm (Safeguard) returns (SafeguardResponse) {}
     // 获取维权信息（基本信息）
-    rpc Get (Safeguard) returns (SafeguardResponse) {}
+    rpc Get (SafeguardWhere) returns (SafeguardResponse) {}
     // 获取维权信息
-    rpc Display (Safeguard) returns (SafeguardResponse) {}
+    rpc Display (SafeguardWhere) returns (SafeguardResponse) {}
     // 退换/售后查询
     rpc Search (SafeguardWhere) returns (SafeguardResponse) {}
 
@@ -38,9 +39,9 @@ service SafeguardService {
     //维权订单退款
     rpc Refund (Safeguard) returns (SafeguardResponse) {}
     // 获取维权信息（基本信息）
-    rpc Get (Safeguard) returns (SafeguardResponse) {}
+    rpc Get (SafeguardWhere) returns (SafeguardResponse) {}
     // 获取维权信息
-    rpc Display (Safeguard) returns (SafeguardResponse) {}
+    rpc Display (SafeguardWhere) returns (SafeguardResponse) {}
     //查询维权信息
     rpc Search (SafeguardWhere) returns (SafeguardResponse) {}
 }
@@ -76,7 +77,7 @@ message Safeguard {
     repeated SafeguardImage images = 28;
     SafeguardAddress address = 29;// 维权收货人地址
     SafeguardReturnExpress return_express = 30;// 买家退货填写的退货物流信息
-
+    Order order = 31;
 }
 
 message SafeguardDetail {
@@ -130,9 +131,10 @@ message SafeguardWhere {
     string type = 8;
     string keywords_type = 9;
     string keywords = 10;
-    repeated int64 order_detail_ids = 11;
-    string status = 12;
-    string safeguard_sn = 13;
+    int64 order_detail_id = 11;
+    repeated int64 order_detail_ids = 12;
+    string status = 13;
+    string safeguard_sn = 14;
 }
 
 message SafeguardType {

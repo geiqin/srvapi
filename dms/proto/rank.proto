@@ -52,7 +52,11 @@ message Rank {
     repeated int32 ids =22;
     string type = 23;
     float team_rate = 24;
-
+    bool is_checked = 25;
+    int64 agreement_id = 26;
+    int64 introduce_id = 27;
+    int32 weight = 28;
+    bool is_bonus_same = 29;
 }
 
 message RankResponse {

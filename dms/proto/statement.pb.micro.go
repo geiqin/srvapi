@@ -112,6 +112,8 @@ type StatementService interface {
 	Get(ctx context.Context, in *Statement, opts ...client.CallOption) (*StatementResponse, error)
 	//查询佣金收支明细
 	Search(ctx context.Context, in *StatementWhere, opts ...client.CallOption) (*StatementResponse, error)
+	//整合数据（表结构发生改变：队长分红收支明细和佣金收支明细整合成一张表）版本升级时执行
+	Upgrade(ctx context.Context, in *Empty, opts ...client.CallOption) (*StatementResponse, error)
 }
 
 type statementService struct {
@@ -146,6 +148,16 @@ func (c *statementService) Search(ctx context.Context, in *StatementWhere, opts 
 	return out, nil
 }
 
+func (c *statementService) Upgrade(ctx context.Context, in *Empty, opts ...client.CallOption) (*StatementResponse, error) {
+	req := c.c.NewRequest(c.name, "StatementService.Upgrade", in)
+	out := new(StatementResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for StatementService service
 
 type StatementServiceHandler interface {
@@ -153,12 +165,15 @@ type StatementServiceHandler interface {
 	Get(context.Context, *Statement, *StatementResponse) error
 	//查询佣金收支明细
 	Search(context.Context, *StatementWhere, *StatementResponse) error
+	//整合数据（表结构发生改变：队长分红收支明细和佣金收支明细整合成一张表）版本升级时执行
+	Upgrade(context.Context, *Empty, *StatementResponse) error
 }
 
 func RegisterStatementServiceHandler(s server.Server, hdlr StatementServiceHandler, opts ...server.HandlerOption) error {
 	type statementService interface {
 		Get(ctx context.Context, in *Statement, out *StatementResponse) error
 		Search(ctx context.Context, in *StatementWhere, out *StatementResponse) error
+		Upgrade(ctx context.Context, in *Empty, out *StatementResponse) error
 	}
 	type StatementService struct {
 		statementService
@@ -177,4 +192,8 @@ func (h *statementServiceHandler) Get(ctx context.Context, in *Statement, out *S
 
 func (h *statementServiceHandler) Search(ctx context.Context, in *StatementWhere, out *StatementResponse) error {
 	return h.StatementServiceHandler.Search(ctx, in, out)
+}
+
+func (h *statementServiceHandler) Upgrade(ctx context.Context, in *Empty, out *StatementResponse) error {
+	return h.StatementServiceHandler.Upgrade(ctx, in, out)
 }

@@ -31,4 +31,5 @@ message OrderDetail {
     int64  present_id = 27;
     string created_at  = 28;
     string updated_at  = 29;
+
 }

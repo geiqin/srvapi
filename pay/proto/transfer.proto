@@ -8,33 +8,50 @@ package geiqin.srv.pay;
 service TransferService {
     //创建转账
     rpc Create (Transfer) returns (TransferResponse) {}
-    //修改转账
-    rpc Update (Transfer) returns (TransferResponse) {}
-    //删除转账
-    rpc Delete (Transfer) returns (TransferResponse) {}
     //获得转账信息
     rpc Get (Transfer) returns (TransferResponse) {}
     //查询转账
-    rpc Search (BaseWhere) returns (TransferResponse) {}
+    rpc Search (TransferWhere) returns (TransferResponse) {}
 }
+
+
 
 //转账
 message Transfer{
     int64 id = 1;
-    int64 settle_account_id = 2;
-    int64 store_id = 3;
-    string app_id = 4;
+    string transfer_sn = 2;
+    int64 paygate_id = 3;
+    string type = 4;
     string channel = 5;
-    string order_no = 6;
-    float amount = 7;
-    string currency = 8;
-    string type = 9;
-    string meno = 10;
-    string extra = 11;
-    string metadata = 12;
-    string status = 13;
-    string created_at = 14;
-    string updated_at = 15;
+    string recipient = 6;
+    string real_name = 7;
+    float amount = 8;
+    string currency = 9;
+    string order_type = 10;
+    int64 order_id = 11;
+    string order_sn = 12;
+    string memo = 13;
+    string extra = 14;
+    string metadata = 15;
+    string status = 16;
+    string finished_at =17;
+    string created_at = 18;
+    string updated_at = 19;
+}
+
+
+message TransferWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    //base params
+    int64 id = 4;
+    string type = 5;
+    string real_name = 6;
+    string keywords = 8;
+    string status =9;
+    string start_date =13;
+    string end_date =14;
 }
 
 

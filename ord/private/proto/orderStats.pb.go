@@ -26,17 +26,17 @@ type OrderStats struct {
 	CouponAmount         float32  `protobuf:"fixed32,3,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount,omitempty"`
 	ExpressAmount        float32  `protobuf:"fixed32,4,opt,name=express_amount,json=expressAmount,proto3" json:"express_amount,omitempty"`
 	RefundAmount         float32  `protobuf:"fixed32,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"`
+	OrderNum             int32    `protobuf:"varint,16,opt,name=order_num,json=orderNum,proto3" json:"order_num,omitempty"`
 	PayNum               int32    `protobuf:"varint,6,opt,name=pay_num,json=payNum,proto3" json:"pay_num,omitempty"`
 	BuyerNum             int32    `protobuf:"varint,7,opt,name=buyer_num,json=buyerNum,proto3" json:"buyer_num,omitempty"`
 	GoodsNum             int32    `protobuf:"varint,8,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num,omitempty"`
 	RefundNum            int32    `protobuf:"varint,9,opt,name=refund_num,json=refundNum,proto3" json:"refund_num,omitempty"`
 	NewCustomerNum       int32    `protobuf:"varint,10,opt,name=new_customer_num,json=newCustomerNum,proto3" json:"new_customer_num,omitempty"`
 	OldCustomerNum       int32    `protobuf:"varint,11,opt,name=old_customer_num,json=oldCustomerNum,proto3" json:"old_customer_num,omitempty"`
-	StatisticDate        string   `protobuf:"bytes,12,opt,name=statistic_date,json=statisticDate,proto3" json:"statistic_date,omitempty"`
-	CustomerUnitPrice    float32  `protobuf:"fixed32,13,opt,name=customer_unit_price,json=customerUnitPrice,proto3" json:"customer_unit_price,omitempty"`
-	LastStatsAt          string   `protobuf:"bytes,14,opt,name=last_stats_at,json=lastStatsAt,proto3" json:"last_stats_at,omitempty"`
-	CreatedAt            string   `protobuf:"bytes,15,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,16,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CustomerUnitPrice    float32  `protobuf:"fixed32,12,opt,name=customer_unit_price,json=customerUnitPrice,proto3" json:"customer_unit_price,omitempty"`
+	LastStatsAt          string   `protobuf:"bytes,13,opt,name=last_stats_at,json=lastStatsAt,proto3" json:"last_stats_at,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -102,6 +102,13 @@ func (m *OrderStats) GetRefundAmount() float32 {
 	return 0
 }
 
+func (m *OrderStats) GetOrderNum() int32 {
+	if m != nil {
+		return m.OrderNum
+	}
+	return 0
+}
+
 func (m *OrderStats) GetPayNum() int32 {
 	if m != nil {
 		return m.PayNum
@@ -144,13 +151,6 @@ func (m *OrderStats) GetOldCustomerNum() int32 {
 	return 0
 }
 
-func (m *OrderStats) GetStatisticDate() string {
-	if m != nil {
-		return m.StatisticDate
-	}
-	return ""
-}
-
 func (m *OrderStats) GetCustomerUnitPrice() float32 {
 	if m != nil {
 		return m.CustomerUnitPrice
@@ -185,14 +185,17 @@ type OrderDayStats struct {
 	CouponAmount         float32  `protobuf:"fixed32,3,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount,omitempty"`
 	ExpressAmount        float32  `protobuf:"fixed32,4,opt,name=express_amount,json=expressAmount,proto3" json:"express_amount,omitempty"`
 	RefundAmount         float32  `protobuf:"fixed32,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"`
+	OrderNum             int32    `protobuf:"varint,16,opt,name=order_num,json=orderNum,proto3" json:"order_num,omitempty"`
 	PayNum               int32    `protobuf:"varint,6,opt,name=pay_num,json=payNum,proto3" json:"pay_num,omitempty"`
 	BuyerNum             int32    `protobuf:"varint,7,opt,name=buyer_num,json=buyerNum,proto3" json:"buyer_num,omitempty"`
 	GoodsNum             int32    `protobuf:"varint,8,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num,omitempty"`
 	RefundNum            int32    `protobuf:"varint,9,opt,name=refund_num,json=refundNum,proto3" json:"refund_num,omitempty"`
 	NewCustomerNum       int32    `protobuf:"varint,10,opt,name=new_customer_num,json=newCustomerNum,proto3" json:"new_customer_num,omitempty"`
 	OldCustomerNum       int32    `protobuf:"varint,11,opt,name=old_customer_num,json=oldCustomerNum,proto3" json:"old_customer_num,omitempty"`
-	CreatedAt            string   `protobuf:"bytes,12,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	UpdatedAt            string   `protobuf:"bytes,13,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	CustomerUnitPrice    float32  `protobuf:"fixed32,12,opt,name=customer_unit_price,json=customerUnitPrice,proto3" json:"customer_unit_price,omitempty"`
+	StatisticAt          string   `protobuf:"bytes,13,opt,name=statistic_at,json=statisticAt,proto3" json:"statistic_at,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,14,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,15,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -258,6 +261,13 @@ func (m *OrderDayStats) GetRefundAmount() float32 {
 	return 0
 }
 
+func (m *OrderDayStats) GetOrderNum() int32 {
+	if m != nil {
+		return m.OrderNum
+	}
+	return 0
+}
+
 func (m *OrderDayStats) GetPayNum() int32 {
 	if m != nil {
 		return m.PayNum
@@ -300,6 +310,20 @@ func (m *OrderDayStats) GetOldCustomerNum() int32 {
 	return 0
 }
 
+func (m *OrderDayStats) GetCustomerUnitPrice() float32 {
+	if m != nil {
+		return m.CustomerUnitPrice
+	}
+	return 0
+}
+
+func (m *OrderDayStats) GetStatisticAt() string {
+	if m != nil {
+		return m.StatisticAt
+	}
+	return ""
+}
+
 func (m *OrderDayStats) GetCreatedAt() string {
 	if m != nil {
 		return m.CreatedAt
@@ -312,6 +336,379 @@ func (m *OrderDayStats) GetUpdatedAt() string {
 		return m.UpdatedAt
 	}
 	return ""
+}
+
+type CustomerOrderStats struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CustomerId           int64    `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	OrderNum             int32    `protobuf:"varint,12,opt,name=order_num,json=orderNum,proto3" json:"order_num,omitempty"`
+	PayAmount            float32  `protobuf:"fixed32,3,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`
+	CouponAmount         float32  `protobuf:"fixed32,4,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount,omitempty"`
+	RefundAmount         float32  `protobuf:"fixed32,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"`
+	PayNum               int32    `protobuf:"varint,6,opt,name=pay_num,json=payNum,proto3" json:"pay_num,omitempty"`
+	GoodsNum             int32    `protobuf:"varint,7,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num,omitempty"`
+	RefundNum            int32    `protobuf:"varint,8,opt,name=refund_num,json=refundNum,proto3" json:"refund_num,omitempty"`
+	LastStatsAt          string   `protobuf:"bytes,9,opt,name=last_stats_at,json=lastStatsAt,proto3" json:"last_stats_at,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CustomerOrderStats) Reset()         { *m = CustomerOrderStats{} }
+func (m *CustomerOrderStats) String() string { return proto.CompactTextString(m) }
+func (*CustomerOrderStats) ProtoMessage()    {}
+func (*CustomerOrderStats) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a14a673301f078e7, []int{2}
+}
+
+func (m *CustomerOrderStats) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomerOrderStats.Unmarshal(m, b)
+}
+func (m *CustomerOrderStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CustomerOrderStats.Marshal(b, m, deterministic)
+}
+func (m *CustomerOrderStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomerOrderStats.Merge(m, src)
+}
+func (m *CustomerOrderStats) XXX_Size() int {
+	return xxx_messageInfo_CustomerOrderStats.Size(m)
+}
+func (m *CustomerOrderStats) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomerOrderStats.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomerOrderStats proto.InternalMessageInfo
+
+func (m *CustomerOrderStats) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *CustomerOrderStats) GetCustomerId() int64 {
+	if m != nil {
+		return m.CustomerId
+	}
+	return 0
+}
+
+func (m *CustomerOrderStats) GetOrderNum() int32 {
+	if m != nil {
+		return m.OrderNum
+	}
+	return 0
+}
+
+func (m *CustomerOrderStats) GetPayAmount() float32 {
+	if m != nil {
+		return m.PayAmount
+	}
+	return 0
+}
+
+func (m *CustomerOrderStats) GetCouponAmount() float32 {
+	if m != nil {
+		return m.CouponAmount
+	}
+	return 0
+}
+
+func (m *CustomerOrderStats) GetRefundAmount() float32 {
+	if m != nil {
+		return m.RefundAmount
+	}
+	return 0
+}
+
+func (m *CustomerOrderStats) GetPayNum() int32 {
+	if m != nil {
+		return m.PayNum
+	}
+	return 0
+}
+
+func (m *CustomerOrderStats) GetGoodsNum() int32 {
+	if m != nil {
+		return m.GoodsNum
+	}
+	return 0
+}
+
+func (m *CustomerOrderStats) GetRefundNum() int32 {
+	if m != nil {
+		return m.RefundNum
+	}
+	return 0
+}
+
+func (m *CustomerOrderStats) GetLastStatsAt() string {
+	if m != nil {
+		return m.LastStatsAt
+	}
+	return ""
+}
+
+func (m *CustomerOrderStats) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *CustomerOrderStats) GetUpdatedAt() string {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return ""
+}
+
+type CustomerOrderDayStats struct {
+	Id                   int32    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	CustomerId           int64    `protobuf:"varint,2,opt,name=customer_id,json=customerId,proto3" json:"customer_id,omitempty"`
+	PayAmount            float32  `protobuf:"fixed32,3,opt,name=pay_amount,json=payAmount,proto3" json:"pay_amount,omitempty"`
+	CouponAmount         float32  `protobuf:"fixed32,4,opt,name=coupon_amount,json=couponAmount,proto3" json:"coupon_amount,omitempty"`
+	RefundAmount         float32  `protobuf:"fixed32,5,opt,name=refund_amount,json=refundAmount,proto3" json:"refund_amount,omitempty"`
+	OrderNum             int32    `protobuf:"varint,12,opt,name=order_num,json=orderNum,proto3" json:"order_num,omitempty"`
+	PayNum               int32    `protobuf:"varint,6,opt,name=pay_num,json=payNum,proto3" json:"pay_num,omitempty"`
+	GoodsNum             int32    `protobuf:"varint,7,opt,name=goods_num,json=goodsNum,proto3" json:"goods_num,omitempty"`
+	RefundNum            int32    `protobuf:"varint,8,opt,name=refund_num,json=refundNum,proto3" json:"refund_num,omitempty"`
+	StatisticAt          string   `protobuf:"bytes,9,opt,name=statistic_at,json=statisticAt,proto3" json:"statistic_at,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,10,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	UpdatedAt            string   `protobuf:"bytes,11,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CustomerOrderDayStats) Reset()         { *m = CustomerOrderDayStats{} }
+func (m *CustomerOrderDayStats) String() string { return proto.CompactTextString(m) }
+func (*CustomerOrderDayStats) ProtoMessage()    {}
+func (*CustomerOrderDayStats) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a14a673301f078e7, []int{3}
+}
+
+func (m *CustomerOrderDayStats) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomerOrderDayStats.Unmarshal(m, b)
+}
+func (m *CustomerOrderDayStats) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CustomerOrderDayStats.Marshal(b, m, deterministic)
+}
+func (m *CustomerOrderDayStats) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomerOrderDayStats.Merge(m, src)
+}
+func (m *CustomerOrderDayStats) XXX_Size() int {
+	return xxx_messageInfo_CustomerOrderDayStats.Size(m)
+}
+func (m *CustomerOrderDayStats) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomerOrderDayStats.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomerOrderDayStats proto.InternalMessageInfo
+
+func (m *CustomerOrderDayStats) GetId() int32 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *CustomerOrderDayStats) GetCustomerId() int64 {
+	if m != nil {
+		return m.CustomerId
+	}
+	return 0
+}
+
+func (m *CustomerOrderDayStats) GetPayAmount() float32 {
+	if m != nil {
+		return m.PayAmount
+	}
+	return 0
+}
+
+func (m *CustomerOrderDayStats) GetCouponAmount() float32 {
+	if m != nil {
+		return m.CouponAmount
+	}
+	return 0
+}
+
+func (m *CustomerOrderDayStats) GetRefundAmount() float32 {
+	if m != nil {
+		return m.RefundAmount
+	}
+	return 0
+}
+
+func (m *CustomerOrderDayStats) GetOrderNum() int32 {
+	if m != nil {
+		return m.OrderNum
+	}
+	return 0
+}
+
+func (m *CustomerOrderDayStats) GetPayNum() int32 {
+	if m != nil {
+		return m.PayNum
+	}
+	return 0
+}
+
+func (m *CustomerOrderDayStats) GetGoodsNum() int32 {
+	if m != nil {
+		return m.GoodsNum
+	}
+	return 0
+}
+
+func (m *CustomerOrderDayStats) GetRefundNum() int32 {
+	if m != nil {
+		return m.RefundNum
+	}
+	return 0
+}
+
+func (m *CustomerOrderDayStats) GetStatisticAt() string {
+	if m != nil {
+		return m.StatisticAt
+	}
+	return ""
+}
+
+func (m *CustomerOrderDayStats) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *CustomerOrderDayStats) GetUpdatedAt() string {
+	if m != nil {
+		return m.UpdatedAt
+	}
+	return ""
+}
+
+type CustomerGoods struct {
+	ItemId               int64    `protobuf:"varint,1,opt,name=item_id,json=itemId,proto3" json:"item_id,omitempty"`
+	ThumbUrl             string   `protobuf:"bytes,2,opt,name=thumb_url,json=thumbUrl,proto3" json:"thumb_url,omitempty"`
+	SkuId                int64    `protobuf:"varint,3,opt,name=sku_id,json=skuId,proto3" json:"sku_id,omitempty"`
+	ItemSn               string   `protobuf:"bytes,4,opt,name=item_sn,json=itemSn,proto3" json:"item_sn,omitempty"`
+	SkuSn                string   `protobuf:"bytes,5,opt,name=sku_sn,json=skuSn,proto3" json:"sku_sn,omitempty"`
+	ModelType            string   `protobuf:"bytes,6,opt,name=model_type,json=modelType,proto3" json:"model_type,omitempty"`
+	Name                 string   `protobuf:"bytes,7,opt,name=name,proto3" json:"name,omitempty"`
+	Num                  int32    `protobuf:"varint,8,opt,name=num,proto3" json:"num,omitempty"`
+	Price                float32  `protobuf:"fixed32,9,opt,name=price,proto3" json:"price,omitempty"`
+	TotalPrice           float32  `protobuf:"fixed32,10,opt,name=total_price,json=totalPrice,proto3" json:"total_price,omitempty"`
+	OriginPrice          float32  `protobuf:"fixed32,11,opt,name=origin_price,json=originPrice,proto3" json:"origin_price,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CustomerGoods) Reset()         { *m = CustomerGoods{} }
+func (m *CustomerGoods) String() string { return proto.CompactTextString(m) }
+func (*CustomerGoods) ProtoMessage()    {}
+func (*CustomerGoods) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a14a673301f078e7, []int{4}
+}
+
+func (m *CustomerGoods) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomerGoods.Unmarshal(m, b)
+}
+func (m *CustomerGoods) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CustomerGoods.Marshal(b, m, deterministic)
+}
+func (m *CustomerGoods) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomerGoods.Merge(m, src)
+}
+func (m *CustomerGoods) XXX_Size() int {
+	return xxx_messageInfo_CustomerGoods.Size(m)
+}
+func (m *CustomerGoods) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomerGoods.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomerGoods proto.InternalMessageInfo
+
+func (m *CustomerGoods) GetItemId() int64 {
+	if m != nil {
+		return m.ItemId
+	}
+	return 0
+}
+
+func (m *CustomerGoods) GetThumbUrl() string {
+	if m != nil {
+		return m.ThumbUrl
+	}
+	return ""
+}
+
+func (m *CustomerGoods) GetSkuId() int64 {
+	if m != nil {
+		return m.SkuId
+	}
+	return 0
+}
+
+func (m *CustomerGoods) GetItemSn() string {
+	if m != nil {
+		return m.ItemSn
+	}
+	return ""
+}
+
+func (m *CustomerGoods) GetSkuSn() string {
+	if m != nil {
+		return m.SkuSn
+	}
+	return ""
+}
+
+func (m *CustomerGoods) GetModelType() string {
+	if m != nil {
+		return m.ModelType
+	}
+	return ""
+}
+
+func (m *CustomerGoods) GetName() string {
+	if m != nil {
+		return m.Name
+	}
+	return ""
+}
+
+func (m *CustomerGoods) GetNum() int32 {
+	if m != nil {
+		return m.Num
+	}
+	return 0
+}
+
+func (m *CustomerGoods) GetPrice() float32 {
+	if m != nil {
+		return m.Price
+	}
+	return 0
+}
+
+func (m *CustomerGoods) GetTotalPrice() float32 {
+	if m != nil {
+		return m.TotalPrice
+	}
+	return 0
+}
+
+func (m *CustomerGoods) GetOriginPrice() float32 {
+	if m != nil {
+		return m.OriginPrice
+	}
+	return 0
 }
 
 type OrderStatsResponse struct {
@@ -329,7 +726,7 @@ func (m *OrderStatsResponse) Reset()         { *m = OrderStatsResponse{} }
 func (m *OrderStatsResponse) String() string { return proto.CompactTextString(m) }
 func (*OrderStatsResponse) ProtoMessage()    {}
 func (*OrderStatsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a14a673301f078e7, []int{2}
+	return fileDescriptor_a14a673301f078e7, []int{5}
 }
 
 func (m *OrderStatsResponse) XXX_Unmarshal(b []byte) error {
@@ -400,7 +797,7 @@ func (m *OrderDayStatsResponse) Reset()         { *m = OrderDayStatsResponse{} }
 func (m *OrderDayStatsResponse) String() string { return proto.CompactTextString(m) }
 func (*OrderDayStatsResponse) ProtoMessage()    {}
 func (*OrderDayStatsResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a14a673301f078e7, []int{3}
+	return fileDescriptor_a14a673301f078e7, []int{6}
 }
 
 func (m *OrderDayStatsResponse) XXX_Unmarshal(b []byte) error {
@@ -456,11 +853,230 @@ func (m *OrderDayStatsResponse) GetInfo() *Info {
 	return nil
 }
 
+type CustomerOrderStatsResponse struct {
+	Entity               *CustomerOrderStats   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager                `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*CustomerOrderStats `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error                `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info                 `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}              `json:"-"`
+	XXX_unrecognized     []byte                `json:"-"`
+	XXX_sizecache        int32                 `json:"-"`
+}
+
+func (m *CustomerOrderStatsResponse) Reset()         { *m = CustomerOrderStatsResponse{} }
+func (m *CustomerOrderStatsResponse) String() string { return proto.CompactTextString(m) }
+func (*CustomerOrderStatsResponse) ProtoMessage()    {}
+func (*CustomerOrderStatsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a14a673301f078e7, []int{7}
+}
+
+func (m *CustomerOrderStatsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomerOrderStatsResponse.Unmarshal(m, b)
+}
+func (m *CustomerOrderStatsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CustomerOrderStatsResponse.Marshal(b, m, deterministic)
+}
+func (m *CustomerOrderStatsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomerOrderStatsResponse.Merge(m, src)
+}
+func (m *CustomerOrderStatsResponse) XXX_Size() int {
+	return xxx_messageInfo_CustomerOrderStatsResponse.Size(m)
+}
+func (m *CustomerOrderStatsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomerOrderStatsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomerOrderStatsResponse proto.InternalMessageInfo
+
+func (m *CustomerOrderStatsResponse) GetEntity() *CustomerOrderStats {
+	if m != nil {
+		return m.Entity
+	}
+	return nil
+}
+
+func (m *CustomerOrderStatsResponse) GetPager() *Pager {
+	if m != nil {
+		return m.Pager
+	}
+	return nil
+}
+
+func (m *CustomerOrderStatsResponse) GetItems() []*CustomerOrderStats {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
+func (m *CustomerOrderStatsResponse) GetError() *Error {
+	if m != nil {
+		return m.Error
+	}
+	return nil
+}
+
+func (m *CustomerOrderStatsResponse) GetInfo() *Info {
+	if m != nil {
+		return m.Info
+	}
+	return nil
+}
+
+type CustomerOrderDayStatsResponse struct {
+	Entity               *CustomerOrderDayStats   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager                   `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*CustomerOrderDayStats `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error                   `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info                    `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}                 `json:"-"`
+	XXX_unrecognized     []byte                   `json:"-"`
+	XXX_sizecache        int32                    `json:"-"`
+}
+
+func (m *CustomerOrderDayStatsResponse) Reset()         { *m = CustomerOrderDayStatsResponse{} }
+func (m *CustomerOrderDayStatsResponse) String() string { return proto.CompactTextString(m) }
+func (*CustomerOrderDayStatsResponse) ProtoMessage()    {}
+func (*CustomerOrderDayStatsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a14a673301f078e7, []int{8}
+}
+
+func (m *CustomerOrderDayStatsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomerOrderDayStatsResponse.Unmarshal(m, b)
+}
+func (m *CustomerOrderDayStatsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CustomerOrderDayStatsResponse.Marshal(b, m, deterministic)
+}
+func (m *CustomerOrderDayStatsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomerOrderDayStatsResponse.Merge(m, src)
+}
+func (m *CustomerOrderDayStatsResponse) XXX_Size() int {
+	return xxx_messageInfo_CustomerOrderDayStatsResponse.Size(m)
+}
+func (m *CustomerOrderDayStatsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomerOrderDayStatsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomerOrderDayStatsResponse proto.InternalMessageInfo
+
+func (m *CustomerOrderDayStatsResponse) GetEntity() *CustomerOrderDayStats {
+	if m != nil {
+		return m.Entity
+	}
+	return nil
+}
+
+func (m *CustomerOrderDayStatsResponse) GetPager() *Pager {
+	if m != nil {
+		return m.Pager
+	}
+	return nil
+}
+
+func (m *CustomerOrderDayStatsResponse) GetItems() []*CustomerOrderDayStats {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
+func (m *CustomerOrderDayStatsResponse) GetError() *Error {
+	if m != nil {
+		return m.Error
+	}
+	return nil
+}
+
+func (m *CustomerOrderDayStatsResponse) GetInfo() *Info {
+	if m != nil {
+		return m.Info
+	}
+	return nil
+}
+
+type CustomerGoodsResponse struct {
+	Entity               *CustomerGoods   `protobuf:"bytes,1,opt,name=entity,proto3" json:"entity,omitempty"`
+	Pager                *Pager           `protobuf:"bytes,2,opt,name=pager,proto3" json:"pager,omitempty"`
+	Items                []*CustomerGoods `protobuf:"bytes,3,rep,name=items,proto3" json:"items,omitempty"`
+	Error                *Error           `protobuf:"bytes,4,opt,name=error,proto3" json:"error,omitempty"`
+	Info                 *Info            `protobuf:"bytes,5,opt,name=info,proto3" json:"info,omitempty"`
+	XXX_NoUnkeyedLiteral struct{}         `json:"-"`
+	XXX_unrecognized     []byte           `json:"-"`
+	XXX_sizecache        int32            `json:"-"`
+}
+
+func (m *CustomerGoodsResponse) Reset()         { *m = CustomerGoodsResponse{} }
+func (m *CustomerGoodsResponse) String() string { return proto.CompactTextString(m) }
+func (*CustomerGoodsResponse) ProtoMessage()    {}
+func (*CustomerGoodsResponse) Descriptor() ([]byte, []int) {
+	return fileDescriptor_a14a673301f078e7, []int{9}
+}
+
+func (m *CustomerGoodsResponse) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CustomerGoodsResponse.Unmarshal(m, b)
+}
+func (m *CustomerGoodsResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CustomerGoodsResponse.Marshal(b, m, deterministic)
+}
+func (m *CustomerGoodsResponse) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CustomerGoodsResponse.Merge(m, src)
+}
+func (m *CustomerGoodsResponse) XXX_Size() int {
+	return xxx_messageInfo_CustomerGoodsResponse.Size(m)
+}
+func (m *CustomerGoodsResponse) XXX_DiscardUnknown() {
+	xxx_messageInfo_CustomerGoodsResponse.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CustomerGoodsResponse proto.InternalMessageInfo
+
+func (m *CustomerGoodsResponse) GetEntity() *CustomerGoods {
+	if m != nil {
+		return m.Entity
+	}
+	return nil
+}
+
+func (m *CustomerGoodsResponse) GetPager() *Pager {
+	if m != nil {
+		return m.Pager
+	}
+	return nil
+}
+
+func (m *CustomerGoodsResponse) GetItems() []*CustomerGoods {
+	if m != nil {
+		return m.Items
+	}
+	return nil
+}
+
+func (m *CustomerGoodsResponse) GetError() *Error {
+	if m != nil {
+		return m.Error
+	}
+	return nil
+}
+
+func (m *CustomerGoodsResponse) GetInfo() *Info {
+	if m != nil {
+		return m.Info
+	}
+	return nil
+}
+
 func init() {
 	proto.RegisterType((*OrderStats)(nil), "geiqin.srv.ord.private.OrderStats")
 	proto.RegisterType((*OrderDayStats)(nil), "geiqin.srv.ord.private.OrderDayStats")
+	proto.RegisterType((*CustomerOrderStats)(nil), "geiqin.srv.ord.private.CustomerOrderStats")
+	proto.RegisterType((*CustomerOrderDayStats)(nil), "geiqin.srv.ord.private.CustomerOrderDayStats")
+	proto.RegisterType((*CustomerGoods)(nil), "geiqin.srv.ord.private.CustomerGoods")
 	proto.RegisterType((*OrderStatsResponse)(nil), "geiqin.srv.ord.private.OrderStatsResponse")
 	proto.RegisterType((*OrderDayStatsResponse)(nil), "geiqin.srv.ord.private.OrderDayStatsResponse")
+	proto.RegisterType((*CustomerOrderStatsResponse)(nil), "geiqin.srv.ord.private.CustomerOrderStatsResponse")
+	proto.RegisterType((*CustomerOrderDayStatsResponse)(nil), "geiqin.srv.ord.private.CustomerOrderDayStatsResponse")
+	proto.RegisterType((*CustomerGoodsResponse)(nil), "geiqin.srv.ord.private.CustomerGoodsResponse")
 }
 
 func init() {
@@ -468,39 +1084,59 @@ func init() {
 }
 
 var fileDescriptor_a14a673301f078e7 = []byte{
-	// 534 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x95, 0x4f, 0x8b, 0x13, 0x41,
-	0x10, 0xc5, 0xc9, 0xe4, 0xcf, 0xee, 0x54, 0x32, 0x31, 0xb6, 0xa8, 0x83, 0x1a, 0x08, 0x91, 0x40,
-	0x4e, 0x83, 0x64, 0x2f, 0xa2, 0x78, 0x08, 0xae, 0x07, 0x2f, 0xba, 0x8c, 0x78, 0x1e, 0x7a, 0x67,
-	0x3a, 0xa1, 0x21, 0xd3, 0x3d, 0x76, 0xf7, 0xec, 0x3a, 0x5f, 0xc8, 0x8b, 0x07, 0x0f, 0x7e, 0x41,
-	0xe9, 0xea, 0x4e, 0x76, 0xb3, 0xb8, 0x61, 0x41, 0xd8, 0x93, 0xd7, 0xf7, 0x7e, 0xaf, 0xaa, 0x53,
-	0x55, 0x49, 0x60, 0x24, 0x55, 0xc1, 0xd4, 0x17, 0x43, 0x8d, 0x4e, 0x2a, 0x25, 0x8d, 0x24, 0x4f,
-	0xd6, 0x8c, 0x7f, 0xe3, 0x22, 0xd1, 0xea, 0x22, 0x91, 0xaa, 0x48, 0x2a, 0xc5, 0x2f, 0xa8, 0x61,
-	0xcf, 0x06, 0xb9, 0x2c, 0x4b, 0x29, 0x1c, 0x35, 0xfd, 0xd9, 0x01, 0xf8, 0xbc, 0x8b, 0x92, 0x21,
-	0x04, 0xbc, 0x88, 0x5b, 0x93, 0xd6, 0xbc, 0x9b, 0x06, 0xbc, 0x20, 0x63, 0x80, 0x8a, 0x36, 0x19,
-	0x2d, 0x65, 0x2d, 0x4c, 0x1c, 0x4c, 0x5a, 0xf3, 0x20, 0x0d, 0x2b, 0xda, 0x2c, 0x51, 0x20, 0x2f,
-	0x21, 0xca, 0x65, 0x5d, 0x49, 0xb1, 0x25, 0xda, 0x48, 0x0c, 0x9c, 0xe8, 0xa1, 0x19, 0x0c, 0xd9,
-	0xf7, 0x4a, 0x31, 0xad, 0xb7, 0x54, 0x07, 0xa9, 0xc8, 0xab, 0x57, 0xb5, 0x14, 0x5b, 0xd5, 0xa2,
-	0xd8, 0x52, 0x5d, 0x57, 0xcb, 0x89, 0x1e, 0x7a, 0x0a, 0x47, 0xf6, 0x3d, 0xa2, 0x2e, 0xe3, 0x1e,
-	0x3e, 0xb2, 0x57, 0xd1, 0xe6, 0x53, 0x5d, 0x92, 0xe7, 0x10, 0x9e, 0xd7, 0x0d, 0x53, 0x68, 0x1d,
-	0xa1, 0x75, 0x8c, 0x82, 0x37, 0xd7, 0x52, 0x16, 0x1a, 0xcd, 0x63, 0x67, 0xa2, 0x60, 0xcd, 0x31,
-	0x80, 0xef, 0x6b, 0xdd, 0x10, 0xdd, 0xd0, 0x29, 0xd6, 0x9e, 0xc3, 0x48, 0xb0, 0xcb, 0x2c, 0xaf,
-	0xb5, 0x91, 0xa5, 0xaf, 0x0f, 0x08, 0x0d, 0x05, 0xbb, 0x7c, 0xef, 0x65, 0x4f, 0xca, 0x4d, 0xb1,
-	0x4f, 0xf6, 0x1d, 0x29, 0x37, 0xc5, 0x75, 0x72, 0x06, 0x43, 0x6d, 0xa8, 0xe1, 0xda, 0xf0, 0x3c,
-	0x2b, 0xa8, 0x61, 0xf1, 0x60, 0xd2, 0x9a, 0x87, 0x69, 0xb4, 0x53, 0x4f, 0xa9, 0x61, 0x24, 0x81,
-	0x47, 0xbb, 0x62, 0xb5, 0xe0, 0x26, 0xab, 0x14, 0xcf, 0x59, 0x1c, 0xe1, 0x5c, 0x1e, 0x6e, 0xad,
-	0xaf, 0x82, 0x9b, 0x33, 0x6b, 0x90, 0x29, 0x44, 0x1b, 0xaa, 0x4d, 0x66, 0xab, 0xe8, 0x8c, 0x9a,
-	0x78, 0x88, 0x55, 0xfb, 0x56, 0xc4, 0xf5, 0x2e, 0x8d, 0xfd, 0xb4, 0xb9, 0x62, 0xd4, 0xb0, 0xc2,
-	0x02, 0x0f, 0x10, 0x08, 0xbd, 0xe2, 0xec, 0xba, 0x2a, 0xb6, 0xf6, 0xc8, 0xd9, 0x5e, 0x59, 0x9a,
-	0xe9, 0xef, 0x36, 0x44, 0x78, 0x2d, 0xa7, 0xb4, 0xf9, 0x7f, 0x30, 0xf7, 0x77, 0x30, 0xfb, 0x5b,
-	0x1b, 0x1c, 0xde, 0x5a, 0x74, 0x73, 0x6b, 0x3f, 0x02, 0x20, 0x57, 0xdf, 0xf1, 0x94, 0xe9, 0x4a,
-	0x0a, 0xcd, 0xc8, 0x1b, 0xe8, 0x31, 0x61, 0xb8, 0x69, 0x70, 0x7d, 0xfd, 0xc5, 0x34, 0xf9, 0xfb,
-	0x2f, 0x46, 0x72, 0x2d, 0xeb, 0x13, 0xe4, 0x04, 0xba, 0x15, 0x5d, 0x33, 0x85, 0x1b, 0xee, 0x2f,
-	0xc6, 0xb7, 0x45, 0xcf, 0x2c, 0x94, 0x3a, 0x96, 0xbc, 0x86, 0x2e, 0x37, 0xac, 0xd4, 0x71, 0x7b,
-	0xd2, 0xbe, 0x63, 0x3f, 0x17, 0xb0, 0xed, 0x98, 0x52, 0x52, 0xe1, 0x21, 0x1c, 0x68, 0xf7, 0xc1,
-	0x42, 0xa9, 0x63, 0xc9, 0x2b, 0xe8, 0x70, 0xb1, 0x92, 0x78, 0x16, 0xfd, 0xc5, 0x8b, 0xdb, 0x32,
-	0x1f, 0xc5, 0x4a, 0xa6, 0x48, 0x4e, 0x7f, 0x05, 0xf0, 0x78, 0xef, 0xbc, 0x77, 0xb3, 0x7a, 0x77,
-	0x63, 0x56, 0xb3, 0x83, 0x6f, 0xdf, 0xc5, 0xff, 0x69, 0x5c, 0x6f, 0xf7, 0xc7, 0x75, 0xc7, 0x96,
-	0xf7, 0x3a, 0xb1, 0xf3, 0x1e, 0xfe, 0x8b, 0x9c, 0xfc, 0x09, 0x00, 0x00, 0xff, 0xff, 0x15, 0x65,
-	0x3a, 0x75, 0x7f, 0x06, 0x00, 0x00,
+	// 852 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xec, 0x57, 0x5d, 0x6f, 0xe3, 0x44,
+	0x14, 0x55, 0xed, 0x24, 0xed, 0x5c, 0x27, 0xa5, 0x0c, 0x14, 0xa2, 0x5d, 0x2a, 0x42, 0xd0, 0x4a,
+	0x11, 0x12, 0x11, 0xea, 0xbe, 0x20, 0x10, 0x12, 0x65, 0x59, 0xa1, 0xbe, 0xc0, 0xca, 0x65, 0x9f,
+	0x2d, 0x37, 0x9e, 0x86, 0xd1, 0xc6, 0x33, 0x66, 0x66, 0xbc, 0x8b, 0x5f, 0x11, 0x7f, 0x04, 0x21,
+	0xf1, 0xc2, 0x03, 0xff, 0x80, 0x57, 0xfe, 0x16, 0x9a, 0x3b, 0xb6, 0x53, 0xa7, 0xf9, 0x54, 0x21,
+	0x12, 0xd2, 0xbe, 0xc5, 0xe7, 0x9e, 0x3b, 0x33, 0x3e, 0xe7, 0xdc, 0x71, 0x0b, 0x27, 0x52, 0x25,
+	0x4c, 0x5d, 0x99, 0xd8, 0xe8, 0x71, 0xa6, 0xa4, 0x91, 0xf4, 0x9d, 0x29, 0xe3, 0x3f, 0x72, 0x31,
+	0xd6, 0xea, 0xe5, 0x58, 0xaa, 0x64, 0x9c, 0x29, 0xfe, 0x32, 0x36, 0xec, 0x41, 0x77, 0x22, 0xd3,
+	0x54, 0x0a, 0xc7, 0x1a, 0xfe, 0xda, 0x02, 0xf8, 0xae, 0x6e, 0xa5, 0xc7, 0xe0, 0xf1, 0xa4, 0x7f,
+	0x30, 0x38, 0x18, 0xb5, 0x43, 0x8f, 0x27, 0xf4, 0x0c, 0x20, 0x8b, 0x8b, 0x28, 0x4e, 0x65, 0x2e,
+	0x4c, 0xdf, 0x1b, 0x1c, 0x8c, 0xbc, 0x90, 0x64, 0x71, 0x71, 0x81, 0x00, 0xfd, 0x10, 0x7a, 0x13,
+	0x99, 0x67, 0x52, 0x54, 0x0c, 0x1f, 0x19, 0x5d, 0x07, 0x96, 0xa4, 0x47, 0x70, 0xcc, 0x7e, 0xca,
+	0x14, 0xd3, 0xba, 0x62, 0xb5, 0x90, 0xd5, 0x2b, 0xd1, 0xf9, 0x5a, 0x8a, 0xdd, 0xe4, 0x22, 0xa9,
+	0x58, 0x6d, 0xb7, 0x96, 0x03, 0x4b, 0xd2, 0x43, 0x20, 0xf8, 0xa2, 0x91, 0xc8, 0xd3, 0xfe, 0x09,
+	0x1e, 0xf3, 0x08, 0x81, 0x6f, 0xf3, 0x94, 0xbe, 0x0b, 0x87, 0xf6, 0xb0, 0xb6, 0xd4, 0xc1, 0x52,
+	0x27, 0x8b, 0x0b, 0x5b, 0x78, 0x08, 0xe4, 0x3a, 0x2f, 0xca, 0xae, 0x43, 0xd7, 0x85, 0x40, 0x59,
+	0x9c, 0x4a, 0x99, 0x68, 0x2c, 0x1e, 0xb9, 0x22, 0x02, 0xb6, 0x78, 0x06, 0x50, 0x1e, 0xca, 0x56,
+	0x09, 0x56, 0x89, 0x43, 0x6c, 0x79, 0x04, 0x27, 0x82, 0xbd, 0x8a, 0x26, 0xb9, 0x36, 0x32, 0x2d,
+	0xd7, 0x07, 0x24, 0x1d, 0x0b, 0xf6, 0xea, 0x49, 0x09, 0x97, 0x4c, 0x39, 0x4b, 0x9a, 0xcc, 0xc0,
+	0x31, 0xe5, 0x2c, 0xb9, 0xcd, 0x1c, 0xc3, 0x5b, 0x35, 0x2b, 0x17, 0xdc, 0x44, 0x99, 0xe2, 0x13,
+	0xd6, 0xef, 0xa2, 0x1a, 0x6f, 0x56, 0xa5, 0xe7, 0x82, 0x9b, 0x67, 0xb6, 0x40, 0x87, 0xd0, 0x9b,
+	0xc5, 0xda, 0x44, 0xda, 0x1a, 0x18, 0xc5, 0xa6, 0xdf, 0x1b, 0x1c, 0x8c, 0x48, 0x18, 0x58, 0x10,
+	0x4d, 0xbd, 0x30, 0xf6, 0x35, 0x26, 0x8a, 0xc5, 0x86, 0x25, 0x96, 0x70, 0x8c, 0x04, 0x52, 0x22,
+	0xae, 0x9c, 0x67, 0x49, 0x55, 0x7e, 0xc3, 0x95, 0x4b, 0xe4, 0xc2, 0x0c, 0x7f, 0x6b, 0x41, 0x0f,
+	0x33, 0xf2, 0x75, 0x5c, 0xbc, 0x8e, 0xc9, 0xff, 0x34, 0x26, 0x1f, 0x40, 0xd7, 0x26, 0x84, 0x6b,
+	0xc3, 0x27, 0xb7, 0x52, 0x52, 0x63, 0xf7, 0x4e, 0xc9, 0xcf, 0x3e, 0xd0, 0xea, 0x80, 0x6b, 0x6e,
+	0x94, 0xf7, 0x21, 0xa8, 0xcf, 0xcd, 0x13, 0xcc, 0x8a, 0x1f, 0x42, 0x05, 0x5d, 0x26, 0x4d, 0xef,
+	0xba, 0x0b, 0xde, 0x35, 0x83, 0xe6, 0x6f, 0x0c, 0x5a, 0x6b, 0x49, 0xd0, 0xb6, 0x4a, 0xd0, 0xba,
+	0x90, 0xcc, 0x73, 0x70, 0xb8, 0x36, 0x07, 0x47, 0x8b, 0x39, 0xb8, 0x33, 0xaa, 0x64, 0xd3, 0xa8,
+	0xc2, 0x7a, 0x13, 0x82, 0x45, 0x13, 0x7e, 0xf1, 0xe1, 0xb4, 0x61, 0xc2, 0xca, 0x91, 0xdd, 0xe8,
+	0xc3, 0xde, 0xa4, 0x5e, 0x6b, 0xf8, 0x7f, 0xe2, 0xc3, 0xe2, 0x2c, 0x90, 0x4d, 0xb3, 0xb0, 0xab,
+	0x0d, 0x7f, 0x78, 0xd0, 0xab, 0x6c, 0xf8, 0xc6, 0x1e, 0xca, 0xbe, 0x07, 0x37, 0x2c, 0x8d, 0x4a,
+	0x0f, 0xfc, 0xb0, 0x63, 0x1f, 0x5d, 0xdc, 0xcd, 0x0f, 0x79, 0x7a, 0x1d, 0xe5, 0x6a, 0x86, 0x2e,
+	0x90, 0xf0, 0x08, 0x81, 0xe7, 0x6a, 0x46, 0x4f, 0xa1, 0xa3, 0x5f, 0xe4, 0xb6, 0xc9, 0xc7, 0xa6,
+	0xb6, 0x7e, 0x91, 0x5f, 0x26, 0xf5, 0x62, 0x5a, 0xa0, 0xea, 0xc4, 0x2d, 0x76, 0x25, 0x2a, 0xbe,
+	0x16, 0x28, 0x34, 0x41, 0xfe, 0x95, 0xb0, 0xa7, 0x4d, 0x65, 0xc2, 0x66, 0x91, 0x29, 0x32, 0x86,
+	0x3a, 0x92, 0x90, 0x20, 0xf2, 0x7d, 0x91, 0x31, 0x4a, 0xa1, 0x25, 0xe2, 0x94, 0xa1, 0x8a, 0x24,
+	0xc4, 0xdf, 0xf4, 0x04, 0xfc, 0xb9, 0x74, 0xf6, 0x27, 0x7d, 0x1b, 0xda, 0xee, 0x8a, 0x21, 0xe8,
+	0xa1, 0x7b, 0xb0, 0x31, 0x32, 0xd2, 0xc4, 0xb3, 0xf2, 0xfa, 0x01, 0xac, 0x01, 0x42, 0xf5, 0xbd,
+	0x23, 0x15, 0x9f, 0x72, 0x51, 0x32, 0x02, 0x64, 0x04, 0x0e, 0x43, 0xca, 0xf0, 0x77, 0x0f, 0xe8,
+	0xfc, 0xc6, 0x08, 0x99, 0xce, 0xa4, 0xd0, 0x8c, 0x7e, 0x06, 0x1d, 0x26, 0x0c, 0x37, 0x05, 0x2a,
+	0x16, 0x9c, 0x0f, 0xc7, 0xcb, 0xff, 0xa2, 0x19, 0xdf, 0xea, 0x2d, 0x3b, 0xe8, 0x63, 0x68, 0x67,
+	0xf1, 0x94, 0x29, 0x54, 0x34, 0x38, 0x3f, 0x5b, 0xd5, 0xfa, 0xcc, 0x92, 0x42, 0xc7, 0xa5, 0x9f,
+	0x42, 0xdb, 0xea, 0xa8, 0xfb, 0xfe, 0xc0, 0xdf, 0x72, 0x3f, 0xd7, 0x60, 0xb7, 0x63, 0x4a, 0x49,
+	0x85, 0x76, 0xac, 0xd9, 0xee, 0xa9, 0x25, 0x85, 0x8e, 0x4b, 0x3f, 0x81, 0x16, 0x17, 0x37, 0x12,
+	0xad, 0x0a, 0xce, 0xdf, 0x5b, 0xd5, 0x73, 0x29, 0x6e, 0x64, 0x88, 0xcc, 0xe1, 0x9f, 0x1e, 0x9c,
+	0x36, 0xa6, 0xba, 0xd6, 0xea, 0x8b, 0x05, 0xad, 0x1e, 0xad, 0x3d, 0x7b, 0xdd, 0x7e, 0x2f, 0xb9,
+	0x3e, 0x6f, 0xca, 0xb5, 0xe5, 0x96, 0xfb, 0x55, 0xec, 0x2f, 0x0f, 0x1e, 0xdc, 0xfd, 0x28, 0xd5,
+	0xb2, 0x7d, 0xb5, 0x20, 0xdb, 0x47, 0xab, 0x96, 0x5c, 0xb2, 0xc6, 0xbd, 0xb4, 0xfb, 0xb2, 0xa9,
+	0xdd, 0x2e, 0xfb, 0xee, 0x57, 0xc0, 0xbf, 0x3d, 0x38, 0x5b, 0xfa, 0x41, 0xa9, 0x35, 0x7c, 0xba,
+	0xa0, 0xe1, 0xc7, 0x5b, 0xbd, 0xcb, 0xbf, 0x13, 0xc1, 0x27, 0x4d, 0x19, 0x77, 0xdc, 0x7a, 0xff,
+	0xc3, 0xdb, 0xf8, 0x26, 0xec, 0x3e, 0xbc, 0xcd, 0xf6, 0xbd, 0x0c, 0x6f, 0x73, 0xcb, 0xbd, 0x2a,
+	0x76, 0xdd, 0xc1, 0x7f, 0x51, 0x1f, 0xff, 0x13, 0x00, 0x00, 0xff, 0xff, 0x1a, 0x6d, 0x24, 0xac,
+	0xdc, 0x0e, 0x00, 0x00,
 }

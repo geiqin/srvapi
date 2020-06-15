@@ -34,13 +34,15 @@ var _ server.Option
 // Client API for MyApplierService service
 
 type MyApplierService interface {
+	// 检查用户是否存在可申请的分销等级
+	Check(ctx context.Context, in *Empty, opts ...client.CallOption) (*ApplierResponse, error)
 	// 发起申请销售员
 	Apply(ctx context.Context, in *Empty, opts ...client.CallOption) (*ApplyInfoResponse, error)
 	// 提交销售员申请
 	Submit(ctx context.Context, in *Applier, opts ...client.CallOption) (*ApplierResponse, error)
-	//获取申请者信息
+	// 获取申请者信息
 	Get(ctx context.Context, in *Applier, opts ...client.CallOption) (*ApplierResponse, error)
-	//检查用户是否已经提交申请信息
+	// 检查用户是否已经提交申请信息
 	Exists(ctx context.Context, in *Applier, opts ...client.CallOption) (*ApplierResponse, error)
 }
 
@@ -54,6 +56,16 @@ func NewMyApplierService(name string, c client.Client) MyApplierService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *myApplierService) Check(ctx context.Context, in *Empty, opts ...client.CallOption) (*ApplierResponse, error) {
+	req := c.c.NewRequest(c.name, "MyApplierService.Check", in)
+	out := new(ApplierResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *myApplierService) Apply(ctx context.Context, in *Empty, opts ...client.CallOption) (*ApplyInfoResponse, error) {
@@ -99,18 +111,21 @@ func (c *myApplierService) Exists(ctx context.Context, in *Applier, opts ...clie
 // Server API for MyApplierService service
 
 type MyApplierServiceHandler interface {
+	// 检查用户是否存在可申请的分销等级
+	Check(context.Context, *Empty, *ApplierResponse) error
 	// 发起申请销售员
 	Apply(context.Context, *Empty, *ApplyInfoResponse) error
 	// 提交销售员申请
 	Submit(context.Context, *Applier, *ApplierResponse) error
-	//获取申请者信息
+	// 获取申请者信息
 	Get(context.Context, *Applier, *ApplierResponse) error
-	//检查用户是否已经提交申请信息
+	// 检查用户是否已经提交申请信息
 	Exists(context.Context, *Applier, *ApplierResponse) error
 }
 
 func RegisterMyApplierServiceHandler(s server.Server, hdlr MyApplierServiceHandler, opts ...server.HandlerOption) error {
 	type myApplierService interface {
+		Check(ctx context.Context, in *Empty, out *ApplierResponse) error
 		Apply(ctx context.Context, in *Empty, out *ApplyInfoResponse) error
 		Submit(ctx context.Context, in *Applier, out *ApplierResponse) error
 		Get(ctx context.Context, in *Applier, out *ApplierResponse) error
@@ -125,6 +140,10 @@ func RegisterMyApplierServiceHandler(s server.Server, hdlr MyApplierServiceHandl
 
 type myApplierServiceHandler struct {
 	MyApplierServiceHandler
+}
+
+func (h *myApplierServiceHandler) Check(ctx context.Context, in *Empty, out *ApplierResponse) error {
+	return h.MyApplierServiceHandler.Check(ctx, in, out)
 }
 
 func (h *myApplierServiceHandler) Apply(ctx context.Context, in *Empty, out *ApplyInfoResponse) error {

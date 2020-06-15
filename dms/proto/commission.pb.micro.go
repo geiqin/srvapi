@@ -42,6 +42,7 @@ type CommissionService interface {
 	SearchPerformance(ctx context.Context, in *PerformanceWhere, opts ...client.CallOption) (*PerformanceResponse, error)
 	// 结算佣金
 	Settlement(ctx context.Context, in *CommissionWhere, opts ...client.CallOption) (*CommissionResponse, error)
+	Recalculate(ctx context.Context, in *CommissionWhere, opts ...client.CallOption) (*CommissionResponse, error)
 }
 
 type commissionService struct {
@@ -96,6 +97,16 @@ func (c *commissionService) Settlement(ctx context.Context, in *CommissionWhere,
 	return out, nil
 }
 
+func (c *commissionService) Recalculate(ctx context.Context, in *CommissionWhere, opts ...client.CallOption) (*CommissionResponse, error) {
+	req := c.c.NewRequest(c.name, "CommissionService.Recalculate", in)
+	out := new(CommissionResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for CommissionService service
 
 type CommissionServiceHandler interface {
@@ -107,6 +118,7 @@ type CommissionServiceHandler interface {
 	SearchPerformance(context.Context, *PerformanceWhere, *PerformanceResponse) error
 	// 结算佣金
 	Settlement(context.Context, *CommissionWhere, *CommissionResponse) error
+	Recalculate(context.Context, *CommissionWhere, *CommissionResponse) error
 }
 
 func RegisterCommissionServiceHandler(s server.Server, hdlr CommissionServiceHandler, opts ...server.HandlerOption) error {
@@ -115,6 +127,7 @@ func RegisterCommissionServiceHandler(s server.Server, hdlr CommissionServiceHan
 		Search(ctx context.Context, in *CommissionWhere, out *CommissionResponse) error
 		SearchPerformance(ctx context.Context, in *PerformanceWhere, out *PerformanceResponse) error
 		Settlement(ctx context.Context, in *CommissionWhere, out *CommissionResponse) error
+		Recalculate(ctx context.Context, in *CommissionWhere, out *CommissionResponse) error
 	}
 	type CommissionService struct {
 		commissionService
@@ -141,4 +154,8 @@ func (h *commissionServiceHandler) SearchPerformance(ctx context.Context, in *Pe
 
 func (h *commissionServiceHandler) Settlement(ctx context.Context, in *CommissionWhere, out *CommissionResponse) error {
 	return h.CommissionServiceHandler.Settlement(ctx, in, out)
+}
+
+func (h *commissionServiceHandler) Recalculate(ctx context.Context, in *CommissionWhere, out *CommissionResponse) error {
+	return h.CommissionServiceHandler.Recalculate(ctx, in, out)
 }

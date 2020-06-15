@@ -26,6 +26,7 @@ message GlobalCfg {
     int32 	relate_rob =14;
     int32 	relate_protect_days =15;
     bool  	is_inner_relate  =16;
+    bool is_bonus_same = 17;
 }
 
 

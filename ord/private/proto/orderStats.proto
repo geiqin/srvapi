@@ -9,17 +9,17 @@ message OrderStats {
     float coupon_amount  = 3;
     float express_amount  = 4;
     float refund_amount  = 5;
+    int32 order_num  = 16;
     int32 pay_num  = 6;
     int32 buyer_num  = 7;
     int32 goods_num  = 8;
     int32 refund_num  = 9;
     int32 new_customer_num  = 10;
     int32 old_customer_num  = 11;
-    string statistic_date  = 12;
-    float customer_unit_price = 13;
-    string last_stats_at = 14;
-    string created_at  = 15;
-    string updated_at  = 16;
+    float customer_unit_price = 12;
+    string last_stats_at = 13;
+    string created_at  = 14;
+    string updated_at  = 15;
 }
 
 message OrderDayStats {
@@ -28,16 +28,62 @@ message OrderDayStats {
     float coupon_amount  = 3;
     float express_amount  = 4;
     float refund_amount  = 5;
+    int32 order_num  = 16;
     int32 pay_num  = 6;
     int32 buyer_num  = 7;
     int32 goods_num  = 8;
     int32 refund_num  = 9;
     int32 new_customer_num  = 10;
     int32 old_customer_num  = 11;
-    string created_at  = 12;
-    string updated_at  = 13;
+    float customer_unit_price = 12;
+    string statistic_at  = 13;
+    string created_at  = 14;
+    string updated_at  = 15;
 }
 
+message CustomerOrderStats {
+    int32 id  = 1;
+    int64 customer_id = 2;
+    int32 order_num  = 12;
+    float pay_amount  = 3;
+    float coupon_amount  = 4;
+    float refund_amount  = 5;
+    int32 pay_num  = 6;
+    int32 goods_num  = 7;
+    int32 refund_num  = 8;
+    string last_stats_at = 9;
+    string created_at  = 10;
+    string updated_at  = 11;
+}
+
+message CustomerOrderDayStats {
+    int32 id  = 1;
+    int64 customer_id = 2;
+    float pay_amount  = 3;
+    float coupon_amount  = 4;
+    float refund_amount  = 5;
+    int32 order_num  = 12;
+    int32 pay_num  = 6;
+    int32 goods_num  = 7;
+    int32 refund_num  = 8;
+    string statistic_at  = 9;
+    string created_at  = 10;
+    string updated_at  = 11;
+}
+
+message CustomerGoods {
+    int64 item_id = 1;
+    string thumb_url = 2;
+    int64 sku_id = 3;
+    string item_sn = 4;
+    string sku_sn = 5;
+    string model_type = 6;
+    string name = 7;
+    int32 num = 8;
+    float price = 9;
+    float total_price = 10;
+    float origin_price = 11;
+}
 
 message OrderStatsResponse {
     OrderStats entity = 1;
@@ -51,6 +97,30 @@ message OrderDayStatsResponse {
     OrderDayStats entity = 1;
     Pager pager =2;
     repeated OrderDayStats items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message CustomerOrderStatsResponse {
+    CustomerOrderStats entity = 1;
+    Pager pager =2;
+    repeated CustomerOrderStats items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message CustomerOrderDayStatsResponse {
+    CustomerOrderDayStats entity = 1;
+    Pager pager =2;
+    repeated CustomerOrderDayStats items = 3;
+    Error error = 4;
+    Info info =5;
+}
+
+message CustomerGoodsResponse {
+    CustomerGoods entity = 1;
+    Pager pager =2;
+    repeated CustomerGoods items = 3;
     Error error = 4;
     Info info =5;
 }

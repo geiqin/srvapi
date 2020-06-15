@@ -36,14 +36,10 @@ var _ server.Option
 type TransferService interface {
 	//创建转账
 	Create(ctx context.Context, in *Transfer, opts ...client.CallOption) (*TransferResponse, error)
-	//修改转账
-	Update(ctx context.Context, in *Transfer, opts ...client.CallOption) (*TransferResponse, error)
-	//删除转账
-	Delete(ctx context.Context, in *Transfer, opts ...client.CallOption) (*TransferResponse, error)
 	//获得转账信息
 	Get(ctx context.Context, in *Transfer, opts ...client.CallOption) (*TransferResponse, error)
 	//查询转账
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*TransferResponse, error)
+	Search(ctx context.Context, in *TransferWhere, opts ...client.CallOption) (*TransferResponse, error)
 }
 
 type transferService struct {
@@ -68,26 +64,6 @@ func (c *transferService) Create(ctx context.Context, in *Transfer, opts ...clie
 	return out, nil
 }
 
-func (c *transferService) Update(ctx context.Context, in *Transfer, opts ...client.CallOption) (*TransferResponse, error) {
-	req := c.c.NewRequest(c.name, "TransferService.Update", in)
-	out := new(TransferResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *transferService) Delete(ctx context.Context, in *Transfer, opts ...client.CallOption) (*TransferResponse, error) {
-	req := c.c.NewRequest(c.name, "TransferService.Delete", in)
-	out := new(TransferResponse)
-	err := c.c.Call(ctx, req, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 func (c *transferService) Get(ctx context.Context, in *Transfer, opts ...client.CallOption) (*TransferResponse, error) {
 	req := c.c.NewRequest(c.name, "TransferService.Get", in)
 	out := new(TransferResponse)
@@ -98,7 +74,7 @@ func (c *transferService) Get(ctx context.Context, in *Transfer, opts ...client.
 	return out, nil
 }
 
-func (c *transferService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*TransferResponse, error) {
+func (c *transferService) Search(ctx context.Context, in *TransferWhere, opts ...client.CallOption) (*TransferResponse, error) {
 	req := c.c.NewRequest(c.name, "TransferService.Search", in)
 	out := new(TransferResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -113,23 +89,17 @@ func (c *transferService) Search(ctx context.Context, in *BaseWhere, opts ...cli
 type TransferServiceHandler interface {
 	//创建转账
 	Create(context.Context, *Transfer, *TransferResponse) error
-	//修改转账
-	Update(context.Context, *Transfer, *TransferResponse) error
-	//删除转账
-	Delete(context.Context, *Transfer, *TransferResponse) error
 	//获得转账信息
 	Get(context.Context, *Transfer, *TransferResponse) error
 	//查询转账
-	Search(context.Context, *BaseWhere, *TransferResponse) error
+	Search(context.Context, *TransferWhere, *TransferResponse) error
 }
 
 func RegisterTransferServiceHandler(s server.Server, hdlr TransferServiceHandler, opts ...server.HandlerOption) error {
 	type transferService interface {
 		Create(ctx context.Context, in *Transfer, out *TransferResponse) error
-		Update(ctx context.Context, in *Transfer, out *TransferResponse) error
-		Delete(ctx context.Context, in *Transfer, out *TransferResponse) error
 		Get(ctx context.Context, in *Transfer, out *TransferResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *TransferResponse) error
+		Search(ctx context.Context, in *TransferWhere, out *TransferResponse) error
 	}
 	type TransferService struct {
 		transferService
@@ -146,18 +116,10 @@ func (h *transferServiceHandler) Create(ctx context.Context, in *Transfer, out *
 	return h.TransferServiceHandler.Create(ctx, in, out)
 }
 
-func (h *transferServiceHandler) Update(ctx context.Context, in *Transfer, out *TransferResponse) error {
-	return h.TransferServiceHandler.Update(ctx, in, out)
-}
-
-func (h *transferServiceHandler) Delete(ctx context.Context, in *Transfer, out *TransferResponse) error {
-	return h.TransferServiceHandler.Delete(ctx, in, out)
-}
-
 func (h *transferServiceHandler) Get(ctx context.Context, in *Transfer, out *TransferResponse) error {
 	return h.TransferServiceHandler.Get(ctx, in, out)
 }
 
-func (h *transferServiceHandler) Search(ctx context.Context, in *BaseWhere, out *TransferResponse) error {
+func (h *transferServiceHandler) Search(ctx context.Context, in *TransferWhere, out *TransferResponse) error {
 	return h.TransferServiceHandler.Search(ctx, in, out)
 }
