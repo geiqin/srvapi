@@ -12,6 +12,12 @@ service TransferService {
     rpc Get (Transfer) returns (TransferResponse) {}
     //查询转账
     rpc Search (TransferWhere) returns (TransferResponse) {}
+    // 转账到企业银行账户
+    rpc ToCorpBank(TransferRequest) returns (TransferResponse) {}
+    //转账到微信个人钱包
+    rpc ToWxWallet(TransferRequest) returns (TransferResponse) {}
+    //转账到支付宝账户
+    rpc ToAliAccount(TransferRequest) returns (TransferResponse) {}
 }
 
 
@@ -22,7 +28,7 @@ message Transfer{
     string transfer_sn = 2;
     int64 paygate_id = 3;
     string type = 4;
-    string channel = 5;
+    string channel = 5; //wx_wallet
     string recipient = 6;
     string real_name = 7;
     float amount = 8;
@@ -34,11 +40,24 @@ message Transfer{
     string extra = 14;
     string metadata = 15;
     string status = 16;
-    string finished_at =17;
-    string created_at = 18;
-    string updated_at = 19;
+    int64 customer_id = 17;
+    string open_id = 18;
+    string finished_at =19;
+    string created_at = 20;
+    string updated_at = 21;
 }
 
+message TransferRequest {
+    float amount = 1;
+    string currency = 2;
+    int64 customer_id = 3;
+    string extra = 4;
+    string memo = 5;
+    string metadata = 6;
+    string order_type = 7;
+    int64 order_id = 8;
+    string order_sn = 9;
+}
 
 message TransferWhere {
     int32 paged = 1;

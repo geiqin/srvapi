@@ -40,6 +40,12 @@ type TransferService interface {
 	Get(ctx context.Context, in *Transfer, opts ...client.CallOption) (*TransferResponse, error)
 	//查询转账
 	Search(ctx context.Context, in *TransferWhere, opts ...client.CallOption) (*TransferResponse, error)
+	// 转账到企业银行账户
+	ToCorpBank(ctx context.Context, in *TransferRequest, opts ...client.CallOption) (*TransferResponse, error)
+	//转账到微信个人钱包
+	ToWxWallet(ctx context.Context, in *TransferRequest, opts ...client.CallOption) (*TransferResponse, error)
+	//转账到支付宝账户
+	ToAliAccount(ctx context.Context, in *TransferRequest, opts ...client.CallOption) (*TransferResponse, error)
 }
 
 type transferService struct {
@@ -84,6 +90,36 @@ func (c *transferService) Search(ctx context.Context, in *TransferWhere, opts ..
 	return out, nil
 }
 
+func (c *transferService) ToCorpBank(ctx context.Context, in *TransferRequest, opts ...client.CallOption) (*TransferResponse, error) {
+	req := c.c.NewRequest(c.name, "TransferService.ToCorpBank", in)
+	out := new(TransferResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *transferService) ToWxWallet(ctx context.Context, in *TransferRequest, opts ...client.CallOption) (*TransferResponse, error) {
+	req := c.c.NewRequest(c.name, "TransferService.ToWxWallet", in)
+	out := new(TransferResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *transferService) ToAliAccount(ctx context.Context, in *TransferRequest, opts ...client.CallOption) (*TransferResponse, error) {
+	req := c.c.NewRequest(c.name, "TransferService.ToAliAccount", in)
+	out := new(TransferResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for TransferService service
 
 type TransferServiceHandler interface {
@@ -93,6 +129,12 @@ type TransferServiceHandler interface {
 	Get(context.Context, *Transfer, *TransferResponse) error
 	//查询转账
 	Search(context.Context, *TransferWhere, *TransferResponse) error
+	// 转账到企业银行账户
+	ToCorpBank(context.Context, *TransferRequest, *TransferResponse) error
+	//转账到微信个人钱包
+	ToWxWallet(context.Context, *TransferRequest, *TransferResponse) error
+	//转账到支付宝账户
+	ToAliAccount(context.Context, *TransferRequest, *TransferResponse) error
 }
 
 func RegisterTransferServiceHandler(s server.Server, hdlr TransferServiceHandler, opts ...server.HandlerOption) error {
@@ -100,6 +142,9 @@ func RegisterTransferServiceHandler(s server.Server, hdlr TransferServiceHandler
 		Create(ctx context.Context, in *Transfer, out *TransferResponse) error
 		Get(ctx context.Context, in *Transfer, out *TransferResponse) error
 		Search(ctx context.Context, in *TransferWhere, out *TransferResponse) error
+		ToCorpBank(ctx context.Context, in *TransferRequest, out *TransferResponse) error
+		ToWxWallet(ctx context.Context, in *TransferRequest, out *TransferResponse) error
+		ToAliAccount(ctx context.Context, in *TransferRequest, out *TransferResponse) error
 	}
 	type TransferService struct {
 		transferService
@@ -122,4 +167,16 @@ func (h *transferServiceHandler) Get(ctx context.Context, in *Transfer, out *Tra
 
 func (h *transferServiceHandler) Search(ctx context.Context, in *TransferWhere, out *TransferResponse) error {
 	return h.TransferServiceHandler.Search(ctx, in, out)
+}
+
+func (h *transferServiceHandler) ToCorpBank(ctx context.Context, in *TransferRequest, out *TransferResponse) error {
+	return h.TransferServiceHandler.ToCorpBank(ctx, in, out)
+}
+
+func (h *transferServiceHandler) ToWxWallet(ctx context.Context, in *TransferRequest, out *TransferResponse) error {
+	return h.TransferServiceHandler.ToWxWallet(ctx, in, out)
+}
+
+func (h *transferServiceHandler) ToAliAccount(ctx context.Context, in *TransferRequest, out *TransferResponse) error {
+	return h.TransferServiceHandler.ToAliAccount(ctx, in, out)
 }
