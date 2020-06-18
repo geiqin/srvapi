@@ -26,6 +26,8 @@ service ExpressService {
   rpc Get (Express) returns (ExpressResponse) {}
   // 设置默认使用模板
   rpc Defaulted (ExpressWhere) returns (ExpressResponse) {}
+  // 获取默认使用的模板
+  rpc GetDefault (Empty) returns (ExpressResponse) {}
 }
 
 message ExpressWhere {

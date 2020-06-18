@@ -174,6 +174,8 @@ type ExpressService interface {
 	Get(ctx context.Context, in *Express, opts ...client.CallOption) (*ExpressResponse, error)
 	// 设置默认使用模板
 	Defaulted(ctx context.Context, in *ExpressWhere, opts ...client.CallOption) (*ExpressResponse, error)
+	// 获取默认使用的模板
+	GetDefault(ctx context.Context, in *Empty, opts ...client.CallOption) (*ExpressResponse, error)
 }
 
 type expressService struct {
@@ -268,6 +270,16 @@ func (c *expressService) Defaulted(ctx context.Context, in *ExpressWhere, opts .
 	return out, nil
 }
 
+func (c *expressService) GetDefault(ctx context.Context, in *Empty, opts ...client.CallOption) (*ExpressResponse, error) {
+	req := c.c.NewRequest(c.name, "ExpressService.GetDefault", in)
+	out := new(ExpressResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ExpressService service
 
 type ExpressServiceHandler interface {
@@ -280,6 +292,8 @@ type ExpressServiceHandler interface {
 	Get(context.Context, *Express, *ExpressResponse) error
 	// 设置默认使用模板
 	Defaulted(context.Context, *ExpressWhere, *ExpressResponse) error
+	// 获取默认使用的模板
+	GetDefault(context.Context, *Empty, *ExpressResponse) error
 }
 
 func RegisterExpressServiceHandler(s server.Server, hdlr ExpressServiceHandler, opts ...server.HandlerOption) error {
@@ -292,6 +306,7 @@ func RegisterExpressServiceHandler(s server.Server, hdlr ExpressServiceHandler, 
 		List(ctx context.Context, in *ExpressWhere, out *ExpressResponse) error
 		Get(ctx context.Context, in *Express, out *ExpressResponse) error
 		Defaulted(ctx context.Context, in *ExpressWhere, out *ExpressResponse) error
+		GetDefault(ctx context.Context, in *Empty, out *ExpressResponse) error
 	}
 	type ExpressService struct {
 		expressService
@@ -334,4 +349,8 @@ func (h *expressServiceHandler) Get(ctx context.Context, in *Express, out *Expre
 
 func (h *expressServiceHandler) Defaulted(ctx context.Context, in *ExpressWhere, out *ExpressResponse) error {
 	return h.ExpressServiceHandler.Defaulted(ctx, in, out)
+}
+
+func (h *expressServiceHandler) GetDefault(ctx context.Context, in *Empty, out *ExpressResponse) error {
+	return h.ExpressServiceHandler.GetDefault(ctx, in, out)
 }

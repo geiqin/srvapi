@@ -37,6 +37,7 @@ message FetchWhere {
   repeated int64 ids = 6;
   string lng = 7;
   string lat = 8;
+  string name = 9;
 }
 
 message Fetch {
