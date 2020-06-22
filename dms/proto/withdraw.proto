@@ -40,25 +40,27 @@ message Withdraw {
     int64 target_id = 5;
     float money = 6;
     float service_money = 7;
-    int64 transfer_id = 8;
-    string transactionId_id = 9;
-    string method = 10;
-    int32 cash_account_id= 11;
-    string payee_name = 12;
-    string payee_account = 13;
-    string payee_bank = 14;
-    string platform_account =15;
-    string payment = 16;
-    string memo = 17;
-    int32 status = 18;
-    string failure = 19;
-    string audit_at = 20;
-    string payment_at = 21;
-    string created_at = 22;
-    string updated_at = 23;
-    Distributor distributor = 24;
-    Leader leader = 25;
-    CustomerInfo customer = 26;
+    float service_money_rate = 8;
+    float actual_money = 9;
+    int64 transfer_id = 10;
+    string transactionId_id = 11;
+    string method = 12;
+    int32 cash_account_id= 13;
+    string payee_name = 14;
+    string payee_account = 15;
+    string payee_bank = 16;
+    string platform_account =17;
+    string payment = 18;
+    string memo = 19;
+    int32 status = 20;
+    string failure = 21;
+    string audit_at = 22;
+    string payment_at = 23;
+    string created_at = 24;
+    string updated_at = 25;
+    Distributor distributor = 26;
+    Leader leader = 27;
+    CustomerInfo customer = 28;
 }
 
 message WithdrawWhere {
@@ -85,6 +87,7 @@ message WithdrawApply {
     float min_money = 2; // 最小提现佣金
     float max_money = 3; // 最大提现佣金
     float service_money_rate = 4; // 手续费比例
+    float min_service_money = 5; // 最小手续费
 }
 
 message WithdrawResponse {

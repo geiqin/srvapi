@@ -5,6 +5,7 @@ import "orderAddress.proto";
 import "orderCoupon.proto";
 import "orderPromotion.proto";
 import "couponTicketInfo.proto";
+import "shipment.proto";
 
 package geiqin.srv.ord.private;
 
@@ -19,6 +20,7 @@ message Buying {
     bool changed = 2;
     int32 count = 3;
     float total = 4;
+    float total_weight = 25;
     float discount = 5;
     float freight = 6;
     float amount = 7;
@@ -38,7 +40,8 @@ message Buying {
     float limit_discount_money = 21; // 限时活动优惠金额
     float reward_money = 22; // 满减送活动优惠金额
     float coupon_money = 23; // 优惠券优惠金额
-    string delivery_method = 24; // 下单选择的配送方式
+    OrderShipment shipment = 24; // 配送信息
+
 }
 
 //购买清单明细
@@ -66,10 +69,10 @@ message BuyingRequest{
     string message =4; //买家留言(50字以内)
     int64 vipcard_id =5; //选中的会员卡
     int32 pay_method =6; //选中的支付方式
-    int64 use_ticket_id =7; //选中的优惠劵凭证ID
     string platform_source =8; //下单来源
+    int64 use_ticket_id =7; //选中的优惠劵凭证ID
     repeated BuyingItem items =9;
-    string delivery_method = 10; // 下单选择的配送方式
+    OrderShipment shipment = 10; // 配送信息
 }
 
 message BuyingResponse {

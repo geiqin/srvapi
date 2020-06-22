@@ -27,6 +27,8 @@ message OrderAddress {
     string created_at = 14;
     string updated_at = 15;
     AreaInfo area = 16;
+    string lng = 17;
+    string lat = 18;
 }
 
 
