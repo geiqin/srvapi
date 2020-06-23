@@ -106,7 +106,7 @@ message Order {
     repeated OrderDetail details = 55;
     Customer customer = 56;
     repeated Delivery delivery = 57;
-    string delivery_method = 58;
+    string shipment_method = 58;
 }
 
 message Customer {
@@ -147,7 +147,7 @@ message OrderWhere {
     string end_at = 21;
     bool paid = 22;
     repeated int64 ids = 23;
-    string delivery_method = 24;
+    string shipment_method = 24;
 }
 
 
