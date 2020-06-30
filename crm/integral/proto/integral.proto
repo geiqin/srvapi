@@ -1,0 +1,40 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.crm.integral;
+
+service IntegralService {
+    rpc Search(IntegralWhere) returns (IntegralResponse) {}
+    rpc Get(IntegralWhere) returns (IntegralResponse) {}
+}
+
+service MyIntegralService {
+    rpc Get(IntegralWhere) returns (IntegralResponse) {}
+}
+
+message IntegralWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    string keywords = 4;
+    int64 id = 5;
+    repeated int64 ids = 6;
+    int64 customer_id = 7;
+}
+
+message Integral {
+    int64 id = 1;
+    int64 customer_id = 2;
+    int64 points = 3;
+    int64 total_points = 4;
+    int64 expired_points = 5;
+    string created_at = 6;
+    string updated_at = 7;
+}
+
+message IntegralResponse {
+    Integral entity = 1;
+    Pager pager = 2;
+    repeated Integral items = 3;
+    Error error = 4;
+    Info info = 5;
+}
