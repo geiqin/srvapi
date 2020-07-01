@@ -12,11 +12,11 @@ service PayMethodService {
 
 message PayMethod {
     int64	id	=1;
-    string	code	=2;
-    string	name	=3;
+    string	name	=2;
+    string	title	=3;
     string	icon	=4;
-    int64	store_id	=5;
-    int64	user_id	=6;
+    string	memo	=5;
+    string supports =6;
     bool	disabled	=7;
 }
 
@@ -25,10 +25,11 @@ message PayMethodWhere {
     int32 page_size = 2;
     string sorting = 3;
     int64	id	=4;
-    string	code	=5;
-    string	name	=6;
+    string	name	=5;
+    string	title	=6;
     int64	store_id	=7;
-    int64	status	=8;
+    string	channel	=8;
+    int64	status	=9;
 }
 
 //
