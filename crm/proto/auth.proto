@@ -18,11 +18,14 @@ service AuthService {
 
 
 message AuthRequest{
-    int64 customer_id =2;
-    string name = 4;
-    string mobile =6;
-    string email =7;
-    string password =3;
+    int64 customer_id =1;
+    string name = 2;
+    string mobile =3;
+    string email =4;
+    string password =5;
+    string old_pwd = 6;
+    string new_pwd = 7;
+    string confirm_pwd = 8;
 }
 
 

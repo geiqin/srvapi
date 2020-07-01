@@ -370,3 +370,58 @@ func (h *customerServiceHandler) SetCards(ctx context.Context, in *Customer, out
 func (h *customerServiceHandler) UpdateMobile(ctx context.Context, in *Customer, out *CustomerResponse) error {
 	return h.CustomerServiceHandler.UpdateMobile(ctx, in, out)
 }
+
+// Client API for MyCustomerService service
+
+type MyCustomerService interface {
+	// 修改密码
+	ChangePwd(ctx context.Context, in *CustomerWhere, opts ...client.CallOption) (*CustomerResponse, error)
+}
+
+type myCustomerService struct {
+	c    client.Client
+	name string
+}
+
+func NewMyCustomerService(name string, c client.Client) MyCustomerService {
+	return &myCustomerService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *myCustomerService) ChangePwd(ctx context.Context, in *CustomerWhere, opts ...client.CallOption) (*CustomerResponse, error) {
+	req := c.c.NewRequest(c.name, "MyCustomerService.ChangePwd", in)
+	out := new(CustomerResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for MyCustomerService service
+
+type MyCustomerServiceHandler interface {
+	// 修改密码
+	ChangePwd(context.Context, *CustomerWhere, *CustomerResponse) error
+}
+
+func RegisterMyCustomerServiceHandler(s server.Server, hdlr MyCustomerServiceHandler, opts ...server.HandlerOption) error {
+	type myCustomerService interface {
+		ChangePwd(ctx context.Context, in *CustomerWhere, out *CustomerResponse) error
+	}
+	type MyCustomerService struct {
+		myCustomerService
+	}
+	h := &myCustomerServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&MyCustomerService{h}, opts...))
+}
+
+type myCustomerServiceHandler struct {
+	MyCustomerServiceHandler
+}
+
+func (h *myCustomerServiceHandler) ChangePwd(ctx context.Context, in *CustomerWhere, out *CustomerResponse) error {
+	return h.MyCustomerServiceHandler.ChangePwd(ctx, in, out)
+}

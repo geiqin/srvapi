@@ -41,6 +41,11 @@ service CustomerService {
     rpc UpdateMobile (Customer) returns (CustomerResponse) {}
 }
 
+service MyCustomerService {
+    // 修改密码
+    rpc ChangePwd (CustomerWhere) returns (CustomerResponse) {}
+}
+
 message Customer {
     int64 id =1;
     string customer_sn =2;
@@ -102,7 +107,10 @@ message CustomerWhere {
     string status =15;
     string keywords =16;
     int32 type = 17;
-
+    int64 customer_id = 18;
+    string old_pwd = 19;
+    string new_pwd = 20;
+    string confirm_pwd = 21;
 }
 
 //
