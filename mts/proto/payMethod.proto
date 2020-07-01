@@ -1,0 +1,41 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.mts;
+
+service PayMethodService {
+    rpc Lock (PayMethod) returns (PayMethodResponse) {}
+    rpc Unlock (PayMethod) returns (PayMethodResponse) {}
+    rpc Get (PayMethod) returns (PayMethodResponse) {}
+    rpc List (PayMethodWhere) returns (PayMethodResponse) {}
+    rpc Search (PayMethodWhere) returns (PayMethodResponse) {}
+}
+
+message PayMethod {
+    int64	id	=1;
+    string	code	=2;
+    string	name	=3;
+    string	icon	=4;
+    int64	store_id	=5;
+    int64	user_id	=6;
+    bool	disabled	=7;
+}
+
+message PayMethodWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    string sorting = 3;
+    int64	id	=4;
+    string	code	=5;
+    string	name	=6;
+    int64	store_id	=7;
+    int64	status	=8;
+}
+
+//
+message PayMethodResponse {
+    PayMethod entity = 1;
+    Pager pager =2;
+    repeated PayMethod items = 3;
+    Error error = 4;
+    Info info =5;
+}

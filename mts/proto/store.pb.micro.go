@@ -38,8 +38,16 @@ type StoreService interface {
 	Create(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//修改店铺
 	Update(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//修改店铺Logo
+	UpdateLogo(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//修改店铺名称
+	UpdateName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//设置店铺地址
+	SetAddress(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//删除店铺
 	Delete(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
+	//升级店铺数据库
+	Upgrade(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error)
 	//店铺授权
 	Auth(ctx context.Context, in *StoreSecret, opts ...client.CallOption) (*TokenResponse, error)
 	//切换店铺
@@ -88,8 +96,48 @@ func (c *storeService) Update(ctx context.Context, in *Store, opts ...client.Cal
 	return out, nil
 }
 
+func (c *storeService) UpdateLogo(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.UpdateLogo", in)
+	out := new(StoreResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *storeService) UpdateName(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.UpdateName", in)
+	out := new(StoreResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *storeService) SetAddress(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.SetAddress", in)
+	out := new(StoreResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *storeService) Delete(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
 	req := c.c.NewRequest(c.name, "StoreService.Delete", in)
+	out := new(StoreResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *storeService) Upgrade(ctx context.Context, in *Store, opts ...client.CallOption) (*StoreResponse, error) {
+	req := c.c.NewRequest(c.name, "StoreService.Upgrade", in)
 	out := new(StoreResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
@@ -175,8 +223,16 @@ type StoreServiceHandler interface {
 	Create(context.Context, *Store, *StoreResponse) error
 	//修改店铺
 	Update(context.Context, *Store, *StoreResponse) error
+	//修改店铺Logo
+	UpdateLogo(context.Context, *Store, *StoreResponse) error
+	//修改店铺名称
+	UpdateName(context.Context, *Store, *StoreResponse) error
+	//设置店铺地址
+	SetAddress(context.Context, *Store, *StoreResponse) error
 	//删除店铺
 	Delete(context.Context, *Store, *StoreResponse) error
+	//升级店铺数据库
+	Upgrade(context.Context, *Store, *StoreResponse) error
 	//店铺授权
 	Auth(context.Context, *StoreSecret, *TokenResponse) error
 	//切换店铺
@@ -197,7 +253,11 @@ func RegisterStoreServiceHandler(s server.Server, hdlr StoreServiceHandler, opts
 	type storeService interface {
 		Create(ctx context.Context, in *Store, out *StoreResponse) error
 		Update(ctx context.Context, in *Store, out *StoreResponse) error
+		UpdateLogo(ctx context.Context, in *Store, out *StoreResponse) error
+		UpdateName(ctx context.Context, in *Store, out *StoreResponse) error
+		SetAddress(ctx context.Context, in *Store, out *StoreResponse) error
 		Delete(ctx context.Context, in *Store, out *StoreResponse) error
+		Upgrade(ctx context.Context, in *Store, out *StoreResponse) error
 		Auth(ctx context.Context, in *StoreSecret, out *TokenResponse) error
 		Switch(ctx context.Context, in *Store, out *TokenResponse) error
 		Info(ctx context.Context, in *Empty, out *StoreResponse) error
@@ -225,8 +285,24 @@ func (h *storeServiceHandler) Update(ctx context.Context, in *Store, out *StoreR
 	return h.StoreServiceHandler.Update(ctx, in, out)
 }
 
+func (h *storeServiceHandler) UpdateLogo(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.UpdateLogo(ctx, in, out)
+}
+
+func (h *storeServiceHandler) UpdateName(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.UpdateName(ctx, in, out)
+}
+
+func (h *storeServiceHandler) SetAddress(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.SetAddress(ctx, in, out)
+}
+
 func (h *storeServiceHandler) Delete(ctx context.Context, in *Store, out *StoreResponse) error {
 	return h.StoreServiceHandler.Delete(ctx, in, out)
+}
+
+func (h *storeServiceHandler) Upgrade(ctx context.Context, in *Store, out *StoreResponse) error {
+	return h.StoreServiceHandler.Upgrade(ctx, in, out)
 }
 
 func (h *storeServiceHandler) Auth(ctx context.Context, in *StoreSecret, out *TokenResponse) error {

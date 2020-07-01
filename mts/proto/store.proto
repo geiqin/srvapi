@@ -1,6 +1,8 @@
 syntax = "proto3";
 import "common.proto";
 import "application.proto";
+import "menu.proto";
+import "payMethod.proto";
 
 package geiqin.srv.mts;
 
@@ -9,8 +11,16 @@ service StoreService {
     rpc Create (Store) returns (StoreResponse) {}
     //修改店铺
     rpc Update (Store) returns (StoreResponse) {}
+    //修改店铺Logo
+    rpc UpdateLogo (Store) returns (StoreResponse) {}
+    //修改店铺名称
+    rpc UpdateName (Store) returns (StoreResponse) {}
+    //设置店铺地址
+    rpc SetAddress (Store) returns (StoreResponse) {}
     //删除店铺
     rpc Delete (Store) returns (StoreResponse) {}
+    //升级店铺数据库
+    rpc Upgrade (Store) returns (StoreResponse) {}
     //店铺授权
     rpc Auth (StoreSecret) returns (TokenResponse) {}
     //切换店铺
@@ -50,6 +60,8 @@ message Store {
     string	updated_at	=21;
     Application application =22;
     repeated int64 ids = 23;
+    repeated Menu menus = 24;
+    repeated PayMethod pay_methods = 25;
 }
 
 message StoreSecret{
