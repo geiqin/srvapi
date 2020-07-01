@@ -6,6 +6,7 @@ import "orderCoupon.proto";
 import "orderPromotion.proto";
 import "couponTicketInfo.proto";
 import "shipment.proto";
+import "integral.proto";
 
 package geiqin.srv.ord.private;
 
@@ -41,6 +42,7 @@ message Buying {
     float reward_money = 22; // 满减送活动优惠金额
     float coupon_money = 23; // 优惠券优惠金额
     OrderShipment shipment = 24; // 配送信息
+    Integral integral = 26; // 积分信息
 
 }
 
@@ -73,6 +75,7 @@ message BuyingRequest{
     int64 use_ticket_id =7; //选中的优惠劵凭证ID
     repeated BuyingItem items =9;
     OrderShipment shipment = 10; // 配送信息
+    Integral integral = 11; // 积分信息
 }
 
 message BuyingResponse {

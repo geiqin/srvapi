@@ -3,7 +3,7 @@ import "common.proto";
 import "buying.proto";
 import "orderDetail.proto";
 import "orderAddress.proto";
-import "delivery.proto";
+import "shipment.proto";
 import "orderCoupon.proto";
 package geiqin.srv.ord.private;
 
@@ -48,11 +48,11 @@ service OrderService {
     //订单备注
     rpc Remarks (Order) returns (OrderResponse) {}
     //订单发货
-    rpc Ship (Delivery) returns (DeliveryResponse) {}
+    rpc Ship (ShipmentRequest) returns (ShipmentResponse) {}
     //订单补发货
-    rpc RepairShip (Delivery) returns (DeliveryResponse) {}
+    rpc RepairShip (ShipmentRequest) returns (ShipmentResponse) {}
     //订单换货发货
-    rpc ExchangeShip (Delivery) returns (DeliveryResponse) {}
+    rpc ExchangeShip (ShipmentRequest) returns (ShipmentResponse) {}
     // 获取订单赠送\使用的优惠券列表
     rpc OrderCouponList (OrderCoupon) returns (OrderCouponResponse) {}
 }
@@ -105,8 +105,9 @@ message Order {
     OrderAddress address =54;
     repeated OrderDetail details = 55;
     Customer customer = 56;
-    repeated Delivery delivery = 57;
-    string shipment_method = 58;
+    string shipment_method = 57;
+    string cash_exchange_money = 58;
+    int32 cash_exchange_points = 59;
 }
 
 message Customer {
@@ -149,7 +150,6 @@ message OrderWhere {
     repeated int64 ids = 23;
     string shipment_method = 24;
 }
-
 
 message OrderResponse {
     Order entity = 1;

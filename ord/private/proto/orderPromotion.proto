@@ -30,9 +30,10 @@ message OrderPromotion {
     int64 promotion_id = 4;
     string promotion_type = 5;
     float price = 6;
-    string created_at = 7;
-    string updated_at = 8;
-    repeated OrderPromotionGoods goodses = 9;
+    int32 point = 7;
+    string created_at = 8;
+    string updated_at = 9;
+    repeated OrderPromotionGoods goodses = 10;
 }
 
 message OrderPromotionGoods {
