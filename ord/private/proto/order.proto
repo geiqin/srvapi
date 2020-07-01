@@ -106,7 +106,7 @@ message Order {
     repeated OrderDetail details = 55;
     Customer customer = 56;
     string shipment_method = 57;
-    string cash_exchange_money = 58;
+    float cash_exchange_money = 58;
     int32 cash_exchange_points = 59;
 }
 
