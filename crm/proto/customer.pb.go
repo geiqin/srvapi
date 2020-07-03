@@ -56,7 +56,7 @@ type Customer struct {
 	UpdatedAt            string     `protobuf:"bytes,33,opt,name=updated_at,json=updatedAt,proto3" json:"updated_at,omitempty"`
 	DeletedAt            string     `protobuf:"bytes,34,opt,name=deleted_at,json=deletedAt,proto3" json:"deleted_at,omitempty"`
 	Level                *Level     `protobuf:"bytes,35,opt,name=level,proto3" json:"level,omitempty"`
-	Tags                 []*Tag     `protobuf:"bytes,36,rep,name=tags,proto3" json:"tags,omitempty"`
+	Tags                 []*Tag     `protobuf:"bytes,36,rep,name=tags,proto3" json:"tags,omitempty" gorm:"many2many:customer_tags;"`
 	Vipcards             []*Vipcard `protobuf:"bytes,37,rep,name=vipcards,proto3" json:"vipcards,omitempty"`
 	Addrs                []*Address `protobuf:"bytes,38,rep,name=addrs,proto3" json:"addrs,omitempty"`
 	Ids                  []int64    `protobuf:"varint,39,rep,packed,name=ids,proto3" json:"ids,omitempty"`
