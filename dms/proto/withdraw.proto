@@ -80,6 +80,7 @@ message WithdrawWhere {
     string payment = 13;
     bool ok = 14;
     string failure = 15;
+    string mobile = 16;
 }
 
 message WithdrawApply {
@@ -88,6 +89,7 @@ message WithdrawApply {
     float max_money = 3; // 最大提现佣金
     float service_money_rate = 4; // 手续费比例
     float min_service_money = 5; // 最小手续费
+    float balance = 6; // 剩余提现余额
 }
 
 message WithdrawResponse {

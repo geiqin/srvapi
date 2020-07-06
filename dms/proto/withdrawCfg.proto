@@ -12,8 +12,8 @@ service WithdrawCfgService {
 
 message WithdrawCfg {
     int64 id = 1;
-    float min_money = 2;//最小提现金额
-    float daily_limit = 3;//每日提现上限
+    float min_money = 2;//单笔最小提现金额
+    float max_money = 3;//单笔最大提现金额
     float service_money_rate = 4;//提现手续费比例
     string created_at = 5;
     string updated_at = 6;
