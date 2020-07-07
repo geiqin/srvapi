@@ -5,6 +5,10 @@ package geiqin.srv.crm.integral;
 service IntegralService {
     rpc Search(IntegralWhere) returns (IntegralResponse) {}
     rpc Get(IntegralWhere) returns (IntegralResponse) {}
+    // 增加积分
+    rpc Inc(IntegralWhere) returns (IntegralResponse) {}
+    // 减少积分
+    rpc Dec(IntegralWhere) returns (IntegralResponse) {}
 }
 
 service MyIntegralService {
@@ -19,6 +23,9 @@ message IntegralWhere {
     int64 id = 5;
     repeated int64 ids = 6;
     int64 customer_id = 7;
+    repeated int64 customer_ids = 8;
+    int32 points = 9;
+    string memo = 10;
 }
 
 message Integral {

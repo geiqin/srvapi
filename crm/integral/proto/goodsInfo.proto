@@ -1,5 +1,5 @@
 syntax = "proto3";
-package geiqin.srv.ord.private;
+package geiqin.srv.crm.integral;
 
 message GoodsInfo {
 	int64	item_id	=1;
@@ -20,5 +20,4 @@ message GoodsInfo {
 	int64 sku_id =16; // 规格商品时使用
 	string sku_sn =17;
 	string sku_name =18;
-	string sku_spec_desc =19;
 }

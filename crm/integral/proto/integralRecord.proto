@@ -19,6 +19,13 @@ message IntegralRecordWhere {
     repeated int64 ids = 6;
     int64 customer_id = 7;
     int32 status = 8;
+    int32 points = 9;
+    repeated int64 customer_ids = 10;
+    string direction = 11;
+    int64 order_id = 12;
+    int32 type = 13;
+    repeated int32 types = 14;
+    repeated int32 statuses = 15;
 }
 
 message IntegralRecord {
@@ -36,6 +43,7 @@ message IntegralRecord {
     int32 status = 12;
     string created_at = 13;
     string updated_at = 14;
+    int64 order_id = 15;
 }
 
 message IntegralRecordResponse {

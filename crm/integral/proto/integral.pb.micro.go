@@ -36,6 +36,10 @@ var _ server.Option
 type IntegralService interface {
 	Search(ctx context.Context, in *IntegralWhere, opts ...client.CallOption) (*IntegralResponse, error)
 	Get(ctx context.Context, in *IntegralWhere, opts ...client.CallOption) (*IntegralResponse, error)
+	// 增加积分
+	Inc(ctx context.Context, in *IntegralWhere, opts ...client.CallOption) (*IntegralResponse, error)
+	// 减少积分
+	Dec(ctx context.Context, in *IntegralWhere, opts ...client.CallOption) (*IntegralResponse, error)
 }
 
 type integralService struct {
@@ -70,17 +74,43 @@ func (c *integralService) Get(ctx context.Context, in *IntegralWhere, opts ...cl
 	return out, nil
 }
 
+func (c *integralService) Inc(ctx context.Context, in *IntegralWhere, opts ...client.CallOption) (*IntegralResponse, error) {
+	req := c.c.NewRequest(c.name, "IntegralService.Inc", in)
+	out := new(IntegralResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *integralService) Dec(ctx context.Context, in *IntegralWhere, opts ...client.CallOption) (*IntegralResponse, error) {
+	req := c.c.NewRequest(c.name, "IntegralService.Dec", in)
+	out := new(IntegralResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for IntegralService service
 
 type IntegralServiceHandler interface {
 	Search(context.Context, *IntegralWhere, *IntegralResponse) error
 	Get(context.Context, *IntegralWhere, *IntegralResponse) error
+	// 增加积分
+	Inc(context.Context, *IntegralWhere, *IntegralResponse) error
+	// 减少积分
+	Dec(context.Context, *IntegralWhere, *IntegralResponse) error
 }
 
 func RegisterIntegralServiceHandler(s server.Server, hdlr IntegralServiceHandler, opts ...server.HandlerOption) error {
 	type integralService interface {
 		Search(ctx context.Context, in *IntegralWhere, out *IntegralResponse) error
 		Get(ctx context.Context, in *IntegralWhere, out *IntegralResponse) error
+		Inc(ctx context.Context, in *IntegralWhere, out *IntegralResponse) error
+		Dec(ctx context.Context, in *IntegralWhere, out *IntegralResponse) error
 	}
 	type IntegralService struct {
 		integralService
@@ -99,6 +129,14 @@ func (h *integralServiceHandler) Search(ctx context.Context, in *IntegralWhere, 
 
 func (h *integralServiceHandler) Get(ctx context.Context, in *IntegralWhere, out *IntegralResponse) error {
 	return h.IntegralServiceHandler.Get(ctx, in, out)
+}
+
+func (h *integralServiceHandler) Inc(ctx context.Context, in *IntegralWhere, out *IntegralResponse) error {
+	return h.IntegralServiceHandler.Inc(ctx, in, out)
+}
+
+func (h *integralServiceHandler) Dec(ctx context.Context, in *IntegralWhere, out *IntegralResponse) error {
+	return h.IntegralServiceHandler.Dec(ctx, in, out)
 }
 
 // Client API for MyIntegralService service

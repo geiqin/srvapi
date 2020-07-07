@@ -23,8 +23,7 @@ message IntegralSetting {
     int64 id = 1;
     int32 limit = 2;
     int32 effective_type = 3;
-    int32 expire_year = 4;
-    string expire_date = 5;
+    int32 expire_year_num = 4;
     string expire_at = 6;
     int32 protect_days = 7;
     string integral_name = 8;
