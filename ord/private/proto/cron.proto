@@ -1,0 +1,16 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.ord.private;
+
+service CronService {
+    // 订单超时自动关闭（下单后超过1天未支付）
+    rpc OrderClose(Empty) returns(CronServiceResponse) {}
+    // 订单超时自动收货（发货后超过7天未收货）
+    rpc OrderReceipt(Empty) returns(CronServiceResponse) {}
+}
+
+message CronServiceResponse {
+  Pager pager = 1;
+  Error error = 2;
+  Info info = 3;
+}

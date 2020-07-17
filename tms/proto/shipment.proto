@@ -1,6 +1,7 @@
 syntax = "proto3";
 import "common.proto";
 import "shipper.proto";
+import "goodsInfo.proto";
 package geiqin.srv.tms;
 
 service ShipmentService {
@@ -55,6 +56,8 @@ message Shipment {
     string updated_at = 28;
     repeated ShipmentDetail details = 29;
     Shipper shipper = 30;
+    string start_time = 31;
+    string end_time = 32;
 }
 
 message ShipmentDetail {
@@ -66,8 +69,8 @@ message ShipmentDetail {
     int32 num = 6;
     string created_at = 7;
     string updated_at = 8;
+    GoodsInfo goods = 9;
 }
-
 
 message ShipmentResponse {
     Shipment entity = 1;

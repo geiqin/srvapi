@@ -18,7 +18,7 @@ message Buying {
     float freight = 4;
     int64 address_id = 5;
     repeated BuyingItem items = 6;
-    DeliveryMethod delivery_method = 7; // 配送信息
+    DeliveryMethod shipment = 7; // 配送信息
 }
 
 //购买清单明细
