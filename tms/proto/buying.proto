@@ -49,6 +49,8 @@ message DeliveryMethod {
     Delivery deliver_info = 14; // 同城配送信息
     Fetch fetch_info = 15; // 上门自提信息
     Express express_info = 16; // 快递发货信息
+    string start_time = 17; // 选择的配送或自提的开始时间
+    string end_time = 18; // 选择的配送或自提的结束时间
 }
 
 message BuyingResponse {
