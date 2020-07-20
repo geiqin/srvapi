@@ -1,0 +1,27 @@
+syntax = "proto3";
+import "common.proto";
+import "order.proto";
+package geiqin.srv.ord.private;
+
+service CostSharingService {
+    // 计算订单明细分摊后的总金额
+    rpc Calculate (CostSharingWhere) returns (CostSharingResponse) {}
+}
+
+message CostSharingWhere {
+    Order order = 1;
+    int64 orderDetailId = 2;
+    repeated int64 orderDetailIds = 3;
+}
+
+message CostSharing {
+    float money = 1;
+}
+
+message CostSharingResponse {
+    CostSharing entity = 1;
+    Pager pager = 2;
+    repeated CostSharing items = 3;
+    Error error = 4;
+    Info info = 5;
+}
