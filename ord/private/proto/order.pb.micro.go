@@ -245,7 +245,7 @@ type OrderService interface {
 	//订单发货(快递发货)
 	Ship(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
 	//订单发货(同城配送)
-	DeliveryShip(ctx context.Context, in *ShipmentDeliveryRequest, opts ...client.CallOption) (*ShipmentDeliveryResponse, error)
+	DeliveryShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
 	//订单补发货
 	RepairShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
 	//订单换货发货
@@ -376,9 +376,9 @@ func (c *orderService) Ship(ctx context.Context, in *ShipmentRequest, opts ...cl
 	return out, nil
 }
 
-func (c *orderService) DeliveryShip(ctx context.Context, in *ShipmentDeliveryRequest, opts ...client.CallOption) (*ShipmentDeliveryResponse, error) {
+func (c *orderService) DeliveryShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.DeliveryShip", in)
-	out := new(ShipmentDeliveryResponse)
+	out := new(ShipmentResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -442,7 +442,7 @@ type OrderServiceHandler interface {
 	//订单发货(快递发货)
 	Ship(context.Context, *ShipmentRequest, *ShipmentResponse) error
 	//订单发货(同城配送)
-	DeliveryShip(context.Context, *ShipmentDeliveryRequest, *ShipmentDeliveryResponse) error
+	DeliveryShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
 	//订单补发货
 	RepairShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
 	//订单换货发货
@@ -464,7 +464,7 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		List(ctx context.Context, in *OrderWhere, out *OrderResponse) error
 		Remarks(ctx context.Context, in *Order, out *OrderResponse) error
 		Ship(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
-		DeliveryShip(ctx context.Context, in *ShipmentDeliveryRequest, out *ShipmentDeliveryResponse) error
+		DeliveryShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		RepairShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		ExchangeShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		OrderCouponList(ctx context.Context, in *OrderCoupon, out *OrderCouponResponse) error
@@ -524,7 +524,7 @@ func (h *orderServiceHandler) Ship(ctx context.Context, in *ShipmentRequest, out
 	return h.OrderServiceHandler.Ship(ctx, in, out)
 }
 
-func (h *orderServiceHandler) DeliveryShip(ctx context.Context, in *ShipmentDeliveryRequest, out *ShipmentDeliveryResponse) error {
+func (h *orderServiceHandler) DeliveryShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
 	return h.OrderServiceHandler.DeliveryShip(ctx, in, out)
 }
 

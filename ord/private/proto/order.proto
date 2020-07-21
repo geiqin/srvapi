@@ -50,7 +50,7 @@ service OrderService {
     //订单发货(快递发货)
     rpc Ship (ShipmentRequest) returns (ShipmentResponse) {}
     //订单发货(同城配送)
-    rpc DeliveryShip (ShipmentDeliveryRequest) returns (ShipmentDeliveryResponse) {}
+    rpc DeliveryShip (ShipmentRequest) returns (ShipmentResponse) {}
     //订单补发货
     rpc RepairShip (ShipmentRequest) returns (ShipmentResponse) {}
     //订单换货发货
