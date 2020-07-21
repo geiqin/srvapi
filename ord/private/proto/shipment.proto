@@ -18,6 +18,7 @@ message OrderShipment {
     string delivery_at = 11; // 下单选择的配送时间【同城配送】
     float express_fee = 12; // 快递发货运费
     float delivery_fee = 13; // 同城配送配送费
+    float start_price = 19; // 起送价
     DeliveryInfo delivery_info = 14; // 同城配送信息
     FetchInfo fetch_info = 15; // 上门自提信息
     ExpressInfo express_info = 16; // 快递发货信息
