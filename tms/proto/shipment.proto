@@ -23,6 +23,7 @@ message ShipmentWhere {
     string type = 7;
     string method = 8;
     int64 order_id = 9;
+    int32 delivery_type = 10;
 }
 
 message Shipment {
@@ -40,6 +41,7 @@ message Shipment {
     int64 location_id = 12;
     string fetch_at = 13;
     string delivery_at = 14;
+    int32 delivery_type = 33;
     int64 customer_id = 15;
     string receiver_name = 16;
     int64 receiver_area_id = 17;

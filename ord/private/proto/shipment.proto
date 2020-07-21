@@ -56,7 +56,7 @@ message ExpressInfo {
 
 }
 
-// 订单发货的请求数据
+// 订单发货的请求数据(快递发货)
 message ShipmentRequest {
     string method = 1;
     string type = 2;
@@ -69,7 +69,10 @@ message ShipmentRequest {
     string delivery_at = 9;
     string start_time = 10;
     string end_time = 11;
-    repeated ShipmentRequestDetail details = 12;
+    // 订单发货的请求数据(同城配送)
+    int32 delivery_type = 12; // 配送方式【同城配送】: 1商家自配送, 2第三方同城配送
+    int64 deliveryer_id = 13; // 配送员ID
+    repeated ShipmentRequestDetail details = 14;
 }
 
 message ShipmentRequestDetail {
