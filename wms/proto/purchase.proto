@@ -7,24 +7,37 @@ package geiqin.srv.wms;
 service PurchaseInService {
     rpc Create (Purchase) returns (PurchaseResponse) {}
     rpc Update (Purchase) returns (PurchaseResponse) {}
-    rpc Delete (Purchase) returns (PurchaseResponse) {}
-    rpc Confirm (Purchase) returns (PurchaseResponse) {}
-    rpc Approve (Purchase) returns (PurchaseResponse) {}
+    rpc Delete (PurchaseWhere) returns (PurchaseResponse) {}
+    rpc Confirm (PurchaseWhere) returns (PurchaseResponse) {}
+    rpc Approve (PurchaseWhere) returns (PurchaseResponse) {}
     rpc Get (Purchase) returns (PurchaseResponse) {}
-    rpc Search (BaseWhere) returns (PurchaseResponse) {}
-    rpc Details (BaseWhere) returns (PurchaseDetailResponse) {}
+    rpc Search (PurchaseWhere) returns (PurchaseResponse) {}
+    rpc Details (PurchaseWhere) returns (PurchaseDetailResponse) {}
 }
 
 //采购退货单
 service PurchaseOutService {
     rpc Create (Purchase) returns (PurchaseResponse) {}
     rpc Update (Purchase) returns (PurchaseResponse) {}
-    rpc Delete (Purchase) returns (PurchaseResponse) {}
-    rpc Confirm (Purchase) returns (PurchaseResponse) {}
-    rpc Approve (Purchase) returns (PurchaseResponse) {}
+    rpc Delete (PurchaseWhere) returns (PurchaseResponse) {}
+    rpc Confirm (PurchaseWhere) returns (PurchaseResponse) {}
+    rpc Approve (PurchaseWhere) returns (PurchaseResponse) {}
     rpc Get (Purchase) returns (PurchaseResponse) {}
-    rpc Search (BaseWhere) returns (PurchaseResponse) {}
-    rpc Details (BaseWhere) returns (PurchaseDetailResponse) {}
+    rpc Search (PurchaseWhere) returns (PurchaseResponse) {}
+    rpc Details (PurchaseWhere) returns (PurchaseDetailResponse) {}
+}
+
+message PurchaseWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int64 id = 3;
+    repeated int64 ids = 4;
+    string type = 5;
+    int32 status = 6;
+    bool ok = 7;
+    string failure = 8;
+    int64 purchase_id = 9;
+    repeated int64 purchase_ids = 10;
 }
 
 message Purchase {

@@ -7,30 +7,44 @@ package geiqin.srv.wms;
 service StockInService {
     rpc Create (Stock) returns (StockResponse) {}
     rpc Update (Stock) returns (StockResponse) {}
-    rpc Delete (Stock) returns (StockResponse) {}
-    rpc Confirm (Stock) returns (StockResponse) {}
-    rpc Approve (Stock) returns (StockResponse) {}
+    rpc Delete (StockWhere) returns (StockResponse) {}
+    rpc Confirm (StockWhere) returns (StockResponse) {}
+    rpc Approve (StockWhere) returns (StockResponse) {}
     rpc Get (Stock) returns (StockResponse) {}
-    rpc Search (BaseWhere) returns (StockResponse) {}
-    rpc Details (BaseWhere) returns (StockDetailResponse) {}
+    rpc Search (StockWhere) returns (StockResponse) {}
+    rpc Details (StockWhere) returns (StockDetailResponse) {}
 }
 
 service StockOutService {
     rpc Create (Stock) returns (StockResponse) {}
     rpc Update (Stock) returns (StockResponse) {}
-    rpc Delete (Stock) returns (StockResponse) {}
-    rpc Confirm (Stock) returns (StockResponse) {}
-    rpc Approve (Stock) returns (StockResponse) {}
+    rpc Delete (StockWhere) returns (StockResponse) {}
+    rpc Confirm (StockWhere) returns (StockResponse) {}
+    rpc Approve (StockWhere) returns (StockResponse) {}
     rpc Get (Stock) returns (StockResponse) {}
-    rpc Search (BaseWhere) returns (StockResponse) {}
-    rpc Details (BaseWhere) returns (StockDetailResponse) {}
+    rpc Search (StockWhere) returns (StockResponse) {}
+    rpc Details (StockWhere) returns (StockDetailResponse) {}
+}
+
+message StockWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int64 id = 3;
+    repeated int64 ids = 4;
+    string type = 5;
+    int32 sheet_type = 6;
+    int32 status = 7;
+    bool ok = 8;
+    string failure = 9;
+    int64 stock_id = 10;
+    repeated int64 stock_ids = 11;
 }
 
 message Stock {
     int64 id = 1;
     string stock_sn = 2;
     string type = 3;
-    string sheet_type = 4;
+    int32 sheet_type = 4;
     string handled_at = 5;
     string source_no = 6;
     int64 user_id = 7;
@@ -43,7 +57,6 @@ message Stock {
     string created_at = 14;
     string updated_at = 15;
     repeated StockDetail details =16;
-    bool ok =17; //确定操作
 }
 
 message StockResponse {

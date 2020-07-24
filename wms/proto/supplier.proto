@@ -7,9 +7,15 @@ package geiqin.srv.wms;
 service SupplierService {
     rpc Create (Supplier) returns (SupplierResponse) {}
     rpc Update (Supplier) returns (SupplierResponse) {}
-    rpc Delete (Supplier) returns (SupplierResponse) {}
+    rpc Delete (SupplierWhere) returns (SupplierResponse) {}
     rpc Get (Supplier) returns (SupplierResponse) {}
     rpc Search (SupplierWhere) returns (SupplierResponse) {}
+    // 供应商列表
+    rpc List (SupplierWhere) returns (SupplierResponse) {}
+    // 禁用供应商
+    rpc Disable  (SupplierWhere) returns (SupplierResponse) {}
+    // 启用供应商
+    rpc Enable  (SupplierWhere) returns (SupplierResponse) {}
 }
 
 message Supplier {
@@ -25,7 +31,7 @@ message Supplier {
     string address = 10;
     string memo = 11;
     bool verified = 12;
-    string status = 13;
+    int32 status = 13;
     string created_at = 14;
     string updated_at = 15;
     repeated SupplierContact contacts =16;
@@ -41,8 +47,9 @@ message SupplierWhere {
     string shortname = 6;
     string registed_code = 7;
     string supply_type = 8;
-    int64 area_id = 9;
-    string status = 10;
+    int64 id = 9;
+    repeated int64 ids = 10;
+    int32 status = 11;
 }
 
 

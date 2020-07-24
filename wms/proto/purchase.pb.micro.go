@@ -36,12 +36,12 @@ var _ server.Option
 type PurchaseInService interface {
 	Create(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
 	Update(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
-	Delete(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
-	Confirm(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
-	Approve(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
+	Delete(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
+	Confirm(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
+	Approve(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
 	Get(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
-	Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*PurchaseDetailResponse, error)
+	Search(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
+	Details(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseDetailResponse, error)
 }
 
 type purchaseInService struct {
@@ -76,7 +76,7 @@ func (c *purchaseInService) Update(ctx context.Context, in *Purchase, opts ...cl
 	return out, nil
 }
 
-func (c *purchaseInService) Delete(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error) {
+func (c *purchaseInService) Delete(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseInService.Delete", in)
 	out := new(PurchaseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -86,7 +86,7 @@ func (c *purchaseInService) Delete(ctx context.Context, in *Purchase, opts ...cl
 	return out, nil
 }
 
-func (c *purchaseInService) Confirm(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error) {
+func (c *purchaseInService) Confirm(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseInService.Confirm", in)
 	out := new(PurchaseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -96,7 +96,7 @@ func (c *purchaseInService) Confirm(ctx context.Context, in *Purchase, opts ...c
 	return out, nil
 }
 
-func (c *purchaseInService) Approve(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error) {
+func (c *purchaseInService) Approve(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseInService.Approve", in)
 	out := new(PurchaseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -116,7 +116,7 @@ func (c *purchaseInService) Get(ctx context.Context, in *Purchase, opts ...clien
 	return out, nil
 }
 
-func (c *purchaseInService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
+func (c *purchaseInService) Search(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseInService.Search", in)
 	out := new(PurchaseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -126,7 +126,7 @@ func (c *purchaseInService) Search(ctx context.Context, in *BaseWhere, opts ...c
 	return out, nil
 }
 
-func (c *purchaseInService) Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*PurchaseDetailResponse, error) {
+func (c *purchaseInService) Details(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseDetailResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseInService.Details", in)
 	out := new(PurchaseDetailResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -141,24 +141,24 @@ func (c *purchaseInService) Details(ctx context.Context, in *BaseWhere, opts ...
 type PurchaseInServiceHandler interface {
 	Create(context.Context, *Purchase, *PurchaseResponse) error
 	Update(context.Context, *Purchase, *PurchaseResponse) error
-	Delete(context.Context, *Purchase, *PurchaseResponse) error
-	Confirm(context.Context, *Purchase, *PurchaseResponse) error
-	Approve(context.Context, *Purchase, *PurchaseResponse) error
+	Delete(context.Context, *PurchaseWhere, *PurchaseResponse) error
+	Confirm(context.Context, *PurchaseWhere, *PurchaseResponse) error
+	Approve(context.Context, *PurchaseWhere, *PurchaseResponse) error
 	Get(context.Context, *Purchase, *PurchaseResponse) error
-	Search(context.Context, *BaseWhere, *PurchaseResponse) error
-	Details(context.Context, *BaseWhere, *PurchaseDetailResponse) error
+	Search(context.Context, *PurchaseWhere, *PurchaseResponse) error
+	Details(context.Context, *PurchaseWhere, *PurchaseDetailResponse) error
 }
 
 func RegisterPurchaseInServiceHandler(s server.Server, hdlr PurchaseInServiceHandler, opts ...server.HandlerOption) error {
 	type purchaseInService interface {
 		Create(ctx context.Context, in *Purchase, out *PurchaseResponse) error
 		Update(ctx context.Context, in *Purchase, out *PurchaseResponse) error
-		Delete(ctx context.Context, in *Purchase, out *PurchaseResponse) error
-		Confirm(ctx context.Context, in *Purchase, out *PurchaseResponse) error
-		Approve(ctx context.Context, in *Purchase, out *PurchaseResponse) error
+		Delete(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error
+		Confirm(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error
+		Approve(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error
 		Get(ctx context.Context, in *Purchase, out *PurchaseResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *PurchaseResponse) error
-		Details(ctx context.Context, in *BaseWhere, out *PurchaseDetailResponse) error
+		Search(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error
+		Details(ctx context.Context, in *PurchaseWhere, out *PurchaseDetailResponse) error
 	}
 	type PurchaseInService struct {
 		purchaseInService
@@ -179,15 +179,15 @@ func (h *purchaseInServiceHandler) Update(ctx context.Context, in *Purchase, out
 	return h.PurchaseInServiceHandler.Update(ctx, in, out)
 }
 
-func (h *purchaseInServiceHandler) Delete(ctx context.Context, in *Purchase, out *PurchaseResponse) error {
+func (h *purchaseInServiceHandler) Delete(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error {
 	return h.PurchaseInServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *purchaseInServiceHandler) Confirm(ctx context.Context, in *Purchase, out *PurchaseResponse) error {
+func (h *purchaseInServiceHandler) Confirm(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error {
 	return h.PurchaseInServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *purchaseInServiceHandler) Approve(ctx context.Context, in *Purchase, out *PurchaseResponse) error {
+func (h *purchaseInServiceHandler) Approve(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error {
 	return h.PurchaseInServiceHandler.Approve(ctx, in, out)
 }
 
@@ -195,11 +195,11 @@ func (h *purchaseInServiceHandler) Get(ctx context.Context, in *Purchase, out *P
 	return h.PurchaseInServiceHandler.Get(ctx, in, out)
 }
 
-func (h *purchaseInServiceHandler) Search(ctx context.Context, in *BaseWhere, out *PurchaseResponse) error {
+func (h *purchaseInServiceHandler) Search(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error {
 	return h.PurchaseInServiceHandler.Search(ctx, in, out)
 }
 
-func (h *purchaseInServiceHandler) Details(ctx context.Context, in *BaseWhere, out *PurchaseDetailResponse) error {
+func (h *purchaseInServiceHandler) Details(ctx context.Context, in *PurchaseWhere, out *PurchaseDetailResponse) error {
 	return h.PurchaseInServiceHandler.Details(ctx, in, out)
 }
 
@@ -208,12 +208,12 @@ func (h *purchaseInServiceHandler) Details(ctx context.Context, in *BaseWhere, o
 type PurchaseOutService interface {
 	Create(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
 	Update(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
-	Delete(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
-	Confirm(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
-	Approve(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
+	Delete(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
+	Confirm(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
+	Approve(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
 	Get(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
-	Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*PurchaseDetailResponse, error)
+	Search(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error)
+	Details(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseDetailResponse, error)
 }
 
 type purchaseOutService struct {
@@ -248,7 +248,7 @@ func (c *purchaseOutService) Update(ctx context.Context, in *Purchase, opts ...c
 	return out, nil
 }
 
-func (c *purchaseOutService) Delete(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error) {
+func (c *purchaseOutService) Delete(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseOutService.Delete", in)
 	out := new(PurchaseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -258,7 +258,7 @@ func (c *purchaseOutService) Delete(ctx context.Context, in *Purchase, opts ...c
 	return out, nil
 }
 
-func (c *purchaseOutService) Confirm(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error) {
+func (c *purchaseOutService) Confirm(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseOutService.Confirm", in)
 	out := new(PurchaseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -268,7 +268,7 @@ func (c *purchaseOutService) Confirm(ctx context.Context, in *Purchase, opts ...
 	return out, nil
 }
 
-func (c *purchaseOutService) Approve(ctx context.Context, in *Purchase, opts ...client.CallOption) (*PurchaseResponse, error) {
+func (c *purchaseOutService) Approve(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseOutService.Approve", in)
 	out := new(PurchaseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -288,7 +288,7 @@ func (c *purchaseOutService) Get(ctx context.Context, in *Purchase, opts ...clie
 	return out, nil
 }
 
-func (c *purchaseOutService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
+func (c *purchaseOutService) Search(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseOutService.Search", in)
 	out := new(PurchaseResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -298,7 +298,7 @@ func (c *purchaseOutService) Search(ctx context.Context, in *BaseWhere, opts ...
 	return out, nil
 }
 
-func (c *purchaseOutService) Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*PurchaseDetailResponse, error) {
+func (c *purchaseOutService) Details(ctx context.Context, in *PurchaseWhere, opts ...client.CallOption) (*PurchaseDetailResponse, error) {
 	req := c.c.NewRequest(c.name, "PurchaseOutService.Details", in)
 	out := new(PurchaseDetailResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -313,24 +313,24 @@ func (c *purchaseOutService) Details(ctx context.Context, in *BaseWhere, opts ..
 type PurchaseOutServiceHandler interface {
 	Create(context.Context, *Purchase, *PurchaseResponse) error
 	Update(context.Context, *Purchase, *PurchaseResponse) error
-	Delete(context.Context, *Purchase, *PurchaseResponse) error
-	Confirm(context.Context, *Purchase, *PurchaseResponse) error
-	Approve(context.Context, *Purchase, *PurchaseResponse) error
+	Delete(context.Context, *PurchaseWhere, *PurchaseResponse) error
+	Confirm(context.Context, *PurchaseWhere, *PurchaseResponse) error
+	Approve(context.Context, *PurchaseWhere, *PurchaseResponse) error
 	Get(context.Context, *Purchase, *PurchaseResponse) error
-	Search(context.Context, *BaseWhere, *PurchaseResponse) error
-	Details(context.Context, *BaseWhere, *PurchaseDetailResponse) error
+	Search(context.Context, *PurchaseWhere, *PurchaseResponse) error
+	Details(context.Context, *PurchaseWhere, *PurchaseDetailResponse) error
 }
 
 func RegisterPurchaseOutServiceHandler(s server.Server, hdlr PurchaseOutServiceHandler, opts ...server.HandlerOption) error {
 	type purchaseOutService interface {
 		Create(ctx context.Context, in *Purchase, out *PurchaseResponse) error
 		Update(ctx context.Context, in *Purchase, out *PurchaseResponse) error
-		Delete(ctx context.Context, in *Purchase, out *PurchaseResponse) error
-		Confirm(ctx context.Context, in *Purchase, out *PurchaseResponse) error
-		Approve(ctx context.Context, in *Purchase, out *PurchaseResponse) error
+		Delete(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error
+		Confirm(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error
+		Approve(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error
 		Get(ctx context.Context, in *Purchase, out *PurchaseResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *PurchaseResponse) error
-		Details(ctx context.Context, in *BaseWhere, out *PurchaseDetailResponse) error
+		Search(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error
+		Details(ctx context.Context, in *PurchaseWhere, out *PurchaseDetailResponse) error
 	}
 	type PurchaseOutService struct {
 		purchaseOutService
@@ -351,15 +351,15 @@ func (h *purchaseOutServiceHandler) Update(ctx context.Context, in *Purchase, ou
 	return h.PurchaseOutServiceHandler.Update(ctx, in, out)
 }
 
-func (h *purchaseOutServiceHandler) Delete(ctx context.Context, in *Purchase, out *PurchaseResponse) error {
+func (h *purchaseOutServiceHandler) Delete(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error {
 	return h.PurchaseOutServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *purchaseOutServiceHandler) Confirm(ctx context.Context, in *Purchase, out *PurchaseResponse) error {
+func (h *purchaseOutServiceHandler) Confirm(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error {
 	return h.PurchaseOutServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *purchaseOutServiceHandler) Approve(ctx context.Context, in *Purchase, out *PurchaseResponse) error {
+func (h *purchaseOutServiceHandler) Approve(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error {
 	return h.PurchaseOutServiceHandler.Approve(ctx, in, out)
 }
 
@@ -367,10 +367,10 @@ func (h *purchaseOutServiceHandler) Get(ctx context.Context, in *Purchase, out *
 	return h.PurchaseOutServiceHandler.Get(ctx, in, out)
 }
 
-func (h *purchaseOutServiceHandler) Search(ctx context.Context, in *BaseWhere, out *PurchaseResponse) error {
+func (h *purchaseOutServiceHandler) Search(ctx context.Context, in *PurchaseWhere, out *PurchaseResponse) error {
 	return h.PurchaseOutServiceHandler.Search(ctx, in, out)
 }
 
-func (h *purchaseOutServiceHandler) Details(ctx context.Context, in *BaseWhere, out *PurchaseDetailResponse) error {
+func (h *purchaseOutServiceHandler) Details(ctx context.Context, in *PurchaseWhere, out *PurchaseDetailResponse) error {
 	return h.PurchaseOutServiceHandler.Details(ctx, in, out)
 }

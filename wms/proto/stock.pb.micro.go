@@ -36,12 +36,12 @@ var _ server.Option
 type StockInService interface {
 	Create(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
 	Update(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
-	Delete(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
-	Confirm(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
-	Approve(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
+	Delete(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error)
+	Confirm(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error)
+	Approve(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error)
 	Get(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StockResponse, error)
-	Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StockDetailResponse, error)
+	Search(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error)
+	Details(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockDetailResponse, error)
 }
 
 type stockInService struct {
@@ -76,7 +76,7 @@ func (c *stockInService) Update(ctx context.Context, in *Stock, opts ...client.C
 	return out, nil
 }
 
-func (c *stockInService) Delete(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error) {
+func (c *stockInService) Delete(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error) {
 	req := c.c.NewRequest(c.name, "StockInService.Delete", in)
 	out := new(StockResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -86,7 +86,7 @@ func (c *stockInService) Delete(ctx context.Context, in *Stock, opts ...client.C
 	return out, nil
 }
 
-func (c *stockInService) Confirm(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error) {
+func (c *stockInService) Confirm(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error) {
 	req := c.c.NewRequest(c.name, "StockInService.Confirm", in)
 	out := new(StockResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -96,7 +96,7 @@ func (c *stockInService) Confirm(ctx context.Context, in *Stock, opts ...client.
 	return out, nil
 }
 
-func (c *stockInService) Approve(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error) {
+func (c *stockInService) Approve(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error) {
 	req := c.c.NewRequest(c.name, "StockInService.Approve", in)
 	out := new(StockResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -116,7 +116,7 @@ func (c *stockInService) Get(ctx context.Context, in *Stock, opts ...client.Call
 	return out, nil
 }
 
-func (c *stockInService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StockResponse, error) {
+func (c *stockInService) Search(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error) {
 	req := c.c.NewRequest(c.name, "StockInService.Search", in)
 	out := new(StockResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -126,7 +126,7 @@ func (c *stockInService) Search(ctx context.Context, in *BaseWhere, opts ...clie
 	return out, nil
 }
 
-func (c *stockInService) Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StockDetailResponse, error) {
+func (c *stockInService) Details(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockDetailResponse, error) {
 	req := c.c.NewRequest(c.name, "StockInService.Details", in)
 	out := new(StockDetailResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -141,24 +141,24 @@ func (c *stockInService) Details(ctx context.Context, in *BaseWhere, opts ...cli
 type StockInServiceHandler interface {
 	Create(context.Context, *Stock, *StockResponse) error
 	Update(context.Context, *Stock, *StockResponse) error
-	Delete(context.Context, *Stock, *StockResponse) error
-	Confirm(context.Context, *Stock, *StockResponse) error
-	Approve(context.Context, *Stock, *StockResponse) error
+	Delete(context.Context, *StockWhere, *StockResponse) error
+	Confirm(context.Context, *StockWhere, *StockResponse) error
+	Approve(context.Context, *StockWhere, *StockResponse) error
 	Get(context.Context, *Stock, *StockResponse) error
-	Search(context.Context, *BaseWhere, *StockResponse) error
-	Details(context.Context, *BaseWhere, *StockDetailResponse) error
+	Search(context.Context, *StockWhere, *StockResponse) error
+	Details(context.Context, *StockWhere, *StockDetailResponse) error
 }
 
 func RegisterStockInServiceHandler(s server.Server, hdlr StockInServiceHandler, opts ...server.HandlerOption) error {
 	type stockInService interface {
 		Create(ctx context.Context, in *Stock, out *StockResponse) error
 		Update(ctx context.Context, in *Stock, out *StockResponse) error
-		Delete(ctx context.Context, in *Stock, out *StockResponse) error
-		Confirm(ctx context.Context, in *Stock, out *StockResponse) error
-		Approve(ctx context.Context, in *Stock, out *StockResponse) error
+		Delete(ctx context.Context, in *StockWhere, out *StockResponse) error
+		Confirm(ctx context.Context, in *StockWhere, out *StockResponse) error
+		Approve(ctx context.Context, in *StockWhere, out *StockResponse) error
 		Get(ctx context.Context, in *Stock, out *StockResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *StockResponse) error
-		Details(ctx context.Context, in *BaseWhere, out *StockDetailResponse) error
+		Search(ctx context.Context, in *StockWhere, out *StockResponse) error
+		Details(ctx context.Context, in *StockWhere, out *StockDetailResponse) error
 	}
 	type StockInService struct {
 		stockInService
@@ -179,15 +179,15 @@ func (h *stockInServiceHandler) Update(ctx context.Context, in *Stock, out *Stoc
 	return h.StockInServiceHandler.Update(ctx, in, out)
 }
 
-func (h *stockInServiceHandler) Delete(ctx context.Context, in *Stock, out *StockResponse) error {
+func (h *stockInServiceHandler) Delete(ctx context.Context, in *StockWhere, out *StockResponse) error {
 	return h.StockInServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *stockInServiceHandler) Confirm(ctx context.Context, in *Stock, out *StockResponse) error {
+func (h *stockInServiceHandler) Confirm(ctx context.Context, in *StockWhere, out *StockResponse) error {
 	return h.StockInServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *stockInServiceHandler) Approve(ctx context.Context, in *Stock, out *StockResponse) error {
+func (h *stockInServiceHandler) Approve(ctx context.Context, in *StockWhere, out *StockResponse) error {
 	return h.StockInServiceHandler.Approve(ctx, in, out)
 }
 
@@ -195,11 +195,11 @@ func (h *stockInServiceHandler) Get(ctx context.Context, in *Stock, out *StockRe
 	return h.StockInServiceHandler.Get(ctx, in, out)
 }
 
-func (h *stockInServiceHandler) Search(ctx context.Context, in *BaseWhere, out *StockResponse) error {
+func (h *stockInServiceHandler) Search(ctx context.Context, in *StockWhere, out *StockResponse) error {
 	return h.StockInServiceHandler.Search(ctx, in, out)
 }
 
-func (h *stockInServiceHandler) Details(ctx context.Context, in *BaseWhere, out *StockDetailResponse) error {
+func (h *stockInServiceHandler) Details(ctx context.Context, in *StockWhere, out *StockDetailResponse) error {
 	return h.StockInServiceHandler.Details(ctx, in, out)
 }
 
@@ -208,12 +208,12 @@ func (h *stockInServiceHandler) Details(ctx context.Context, in *BaseWhere, out 
 type StockOutService interface {
 	Create(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
 	Update(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
-	Delete(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
-	Confirm(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
-	Approve(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
+	Delete(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error)
+	Confirm(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error)
+	Approve(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error)
 	Get(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StockResponse, error)
-	Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StockDetailResponse, error)
+	Search(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error)
+	Details(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockDetailResponse, error)
 }
 
 type stockOutService struct {
@@ -248,7 +248,7 @@ func (c *stockOutService) Update(ctx context.Context, in *Stock, opts ...client.
 	return out, nil
 }
 
-func (c *stockOutService) Delete(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error) {
+func (c *stockOutService) Delete(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error) {
 	req := c.c.NewRequest(c.name, "StockOutService.Delete", in)
 	out := new(StockResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -258,7 +258,7 @@ func (c *stockOutService) Delete(ctx context.Context, in *Stock, opts ...client.
 	return out, nil
 }
 
-func (c *stockOutService) Confirm(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error) {
+func (c *stockOutService) Confirm(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error) {
 	req := c.c.NewRequest(c.name, "StockOutService.Confirm", in)
 	out := new(StockResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -268,7 +268,7 @@ func (c *stockOutService) Confirm(ctx context.Context, in *Stock, opts ...client
 	return out, nil
 }
 
-func (c *stockOutService) Approve(ctx context.Context, in *Stock, opts ...client.CallOption) (*StockResponse, error) {
+func (c *stockOutService) Approve(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error) {
 	req := c.c.NewRequest(c.name, "StockOutService.Approve", in)
 	out := new(StockResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -288,7 +288,7 @@ func (c *stockOutService) Get(ctx context.Context, in *Stock, opts ...client.Cal
 	return out, nil
 }
 
-func (c *stockOutService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StockResponse, error) {
+func (c *stockOutService) Search(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockResponse, error) {
 	req := c.c.NewRequest(c.name, "StockOutService.Search", in)
 	out := new(StockResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -298,7 +298,7 @@ func (c *stockOutService) Search(ctx context.Context, in *BaseWhere, opts ...cli
 	return out, nil
 }
 
-func (c *stockOutService) Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*StockDetailResponse, error) {
+func (c *stockOutService) Details(ctx context.Context, in *StockWhere, opts ...client.CallOption) (*StockDetailResponse, error) {
 	req := c.c.NewRequest(c.name, "StockOutService.Details", in)
 	out := new(StockDetailResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -313,24 +313,24 @@ func (c *stockOutService) Details(ctx context.Context, in *BaseWhere, opts ...cl
 type StockOutServiceHandler interface {
 	Create(context.Context, *Stock, *StockResponse) error
 	Update(context.Context, *Stock, *StockResponse) error
-	Delete(context.Context, *Stock, *StockResponse) error
-	Confirm(context.Context, *Stock, *StockResponse) error
-	Approve(context.Context, *Stock, *StockResponse) error
+	Delete(context.Context, *StockWhere, *StockResponse) error
+	Confirm(context.Context, *StockWhere, *StockResponse) error
+	Approve(context.Context, *StockWhere, *StockResponse) error
 	Get(context.Context, *Stock, *StockResponse) error
-	Search(context.Context, *BaseWhere, *StockResponse) error
-	Details(context.Context, *BaseWhere, *StockDetailResponse) error
+	Search(context.Context, *StockWhere, *StockResponse) error
+	Details(context.Context, *StockWhere, *StockDetailResponse) error
 }
 
 func RegisterStockOutServiceHandler(s server.Server, hdlr StockOutServiceHandler, opts ...server.HandlerOption) error {
 	type stockOutService interface {
 		Create(ctx context.Context, in *Stock, out *StockResponse) error
 		Update(ctx context.Context, in *Stock, out *StockResponse) error
-		Delete(ctx context.Context, in *Stock, out *StockResponse) error
-		Confirm(ctx context.Context, in *Stock, out *StockResponse) error
-		Approve(ctx context.Context, in *Stock, out *StockResponse) error
+		Delete(ctx context.Context, in *StockWhere, out *StockResponse) error
+		Confirm(ctx context.Context, in *StockWhere, out *StockResponse) error
+		Approve(ctx context.Context, in *StockWhere, out *StockResponse) error
 		Get(ctx context.Context, in *Stock, out *StockResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *StockResponse) error
-		Details(ctx context.Context, in *BaseWhere, out *StockDetailResponse) error
+		Search(ctx context.Context, in *StockWhere, out *StockResponse) error
+		Details(ctx context.Context, in *StockWhere, out *StockDetailResponse) error
 	}
 	type StockOutService struct {
 		stockOutService
@@ -351,15 +351,15 @@ func (h *stockOutServiceHandler) Update(ctx context.Context, in *Stock, out *Sto
 	return h.StockOutServiceHandler.Update(ctx, in, out)
 }
 
-func (h *stockOutServiceHandler) Delete(ctx context.Context, in *Stock, out *StockResponse) error {
+func (h *stockOutServiceHandler) Delete(ctx context.Context, in *StockWhere, out *StockResponse) error {
 	return h.StockOutServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *stockOutServiceHandler) Confirm(ctx context.Context, in *Stock, out *StockResponse) error {
+func (h *stockOutServiceHandler) Confirm(ctx context.Context, in *StockWhere, out *StockResponse) error {
 	return h.StockOutServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *stockOutServiceHandler) Approve(ctx context.Context, in *Stock, out *StockResponse) error {
+func (h *stockOutServiceHandler) Approve(ctx context.Context, in *StockWhere, out *StockResponse) error {
 	return h.StockOutServiceHandler.Approve(ctx, in, out)
 }
 
@@ -367,10 +367,10 @@ func (h *stockOutServiceHandler) Get(ctx context.Context, in *Stock, out *StockR
 	return h.StockOutServiceHandler.Get(ctx, in, out)
 }
 
-func (h *stockOutServiceHandler) Search(ctx context.Context, in *BaseWhere, out *StockResponse) error {
+func (h *stockOutServiceHandler) Search(ctx context.Context, in *StockWhere, out *StockResponse) error {
 	return h.StockOutServiceHandler.Search(ctx, in, out)
 }
 
-func (h *stockOutServiceHandler) Details(ctx context.Context, in *BaseWhere, out *StockDetailResponse) error {
+func (h *stockOutServiceHandler) Details(ctx context.Context, in *StockWhere, out *StockDetailResponse) error {
 	return h.StockOutServiceHandler.Details(ctx, in, out)
 }

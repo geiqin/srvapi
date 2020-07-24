@@ -6,12 +6,26 @@ package geiqin.srv.wms;
 service CheckService {
     rpc Create (Check) returns (CheckResponse) {}
     rpc Update (Check) returns (CheckResponse) {}
-    rpc Delete (Check) returns (CheckResponse) {}
-    rpc Confirm (Check) returns (CheckResponse) {}
-    rpc Approve (Check) returns (CheckResponse) {}
+    rpc Delete (CheckWhere) returns (CheckResponse) {}
+    rpc Confirm (CheckWhere) returns (CheckResponse) {}
+    rpc Approve (CheckWhere) returns (CheckResponse) {}
     rpc Get (Check) returns (CheckResponse) {}
-    rpc Search (BaseWhere) returns (CheckResponse) {}
-    rpc Details (BaseWhere) returns (CheckDetailResponse) {}
+    rpc Search (CheckWhere) returns (CheckResponse) {}
+    rpc Details (CheckWhere) returns (CheckDetailResponse) {}
+}
+
+message CheckWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int64 id = 3;
+    repeated int64 ids = 4;
+    string type = 5;
+    int32 sheet_type = 6;
+    int32 status = 7;
+    bool ok = 8;
+    string failure = 9;
+    int64 check_id = 10;
+    repeated int64 check_ids = 11;
 }
 
 message Check {

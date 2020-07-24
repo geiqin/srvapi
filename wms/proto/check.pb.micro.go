@@ -36,12 +36,12 @@ var _ server.Option
 type CheckService interface {
 	Create(ctx context.Context, in *Check, opts ...client.CallOption) (*CheckResponse, error)
 	Update(ctx context.Context, in *Check, opts ...client.CallOption) (*CheckResponse, error)
-	Delete(ctx context.Context, in *Check, opts ...client.CallOption) (*CheckResponse, error)
-	Confirm(ctx context.Context, in *Check, opts ...client.CallOption) (*CheckResponse, error)
-	Approve(ctx context.Context, in *Check, opts ...client.CallOption) (*CheckResponse, error)
+	Delete(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckResponse, error)
+	Confirm(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckResponse, error)
+	Approve(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckResponse, error)
 	Get(ctx context.Context, in *Check, opts ...client.CallOption) (*CheckResponse, error)
-	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CheckResponse, error)
-	Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CheckDetailResponse, error)
+	Search(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckResponse, error)
+	Details(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckDetailResponse, error)
 }
 
 type checkService struct {
@@ -76,7 +76,7 @@ func (c *checkService) Update(ctx context.Context, in *Check, opts ...client.Cal
 	return out, nil
 }
 
-func (c *checkService) Delete(ctx context.Context, in *Check, opts ...client.CallOption) (*CheckResponse, error) {
+func (c *checkService) Delete(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckResponse, error) {
 	req := c.c.NewRequest(c.name, "CheckService.Delete", in)
 	out := new(CheckResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -86,7 +86,7 @@ func (c *checkService) Delete(ctx context.Context, in *Check, opts ...client.Cal
 	return out, nil
 }
 
-func (c *checkService) Confirm(ctx context.Context, in *Check, opts ...client.CallOption) (*CheckResponse, error) {
+func (c *checkService) Confirm(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckResponse, error) {
 	req := c.c.NewRequest(c.name, "CheckService.Confirm", in)
 	out := new(CheckResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -96,7 +96,7 @@ func (c *checkService) Confirm(ctx context.Context, in *Check, opts ...client.Ca
 	return out, nil
 }
 
-func (c *checkService) Approve(ctx context.Context, in *Check, opts ...client.CallOption) (*CheckResponse, error) {
+func (c *checkService) Approve(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckResponse, error) {
 	req := c.c.NewRequest(c.name, "CheckService.Approve", in)
 	out := new(CheckResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -116,7 +116,7 @@ func (c *checkService) Get(ctx context.Context, in *Check, opts ...client.CallOp
 	return out, nil
 }
 
-func (c *checkService) Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CheckResponse, error) {
+func (c *checkService) Search(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckResponse, error) {
 	req := c.c.NewRequest(c.name, "CheckService.Search", in)
 	out := new(CheckResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -126,7 +126,7 @@ func (c *checkService) Search(ctx context.Context, in *BaseWhere, opts ...client
 	return out, nil
 }
 
-func (c *checkService) Details(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*CheckDetailResponse, error) {
+func (c *checkService) Details(ctx context.Context, in *CheckWhere, opts ...client.CallOption) (*CheckDetailResponse, error) {
 	req := c.c.NewRequest(c.name, "CheckService.Details", in)
 	out := new(CheckDetailResponse)
 	err := c.c.Call(ctx, req, out, opts...)
@@ -141,24 +141,24 @@ func (c *checkService) Details(ctx context.Context, in *BaseWhere, opts ...clien
 type CheckServiceHandler interface {
 	Create(context.Context, *Check, *CheckResponse) error
 	Update(context.Context, *Check, *CheckResponse) error
-	Delete(context.Context, *Check, *CheckResponse) error
-	Confirm(context.Context, *Check, *CheckResponse) error
-	Approve(context.Context, *Check, *CheckResponse) error
+	Delete(context.Context, *CheckWhere, *CheckResponse) error
+	Confirm(context.Context, *CheckWhere, *CheckResponse) error
+	Approve(context.Context, *CheckWhere, *CheckResponse) error
 	Get(context.Context, *Check, *CheckResponse) error
-	Search(context.Context, *BaseWhere, *CheckResponse) error
-	Details(context.Context, *BaseWhere, *CheckDetailResponse) error
+	Search(context.Context, *CheckWhere, *CheckResponse) error
+	Details(context.Context, *CheckWhere, *CheckDetailResponse) error
 }
 
 func RegisterCheckServiceHandler(s server.Server, hdlr CheckServiceHandler, opts ...server.HandlerOption) error {
 	type checkService interface {
 		Create(ctx context.Context, in *Check, out *CheckResponse) error
 		Update(ctx context.Context, in *Check, out *CheckResponse) error
-		Delete(ctx context.Context, in *Check, out *CheckResponse) error
-		Confirm(ctx context.Context, in *Check, out *CheckResponse) error
-		Approve(ctx context.Context, in *Check, out *CheckResponse) error
+		Delete(ctx context.Context, in *CheckWhere, out *CheckResponse) error
+		Confirm(ctx context.Context, in *CheckWhere, out *CheckResponse) error
+		Approve(ctx context.Context, in *CheckWhere, out *CheckResponse) error
 		Get(ctx context.Context, in *Check, out *CheckResponse) error
-		Search(ctx context.Context, in *BaseWhere, out *CheckResponse) error
-		Details(ctx context.Context, in *BaseWhere, out *CheckDetailResponse) error
+		Search(ctx context.Context, in *CheckWhere, out *CheckResponse) error
+		Details(ctx context.Context, in *CheckWhere, out *CheckDetailResponse) error
 	}
 	type CheckService struct {
 		checkService
@@ -179,15 +179,15 @@ func (h *checkServiceHandler) Update(ctx context.Context, in *Check, out *CheckR
 	return h.CheckServiceHandler.Update(ctx, in, out)
 }
 
-func (h *checkServiceHandler) Delete(ctx context.Context, in *Check, out *CheckResponse) error {
+func (h *checkServiceHandler) Delete(ctx context.Context, in *CheckWhere, out *CheckResponse) error {
 	return h.CheckServiceHandler.Delete(ctx, in, out)
 }
 
-func (h *checkServiceHandler) Confirm(ctx context.Context, in *Check, out *CheckResponse) error {
+func (h *checkServiceHandler) Confirm(ctx context.Context, in *CheckWhere, out *CheckResponse) error {
 	return h.CheckServiceHandler.Confirm(ctx, in, out)
 }
 
-func (h *checkServiceHandler) Approve(ctx context.Context, in *Check, out *CheckResponse) error {
+func (h *checkServiceHandler) Approve(ctx context.Context, in *CheckWhere, out *CheckResponse) error {
 	return h.CheckServiceHandler.Approve(ctx, in, out)
 }
 
@@ -195,10 +195,10 @@ func (h *checkServiceHandler) Get(ctx context.Context, in *Check, out *CheckResp
 	return h.CheckServiceHandler.Get(ctx, in, out)
 }
 
-func (h *checkServiceHandler) Search(ctx context.Context, in *BaseWhere, out *CheckResponse) error {
+func (h *checkServiceHandler) Search(ctx context.Context, in *CheckWhere, out *CheckResponse) error {
 	return h.CheckServiceHandler.Search(ctx, in, out)
 }
 
-func (h *checkServiceHandler) Details(ctx context.Context, in *BaseWhere, out *CheckDetailResponse) error {
+func (h *checkServiceHandler) Details(ctx context.Context, in *CheckWhere, out *CheckDetailResponse) error {
 	return h.CheckServiceHandler.Details(ctx, in, out)
 }
