@@ -1,8 +1,11 @@
 syntax = "proto3";
+import "item.proto";
 import "common.proto";
 package geiqin.srv.pdm;
 
 service BuyingService {
+    // 检查商品是否可购买
+    rpc IsBuy(Item) returns (ItemResponse) {}
     //计算优惠
     rpc Calculate (Buying) returns (BuyingResponse) {}
 }

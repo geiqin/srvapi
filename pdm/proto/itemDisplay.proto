@@ -55,6 +55,7 @@ message ItemDisplay {
     float member_price = 34; // 会员价
     bool is_distribution = 35; // 是否参与分销
     string distribution_share_icon = 36; // 分销图标
+    bool listed = 37;
 }
 
 message ItemDisplayWhere {
