@@ -1,0 +1,9 @@
+syntax = "proto3";
+package geiqin.srv.eat;
+
+message KindSellTime {
+    int64 id = 1;
+    int64 kind_id = 2;
+    string start_time = 3;
+    string end_time = 4;
+}

@@ -1,0 +1,40 @@
+syntax = "proto3";
+import "common.proto";
+package geiqin.srv.eat;
+
+service KindTagService {
+    rpc Search (KindTagWhere) returns (KindTagResponse) {};
+    rpc List (KindTagWhere) returns (KindTagResponse) {};
+    rpc Get (KindTag) returns (KindTagResponse) {};
+    rpc Create (KindTag) returns (KindTagResponse) {};
+    rpc Update (KindTag) returns (KindTagResponse) {};
+    rpc Delete (KindTagWhere) returns (KindTagResponse) {};
+}
+
+message KindTagWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    int32 id = 4;
+    repeated int32 ids = 5;
+    bool is_system = 6;
+}
+
+message KindTag {
+    int32 id = 1;
+    // @inject_tag: validate:"required" label:"菜单标签名称"
+    string name = 2;
+    // @inject_tag: validate:"required" label:"菜单图标"
+    string icon = 3;
+    bool is_system = 4;
+    string created_at = 5;
+    string updated_at = 6;
+}
+
+message KindTagResponse {
+    KindTag entity = 1;
+    Pager pager = 2;
+    repeated KindTag items = 3;
+    Error error = 4;
+    Info info = 5;
+}

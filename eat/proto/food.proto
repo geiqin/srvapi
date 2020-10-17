@@ -1,0 +1,26 @@
+syntax = "proto3";
+package geiqin.srv.eat;
+option go_package = "github.com/geiqin/srvapi/eat/proto";
+import "foodTaste.proto";
+import "foodAdd.proto";
+import "foodTag.proto";
+import "foodSellTime.proto";
+
+message Food {
+    int64 id = 1;
+    int64 item_id = 2;
+    string food_type = 3;
+    int64 kind_id = 4;
+    float box_fee = 5;
+    bool is_tastes = 6;
+    bool is_adds = 7;
+    bool is_tags = 8;
+    bool is_sell_times = 9;
+    string week_days = 10;
+    string created_at = 11;
+    string updated_at = 12;
+    repeated FoodTaste tastes = 13;
+    repeated FoodAdd adds = 14;
+    repeated FoodTag tags = 15;
+    repeated FoodSellTime sell_times = 16;
+}
