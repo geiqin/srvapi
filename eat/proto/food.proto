@@ -6,7 +6,6 @@ service FoodService {
     rpc Create(Food) returns(FoodResponse) {}
     rpc Update(Food) returns(FoodResponse) {}
     rpc Get(FoodWhere) returns(FoodResponse) {}
-    rpc Get1(FoodWhere) returns(FoodResponse) {}
 }
 
 message FoodWhere {
