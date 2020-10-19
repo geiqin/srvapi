@@ -37,6 +37,7 @@ type FoodService interface {
 	Create(ctx context.Context, in *Food, opts ...client.CallOption) (*FoodResponse, error)
 	Update(ctx context.Context, in *Food, opts ...client.CallOption) (*FoodResponse, error)
 	Get(ctx context.Context, in *FoodWhere, opts ...client.CallOption) (*FoodResponse, error)
+	Get1(ctx context.Context, in *FoodWhere, opts ...client.CallOption) (*FoodResponse, error)
 }
 
 type foodService struct {
@@ -81,12 +82,23 @@ func (c *foodService) Get(ctx context.Context, in *FoodWhere, opts ...client.Cal
 	return out, nil
 }
 
+func (c *foodService) Get1(ctx context.Context, in *FoodWhere, opts ...client.CallOption) (*FoodResponse, error) {
+	req := c.c.NewRequest(c.name, "FoodService.Get1", in)
+	out := new(FoodResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for FoodService service
 
 type FoodServiceHandler interface {
 	Create(context.Context, *Food, *FoodResponse) error
 	Update(context.Context, *Food, *FoodResponse) error
 	Get(context.Context, *FoodWhere, *FoodResponse) error
+	Get1(context.Context, *FoodWhere, *FoodResponse) error
 }
 
 func RegisterFoodServiceHandler(s server.Server, hdlr FoodServiceHandler, opts ...server.HandlerOption) error {
@@ -94,6 +106,7 @@ func RegisterFoodServiceHandler(s server.Server, hdlr FoodServiceHandler, opts .
 		Create(ctx context.Context, in *Food, out *FoodResponse) error
 		Update(ctx context.Context, in *Food, out *FoodResponse) error
 		Get(ctx context.Context, in *FoodWhere, out *FoodResponse) error
+		Get1(ctx context.Context, in *FoodWhere, out *FoodResponse) error
 	}
 	type FoodService struct {
 		foodService
@@ -116,4 +129,8 @@ func (h *foodServiceHandler) Update(ctx context.Context, in *Food, out *FoodResp
 
 func (h *foodServiceHandler) Get(ctx context.Context, in *FoodWhere, out *FoodResponse) error {
 	return h.FoodServiceHandler.Get(ctx, in, out)
+}
+
+func (h *foodServiceHandler) Get1(ctx context.Context, in *FoodWhere, out *FoodResponse) error {
+	return h.FoodServiceHandler.Get1(ctx, in, out)
 }
