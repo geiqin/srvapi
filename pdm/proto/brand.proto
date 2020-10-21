@@ -9,6 +9,7 @@ service BrandService {
     rpc Delete (Brand) returns (BrandResponse) {}
     rpc Get (Brand) returns (BrandResponse) {}
     rpc Search (BaseWhere) returns (BrandResponse) {}
+    rpc List (Brand) returns (BrandResponse) {}
 }
 
 

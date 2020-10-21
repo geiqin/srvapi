@@ -68,6 +68,8 @@ type ItemService interface {
 	Search(ctx context.Context, in *ItemWhere, opts ...client.CallOption) (*ItemResponse, error)
 	//查询已删除商品
 	SearchDeleted(ctx context.Context, in *ItemWhere, opts ...client.CallOption) (*ItemResponse, error)
+	// 批量删除商品
+	DeleteByIds(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error)
 }
 
 type itemService struct {
@@ -252,6 +254,16 @@ func (c *itemService) SearchDeleted(ctx context.Context, in *ItemWhere, opts ...
 	return out, nil
 }
 
+func (c *itemService) DeleteByIds(ctx context.Context, in *Item, opts ...client.CallOption) (*ItemResponse, error) {
+	req := c.c.NewRequest(c.name, "ItemService.DeleteByIds", in)
+	out := new(ItemResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for ItemService service
 
 type ItemServiceHandler interface {
@@ -289,6 +301,8 @@ type ItemServiceHandler interface {
 	Search(context.Context, *ItemWhere, *ItemResponse) error
 	//查询已删除商品
 	SearchDeleted(context.Context, *ItemWhere, *ItemResponse) error
+	// 批量删除商品
+	DeleteByIds(context.Context, *Item, *ItemResponse) error
 }
 
 func RegisterItemServiceHandler(s server.Server, hdlr ItemServiceHandler, opts ...server.HandlerOption) error {
@@ -310,6 +324,7 @@ func RegisterItemServiceHandler(s server.Server, hdlr ItemServiceHandler, opts .
 		List(ctx context.Context, in *Item, out *ItemResponse) error
 		Search(ctx context.Context, in *ItemWhere, out *ItemResponse) error
 		SearchDeleted(ctx context.Context, in *ItemWhere, out *ItemResponse) error
+		DeleteByIds(ctx context.Context, in *Item, out *ItemResponse) error
 	}
 	type ItemService struct {
 		itemService
@@ -388,4 +403,8 @@ func (h *itemServiceHandler) Search(ctx context.Context, in *ItemWhere, out *Ite
 
 func (h *itemServiceHandler) SearchDeleted(ctx context.Context, in *ItemWhere, out *ItemResponse) error {
 	return h.ItemServiceHandler.SearchDeleted(ctx, in, out)
+}
+
+func (h *itemServiceHandler) DeleteByIds(ctx context.Context, in *Item, out *ItemResponse) error {
+	return h.ItemServiceHandler.DeleteByIds(ctx, in, out)
 }

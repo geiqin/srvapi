@@ -8,9 +8,14 @@ message SkuSaleStats {
     int64 item_id = 2;
     int64 sku_id = 3;
     int32 sale_num = 4;
-    string last_stats_at = 5;
-    string	created_at	= 6;
-    string	updated_at	= 7;
+    float unit_price = 5;
+    float sale_amount = 6;
+    float cost_amount = 7;
+    float profit = 8;
+    float profit_rate = 9;
+    string last_stats_at = 10;
+    string	created_at	= 11;
+    string	updated_at	= 12;
 }
 
 message SkuSaleStatsResponse {
@@ -26,9 +31,14 @@ message SkuSaleDayStats {
     int64 item_id = 2;
     int64 sku_id = 3;
     int32 sale_num = 4;
-    string	statistic_date	=5;
-    string	created_at	=6;
-    string	updated_at	=7;
+    float unit_price = 5;
+    float sale_amount = 6;
+    float cost_amount = 7;
+    float profit = 8;
+    float profit_rate = 9;
+    string	statistic_date	= 10;
+    string	created_at	= 11;
+    string	updated_at	= 12;
 }
 
 message SkuSaleDayStatsResponse {

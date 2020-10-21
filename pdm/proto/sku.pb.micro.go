@@ -34,6 +34,7 @@ var _ server.Option
 // Client API for SkuService service
 
 type SkuService interface {
+	BatchUpdateSpecDesc(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error)
 	List(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error)
 }
 
@@ -49,6 +50,16 @@ func NewSkuService(name string, c client.Client) SkuService {
 	}
 }
 
+func (c *skuService) BatchUpdateSpecDesc(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error) {
+	req := c.c.NewRequest(c.name, "SkuService.BatchUpdateSpecDesc", in)
+	out := new(SkuResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *skuService) List(ctx context.Context, in *Sku, opts ...client.CallOption) (*SkuResponse, error) {
 	req := c.c.NewRequest(c.name, "SkuService.List", in)
 	out := new(SkuResponse)
@@ -62,11 +73,13 @@ func (c *skuService) List(ctx context.Context, in *Sku, opts ...client.CallOptio
 // Server API for SkuService service
 
 type SkuServiceHandler interface {
+	BatchUpdateSpecDesc(context.Context, *Sku, *SkuResponse) error
 	List(context.Context, *Sku, *SkuResponse) error
 }
 
 func RegisterSkuServiceHandler(s server.Server, hdlr SkuServiceHandler, opts ...server.HandlerOption) error {
 	type skuService interface {
+		BatchUpdateSpecDesc(ctx context.Context, in *Sku, out *SkuResponse) error
 		List(ctx context.Context, in *Sku, out *SkuResponse) error
 	}
 	type SkuService struct {
@@ -78,6 +91,10 @@ func RegisterSkuServiceHandler(s server.Server, hdlr SkuServiceHandler, opts ...
 
 type skuServiceHandler struct {
 	SkuServiceHandler
+}
+
+func (h *skuServiceHandler) BatchUpdateSpecDesc(ctx context.Context, in *Sku, out *SkuResponse) error {
+	return h.SkuServiceHandler.BatchUpdateSpecDesc(ctx, in, out)
 }
 
 func (h *skuServiceHandler) List(ctx context.Context, in *Sku, out *SkuResponse) error {

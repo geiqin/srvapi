@@ -1,6 +1,5 @@
 syntax = "proto3";
 package geiqin.srv.pdm;
-
 import "common.proto";
 import "itemGallery.proto";
 import "itemPrice.proto";
@@ -11,6 +10,7 @@ import "sku.proto";
 import "cat.proto";
 import "spec.proto";
 import "itemPresale.proto";
+import "food.proto";
 
 service ItemService {
     //创建商品
@@ -47,6 +47,8 @@ service ItemService {
     rpc Search (ItemWhere) returns (ItemResponse) {}
     //查询已删除商品
     rpc SearchDeleted (ItemWhere) returns (ItemResponse) {}
+    // 批量删除商品
+    rpc DeleteByIds (Item) returns (ItemResponse) {}
 }
 
 
@@ -92,7 +94,9 @@ message Item {
     string	created_at	=39;
     string	updated_at	=40;
     Brand brand =41;
+    // gorm:"many2many:item_cats;"
     repeated Cat cats =42;
+    // gorm:"many2many:item_tags;"
     repeated Tag tags =43;
     repeated  Sku skus  =44;
     repeated  ItemGallery galleries  =45;
@@ -100,11 +104,14 @@ message Item {
     repeated  ItemRight rights  =47;
     repeated  SpecItemIndex spec_indexes  =48; //规格更新专用
     repeated  int64 ids  =49;
+    // gorm:"many2many:spec_item_indices;"
     repeated  Spec specs  =50; //(详情显示专用)
     Sku skuitem =51; //单一规格商品（在购物车，营销活动等场景用到）
     int64 sku_id =52; //单一规格商品输入参数（在获取规格商品时使用）
     bool is_presale = 53;
     ItemPresale item_presale = 54;
+    bool is_sku = 55; // 是否多规格商品
+    Food food = 56; // 餐饮商品附加信息
 }
 
 message GoodsWhere {
@@ -134,6 +141,10 @@ message ItemWhere {
     repeated int64 ids = 19;
     int64 sku_id = 20; //单一规格商品输入参数（在获取规格商品时使用）
     string cat_slug = 21;
+    bool is_sku = 22;
+    string kind_type = 23; // 菜品类型【餐饮商品】: in-堂食菜品,out-外卖菜品
+    int64 kind_id = 24; // 菜单ID【餐饮商品】
+    repeated int64 kind_ids = 25; // 菜单ID集合【餐饮商品】
 }
 
 message MemberGoods {

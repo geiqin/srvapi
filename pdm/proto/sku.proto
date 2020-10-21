@@ -4,6 +4,7 @@ import "common.proto";
 import "specValue.proto";
 package geiqin.srv.pdm;
 service SkuService {
+    rpc BatchUpdateSpecDesc (Sku) returns (SkuResponse) {}
     rpc List (Sku) returns (SkuResponse) {}
 }
 

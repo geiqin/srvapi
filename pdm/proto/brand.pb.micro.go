@@ -39,6 +39,7 @@ type BrandService interface {
 	Delete(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
 	Get(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
 	Search(ctx context.Context, in *BaseWhere, opts ...client.CallOption) (*BrandResponse, error)
+	List(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error)
 }
 
 type brandService struct {
@@ -103,6 +104,16 @@ func (c *brandService) Search(ctx context.Context, in *BaseWhere, opts ...client
 	return out, nil
 }
 
+func (c *brandService) List(ctx context.Context, in *Brand, opts ...client.CallOption) (*BrandResponse, error) {
+	req := c.c.NewRequest(c.name, "BrandService.List", in)
+	out := new(BrandResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for BrandService service
 
 type BrandServiceHandler interface {
@@ -111,6 +122,7 @@ type BrandServiceHandler interface {
 	Delete(context.Context, *Brand, *BrandResponse) error
 	Get(context.Context, *Brand, *BrandResponse) error
 	Search(context.Context, *BaseWhere, *BrandResponse) error
+	List(context.Context, *Brand, *BrandResponse) error
 }
 
 func RegisterBrandServiceHandler(s server.Server, hdlr BrandServiceHandler, opts ...server.HandlerOption) error {
@@ -120,6 +132,7 @@ func RegisterBrandServiceHandler(s server.Server, hdlr BrandServiceHandler, opts
 		Delete(ctx context.Context, in *Brand, out *BrandResponse) error
 		Get(ctx context.Context, in *Brand, out *BrandResponse) error
 		Search(ctx context.Context, in *BaseWhere, out *BrandResponse) error
+		List(ctx context.Context, in *Brand, out *BrandResponse) error
 	}
 	type BrandService struct {
 		brandService
@@ -150,4 +163,8 @@ func (h *brandServiceHandler) Get(ctx context.Context, in *Brand, out *BrandResp
 
 func (h *brandServiceHandler) Search(ctx context.Context, in *BaseWhere, out *BrandResponse) error {
 	return h.BrandServiceHandler.Search(ctx, in, out)
+}
+
+func (h *brandServiceHandler) List(ctx context.Context, in *Brand, out *BrandResponse) error {
+	return h.BrandServiceHandler.List(ctx, in, out)
 }
