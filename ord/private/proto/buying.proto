@@ -77,6 +77,7 @@ message BuyingRequest{
     repeated BuyingItem items =9;
     OrderShipment shipment = 10; // 配送信息
     Integral integral = 11; // 积分信息
+    OrderFood food = 12; // 餐饮商品信息
 }
 
 message BuyingResponse {

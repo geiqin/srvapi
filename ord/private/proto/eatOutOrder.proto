@@ -3,7 +3,7 @@ package geiqin.srv.ord.private;
 import "order.proto";
 import "buying.proto";
 
-service MyEatInOrderService {
+service MyEatOutOrderService {
     // 下单确认
     rpc Confirm (BuyingRequest) returns (BuyingResponse) {}
     // 提交订单
