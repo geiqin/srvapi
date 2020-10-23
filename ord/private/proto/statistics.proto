@@ -11,6 +11,8 @@ service MyStatistics {
 }
 
 service Statistics {
+    //获取订单每日统计数据
+    rpc OrderDaily (StatsRequest) returns (OrderDayStatsResponse) {}
     //获取订单统计数据
     rpc OrderTotal (StatsRequest) returns (OrderStatsResponse) {}
     //今日实时统计

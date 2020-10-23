@@ -1,0 +1,22 @@
+syntax = "proto3";
+import "common.proto";
+import "order.proto";
+package geiqin.srv.ord.private;
+
+service ExportService {
+    // 导出订单
+    rpc OrderExport(OrderWhere) returns (ExportResponse) {}
+}
+
+message Export {
+    string download_url = 1;
+    int32 file_size = 2;
+}
+
+message ExportResponse {
+    Export entity = 1;
+    Pager pager =2;
+    repeated Export items = 3;
+    Error error = 4;
+    Info info =5;
+}

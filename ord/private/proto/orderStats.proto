@@ -17,9 +17,13 @@ message OrderStats {
     int32 new_customer_num  = 10;
     int32 old_customer_num  = 11;
     float customer_unit_price = 12;
-    string last_stats_at = 13;
-    string created_at  = 14;
-    string updated_at  = 15;
+    float income_amount = 13;
+    float cost_amount = 14;
+    float profit = 15;
+    float profit_rate = 17;
+    string last_stats_at = 18;
+    string created_at  = 19;
+    string updated_at  = 20;
 }
 
 message OrderDayStats {
@@ -36,9 +40,13 @@ message OrderDayStats {
     int32 new_customer_num  = 10;
     int32 old_customer_num  = 11;
     float customer_unit_price = 12;
-    string statistic_at  = 13;
-    string created_at  = 14;
-    string updated_at  = 15;
+    float income_amount = 13;
+    float cost_amount = 14;
+    float profit = 15;
+    float profit_rate = 17;
+    string statistic_at  = 18;
+    string created_at  = 19;
+    string updated_at  = 20;
 }
 
 message CustomerOrderStats {

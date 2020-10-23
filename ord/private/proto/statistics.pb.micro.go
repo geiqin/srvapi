@@ -89,6 +89,8 @@ func (h *myStatisticsHandler) Unhandled(ctx context.Context, in *StatsRequest, o
 // Client API for Statistics service
 
 type StatisticsService interface {
+	//获取订单每日统计数据
+	OrderDaily(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderDayStatsResponse, error)
 	//获取订单统计数据
 	OrderTotal(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderStatsResponse, error)
 	//今日实时统计
@@ -117,6 +119,16 @@ func NewStatisticsService(name string, c client.Client) StatisticsService {
 		c:    c,
 		name: name,
 	}
+}
+
+func (c *statisticsService) OrderDaily(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderDayStatsResponse, error) {
+	req := c.c.NewRequest(c.name, "Statistics.OrderDaily", in)
+	out := new(OrderDayStatsResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *statisticsService) OrderTotal(ctx context.Context, in *StatsRequest, opts ...client.CallOption) (*OrderStatsResponse, error) {
@@ -202,6 +214,8 @@ func (c *statisticsService) Reset(ctx context.Context, in *Empty, opts ...client
 // Server API for Statistics service
 
 type StatisticsHandler interface {
+	//获取订单每日统计数据
+	OrderDaily(context.Context, *StatsRequest, *OrderDayStatsResponse) error
 	//获取订单统计数据
 	OrderTotal(context.Context, *StatsRequest, *OrderStatsResponse) error
 	//今日实时统计
@@ -222,6 +236,7 @@ type StatisticsHandler interface {
 
 func RegisterStatisticsHandler(s server.Server, hdlr StatisticsHandler, opts ...server.HandlerOption) error {
 	type statistics interface {
+		OrderDaily(ctx context.Context, in *StatsRequest, out *OrderDayStatsResponse) error
 		OrderTotal(ctx context.Context, in *StatsRequest, out *OrderStatsResponse) error
 		TodayTotal(ctx context.Context, in *StatsRequest, out *OrderDayStatsResponse) error
 		OrderDays(ctx context.Context, in *StatsRequest, out *OrderDayStatsResponse) error
@@ -240,6 +255,10 @@ func RegisterStatisticsHandler(s server.Server, hdlr StatisticsHandler, opts ...
 
 type statisticsHandler struct {
 	StatisticsHandler
+}
+
+func (h *statisticsHandler) OrderDaily(ctx context.Context, in *StatsRequest, out *OrderDayStatsResponse) error {
+	return h.StatisticsHandler.OrderDaily(ctx, in, out)
 }
 
 func (h *statisticsHandler) OrderTotal(ctx context.Context, in *StatsRequest, out *OrderStatsResponse) error {

@@ -242,16 +242,22 @@ type OrderService interface {
 	List(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
 	//订单备注
 	Remarks(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
-	//订单发货(快递发货)
+	// 订单发货(快递发货)
 	Ship(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
-	//订单发货(同城配送)
+	// 订单发货(同城配送)
 	DeliveryShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
+	// 验证提货码(上门自提)
+	CodeVerify(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
+	// 订单发货(上门自提)
+	FetchShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
 	//订单补发货
 	RepairShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
 	//订单换货发货
 	ExchangeShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error)
 	// 获取订单赠送\使用的优惠券列表
 	OrderCouponList(ctx context.Context, in *OrderCoupon, opts ...client.CallOption) (*OrderCouponResponse, error)
+	// 获取订单数量
+	Count(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
 }
 
 type orderService struct {
@@ -386,6 +392,26 @@ func (c *orderService) DeliveryShip(ctx context.Context, in *ShipmentRequest, op
 	return out, nil
 }
 
+func (c *orderService) CodeVerify(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.CodeVerify", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) FetchShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.FetchShip", in)
+	out := new(ShipmentResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *orderService) RepairShip(ctx context.Context, in *ShipmentRequest, opts ...client.CallOption) (*ShipmentResponse, error) {
 	req := c.c.NewRequest(c.name, "OrderService.RepairShip", in)
 	out := new(ShipmentResponse)
@@ -416,6 +442,16 @@ func (c *orderService) OrderCouponList(ctx context.Context, in *OrderCoupon, opt
 	return out, nil
 }
 
+func (c *orderService) Count(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.Count", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
@@ -439,16 +475,22 @@ type OrderServiceHandler interface {
 	List(context.Context, *OrderWhere, *OrderResponse) error
 	//订单备注
 	Remarks(context.Context, *Order, *OrderResponse) error
-	//订单发货(快递发货)
+	// 订单发货(快递发货)
 	Ship(context.Context, *ShipmentRequest, *ShipmentResponse) error
-	//订单发货(同城配送)
+	// 订单发货(同城配送)
 	DeliveryShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
+	// 验证提货码(上门自提)
+	CodeVerify(context.Context, *OrderWhere, *OrderResponse) error
+	// 订单发货(上门自提)
+	FetchShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
 	//订单补发货
 	RepairShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
 	//订单换货发货
 	ExchangeShip(context.Context, *ShipmentRequest, *ShipmentResponse) error
 	// 获取订单赠送\使用的优惠券列表
 	OrderCouponList(context.Context, *OrderCoupon, *OrderCouponResponse) error
+	// 获取订单数量
+	Count(context.Context, *OrderWhere, *OrderResponse) error
 }
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
@@ -465,9 +507,12 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		Remarks(ctx context.Context, in *Order, out *OrderResponse) error
 		Ship(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		DeliveryShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
+		CodeVerify(ctx context.Context, in *OrderWhere, out *OrderResponse) error
+		FetchShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		RepairShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		ExchangeShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		OrderCouponList(ctx context.Context, in *OrderCoupon, out *OrderCouponResponse) error
+		Count(ctx context.Context, in *OrderWhere, out *OrderResponse) error
 	}
 	type OrderService struct {
 		orderService
@@ -528,6 +573,14 @@ func (h *orderServiceHandler) DeliveryShip(ctx context.Context, in *ShipmentRequ
 	return h.OrderServiceHandler.DeliveryShip(ctx, in, out)
 }
 
+func (h *orderServiceHandler) CodeVerify(ctx context.Context, in *OrderWhere, out *OrderResponse) error {
+	return h.OrderServiceHandler.CodeVerify(ctx, in, out)
+}
+
+func (h *orderServiceHandler) FetchShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
+	return h.OrderServiceHandler.FetchShip(ctx, in, out)
+}
+
 func (h *orderServiceHandler) RepairShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error {
 	return h.OrderServiceHandler.RepairShip(ctx, in, out)
 }
@@ -538,4 +591,8 @@ func (h *orderServiceHandler) ExchangeShip(ctx context.Context, in *ShipmentRequ
 
 func (h *orderServiceHandler) OrderCouponList(ctx context.Context, in *OrderCoupon, out *OrderCouponResponse) error {
 	return h.OrderServiceHandler.OrderCouponList(ctx, in, out)
+}
+
+func (h *orderServiceHandler) Count(ctx context.Context, in *OrderWhere, out *OrderResponse) error {
+	return h.OrderServiceHandler.Count(ctx, in, out)
 }

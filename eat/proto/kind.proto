@@ -52,6 +52,8 @@ message KindWhere {
     int64 min_sort = 11;
     int64 max_sort = 12;
     string keywords = 13;
+    bool is_client = 14; // 是否客户端展示
+    bool require_choose = 15;
 }
 
 message Kind {

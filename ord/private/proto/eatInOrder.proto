@@ -1,0 +1,11 @@
+syntax = "proto3";
+package geiqin.srv.ord.private;
+import "order.proto";
+import "buying.proto";
+
+service MyEatInOrderService {
+    // 确认订单
+    rpc Confirm (BuyingRequest) returns (BuyingResponse) {}
+    // 提交订单
+    rpc Submit (BuyingRequest) returns (OrderResponse) {}
+}

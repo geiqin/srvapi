@@ -47,16 +47,22 @@ service OrderService {
     rpc List (OrderWhere) returns (OrderResponse) {}
     //订单备注
     rpc Remarks (Order) returns (OrderResponse) {}
-    //订单发货(快递发货)
+    // 订单发货(快递发货)
     rpc Ship (ShipmentRequest) returns (ShipmentResponse) {}
-    //订单发货(同城配送)
+    // 订单发货(同城配送)
     rpc DeliveryShip (ShipmentRequest) returns (ShipmentResponse) {}
+    // 验证提货码(上门自提)
+    rpc CodeVerify (OrderWhere) returns (OrderResponse) {}
+    // 订单发货(上门自提)
+    rpc FetchShip (ShipmentRequest) returns (ShipmentResponse) {}
     //订单补发货
     rpc RepairShip (ShipmentRequest) returns (ShipmentResponse) {}
     //订单换货发货
     rpc ExchangeShip (ShipmentRequest) returns (ShipmentResponse) {}
     // 获取订单赠送\使用的优惠券列表
     rpc OrderCouponList (OrderCoupon) returns (OrderCouponResponse) {}
+    // 获取订单数量
+    rpc Count (OrderWhere) returns (OrderResponse) {}
 }
 
 message Order {
@@ -151,6 +157,8 @@ message OrderWhere {
     bool paid = 22;
     repeated int64 ids = 23;
     string shipment_method = 24;
+    string code = 25;
+    string fetch_status = 26;// 自提状态: waiting待自提, finished已自提
 }
 
 message OrderResponse {

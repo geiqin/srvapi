@@ -7,6 +7,7 @@ import "orderPromotion.proto";
 import "couponTicketInfo.proto";
 import "shipment.proto";
 import "integral.proto";
+import "orderFood.proto";
 
 package geiqin.srv.ord.private;
 
@@ -43,6 +44,7 @@ message Buying {
     float coupon_money = 23; // 优惠券优惠金额
     OrderShipment shipment = 24; // 配送信息
     Integral integral = 26; // 积分信息
+    OrderFood food = 27; // 餐饮商品信息
 }
 
 //购买清单明细
