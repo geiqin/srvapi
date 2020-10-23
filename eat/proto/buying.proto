@@ -4,6 +4,7 @@ import "orderFood.proto";
 package geiqin.srv.eat;
 
 service BuyingService {
+    rpc IsBuy (Buying) returns (BuyingResponse) {}
     rpc Calculate (Buying) returns (BuyingResponse) {}
 }
 

@@ -34,6 +34,7 @@ var _ server.Option
 // Client API for BuyingService service
 
 type BuyingService interface {
+	IsBuy(ctx context.Context, in *Buying, opts ...client.CallOption) (*BuyingResponse, error)
 	Calculate(ctx context.Context, in *Buying, opts ...client.CallOption) (*BuyingResponse, error)
 }
 
@@ -49,6 +50,16 @@ func NewBuyingService(name string, c client.Client) BuyingService {
 	}
 }
 
+func (c *buyingService) IsBuy(ctx context.Context, in *Buying, opts ...client.CallOption) (*BuyingResponse, error) {
+	req := c.c.NewRequest(c.name, "BuyingService.IsBuy", in)
+	out := new(BuyingResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *buyingService) Calculate(ctx context.Context, in *Buying, opts ...client.CallOption) (*BuyingResponse, error) {
 	req := c.c.NewRequest(c.name, "BuyingService.Calculate", in)
 	out := new(BuyingResponse)
@@ -62,11 +73,13 @@ func (c *buyingService) Calculate(ctx context.Context, in *Buying, opts ...clien
 // Server API for BuyingService service
 
 type BuyingServiceHandler interface {
+	IsBuy(context.Context, *Buying, *BuyingResponse) error
 	Calculate(context.Context, *Buying, *BuyingResponse) error
 }
 
 func RegisterBuyingServiceHandler(s server.Server, hdlr BuyingServiceHandler, opts ...server.HandlerOption) error {
 	type buyingService interface {
+		IsBuy(ctx context.Context, in *Buying, out *BuyingResponse) error
 		Calculate(ctx context.Context, in *Buying, out *BuyingResponse) error
 	}
 	type BuyingService struct {
@@ -78,6 +91,10 @@ func RegisterBuyingServiceHandler(s server.Server, hdlr BuyingServiceHandler, op
 
 type buyingServiceHandler struct {
 	BuyingServiceHandler
+}
+
+func (h *buyingServiceHandler) IsBuy(ctx context.Context, in *Buying, out *BuyingResponse) error {
+	return h.BuyingServiceHandler.IsBuy(ctx, in, out)
 }
 
 func (h *buyingServiceHandler) Calculate(ctx context.Context, in *Buying, out *BuyingResponse) error {
