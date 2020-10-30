@@ -34,10 +34,18 @@ var _ server.Option
 // Client API for MyEatInOrderService service
 
 type MyEatInOrderService interface {
-	// 确认订单
+	// 下单确认
 	Confirm(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*BuyingResponse, error)
 	// 提交订单
 	Submit(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*OrderResponse, error)
+	// 获取点桌台订单列表
+	ListByTable(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
+	// 加菜(订单未支付时将更新订单，已支付则创建新订单)
+	AddDish(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*OrderResponse, error)
+	// 订单结算确认
+	SettlementConfirm(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*SettlementConfirmByEatInResponse, error)
+	// 订单结算
+	Settlement(ctx context.Context, in *SettlementRequestByEatIn, opts ...client.CallOption) (*OrderResponse, error)
 }
 
 type myEatInOrderService struct {
@@ -72,19 +80,71 @@ func (c *myEatInOrderService) Submit(ctx context.Context, in *BuyingRequest, opt
 	return out, nil
 }
 
+func (c *myEatInOrderService) ListByTable(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "MyEatInOrderService.ListByTable", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myEatInOrderService) AddDish(ctx context.Context, in *BuyingRequest, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "MyEatInOrderService.AddDish", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myEatInOrderService) SettlementConfirm(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*SettlementConfirmByEatInResponse, error) {
+	req := c.c.NewRequest(c.name, "MyEatInOrderService.SettlementConfirm", in)
+	out := new(SettlementConfirmByEatInResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *myEatInOrderService) Settlement(ctx context.Context, in *SettlementRequestByEatIn, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "MyEatInOrderService.Settlement", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for MyEatInOrderService service
 
 type MyEatInOrderServiceHandler interface {
-	// 确认订单
+	// 下单确认
 	Confirm(context.Context, *BuyingRequest, *BuyingResponse) error
 	// 提交订单
 	Submit(context.Context, *BuyingRequest, *OrderResponse) error
+	// 获取点桌台订单列表
+	ListByTable(context.Context, *OrderWhere, *OrderResponse) error
+	// 加菜(订单未支付时将更新订单，已支付则创建新订单)
+	AddDish(context.Context, *BuyingRequest, *OrderResponse) error
+	// 订单结算确认
+	SettlementConfirm(context.Context, *OrderWhere, *SettlementConfirmByEatInResponse) error
+	// 订单结算
+	Settlement(context.Context, *SettlementRequestByEatIn, *OrderResponse) error
 }
 
 func RegisterMyEatInOrderServiceHandler(s server.Server, hdlr MyEatInOrderServiceHandler, opts ...server.HandlerOption) error {
 	type myEatInOrderService interface {
 		Confirm(ctx context.Context, in *BuyingRequest, out *BuyingResponse) error
 		Submit(ctx context.Context, in *BuyingRequest, out *OrderResponse) error
+		ListByTable(ctx context.Context, in *OrderWhere, out *OrderResponse) error
+		AddDish(ctx context.Context, in *BuyingRequest, out *OrderResponse) error
+		SettlementConfirm(ctx context.Context, in *OrderWhere, out *SettlementConfirmByEatInResponse) error
+		Settlement(ctx context.Context, in *SettlementRequestByEatIn, out *OrderResponse) error
 	}
 	type MyEatInOrderService struct {
 		myEatInOrderService
@@ -103,4 +163,94 @@ func (h *myEatInOrderServiceHandler) Confirm(ctx context.Context, in *BuyingRequ
 
 func (h *myEatInOrderServiceHandler) Submit(ctx context.Context, in *BuyingRequest, out *OrderResponse) error {
 	return h.MyEatInOrderServiceHandler.Submit(ctx, in, out)
+}
+
+func (h *myEatInOrderServiceHandler) ListByTable(ctx context.Context, in *OrderWhere, out *OrderResponse) error {
+	return h.MyEatInOrderServiceHandler.ListByTable(ctx, in, out)
+}
+
+func (h *myEatInOrderServiceHandler) AddDish(ctx context.Context, in *BuyingRequest, out *OrderResponse) error {
+	return h.MyEatInOrderServiceHandler.AddDish(ctx, in, out)
+}
+
+func (h *myEatInOrderServiceHandler) SettlementConfirm(ctx context.Context, in *OrderWhere, out *SettlementConfirmByEatInResponse) error {
+	return h.MyEatInOrderServiceHandler.SettlementConfirm(ctx, in, out)
+}
+
+func (h *myEatInOrderServiceHandler) Settlement(ctx context.Context, in *SettlementRequestByEatIn, out *OrderResponse) error {
+	return h.MyEatInOrderServiceHandler.Settlement(ctx, in, out)
+}
+
+// Client API for EatInOrderService service
+
+type EatInOrderService interface {
+	// 订单结算确认
+	SettlementConfirm(ctx context.Context, in *SettlementRequestByEatIn, opts ...client.CallOption) (*SettlementConfirmByEatInResponse, error)
+	// 订单结算
+	Settlement(ctx context.Context, in *SettlementRequestByEatIn, opts ...client.CallOption) (*OrderResponse, error)
+}
+
+type eatInOrderService struct {
+	c    client.Client
+	name string
+}
+
+func NewEatInOrderService(name string, c client.Client) EatInOrderService {
+	return &eatInOrderService{
+		c:    c,
+		name: name,
+	}
+}
+
+func (c *eatInOrderService) SettlementConfirm(ctx context.Context, in *SettlementRequestByEatIn, opts ...client.CallOption) (*SettlementConfirmByEatInResponse, error) {
+	req := c.c.NewRequest(c.name, "EatInOrderService.SettlementConfirm", in)
+	out := new(SettlementConfirmByEatInResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *eatInOrderService) Settlement(ctx context.Context, in *SettlementRequestByEatIn, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "EatInOrderService.Settlement", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+// Server API for EatInOrderService service
+
+type EatInOrderServiceHandler interface {
+	// 订单结算确认
+	SettlementConfirm(context.Context, *SettlementRequestByEatIn, *SettlementConfirmByEatInResponse) error
+	// 订单结算
+	Settlement(context.Context, *SettlementRequestByEatIn, *OrderResponse) error
+}
+
+func RegisterEatInOrderServiceHandler(s server.Server, hdlr EatInOrderServiceHandler, opts ...server.HandlerOption) error {
+	type eatInOrderService interface {
+		SettlementConfirm(ctx context.Context, in *SettlementRequestByEatIn, out *SettlementConfirmByEatInResponse) error
+		Settlement(ctx context.Context, in *SettlementRequestByEatIn, out *OrderResponse) error
+	}
+	type EatInOrderService struct {
+		eatInOrderService
+	}
+	h := &eatInOrderServiceHandler{hdlr}
+	return s.Handle(s.NewHandler(&EatInOrderService{h}, opts...))
+}
+
+type eatInOrderServiceHandler struct {
+	EatInOrderServiceHandler
+}
+
+func (h *eatInOrderServiceHandler) SettlementConfirm(ctx context.Context, in *SettlementRequestByEatIn, out *SettlementConfirmByEatInResponse) error {
+	return h.EatInOrderServiceHandler.SettlementConfirm(ctx, in, out)
+}
+
+func (h *eatInOrderServiceHandler) Settlement(ctx context.Context, in *SettlementRequestByEatIn, out *OrderResponse) error {
+	return h.EatInOrderServiceHandler.Settlement(ctx, in, out)
 }

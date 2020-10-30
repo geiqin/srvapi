@@ -5,6 +5,7 @@ import "orderDetail.proto";
 import "orderAddress.proto";
 import "shipment.proto";
 import "orderCoupon.proto";
+import "orderFood.proto";
 package geiqin.srv.ord.private;
 
 service MyOrderService {
@@ -63,6 +64,11 @@ service OrderService {
     rpc OrderCouponList (OrderCoupon) returns (OrderCouponResponse) {}
     // 获取订单数量
     rpc Count (OrderWhere) returns (OrderResponse) {}
+    // 接单|拒绝接单
+    rpc Confirm(Order) returns (OrderResponse) {}
+    // 结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
+    // 适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
+    rpc Settlement (OrderWhere) returns (OrderResponse) {}
 }
 
 message Order {
@@ -117,6 +123,8 @@ message Order {
     float cash_exchange_money = 58;
     int32 cash_exchange_points = 59;
     bool is_distribution = 60;
+    bool is_confirmed = 61; // 商家是否已接单
+    OrderFood food = 62;
 }
 
 message Customer {
@@ -161,6 +169,9 @@ message OrderWhere {
     string code = 25;
     string fetch_status = 26;// 自提状态: waiting待自提, finished已自提
     bool is_distribution = 27;
+    bool is_confirmed = 28; // 商家是否已接单
+    int64 id = 29;
+    int64 table_id = 62; // 桌台ID
 }
 
 message OrderResponse {

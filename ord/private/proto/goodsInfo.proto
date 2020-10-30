@@ -21,4 +21,5 @@ message GoodsInfo {
 	string sku_sn =17;
 	string sku_name =18;
 	string sku_spec_desc =19;
+
 }

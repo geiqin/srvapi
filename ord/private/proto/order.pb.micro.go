@@ -258,6 +258,11 @@ type OrderService interface {
 	OrderCouponList(ctx context.Context, in *OrderCoupon, opts ...client.CallOption) (*OrderCouponResponse, error)
 	// 获取订单数量
 	Count(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
+	// 接单|拒绝接单
+	Confirm(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error)
+	// 结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
+	// 适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
+	Settlement(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error)
 }
 
 type orderService struct {
@@ -452,6 +457,26 @@ func (c *orderService) Count(ctx context.Context, in *OrderWhere, opts ...client
 	return out, nil
 }
 
+func (c *orderService) Confirm(ctx context.Context, in *Order, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.Confirm", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *orderService) Settlement(ctx context.Context, in *OrderWhere, opts ...client.CallOption) (*OrderResponse, error) {
+	req := c.c.NewRequest(c.name, "OrderService.Settlement", in)
+	out := new(OrderResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for OrderService service
 
 type OrderServiceHandler interface {
@@ -491,6 +516,11 @@ type OrderServiceHandler interface {
 	OrderCouponList(context.Context, *OrderCoupon, *OrderCouponResponse) error
 	// 获取订单数量
 	Count(context.Context, *OrderWhere, *OrderResponse) error
+	// 接单|拒绝接单
+	Confirm(context.Context, *Order, *OrderResponse) error
+	// 结算订单(无法通过正常流程完成订单,需要商家主动完成订单)
+	// 适用订单: 堂食餐后付款订单、货到付款订单、外卖餐到付款订单
+	Settlement(context.Context, *OrderWhere, *OrderResponse) error
 }
 
 func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts ...server.HandlerOption) error {
@@ -513,6 +543,8 @@ func RegisterOrderServiceHandler(s server.Server, hdlr OrderServiceHandler, opts
 		ExchangeShip(ctx context.Context, in *ShipmentRequest, out *ShipmentResponse) error
 		OrderCouponList(ctx context.Context, in *OrderCoupon, out *OrderCouponResponse) error
 		Count(ctx context.Context, in *OrderWhere, out *OrderResponse) error
+		Confirm(ctx context.Context, in *Order, out *OrderResponse) error
+		Settlement(ctx context.Context, in *OrderWhere, out *OrderResponse) error
 	}
 	type OrderService struct {
 		orderService
@@ -595,4 +627,12 @@ func (h *orderServiceHandler) OrderCouponList(ctx context.Context, in *OrderCoup
 
 func (h *orderServiceHandler) Count(ctx context.Context, in *OrderWhere, out *OrderResponse) error {
 	return h.OrderServiceHandler.Count(ctx, in, out)
+}
+
+func (h *orderServiceHandler) Confirm(ctx context.Context, in *Order, out *OrderResponse) error {
+	return h.OrderServiceHandler.Confirm(ctx, in, out)
+}
+
+func (h *orderServiceHandler) Settlement(ctx context.Context, in *OrderWhere, out *OrderResponse) error {
+	return h.OrderServiceHandler.Settlement(ctx, in, out)
 }
