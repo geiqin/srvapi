@@ -1,0 +1,52 @@
+syntax = "proto3";
+package geiqin.srv.eat;
+import "common.proto";
+import "inConfig.proto";
+import "outConfig.proto";
+import "kind.proto";
+
+
+service FrontTableService {
+  // 堂食点餐台
+  rpc In(FrontTableWhere) returns(FrontTableInResponse) {}
+  // 外卖点餐台
+  rpc Out(FrontTableWhere) returns(FrontTableOutResponse) {}
+}
+
+message FrontTableWhere {
+    int32 paged = 1;
+    int32 page_size = 2;
+    int32 top = 3;
+    int64 table_id = 4;
+    string table_name = 5;
+}
+
+message FrontTableIn {
+    int64 table_id = 4;
+    string table_name = 5;
+    int32 status = 6; // 状态: 1-可下单,2-未开启堂食业务,3-不在营业时间内,4-不在配送时间内
+    InConfig config = 7;
+    repeated Kind kinds = 8;
+}
+
+message FrontTableOut {
+    int32 status = 1; // 状态: 1-可下单,2-未开启外卖业务,3-不在营业时间内,4-不在配送时间内
+    OutConfig config = 2;
+    repeated Kind kinds = 3;
+}
+
+message FrontTableInResponse {
+    FrontTableIn entity = 1;
+    Pager pager = 2;
+    repeated FrontTableIn items = 3;
+    Error error = 4;
+    Info info = 5;
+}
+
+message FrontTableOutResponse {
+    FrontTableOut entity = 1;
+    Pager pager = 2;
+    repeated FrontTableOut items = 3;
+    Error error = 4;
+    Info info = 5;
+}

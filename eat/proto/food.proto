@@ -8,7 +8,6 @@ service FoodService {
     rpc Get(FoodWhere) returns(FoodResponse) {}
 }
 
-
 message FoodWhere {
     int32 paged = 1;
     int32 page_size = 2;

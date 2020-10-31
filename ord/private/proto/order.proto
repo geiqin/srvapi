@@ -172,6 +172,8 @@ message OrderWhere {
     bool is_confirmed = 28; // 商家是否已接单
     int64 id = 29;
     int64 table_id = 62; // 桌台ID
+    string table_name = 63; // 桌台名称
+    string mobile = 64; // 用户手机号
 }
 
 message OrderResponse {
