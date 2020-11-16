@@ -1,0 +1,22 @@
+syntax = "proto3";
+package geiqin.srv.tms;
+
+import "common.proto";
+import "shipper.proto";
+
+service FypCallService {
+    rpc Auth(Empty) returns(FypCallResponse) {}; // 丰云配平台授权
+    rpc Submit(FypCall) returns(FypCallResponse) {}; // 丰云配平台下单
+}
+
+message FypCall {
+    int64 order_id = 1;
+    string logistics_no = 2;
+    Shipper shipper = 3;
+}
+
+message FypCallResponse {
+    Info info = 1;
+    Error error = 2;
+    FypCall entity = 3;
+}

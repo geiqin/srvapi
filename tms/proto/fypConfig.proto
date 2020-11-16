@@ -1,0 +1,30 @@
+syntax = "proto3";
+package geiqin.srv.tms;
+
+import "common.proto";
+
+service FypConfigService {
+    rpc Get(FypConfig) returns(FypConfigResponse) {};
+    rpc Save(FypConfig) returns(FypConfigResponse) {};
+}
+
+message FypConfig {
+    int32 id = 1;
+    string app_code = 2;
+    string app_key = 3;
+    string monthly_cust = 4;
+    int32 express_type = 5;
+    int32 order_method = 6;
+    int32 pay_method = 7;
+    string access_toke = 8;
+    string expired_at = 9;
+    int64 address_id = 10;
+    string created_at = 11;
+    string updated_at = 12;
+}
+
+message FypConfigResponse {
+    Info info = 1;
+    Error error = 2;
+    FypConfig entity = 3;
+}
