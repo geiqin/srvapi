@@ -35,7 +35,7 @@ var _ server.Option
 
 type AccessLogisticsService interface {
 	// 快递下单
-	Submit(ctx context.Context, in *ShipmentReq, opts ...client.CallOption) (*ExpressBillResponse, error)
+	Submit(ctx context.Context, in *AccessLogisticsReq, opts ...client.CallOption) (*AccessLogisticsResponse, error)
 }
 
 type accessLogisticsService struct {
@@ -50,9 +50,9 @@ func NewAccessLogisticsService(name string, c client.Client) AccessLogisticsServ
 	}
 }
 
-func (c *accessLogisticsService) Submit(ctx context.Context, in *ShipmentReq, opts ...client.CallOption) (*ExpressBillResponse, error) {
+func (c *accessLogisticsService) Submit(ctx context.Context, in *AccessLogisticsReq, opts ...client.CallOption) (*AccessLogisticsResponse, error) {
 	req := c.c.NewRequest(c.name, "AccessLogisticsService.Submit", in)
-	out := new(ExpressBillResponse)
+	out := new(AccessLogisticsResponse)
 	err := c.c.Call(ctx, req, out, opts...)
 	if err != nil {
 		return nil, err
@@ -64,12 +64,12 @@ func (c *accessLogisticsService) Submit(ctx context.Context, in *ShipmentReq, op
 
 type AccessLogisticsServiceHandler interface {
 	// 快递下单
-	Submit(context.Context, *ShipmentReq, *ExpressBillResponse) error
+	Submit(context.Context, *AccessLogisticsReq, *AccessLogisticsResponse) error
 }
 
 func RegisterAccessLogisticsServiceHandler(s server.Server, hdlr AccessLogisticsServiceHandler, opts ...server.HandlerOption) error {
 	type accessLogisticsService interface {
-		Submit(ctx context.Context, in *ShipmentReq, out *ExpressBillResponse) error
+		Submit(ctx context.Context, in *AccessLogisticsReq, out *AccessLogisticsResponse) error
 	}
 	type AccessLogisticsService struct {
 		accessLogisticsService
@@ -82,6 +82,6 @@ type accessLogisticsServiceHandler struct {
 	AccessLogisticsServiceHandler
 }
 
-func (h *accessLogisticsServiceHandler) Submit(ctx context.Context, in *ShipmentReq, out *ExpressBillResponse) error {
+func (h *accessLogisticsServiceHandler) Submit(ctx context.Context, in *AccessLogisticsReq, out *AccessLogisticsResponse) error {
 	return h.AccessLogisticsServiceHandler.Submit(ctx, in, out)
 }
