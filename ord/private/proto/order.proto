@@ -169,7 +169,7 @@ message OrderWhere {
     string code = 25;
     string fetch_status = 26;// 自提状态: waiting待自提, finished已自提
     bool is_distribution = 27;
-    bool is_confirmed = 28; // 商家是否已接单
+    int32 receive_status = 28; // 接单状态: 0-全部,1-已接单,2-未接单
     int64 id = 29;
     int64 table_id = 62; // 桌台ID
     string table_name = 63; // 桌台名称

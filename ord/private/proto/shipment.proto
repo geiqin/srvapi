@@ -74,6 +74,7 @@ message ShipmentRequest {
     int32 delivery_type = 12; // 配送方式【同城配送】: 1商家自配送, 2第三方同城配送
     int64 deliveryer_id = 13; // 配送员ID
     repeated ShipmentRequestDetail details = 14;
+    bool is_auto = 15;// 是否自动发货(自动填单并发货)
 }
 
 message ShipmentRequestDetail {

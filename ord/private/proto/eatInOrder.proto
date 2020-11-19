@@ -12,7 +12,7 @@ service MyEatInOrderService {
     rpc Confirm (BuyingRequest) returns (BuyingResponse) {}
     // 提交订单
     rpc Submit (BuyingRequest) returns (OrderResponse) {}
-    // 获取点桌台订单列表
+    // 获取点餐台订单列表
     rpc ListByTable (OrderWhere) returns (OrderResponse) {}
     // 加菜(订单未支付时将更新订单，已支付则创建新订单)
     rpc AddDish (BuyingRequest) returns (OrderResponse) {}
@@ -23,7 +23,7 @@ service MyEatInOrderService {
 }
 
 service EatInOrderService {
-    // 获取点桌台订单列表(用于商家接单、订单结算确认、订单结算)
+    // 获取点餐台订单列表(用于商家接单、订单结算确认、订单结算)
     rpc ListByTable (OrderWhere) returns (OrderResponse) {}
     // 订单结算确认
     rpc SettlementConfirm (SettlementRequestByEatIn) returns (SettlementConfirmByEatInResponse) {}
@@ -33,7 +33,7 @@ service EatInOrderService {
 
 message SettlementRequestByEatIn {
     int64 order_id = 1;
-    int64 use_ticket_id = 2; // 选中的优惠劵凭证ID
+    int64 use_ticket_id = 2; // 使用的优惠劵凭证ID
     bool is_use_jf = 3; // 是否使用积分抵扣
 }
 

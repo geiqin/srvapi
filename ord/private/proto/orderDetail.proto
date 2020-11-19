@@ -29,7 +29,8 @@ message OrderDetail {
     string ship_status = 25;
     string refund_status = 26;
     int64  present_id = 27;
-    string created_at  = 28;
-    string updated_at  = 29;
+    string sku_spec_desc = 28;
+    string created_at  = 29;
+    string updated_at  = 30;
 
 }

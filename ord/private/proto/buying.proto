@@ -16,7 +16,7 @@ service BuyingService {
     rpc Calculate (Buying) returns (BuyingResponse) {}
 }
 
-//购买清单
+// 购买清单
 message Buying {
     string solution = 1;
     bool changed = 2;
