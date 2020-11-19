@@ -12,8 +12,9 @@ message Setting {
   bool is_fetch = 3;
   bool is_express = 4;
   int32 express_charging_method = 5;
-  string created_at = 6;
-  string updated_at = 7;
+  int32 shipper_id = 6;
+  string created_at = 7;
+  string updated_at = 8;
 }
 
 message SettingResponse {

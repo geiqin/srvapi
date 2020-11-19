@@ -1,6 +1,7 @@
 syntax = "proto3";
 import "common.proto";
 import "addressType.proto";
+import "areaInfo.proto";
 package geiqin.srv.tms;
 
 service AddressService {
@@ -35,7 +36,8 @@ message Address {
     string mobile = 8;
     string created_at = 9;
     string updated_at = 10;
-    repeated AddressType address_types = 11;
+    AreaInfo area = 11;
+    repeated AddressType address_types = 12;
 }
 
 message AddressResponse {

@@ -6,7 +6,6 @@ import "shipper.proto";
 
 service FypCallService {
     rpc Auth(Empty) returns(FypCallResponse) {}; // 丰云配平台授权
-    rpc Submit(FypCall) returns(FypCallResponse) {}; // 丰云配平台下单
 }
 
 message FypCall {
